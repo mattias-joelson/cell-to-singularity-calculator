@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cell to Singularity Calculator</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<h1>Cell to Singularity Calculator</h1>
+
+<div th:each="simulation : ${calculator.simulations}">
+    <h2 th:text="${simulation.name}"/>
+</div>
+
+</body>
+</html>

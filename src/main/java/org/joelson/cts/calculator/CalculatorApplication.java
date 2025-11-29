@@ -2,8 +2,10 @@ package org.joelson.cts.calculator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan({ "org.joelson.cts.calculator" })
 public class CalculatorApplication {
 
     static void main(String[] args) {
