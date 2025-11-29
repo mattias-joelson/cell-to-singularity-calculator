@@ -3,7 +3,9 @@ package org.joelson.cts.calculator.service;
 import org.joelson.cts.calculator.model.Calculator;
 import org.joelson.cts.calculator.model.Currency;
 import org.joelson.cts.calculator.model.Garden;
+import org.joelson.cts.calculator.model.Generator;
 import org.joelson.cts.calculator.model.Simulation;
+import org.joelson.cts.calculator.model.Upgrade;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,8 +36,20 @@ public class CalculatorService {
         calculator.addSimulation(beyond);
         Simulation mesozoicValley = new Simulation("Mezosoic Valley");
         calculator.addSimulation(mesozoicValley);
-        Simulation extinction = new Simulation("Extinction");
-        calculator.addSimulation(extinction);
+
+        Simulation lifeAfterApocalypse = new Simulation("Life after Apocalypse");
+        calculator.addSimulation(lifeAfterApocalypse);
+        Currency laaCurrency = new Currency("L.A.A.");
+        Garden extinction = new Garden("Extinction", laaCurrency);
+        lifeAfterApocalypse.addGarden(extinction);
+        Generator luca = new Generator("L.U.C.A.");
+        extinction.addGenerator(luca);
+        Generator dinosaurs = new Generator("Reign of Dinosaurs");
+        extinction.addGenerator(dinosaurs);
+        Upgrade shookAndBoom = new Upgrade(dinosaurs, "Shook and Boom");
+        extinction.addUpgrade(shookAndBoom);
+        Upgrade quakeAndSlide = new Upgrade(dinosaurs, "Quake and Slide");
+        extinction.addUpgrade(quakeAndSlide);
 
         return calculator;
     }
