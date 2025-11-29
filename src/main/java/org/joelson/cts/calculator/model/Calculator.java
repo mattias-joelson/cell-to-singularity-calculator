@@ -1,11 +1,11 @@
 package org.joelson.cts.calculator.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 public class Calculator {
 
-    private final Collection<Simulation> simulations;
+    private final List<Simulation> simulations;
 
     public Calculator() {
         simulations = new ArrayList<>();
@@ -15,7 +15,7 @@ public class Calculator {
         simulations.add(simulation);
     }
 
-    public Collection<Simulation> getSimulations() {
+    public List<Simulation> getSimulations() {
         return simulations;
     }
 }
