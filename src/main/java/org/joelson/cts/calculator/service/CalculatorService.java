@@ -1,6 +1,7 @@
 package org.joelson.cts.calculator.service;
 
 import org.joelson.cts.calculator.model.Calculator;
+import org.joelson.cts.calculator.model.Currency;
 import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.Simulation;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,11 @@ public class CalculatorService {
 
         Simulation primary = new Simulation("Primary Simulation");
         calculator.addSimulation(primary);
-        Garden ancient = new Garden("Ancient Garden");
+        Currency ideaCurrency = new Currency("Idea");
+        Garden ancient = new Garden("Ancient Garden", ideaCurrency);
         primary.addGarden(ancient);
+        Garden modern = new Garden("Modern Garden", ideaCurrency);
+        primary.addGarden(modern);
 
         Simulation beyond = new Simulation("Beyond");
         calculator.addSimulation(beyond);

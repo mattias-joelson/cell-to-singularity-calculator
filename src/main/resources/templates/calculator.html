@@ -11,7 +11,7 @@
 <div th:each="simulation : ${calculator.simulations}">
     <h2 th:text="${simulation.name}"/>
     <div th:each="garden : ${simulation.gardens}">
-        <h3 th:text="${garden.name}"/>
+        <h3 th:text="|${garden.name} (${garden.currency.name})|"/>
     </div>
 </div>
 
