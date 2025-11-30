@@ -8,18 +8,21 @@
 
 <h1>Cell to Singularity Calculator</h1>
 
-<div th:each="simulation : ${calculator.simulations}">
-    <h2 th:text="${simulation.name}"/>
-    <div th:each="garden : ${simulation.gardens}">
-        <h3 th:text="|${garden.name} (${garden.currency.name})|"/>
-        <div th:each="generator : ${garden.generators}">
-            <h4 th:text="${generator.name}"/>
-        </div>
-        <div th:each="upgrade : ${garden.upgrades}">
-            <h4 th:text="|${upgrade.generator.name}: ${upgrade.name}"/>
-        </div>
-    </div>
-</div>
+<ul th:each="simulation : ${calculator.simulations}">
+    <li th:text="${simulation.name}"/>
+    <ul th:each="garden : ${simulation.gardens}">
+        <li th:text="|${garden.name} (${garden.currency.name})|"/>
+        <ul th:each="generator : ${garden.generators}">
+            <li th:text="|${generator.name}: ${generator.count}|"/>
+        </ul>
+        <ul th:each="upgrade : ${garden.upgrades}">
+            <li th:text="|${upgrade.name}: ${upgrade.bought}|"/>
+            <ul th:each="effect : ${upgrade.effects}">
+                <li th:text="|${effect.generator.name}: ${effect.efficiency}|"/>
+            </ul>
+        </ul>
+    </ul>
+</ul>
 
 </body>
 </html>

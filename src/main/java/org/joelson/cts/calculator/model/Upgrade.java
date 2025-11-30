@@ -1,27 +1,40 @@
 package org.joelson.cts.calculator.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Upgrade {
 
-    private final Generator generator;
     private final String name;
+    private final float cost;
+    private final List<UpgradeEffect> effects;
     private boolean bought = false;
 
-    public Upgrade(Generator generator, String name, boolean bought) {
-        this.generator = generator;
+    public Upgrade(String name, float cost, boolean bought) {
         this.name = name;
+        this.cost = cost;
+        this.effects = new ArrayList<>();
         this.bought = bought;
     }
 
-    public Upgrade(Generator generator, String name) {
-        this(generator, name, false);
-    }
-
-    public Generator getGenerator() {
-        return generator;
+    public Upgrade(String name, float cost) {
+        this(name, cost, false);
     }
 
     public String getName() {
         return name;
+    }
+
+    public float getCost() {
+        return cost;
+    }
+
+    public void addEffect(UpgradeEffect effect) {
+        effects.add(effect);
+    }
+
+    public List<UpgradeEffect> getEffects() {
+        return effects;
     }
 
     public boolean isBought() {
