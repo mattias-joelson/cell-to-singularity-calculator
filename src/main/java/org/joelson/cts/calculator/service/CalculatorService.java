@@ -42,14 +42,18 @@ public class CalculatorService {
         Currency laaCurrency = new Currency("L.A.A.");
         Garden extinction = new Garden("Extinction", laaCurrency);
         lifeAfterApocalypse.addGarden(extinction);
-        Generator luca = new Generator("L.U.C.A.");
+        Generator luca = new Generator("L.U.C.A.", 40, 1.05f);
+        luca.setCount(601);
         extinction.addGenerator(luca);
-        Generator dinosaurs = new Generator("Reign of Dinosaurs");
+        Generator dinosaurs = new Generator("Reign of Dinosaurs", 8e12f, 1.12f);
+        dinosaurs.setCount(40);
         extinction.addGenerator(dinosaurs);
         Upgrade shookAndBoom = new Upgrade(dinosaurs, "Shook and Boom");
         extinction.addUpgrade(shookAndBoom);
         Upgrade quakeAndSlide = new Upgrade(dinosaurs, "Quake and Slide");
         extinction.addUpgrade(quakeAndSlide);
+        Upgrade metoriteBombs = new Upgrade(dinosaurs, "Meteorite Bombs");
+        extinction.addUpgrade(metoriteBombs);
 
         return calculator;
     }
