@@ -6,13 +6,13 @@ import java.util.List;
 public class Garden {
 
     private final String name;
-    private final Currency currency;
+    private final List<Currency> currencies;
     private final List<Generator> generators;
     private final List<Upgrade> upgrades;
 
-    public Garden(String name, Currency currency) {
+    public Garden(String name) {
         this.name = name;
-        this.currency = currency;
+        this.currencies = new ArrayList<>();
         this.generators = new ArrayList<>();
         this.upgrades = new ArrayList<>();
     }
@@ -21,8 +21,12 @@ public class Garden {
         return name;
     }
 
-    public Currency getCurrency() {
-        return currency;
+    public void addCurrency(Currency currency) {
+        currencies.add(currency);
+    }
+
+    public List<Currency> getCurrencies() {
+        return currencies;
     }
 
     public void addGenerator(Generator generator) {

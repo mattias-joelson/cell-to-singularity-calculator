@@ -28,9 +28,11 @@ public class CalculatorService {
         Simulation primary = new Simulation("Primary Simulation");
         calculator.addSimulation(primary);
         Currency ideaCurrency = new Currency("Idea");
-        Garden ancient = new Garden("Ancient Garden", ideaCurrency);
+        Garden ancient = new Garden("Ancient Garden");
+        ancient.addCurrency(ideaCurrency);
         primary.addGarden(ancient);
-        Garden modern = new Garden("Modern Garden", ideaCurrency);
+        Garden modern = new Garden("Modern Garden");
+        modern.addCurrency(ideaCurrency);
         primary.addGarden(modern);
 
         Simulation beyond = new Simulation("Beyond");
@@ -41,7 +43,8 @@ public class CalculatorService {
         Simulation lifeAfterApocalypse = new Simulation("Life after Apocalypse");
         calculator.addSimulation(lifeAfterApocalypse);
         Currency laaCurrency = new Currency("L.A.A.");
-        Garden extinction = new Garden("Extinction", laaCurrency);
+        Garden extinction = new Garden("Extinction");
+        extinction.addCurrency(laaCurrency);
         lifeAfterApocalypse.addGarden(extinction);
         Generator luca = new Generator("L.U.C.A.", 40, 1.05f, 1, 753, 1);
         extinction.addGenerator(luca);
