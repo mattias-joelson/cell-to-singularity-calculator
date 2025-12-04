@@ -43,12 +43,45 @@ public class CalculatorService {
         Currency laaCurrency = new Currency("L.A.A.");
         Garden extinction = new Garden("Extinction", laaCurrency);
         lifeAfterApocalypse.addGarden(extinction);
-        Generator luca = new Generator("L.U.C.A.", 40, 1.05f);
-        luca.setCount(700);
+        Generator luca = new Generator("L.U.C.A.", 40, 1.05f, 1, 753, 1);
         extinction.addGenerator(luca);
-        Generator dinosaurs = new Generator("Reign of Dinosaurs", 8e12f, 1.12f);
-        dinosaurs.setCount(103);
+
+        createUpgrade(extinction, luca, "Trilobites", 500, 1.5f);
+        createUpgrade(extinction, luca, "Cambrian Explosion", 50, 1.5f);
+        createUpgrade(extinction, luca, "Ordovician Extinction", 1e8f, 2);
+//        createUpgrade(extinction, luca, "Trilobite World", 10000, 2.5f);
+//        createUpgrade(extinction, luca, "Asteroid Bombardment", 70000, 2);
+//        createUpgrade(extinction, luca, "Continental Collision", 140000, 7);
+//        createUpgrade(extinction, luca, "Carbon Tipping Point", 2000000, 2.25f);
+//        createUpgrade(extinction, luca, "Ice Age!", 10000000, 2);
+//        createUpgrade(extinction, luca, "Anoxic Oceans", 30000000, 9);
+
+        Upgrade placoderms = new Upgrade("Placoderms", 3000000, true);
+        placoderms.addEffect(new UpgradeEffect(luca, 16));
+        extinction.addUpgrade(placoderms);
+
+        createUpgrade(extinction, luca, "Devonian Extinction", 4.5e10f, 6);
+
+        Upgrade tetrapods = new Upgrade("Tetrapods", 6e8f, true);
+        tetrapods.addEffect(new UpgradeEffect(luca, 11));
+        extinction.addUpgrade(tetrapods);
+
+        createUpgrade(extinction, luca, "Permian Extinction", 1e14f, 12);
+        createUpgrade(extinction, luca, "Archosaurs", 1.5e11f, 11);
+        createUpgrade(extinction, luca, "Triassic Extinction", 3e15f, 16);
+
+        Upgrade tyrannosaurusRex = new Upgrade("Tyrannosaurus Rex", 3.5e13f, true);
+        tyrannosaurusRex.addEffect(new UpgradeEffect(luca, 11));
+        extinction.addUpgrade(tyrannosaurusRex);
+
+        Generator dinosaurs = new Generator("Reign of Dinosaurs", 8e12f, 1.12f, 5e9f, 103, 1);
         extinction.addGenerator(dinosaurs);
+        Upgrade deccanDeathTraps = new Upgrade("Deccan Death Traps", 3.75e14f, true);
+        deccanDeathTraps.addEffect(new UpgradeEffect(dinosaurs, 6));
+        extinction.addUpgrade(deccanDeathTraps);
+        Upgrade killerSpaceRock = new Upgrade("Killer Space Rock!", 4.5e15f, true);
+        killerSpaceRock.addEffect(new UpgradeEffect(dinosaurs, 4));
+        extinction.addUpgrade(killerSpaceRock);
         Upgrade shookAndBoom = new Upgrade("Shook and Boom", 3.75e16f, true);
         shookAndBoom.addEffect(new UpgradeEffect(dinosaurs, 6));
         extinction.addUpgrade(shookAndBoom);
@@ -64,11 +97,20 @@ public class CalculatorService {
         Upgrade dayIntoNight = new Upgrade("Day into Night", 6.71e19f, true);
         dayIntoNight.addEffect(new UpgradeEffect(dinosaurs, 6));
         extinction.addUpgrade(dayIntoNight);
-        Upgrade cretaceousExtinction = new Upgrade("Cretaceous Extinction", 1.05e20f, true);
+        Upgrade cretaceousExtinction = new Upgrade("Cretaceous Extinction", 1.05e20f, false);
         cretaceousExtinction.addEffect(new UpgradeEffect(luca, 41));
         cretaceousExtinction.addEffect(new UpgradeEffect(dinosaurs, 0));
         extinction.addUpgrade(cretaceousExtinction);
 
+        luca.updateEfficiency(extinction);
+        dinosaurs.updateEfficiency(extinction);
+
         return calculator;
+    }
+
+    private static void createUpgrade(Garden garden, Generator generator, String name, float cost, float efficiency) {
+        Upgrade upgrade = new Upgrade(name, cost, true);
+        upgrade.addEffect(new UpgradeEffect(generator, efficiency));
+        garden.addUpgrade(upgrade);
     }
 }
