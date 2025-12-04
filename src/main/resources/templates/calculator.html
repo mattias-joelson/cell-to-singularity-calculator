@@ -13,7 +13,7 @@
     <ul th:each="garden : ${simulation.gardens}">
         <li th:text="|${garden.name} (${garden.currency.name})|"/>
         <ul th:each="generator : ${garden.generators}">
-            <li th:text="|${generator.name}: ${generator.count}|"/>
+            <li th:text="|${generator.name}: count ${generator.count} * base production ${generator.baseProduction} * efficiency ${generator.efficiency} = ${generator.count * generator.baseProduction * generator.efficiency}|"/>
         </ul>
         <ul th:each="upgrade : ${garden.upgrades}">
             <li th:text="|${upgrade.name}: ${upgrade.bought}|"/>
