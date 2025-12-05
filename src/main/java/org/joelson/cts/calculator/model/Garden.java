@@ -6,7 +6,7 @@ import java.util.List;
 public class Garden {
 
     private final String name;
-    private final List<Currency> currencies;
+    private final List<String> currencies;
     private final List<Generator> generators;
     private final List<Upgrade> upgrades;
 
@@ -21,11 +21,11 @@ public class Garden {
         return name;
     }
 
-    public void addCurrency(Currency currency) {
+    public void addCurrency(String currency) {
         currencies.add(currency);
     }
 
-    public List<Currency> getCurrencies() {
+    public List<String> getCurrencies() {
         return currencies;
     }
 

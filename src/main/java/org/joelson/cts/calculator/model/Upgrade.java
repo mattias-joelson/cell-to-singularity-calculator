@@ -6,18 +6,18 @@ import java.util.List;
 public class Upgrade {
 
     private final String name;
-    private final float cost;
+    private final Amount cost;
     private final List<UpgradeEffect> effects;
     private boolean bought = false;
 
-    public Upgrade(String name, float cost, boolean bought) {
+    public Upgrade(String name, Amount cost, boolean bought) {
         this.name = name;
         this.cost = cost;
         this.effects = new ArrayList<>();
         this.bought = bought;
     }
 
-    public Upgrade(String name, float cost) {
+    public Upgrade(String name, Amount cost) {
         this(name, cost, false);
     }
 
@@ -25,7 +25,7 @@ public class Upgrade {
         return name;
     }
 
-    public float getCost() {
+    public Amount getCost() {
         return cost;
     }
 

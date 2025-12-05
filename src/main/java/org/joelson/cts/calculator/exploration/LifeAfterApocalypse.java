@@ -1,9 +1,13 @@
+import org.joelson.cts.calculator.model.Amount;
 import org.joelson.cts.calculator.model.Generator;
+
+static final String CURRENCY = "currency";
 
 void main() {
     //Generator generator = new Generator("Age of Mammals", 8e15f, 1.12f, 1e12f);
-    Generator generator = new Generator("Cockroach World?", 5e18f, 1.12f, 1e15f);
-    float generatorProduction = generator.getBaseProduction() * 10001 * 2;
+    Generator generator = new Generator("Cockroach World?", new Amount(CURRENCY, 5e18f), 1.12f,
+            new Amount(CURRENCY, 1e15f));
+    float generatorProduction = generator.getBaseProduction().amount() * 10001 * 2;
     System.out.println("generatorProduction: " + generatorProduction);
 
     float lucaProduction = (1 * 1.5f * 1.5f * 2 * 16 * 6 * 11 * 12 * 11 * 16 * 11 * 41 * 13 * 51 * 101) * 900;
@@ -19,7 +23,7 @@ void main() {
         for (int d = startValue + 1; d <= l; d += 1) {
             //System.err.println("production: " + ((d-1) * generatorProduction + lucaProduction));
             //System.err.println("cost: " + generator.getCost(d - 1));
-            float generatorTime = generator.getCost(d - 1) / ((d - 1) * generatorProduction + lucaProduction);
+            float generatorTime = generator.getCost(d - 1).amount() / ((d - 1) * generatorProduction + lucaProduction);
             time += generatorTime;
             System.out.println(
                     "generator" + ": " + d + ", generatorTime: " + generatorTime / 60 + " (time " + time / 60 + ")");

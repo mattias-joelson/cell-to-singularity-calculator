@@ -8,14 +8,14 @@ public class Generator {
     Logger logger = LoggerFactory.getLogger(Generator.class);
 
     private final String name;
-    private final float baseCost;
+    private final Amount baseCost;
     private final float incrementCost;
-    private final float baseProduction;
+    private final Amount baseProduction;
     private int count;
     private float efficiency;
 
     public Generator(
-            String name, float baseCost, float incrementCost, float baseProduction, int count, float efficiency) {
+            String name, Amount baseCost, float incrementCost, Amount baseProduction, int count, float efficiency) {
         this.name = name;
         this.baseCost = baseCost;
         this.incrementCost = incrementCost;
@@ -24,7 +24,7 @@ public class Generator {
         this.efficiency = efficiency;
     }
 
-    public Generator(String name, float baseCost, float incrementCost, float baseProduction) {
+    public Generator(String name, Amount baseCost, float incrementCost, Amount baseProduction) {
         this(name, baseCost, incrementCost, baseProduction, 0, 1);
     }
 
@@ -32,7 +32,7 @@ public class Generator {
         return name;
     }
 
-    public float getBaseCost() {
+    public Amount getBaseCost() {
         return baseCost;
     }
 
@@ -40,11 +40,11 @@ public class Generator {
         return incrementCost;
     }
 
-    public float getCost(int level) {
-        return (float) (baseCost * Math.pow(incrementCost, level));
+    public Amount getCost(int level) {
+        return new Amount(baseCost.currency(), (float) (baseCost.amount() * Math.pow(incrementCost, level)));
     }
 
-    public float getBaseProduction() {
+    public Amount getBaseProduction() {
         return baseProduction;
     }
 
@@ -69,15 +69,16 @@ public class Generator {
                 }
             }
         }
-        logger.debug("generator: " + name + ": baseProduction " + baseProduction + " * efficiency " + efficiency + " = "
-                + baseProduction * efficiency);
+        logger.debug(
+                "generator: " + name + ": baseProduction " + baseProduction.amount() + " * efficiency " + efficiency
+                        + " = " + baseProduction.amount() * efficiency + " " + baseProduction.currency());
     }
 
     public float getEfficiency() {
         return efficiency;
     }
 
-    public float getTotalProduction() {
-        return count * baseProduction * efficiency;
+    public Amount getTotalProduction() {
+        return new Amount(baseProduction.currency(), count * baseProduction.amount() * efficiency);
     }
 }
