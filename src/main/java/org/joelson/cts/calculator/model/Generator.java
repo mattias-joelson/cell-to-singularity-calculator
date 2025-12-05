@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 public class Generator implements Improvement {
 
-    Logger logger = LoggerFactory.getLogger(Generator.class);
+    static Logger logger = LoggerFactory.getLogger(Generator.class);
 
     private final String name;
     private final Amount baseCost;
@@ -62,16 +62,15 @@ public class Generator implements Improvement {
             if (upgrade.isBought()) {
                 for (UpgradeEffect effect : upgrade.getEffects()) {
                     if (effect.getGenerator() == this) {
-                        logger.debug("generator: " + name + ", upgrade " + upgrade.getName() + " gives "
-                                + effect.getEfficiency());
+                        logger.debug("generator: {}, upgrade {} gives {}", name, upgrade.getName(),
+                                effect.getEfficiency());
                         efficiency *= effect.getEfficiency();
                     }
                 }
             }
         }
-        logger.debug(
-                "generator: " + name + ": baseProduction " + baseProduction.amount() + " * efficiency " + efficiency
-                        + " = " + baseProduction.amount() * efficiency + " " + baseProduction.currency());
+        logger.debug("generator: {}: baseProduction {} * efficiency {} = {} {}", name, baseProduction.amount(),
+                efficiency, baseProduction.amount() * efficiency, baseProduction.currency());
     }
 
     public float getEfficiency() {
