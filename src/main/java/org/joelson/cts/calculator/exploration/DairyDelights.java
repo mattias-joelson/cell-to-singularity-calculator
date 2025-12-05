@@ -7,6 +7,8 @@ import org.joelson.cts.calculator.model.Upgrade;
 import org.joelson.cts.calculator.model.UpgradeEffect;
 import org.joelson.cts.calculator.model.UpgradeImprovement;
 
+import static org.joelson.cts.calculator.util.DurationToolkit.durationString;
+
 static String MILK = "Milk";
 static String CHEESE = "Cheese";
 
@@ -128,7 +130,7 @@ private void produceNext(Garden garden) {
             Amount increase = improvement.getIncrease();
             float time = cost.amount() / totalProduction.get(cost.currency());
             System.out.printf("%s: cost %s, increase %s, ratio %.7f, time %s%n",
-                    improvement.getName(), cost.asString(), increase.asString(), ratio, toString(time));
+                    improvement.getName(), cost.asString(), increase.asString(), ratio, durationString(time));
         }
         Improvement best = imp.getLast();
         System.out.printf("Best: %s, (%s)%n", best.getName(), best.getMapping());
@@ -149,7 +151,7 @@ private void produceNext(Garden garden) {
         float bestTime = bestCost.amount() / totalProduction.get(bestCost.currency());
         float shortestTime = bestTime;
         Improvement bestImprovement = null;
-        System.out.printf("%s: time %s%n", best.getName(), toString(bestTime));
+        System.out.printf("%s: time %s%n", best.getName(), durationString(bestTime));
         for (Improvement candidate : candidates) {
             if (candidate == best) {
                 continue;
@@ -161,7 +163,7 @@ private void produceNext(Garden garden) {
                     + candidateIncrease.amount());
             float totalTime = candidateTime + bestImprovedTime;
             System.out.printf("%s and %s: %s and %s = %s%n", candidate.getName(), best.getName(),
-                    toString(candidateTime), toString(bestImprovedTime), toString(totalTime));
+                    durationString(candidateTime), durationString(bestImprovedTime), durationString(totalTime));
             if (totalTime < shortestTime) {
                 shortestTime = totalTime;
                 bestImprovement = candidate;
@@ -172,18 +174,5 @@ private void produceNext(Garden garden) {
         }
 
         System.out.println();
-    }
-}
-
-private static String toString(float seconds) {
-    Duration duration = Duration.ofSeconds(Math.round(seconds));
-    if (duration.toDays() > 1) {
-        return String.format("%d days %d:%02d:%02d", duration.toDays(), duration.toHoursPart(),
-                duration.toMinutesPart(), duration.toSecondsPart());
-    } else if (duration.toDays() > 0) {
-        return String.format("1 day %d:%02d:%02d", duration.toHoursPart(), duration.toMinutesPart(),
-                duration.toSecondsPart());
-    } else {
-        return String.format("%d:%02d:%02d", duration.toHours(), duration.toMinutesPart(), duration.toSecondsPart());
     }
 }
