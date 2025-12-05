@@ -4,8 +4,8 @@ import java.time.Duration;
 
 public class DurationToolkit {
 
-    private DurationToolkit() throws InstantiationError {
-        throw new InstantiationError("Should not be instantiated.");
+    private DurationToolkit() throws InstantiationException {
+        throw new InstantiationException("Should not be instantiated.");
     }
 
     public static String durationString(float seconds) {
