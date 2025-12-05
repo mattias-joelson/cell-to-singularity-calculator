@@ -3,7 +3,7 @@ package org.joelson.cts.calculator.model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Generator {
+public class Generator implements Improvement {
 
     Logger logger = LoggerFactory.getLogger(Generator.class);
 
@@ -80,5 +80,14 @@ public class Generator {
 
     public Amount getTotalProduction() {
         return new Amount(baseProduction.currency(), count * baseProduction.amount() * efficiency);
+    }
+
+    public Amount getCost() {
+        return getCost(getCount());
+    }
+
+    @Override
+    public Amount getIncrease() {
+        return baseProduction.times(efficiency);
     }
 }

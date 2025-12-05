@@ -2,4 +2,12 @@ package org.joelson.cts.calculator.model;
 
 public record Amount(String currency, float amount) {
 
+    public Amount times(float f) {
+        return new Amount(currency, amount * f);
+    }
+
+    public String asString() {
+        return (amount < 1_000_000) ?
+                String.format("%,.2f %s", amount, currency) : String.format("%.2e %s", amount, currency);
+    }
 }
