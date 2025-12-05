@@ -85,9 +85,6 @@ public class ImprovementCalculator {
             Improvement bestImprovement = null;
             System.out.printf("%s: time %s%n", best.getName(), durationString(bestTime));
             for (Improvement candidate : candidates) {
-                if (candidate == best) {
-                    continue;
-                }
                 Amount candidateCost = candidate.getCost();
                 float candidateTime = candidateCost.amount() / totalProduction.get(candidateCost.currency());
                 Amount candidateIncrease = candidate.getIncrease();
