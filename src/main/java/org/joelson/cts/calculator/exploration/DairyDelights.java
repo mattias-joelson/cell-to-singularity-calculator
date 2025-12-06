@@ -1,14 +1,9 @@
 import org.joelson.cts.calculator.model.Amount;
-import org.joelson.cts.calculator.model.CurrencyMapping;
 import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.Generator;
-import org.joelson.cts.calculator.model.Improvement;
 import org.joelson.cts.calculator.model.ImprovementCalculator;
 import org.joelson.cts.calculator.model.Upgrade;
 import org.joelson.cts.calculator.model.UpgradeEffect;
-import org.joelson.cts.calculator.model.UpgradeImprovement;
-
-import static org.joelson.cts.calculator.util.DurationToolkit.durationString;
 
 static String MILK = "Milk";
 static String CHEESE = "Cheese";
@@ -45,6 +40,7 @@ void main() {
     createUpgrade(dairyDelights, milkGenerator, "Muenster", 8e7f, 6);
     createUpgrade(dairyDelights, milkGenerator, "Danish", 3e9f, 6);
     createUpgrade(dairyDelights, milkGenerator, "Curds and Whey", 5e9f, 2);
+    createUpgrade(dairyDelights, milkGenerator, "Edam", 5e11f, 11).setBought(false);
     createUpgrade(dairyDelights, milkGenerator, "Salt", 6e13f, 6).setBought(false);
 
     Generator freshCheese = new Generator("Fresh Cheese", milk(1_000), 1.15f, cheese(1));
@@ -52,16 +48,17 @@ void main() {
     createUpgrade(dairyDelights, freshCheese, "Cottage Cheese", 150, 3);
     createUpgrade(dairyDelights, freshCheese, "Cream Cheese", 500_000, 5);
     createUpgrade(dairyDelights, freshCheese, "Kefir", 2e7f, 6);
-    createUpgrade(dairyDelights, freshCheese, "Feta", 2e10f, 301).setBought(false);
+    createUpgrade(dairyDelights, freshCheese, "Feta", 2e10f, 301);
 
     Generator softRipenedCheese = new Generator("Soft-Ripened Cheese", milk(50_000), 1.15f, cheese(100));
     dairyDelights.addGenerator(softRipenedCheese);
     createUpgrade(dairyDelights, softRipenedCheese, "Brie", 150_000, 1.5f);
-    createUpgrade(dairyDelights, softRipenedCheese, "Chévre", 6e10f, 1.6f).setBought(false);
+    createUpgrade(dairyDelights, softRipenedCheese, "Chévre", 6e10f, 601);
 
     Generator semiSoftCheese = new Generator("Semi-Soft Cheese", milk(1.2e6f), 1.25f, cheese(1000));
     dairyDelights.addGenerator(semiSoftCheese);
     createUpgrade(dairyDelights, semiSoftCheese, "Morbier", 7e6f, 1.5f);
+    createUpgrade(dairyDelights, semiSoftCheese, "Havarti", 1.5e11f, 201);
 
     Generator blueCheese = new Generator("Blue Cheese", milk(1.5e7f), 1.15f, cheese(10_000));
     dairyDelights.addGenerator(blueCheese);
@@ -71,14 +68,17 @@ void main() {
 
     Generator semiFirmCheese = new Generator("Semi-Firm Cheese", milk(3e8f), 1.15f, cheese(1e6f));
     dairyDelights.addGenerator(semiFirmCheese);
-    createUpgrade(dairyDelights, semiFirmCheese, "Halloumi", 1.5e10f, 1.5f).setBought(false);
+    createUpgrade(dairyDelights, semiFirmCheese, "Halloumi", 1.5e10f, 1.5f);
+    createUpgrade(dairyDelights, semiFirmCheese, "Emmental", 3e11f, 4).setBought(false);
 
-    semiFirmCheese.setCount(1);
+    semiFirmCheese.setCount(6);
     blueCheese.setCount(13);
-    semiSoftCheese.setCount(5);
-    softRipenedCheese.setCount(14);
-    freshCheese.setCount(38);
-    milkGenerator.setCount(42);
+    semiSoftCheese.setCount(22);
+    softRipenedCheese.setCount(49);
+    freshCheese.setCount(68);
+    milkGenerator.setCount(44);
+
+    dairyDelights.updateEfficiency();
 
     ImprovementCalculator.calculateImprovement(dairyDelights);
 }

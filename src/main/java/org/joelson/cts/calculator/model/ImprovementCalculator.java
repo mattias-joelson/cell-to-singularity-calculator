@@ -14,7 +14,8 @@ public class ImprovementCalculator {
         throw new InstantiationException("Should not be instantiated!");
     }
 
-    public static void printProduction(Garden garden, Map<String, Float> totalProduction) {
+    public static Map<String, Float> calculateProduction(Garden garden) {
+        Map<String, Float> totalProduction = new HashMap<>();
         for (Generator generator : garden.getGenerators().reversed()) {
             int count = generator.getCount();
             String currencyName = generator.getBaseProduction().currency();
@@ -24,23 +25,17 @@ public class ImprovementCalculator {
             System.out.printf("Generator %s: count %d (next %.2e), base %.2e %s, each %.2e %s, total %.3e %s%n",
                     generator.getName(), count, generator.getCost(count).amount(), baseProduction, currencyName,
                     baseProduction * efficiency, currencyName, production, currencyName);
-            totalProduction.put(currencyName, totalProduction.get(currencyName) + production);
+            totalProduction.put(currencyName, totalProduction.getOrDefault(currencyName, 0f) + production);
         }
         for (String currency : garden.getCurrencies()) {
             System.out.printf("%s production: %.2e%n", currency, totalProduction.get(currency));
         }
         System.out.println();
+        return totalProduction;
     }
 
     public static void calculateImprovement(Garden garden) {
-        Map<String, Float> totalProduction = new HashMap<>();
-        for (String currency : garden.getCurrencies()) {
-            totalProduction.put(currency, 0f);
-        }
-        for (Generator generator : garden.getGenerators()) {
-            generator.updateEfficiency(garden);
-        }
-        printProduction(garden, totalProduction);
+        Map<String, Float> totalProduction = calculateProduction(garden);
 
         Map<CurrencyMapping, List<Improvement>> improvements = new HashMap<>();
         for (Generator generator : garden.getGenerators().reversed()) {

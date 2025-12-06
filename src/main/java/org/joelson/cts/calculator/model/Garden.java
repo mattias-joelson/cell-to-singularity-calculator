@@ -44,4 +44,10 @@ public class Garden {
     public List<Upgrade> getUpgrades() {
         return upgrades;
     }
+
+    public void updateEfficiency() {
+        for (Generator generator : generators) {
+            generator.updateEfficiency(this);
+        }
+    }
 }
