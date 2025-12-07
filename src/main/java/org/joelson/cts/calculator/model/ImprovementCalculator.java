@@ -171,6 +171,34 @@ public class ImprovementCalculator {
             } else {
                 bestImprovement = currencyImprovements.getLast();
                 System.out.printf("Multiple candidates, choosing %s%n", bestImprovement.getName());
+
+                Amount bestCost = bestImprovement.getCost();
+                float bestTime = bestCost.amount() / totalProduction.get(bestCost.currency());
+                float shortestTime = bestTime;
+                Improvement otherImprovement = null;
+                System.out.printf("%s: time %s%n", bestImprovement.getName(), durationString(bestTime));
+
+                for (Improvement candidate : currencyImprovements) {
+                    if (candidate == bestImprovement) {
+                        continue;
+                    }
+                    Amount candidateCost = candidate.getCost();
+                    float candidateTime = candidateCost.amount() / totalProduction.get(candidateCost.currency());
+                    Amount candidateIncrease = candidate.getIncrease();
+                    float bestImprovedTime = bestCost.amount() / (totalProduction.get(candidateIncrease.currency())
+                            + candidateIncrease.amount());
+                    float totalTime = candidateTime + bestImprovedTime;
+                    System.out.printf("%s and %s: %s and %s = %s%n", candidate.getName(), bestImprovement.getName(),
+                            durationString(candidateTime), durationString(bestImprovedTime), durationString(totalTime));
+                    if (totalTime < shortestTime) {
+                        shortestTime = totalTime;
+                        otherImprovement = candidate;
+                    }
+                }
+                if (otherImprovement != null) {
+                    System.out.printf("Do %s before %s%n", otherImprovement.getName(), bestImprovement.getName());
+
+                }
             }
             float bestTime = timeUntil(bestImprovement, totalProduction);
             System.out.printf("Time for %s: %s%n", bestImprovement.getName(), durationString(bestTime));
