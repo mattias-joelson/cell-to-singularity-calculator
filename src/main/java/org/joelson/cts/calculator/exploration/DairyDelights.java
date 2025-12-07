@@ -90,4 +90,6 @@ void main() {
     dairyDelights.updateEfficiency();
 
     ImprovementCalculator.calculateImprovement(dairyDelights);
+    System.out.println("==========================================");
+    ImprovementCalculator.calculateImprovementNew(dairyDelights);
 }

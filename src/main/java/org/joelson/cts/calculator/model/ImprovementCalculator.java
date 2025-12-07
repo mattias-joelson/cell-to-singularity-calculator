@@ -111,4 +111,90 @@ public class ImprovementCalculator {
 
         System.out.println();
     }
+
+    public static void calculateImprovementNew(Garden garden) {
+        Map<String, Float> totalProduction = calculateProduction(garden);
+
+        for (String currency : garden.getCurrencies()) {
+            System.out.printf("Optimize for %s:%n", currency);
+
+            List<Improvement> currencyImprovements = new ArrayList<>();
+            List<Improvement> otherImprovements = new ArrayList<>();
+            for (Generator generator : garden.getGenerators().reversed()) {
+                if (generator.getBaseProduction().currency().equals(currency)) {
+                    if (generator.getCost().currency().equals(currency)) {
+                        currencyImprovements.add(generator);
+                    } else {
+                        otherImprovements.add(generator);
+                    }
+                }
+            }
+            for (Upgrade upgrade : garden.getUpgrades()) {
+                if (!upgrade.isBought()) {
+                    for (UpgradeEffect effect : upgrade.getEffects()) {
+                        if (effect.getGenerator().getBaseProduction().currency().equals(currency)) {
+                            Improvement improvement = new UpgradeImprovement(upgrade, effect);
+                            if (improvement.getCost().currency().equals(currency)) {
+                                currencyImprovements.add(improvement);
+                            } else {
+                                otherImprovements.add(improvement);
+                            }
+                        }
+                    }
+                }
+            }
+            currencyImprovements.sort(Comparator.comparing(Improvement::getRatio));
+            otherImprovements.sort(Comparator.comparing(Improvement::getRatio));
+
+            for (Improvement improvement : currencyImprovements.reversed()) {
+                Amount cost = improvement.getCost();
+                float time = cost.amount() / totalProduction.get(cost.currency());
+                System.out.printf("%s: cost %s, increase %s, ratio %.7f, time %s%n",
+                        improvement.getName(), cost.asString(), improvement.getIncrease().asString(),
+                        improvement.getRatio(), durationString(time));
+            }
+            for (Improvement improvement : otherImprovements.reversed()) {
+                Amount cost = improvement.getCost();
+                float time = cost.amount() / totalProduction.get(cost.currency());
+                System.out.printf("%s: cost %s, increase %s, ratio %.7f, time %s%n",
+                        improvement.getName(), cost.asString(), improvement.getIncrease().asString(),
+                        improvement.getRatio(), durationString(time));
+            }
+
+            Improvement bestImprovement;
+            if (currencyImprovements.isEmpty()) {
+                continue;
+            } else if (currencyImprovements.size() == 1) {
+                bestImprovement = currencyImprovements.getLast();
+                System.out.printf("Only %s to %s improvement is %s.%n", currency, currency,
+                        bestImprovement.getName());
+            } else {
+                bestImprovement = currencyImprovements.getLast();
+                System.out.printf("Multiple candidates, choosing %s%n", bestImprovement.getName());
+            }
+            float bestTime = timeUntil(bestImprovement, totalProduction);
+            System.out.printf("Time for %s: %s%n", bestImprovement.getName(), durationString(bestTime));
+
+            float timeLeft = bestTime;
+            List<Improvement> addedImprovements = new ArrayList<>();
+            for (Improvement improvement : otherImprovements.reversed()) {
+                float time = timeUntil(improvement, totalProduction);
+                System.out.printf("Time for %s: %s%n", improvement.getName(), durationString(time));
+                if (time < bestTime) {
+                    float timedProduction = time * totalProduction.get(currency);
+                    float improvedBestTime =
+                            time + (bestImprovement.getCost().amount() - timedProduction) / (totalProduction.get(
+                                    currency) + improvement.getIncrease().amount());
+                    System.out.printf("Improved time for %s: %s when %s after %s.%n", bestImprovement.getName(),
+                            durationString(improvedBestTime), improvement.getName(), durationString(time));
+                }
+            }
+
+            System.out.println();
+        }
+    }
+
+    private static float timeUntil(Improvement improvement, Map<String, Float> totalProduction) {
+        return improvement.getCost().amount() / totalProduction.get(improvement.getCost().currency());
+    }
 }
