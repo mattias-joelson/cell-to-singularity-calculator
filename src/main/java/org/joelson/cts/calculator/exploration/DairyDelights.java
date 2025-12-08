@@ -41,7 +41,9 @@ void main() {
     createUpgrade(dairyDelights, milkGenerator, "Danish", 3e9f, 6);
     createUpgrade(dairyDelights, milkGenerator, "Curds and Whey", 5e9f, 2);
     createUpgrade(dairyDelights, milkGenerator, "Edam", 5e11f, 11);
-    createUpgrade(dairyDelights, milkGenerator, "Salt", 6e13f, 6).setBought(false);
+    createUpgrade(dairyDelights, milkGenerator, "Salt", 6e13f, 6);
+    createUpgrade(dairyDelights, milkGenerator, "Ricotta", 8e13f, 11);
+    createUpgrade(dairyDelights, milkGenerator, "The Big Cheese", 3.5e16f, 2).setBought(false);
 
     Generator freshCheese = new Generator("Fresh Cheese", milk(1_000), 1.15f, cheese(1));
     dairyDelights.addGenerator(freshCheese);
@@ -54,6 +56,7 @@ void main() {
     dairyDelights.addGenerator(softRipenedCheese);
     createUpgrade(dairyDelights, softRipenedCheese, "Brie", 150_000, 1.5f);
     createUpgrade(dairyDelights, softRipenedCheese, "Chévre", 6e10f, 601);
+    createUpgrade(dairyDelights, softRipenedCheese, "Paneer", 1.5e15f, 11001).setBought(false);
 
     Generator semiSoftCheese = new Generator("Semi-Soft Cheese", milk(1.2e6f), 1.25f, cheese(1000));
     dairyDelights.addGenerator(semiSoftCheese);
@@ -72,20 +75,29 @@ void main() {
     createUpgrade(dairyDelights, semiFirmCheese, "Emmental", 3e11f, 4);
     createUpgrade(dairyDelights, semiFirmCheese, "Cheddar", 2e12f, 3);
     createUpgrade(dairyDelights, semiFirmCheese, "Gloucester", 5e12f, 1.5f);
-    createUpgrade(dairyDelights, semiFirmCheese, "Provolone", 8e12f, 2f).setBought(false);
+    createUpgrade(dairyDelights, semiFirmCheese, "Provolone", 8e12f, 2f);
+    createUpgrade(dairyDelights, semiFirmCheese, "Limburger", 6e14f, 6f);
+    createUpgrade(dairyDelights, semiFirmCheese, "Gouda", 9e14f, 4f);
 
     Generator notQuiteCheese = new Generator("Not-Quite-Cheese", cheese(3e11f), 1.15f, cheese(1e7f));
     dairyDelights.addGenerator(notQuiteCheese);
     createUpgrade(dairyDelights, notQuiteCheese, "Non-Dairy", 7e11f, 3);
-    createUpgrade(dairyDelights, notQuiteCheese, "Processed", 1.5e13f, 1).setBought(false);
+    createUpgrade(dairyDelights, notQuiteCheese, "Processed", 1.5e13f, 11);
 
-    notQuiteCheese.setCount(1);
-    semiFirmCheese.setCount(22);
+    Generator hardCheese = new Generator("Hard Cheese", milk(6e11f), 1.15f, cheese(1e9f));
+    dairyDelights.addGenerator(hardCheese);
+    createUpgrade(dairyDelights, hardCheese, "Pecorino", 1.8e14f, 2);
+    createUpgrade(dairyDelights, hardCheese, "Manchego", 4e14f, 2);
+    createUpgrade(dairyDelights, hardCheese, "Cotija", 2e15f, 3).setBought(false);
+
+    hardCheese.setCount(6);
+    notQuiteCheese.setCount(35);
+    semiFirmCheese.setCount(53);
     blueCheese.setCount(13);
-    semiSoftCheese.setCount(22);
-    softRipenedCheese.setCount(50);
-    freshCheese.setCount(69);
-    milkGenerator.setCount(52);
+    semiSoftCheese.setCount(25);
+    softRipenedCheese.setCount(53);
+    freshCheese.setCount(74);
+    milkGenerator.setCount(67);
 
     dairyDelights.updateEfficiency();
 
