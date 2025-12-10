@@ -2,7 +2,7 @@ package org.joelson.cts.calculator.model;
 
 public interface Improvement {
 
-    Object getName();
+    String getName();
 
     Amount getCost();
 
