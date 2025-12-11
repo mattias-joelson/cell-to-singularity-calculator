@@ -7,4 +7,3 @@
 - Rename Generator.incrementCost
 - move Garden.updateEfficiency to GardenState.
 - rename Generator.incrementCost. base-exponent? base multiple?
-- add boost garden state

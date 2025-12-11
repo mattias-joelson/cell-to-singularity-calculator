@@ -9,15 +9,18 @@ public class GardenState {
 
     private final Map<String, GeneratorState> generatorStates;
     private final Set<String> upgradesBought;
+    private boolean boosted;
 
     public GardenState() {
         this.generatorStates = new HashMap<>();
         this.upgradesBought = new HashSet<>();
+        this.boosted = false;
     }
 
     private GardenState(GardenState that) {
         generatorStates = new HashMap<>(that.generatorStates);
         upgradesBought = new HashSet<>(that.upgradesBought);
+        boosted = that.boosted;
     }
 
     public void setGeneratorState(Generator generator, GeneratorState state) {
@@ -34,7 +37,13 @@ public class GardenState {
 
     public GeneratorState getGeneratorState(Generator generator) {
         GeneratorState state = generatorStates.get(generator.getName());
-        return (state == null) ? GeneratorState.EMPTY : state;
+        if (state == null) {
+            state = GeneratorState.EMPTY;
+        }
+        if (boosted) {
+            return new GeneratorState(state.count(), state.efficiency() * 2);
+        }
+        return state;
     }
 
     public void setUpgradeBought(Upgrade upgrade) {
@@ -51,6 +60,14 @@ public class GardenState {
 
     public boolean isUpgradeBought(Upgrade upgrade) {
         return upgradesBought.contains(upgrade.getName());
+    }
+
+    public void setBoosted(boolean boosted) {
+        this.boosted = boosted;
+    }
+
+    public boolean isBoosted() {
+        return boosted;
     }
 
     public GardenState copy() {
