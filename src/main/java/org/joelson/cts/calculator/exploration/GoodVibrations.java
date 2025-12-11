@@ -111,23 +111,24 @@ void main() {
     createUpgrade(goodVibrations, state, modernInnovations, "Mic Check", songs(7e11f), 2); // phonograph
     createUpgrade(goodVibrations, state, modernInnovations, "Listen Up", songs(2.5e12f), 3); // mic
     createUpgrade(goodVibrations, state, modernInnovations, "Radio", songs(1.5e14f), 76); // listen
-    createUpgrade(goodVibrations, state, modernInnovations, "Portable Player", songs(2e15f), 4, false); // listen
+    createUpgrade(goodVibrations, state, modernInnovations, "Portable Player", songs(2e15f), 4); // listen
     createUpgrade(goodVibrations, state, modernInnovations, "Digital Age", songs(8e16f), 16, false); // player
 
     Generator briefHistory = new Generator("A Brief History", songs(5e12f), 1.15f, songs(3e8f)); // what's next
     goodVibrations.addGenerator(briefHistory);
     createUpgrade(goodVibrations, state, briefHistory, "Ancient Times", songs(1.2e13f), 4); // brief
     createUpgrade(goodVibrations, state, briefHistory, "Middle Ages", songs(7e13f), 2); // ancient
-    createUpgrade(goodVibrations, state, briefHistory, "Classical Clientele", songs(8e14f), 3, false); // middle
-    createUpgrade(goodVibrations, state, briefHistory, "A New World", songs(7e15f), 6, false); // classic
+    createUpgrade(goodVibrations, state, briefHistory, "Classical Clientele", songs(8e14f), 3); // middle
+    createUpgrade(goodVibrations, state, briefHistory, "A New World", songs(7e15f), 6); // classic
+    createUpgrade(goodVibrations, state, briefHistory, "Beyond Borders", songs(3e16f), 4, false); // new world
 
     goodVibrations.updateEfficiency(state);
 
-    state.setGeneratorCount(briefHistory, 12);
-    state.setGeneratorCount(modernInnovations, 58);
+    state.setGeneratorCount(briefHistory, 34);
+    state.setGeneratorCount(modernInnovations, 69);
 
-    state.setGeneratorCount(earlyInnovations, 74);
-    state.setGeneratorCount(theory, 123);
+    state.setGeneratorCount(earlyInnovations, 75);
+    state.setGeneratorCount(theory, 124);
 
     state.setGeneratorCount(instruments, 55);
 
