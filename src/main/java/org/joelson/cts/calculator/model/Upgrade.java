@@ -8,17 +8,11 @@ public class Upgrade {
     private final String name;
     private final Amount cost;
     private final List<UpgradeEffect> effects;
-    private boolean bought = false;
 
-    public Upgrade(String name, Amount cost, boolean bought) {
+    public Upgrade(String name, Amount cost) {
         this.name = name;
         this.cost = cost;
         this.effects = new ArrayList<>();
-        this.bought = bought;
-    }
-
-    public Upgrade(String name, Amount cost) {
-        this(name, cost, false);
     }
 
     public String getName() {
@@ -35,13 +29,5 @@ public class Upgrade {
 
     public List<UpgradeEffect> getEffects() {
         return effects;
-    }
-
-    public boolean isBought() {
-        return bought;
-    }
-
-    public void setBought(boolean bought) {
-        this.bought = bought;
     }
 }

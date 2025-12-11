@@ -1,7 +1,9 @@
 package org.joelson.cts.calculator.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Garden {
 
@@ -45,9 +47,23 @@ public class Garden {
         return upgrades;
     }
 
-    public void updateEfficiency() {
+    public void updateEfficiency(GardenState state) {
+        Map<String, Float> generatorEfficiencies = new HashMap<>(generators.size());
         for (Generator generator : generators) {
-            generator.updateEfficiency(this);
+            generatorEfficiencies.put(generator.getName(), 1f);
+        }
+        for (Upgrade upgrade : upgrades) {
+            if (state.isUpgradeBought(upgrade)) {
+                for (UpgradeEffect effect : upgrade.getEffects()) {
+                    generatorEfficiencies.compute(effect.getGenerator().getName(),
+                            (_, generatorEfficiency) -> generatorEfficiency * effect.getEfficiency());
+                }
+            }
+        }
+        for (Generator generator : generators) {
+            GeneratorState generatorState = state.getGeneratorState(generator);
+            float efficiency = generatorEfficiencies.get(generator.getName());
+            state.setGeneratorState(generator, new GeneratorState(generatorState.count(), efficiency));
         }
     }
 }

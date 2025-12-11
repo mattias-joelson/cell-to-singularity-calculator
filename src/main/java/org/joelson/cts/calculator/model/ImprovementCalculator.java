@@ -14,13 +14,14 @@ public class ImprovementCalculator {
         throw new InstantiationException("Should not be instantiated!");
     }
 
-    public static Map<String, Float> calculateProduction(Garden garden) {
+    public static Map<String, Float> calculateProduction(Garden garden, GardenState state) {
         Map<String, Float> totalProduction = new HashMap<>();
         for (Generator generator : garden.getGenerators().reversed()) {
-            int count = generator.getCount();
+            GeneratorState generatorState = state.getGeneratorState(generator);
+            int count = generatorState.count();
             String currencyName = generator.getBaseProduction().currency();
             float baseProduction = generator.getBaseProduction().amount();
-            float efficiency = generator.getEfficiency();
+            float efficiency = generatorState.efficiency();
             float production = baseProduction * efficiency * count;
             System.out.printf("Generator %s: count %d (next %.2e), base %.2e %s, each %.2e %s, total %.3e %s%n",
                     generator.getName(), count, generator.getCost(count).amount(), baseProduction, currencyName,
@@ -34,17 +35,18 @@ public class ImprovementCalculator {
         return totalProduction;
     }
 
-    public static void calculateImprovement(Garden garden) {
-        Map<String, Float> totalProduction = calculateProduction(garden);
+    public static void calculateImprovement(Garden garden, GardenState state) {
+        Map<String, Float> totalProduction = calculateProduction(garden, state);
 
         Map<CurrencyMapping, List<Improvement>> improvements = new HashMap<>();
         for (Generator generator : garden.getGenerators().reversed()) {
-            improvements.computeIfAbsent(generator.getMapping(), _ -> new ArrayList<>()).add(generator);
+            improvements.computeIfAbsent(generator.getMapping(), _ -> new ArrayList<>()).add(
+                    GeneratorImprovement.create(generator, state));
         }
         for (Upgrade upgrade : garden.getUpgrades()) {
-            if (!upgrade.isBought()) {
+            if (!state.isUpgradeBought(upgrade)) {
                 for (UpgradeEffect effect : upgrade.getEffects()) {
-                    Improvement improvement = new UpgradeImprovement(upgrade, effect);
+                    Improvement improvement = UpgradeImprovement.create(upgrade, effect, state);
                     improvements.computeIfAbsent(improvement.getMapping(), _ -> new ArrayList<>()).add(improvement);
                 }
             }
@@ -112,8 +114,8 @@ public class ImprovementCalculator {
         System.out.println();
     }
 
-    public static void calculateImprovementNew(Garden garden) {
-        Map<String, Float> totalProduction = calculateProduction(garden);
+    public static void calculateImprovementNew(Garden garden, GardenState state) {
+        Map<String, Float> totalProduction = calculateProduction(garden, state);
 
         for (String currency : garden.getCurrencies()) {
             System.out.printf("Optimize for %s:%n", currency);
@@ -122,18 +124,19 @@ public class ImprovementCalculator {
             List<Improvement> otherImprovements = new ArrayList<>();
             for (Generator generator : garden.getGenerators().reversed()) {
                 if (generator.getBaseProduction().currency().equals(currency)) {
-                    if (generator.getCost().currency().equals(currency)) {
-                        currencyImprovements.add(generator);
+                    GeneratorImprovement improvement = GeneratorImprovement.create(generator, state);
+                    if (generator.getBaseCost().currency().equals(currency)) {
+                        currencyImprovements.add(improvement);
                     } else {
-                        otherImprovements.add(generator);
+                        otherImprovements.add(improvement);
                     }
                 }
             }
             for (Upgrade upgrade : garden.getUpgrades()) {
-                if (!upgrade.isBought()) {
+                if (!state.isUpgradeBought(upgrade)) {
                     for (UpgradeEffect effect : upgrade.getEffects()) {
                         if (effect.getGenerator().getBaseProduction().currency().equals(currency)) {
-                            Improvement improvement = new UpgradeImprovement(upgrade, effect);
+                            Improvement improvement = UpgradeImprovement.create(upgrade, effect, state);
                             if (improvement.getCost().currency().equals(currency)) {
                                 currencyImprovements.add(improvement);
                             } else {
