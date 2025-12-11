@@ -6,22 +6,22 @@ import java.util.List;
 public class Simulation {
 
     private final String name;
-    private final List<Garden> gardens;
+    private final List<GardenWithState> gardenWithStates;
 
     public Simulation(String name) {
         this.name = name;
-        this.gardens = new ArrayList<>();
+        this.gardenWithStates = new ArrayList<>();
     }
 
     public String getName() {
         return name;
     }
 
-    public void addGarden(Garden garden) {
-        gardens.add(garden);
+    public void addGardenWithState(GardenWithState garden) {
+        gardenWithStates.add(garden);
     }
 
-    public List<Garden> getGardens() {
-        return gardens;
+    public List<GardenWithState> getGardenWithStates() {
+        return gardenWithStates;
     }
 }

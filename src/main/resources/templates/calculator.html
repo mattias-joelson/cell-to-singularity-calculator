@@ -10,16 +10,16 @@
 
 <ul th:each="simulation : ${calculator.simulations}">
     <li th:text="${simulation.name}"/>
-    <ul th:each="garden : ${simulation.gardens}">
-        <li th:text="|${garden.name}|"/>
-        <ul th:each="currency : ${garden.currencies}">
+    <ul th:each="gardenWithState : ${simulation.gardenWithStates}">
+        <li th:text="|${gardenWithState.garden.name}|"/>
+        <ul th:each="currency : ${gardenWithState.garden.currencies}">
             <li th:text="|${currency}|"/>
         </ul>
-        <ul th:each="generator : ${garden.generators}">
-            <li th:text="|${generator.name}: count ${generator.count} * base production ${generator.baseProduction.amount} * efficiency ${generator.efficiency} = ${generator.count * generator.baseProduction.amount * generator.efficiency}|"/>
+        <ul th:each="generator : ${gardenWithState.garden.generators}">
+            <li th:text="|${generator.name}: count ${gardenWithState.state.getGeneratorState(generator).count} * base production ${generator.baseProduction.amount} * efficiency ${gardenWithState.state.getGeneratorState(generator).efficiency} = ${gardenWithState.state.getGeneratorState(generator).count * generator.baseProduction.amount * gardenWithState.state.getGeneratorState(generator).efficiency}|"/>
         </ul>
-        <ul th:each="upgrade : ${garden.upgrades}">
-            <li th:text="|${upgrade.name}: ${upgrade.bought}|"/>
+        <ul th:each="upgrade : ${gardenWithState.garden.upgrades}">
+            <li th:text="|${upgrade.name}: ${gardenWithState.state.isUpgradeBought(upgrade)}|"/>
             <ul th:each="effect : ${upgrade.effects}">
                 <li th:text="|${effect.generator.name}: ${effect.efficiency}|"/>
             </ul>

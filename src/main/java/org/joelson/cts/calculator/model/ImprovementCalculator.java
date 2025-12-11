@@ -125,7 +125,7 @@ public class ImprovementCalculator {
             for (Generator generator : garden.getGenerators().reversed()) {
                 if (generator.getBaseProduction().currency().equals(currency)) {
                     GeneratorImprovement improvement = GeneratorImprovement.create(generator, state);
-                    if (generator.getCost().currency().equals(currency)) {
+                    if (generator.getBaseCost().currency().equals(currency)) {
                         currencyImprovements.add(improvement);
                     } else {
                         otherImprovements.add(improvement);

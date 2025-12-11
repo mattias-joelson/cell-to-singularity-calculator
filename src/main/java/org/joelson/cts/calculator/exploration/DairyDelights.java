@@ -20,7 +20,7 @@ private static Amount cheese(float amount) {
 private static Upgrade createUpgrade(
         Garden garden, GardenState gardenState, Generator generator, String name, float cost, float efficiency,
         boolean bought) {
-    Upgrade upgrade = new Upgrade(name, cheese(cost), true);
+    Upgrade upgrade = new Upgrade(name, cheese(cost));
     upgrade.addEffect(new UpgradeEffect(generator, efficiency));
     garden.addUpgrade(upgrade);
     if (bought) {
@@ -38,7 +38,7 @@ void main() {
 
     Generator milkGenerator = new Generator("Milk", milk(50), 1.4f, milk(1));
     dairyDelights.addGenerator(milkGenerator);
-    Upgrade lactose = new Upgrade("Lactose", milk(250), true);
+    Upgrade lactose = new Upgrade("Lactose", milk(250));
     lactose.addEffect(new UpgradeEffect(milkGenerator, 1.5f));
     dairyDelights.addUpgrade(lactose);
     dairyDelightsState.setUpgradeBought(lactose, true);

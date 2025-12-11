@@ -47,12 +47,6 @@ public class Garden {
         return upgrades;
     }
 
-    public void updateEfficiency() {
-        for (Generator generator : generators) {
-            generator.updateEfficiency(this);
-        }
-    }
-
     public void updateEfficiency(GardenState state) {
         Map<String, Float> generatorEfficiencies = new HashMap<>(generators.size());
         for (Generator generator : generators) {
