@@ -123,7 +123,7 @@ void main() {
     createUpgrade(goodVibrations, state, briefHistory, "Beyond Borders", songs(3e16f), 4, false); // new world
 
     goodVibrations.updateEfficiency(state);
-    state.setBoosted(true);
+    state.setBoost(2);
 
     state.setGeneratorCount(briefHistory, 34);
     state.setGeneratorCount(modernInnovations, 69);
