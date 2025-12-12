@@ -104,7 +104,6 @@ void main() {
     state.setUpgradeBought(whatsNext);
     goodVibrations.addUpgrade(whatsNext);
 
-
     Generator modernInnovations = new Generator("Modern Innovations", songs(1e10f), 1.15f, songs(1e6f)); // what's next
     goodVibrations.addGenerator(modernInnovations);
     createUpgrade(goodVibrations, state, modernInnovations, "Phonograph", songs(2e11f), 6); // modern
@@ -112,7 +111,9 @@ void main() {
     createUpgrade(goodVibrations, state, modernInnovations, "Listen Up", songs(2.5e12f), 3); // mic
     createUpgrade(goodVibrations, state, modernInnovations, "Radio", songs(1.5e14f), 76); // listen
     createUpgrade(goodVibrations, state, modernInnovations, "Portable Player", songs(2e15f), 4); // listen
-    createUpgrade(goodVibrations, state, modernInnovations, "Digital Age", songs(8e16f), 16, false); // player
+    createUpgrade(goodVibrations, state, modernInnovations, "Digital Age", songs(8e16f), 16); // player
+    createUpgrade(goodVibrations, state, modernInnovations, "Streaming", songs(4e17f), 6); // digital age
+    createUpgrade(goodVibrations, state, modernInnovations, "Here, There, and Everywhere", songs(1e18f), 2, false); // streaming
 
     Generator briefHistory = new Generator("A Brief History", songs(5e12f), 1.15f, songs(3e8f)); // what's next
     goodVibrations.addGenerator(briefHistory);
@@ -120,18 +121,19 @@ void main() {
     createUpgrade(goodVibrations, state, briefHistory, "Middle Ages", songs(7e13f), 2); // ancient
     createUpgrade(goodVibrations, state, briefHistory, "Classical Clientele", songs(8e14f), 3); // middle
     createUpgrade(goodVibrations, state, briefHistory, "A New World", songs(7e15f), 6); // classic
-    createUpgrade(goodVibrations, state, briefHistory, "Beyond Borders", songs(3e16f), 4, false); // new world
+    createUpgrade(goodVibrations, state, briefHistory, "Beyond Borders", songs(3e16f), 4); // new world
+    createUpgrade(goodVibrations, state, briefHistory, "Global Sensations", songs(1.5e17f), 3); // beyond borders
 
     goodVibrations.updateEfficiency(state);
     state.setBoost(2);
 
-    state.setGeneratorCount(briefHistory, 34);
-    state.setGeneratorCount(modernInnovations, 69);
+    state.setGeneratorCount(briefHistory, 53);
+    state.setGeneratorCount(modernInnovations, 102);
 
-    state.setGeneratorCount(earlyInnovations, 75);
-    state.setGeneratorCount(theory, 124);
+    state.setGeneratorCount(earlyInnovations, 76);
+    state.setGeneratorCount(theory, 125);
 
-    state.setGeneratorCount(instruments, 55);
+    state.setGeneratorCount(instruments, 56);
 
     state.setGeneratorCount(soundWaves, 100);
     state.setGeneratorCount(notesGenerator, 100);
