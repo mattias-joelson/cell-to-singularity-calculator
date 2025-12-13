@@ -35,7 +35,7 @@ public class ImprovementCalculator {
         return totalProduction;
     }
 
-    public static void calculateImprovement(Garden garden, GardenState state) {
+    public static Improvement calculateImprovement(Garden garden, GardenState state) {
         Map<String, Float> totalProduction = calculateProduction(garden, state);
 
         Map<CurrencyMapping, List<Improvement>> improvements = new HashMap<>();
@@ -52,12 +52,15 @@ public class ImprovementCalculator {
             }
         }
 
+        Improvement improvement = null;
         for (Map.Entry<CurrencyMapping, List<Improvement>> improvementsEntry : improvements.entrySet()) {
-            calculateMappingImprovement(improvementsEntry, totalProduction, improvements);
+            improvement = calculateMappingImprovement(improvementsEntry, totalProduction, improvements);
+            System.out.println();
         }
+        return improvement;
     }
 
-    private static void calculateMappingImprovement(
+    private static Improvement calculateMappingImprovement(
             Map.Entry<CurrencyMapping, List<Improvement>> improvementsEntry, Map<String, Float> totalProduction,
             Map<CurrencyMapping, List<Improvement>> improvements) {
         System.out.printf("Improvements from %s to %s:%n", improvementsEntry.getKey().from(),
@@ -73,6 +76,12 @@ public class ImprovementCalculator {
                     improvement.getName(), cost.asString(), increase.asString(), ratio, durationString(time));
         }
         Improvement best = mappingImprovements.getLast();
+        return calculateSpecificImprovement(totalProduction, improvements, best);
+    }
+
+    private static Improvement calculateSpecificImprovement(
+            Map<String, Float> totalProduction, Map<CurrencyMapping, List<Improvement>> improvements,
+            Improvement best) {
         System.out.printf("Best: %s, (%s)%n", best.getName(), best.getMapping());
         List<Improvement> candidates = new ArrayList<>();
         for (Map.Entry<CurrencyMapping, List<Improvement>> candidateEntry : improvements.entrySet()) {
@@ -107,11 +116,12 @@ public class ImprovementCalculator {
             }
         }
         if (bestImprovement != null) {
-            System.out.printf("Do %s before %s%n", bestImprovement.getName(), best.getName());
-
+            System.out.printf(">>> Do %s before %s%n", bestImprovement.getName(), best.getName());
+            return calculateSpecificImprovement(totalProduction, improvements, bestImprovement);
         }
 
-        System.out.println();
+        System.out.printf("*** Do %s by itself%n", best.getName());
+        return best;
     }
 
     public static void calculateImprovementNew(Garden garden, GardenState state) {
