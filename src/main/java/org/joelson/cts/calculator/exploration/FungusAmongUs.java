@@ -140,7 +140,7 @@ void main() {
         } else if (improvement instanceof UpgradeImprovement upgradeImprovement) {
             Upgrade upgrade = upgradeImprovement.upgrade();
             UpgradeEffect effect = upgrade.getEffects().getFirst();
-            actions.add(String.format("Upgrade %s (%s)", upgrade.getName(), effect.getGenerator().name()));
+            actions.add(String.format("Upgrade %s (%s)", upgrade.getName(), effect.generator().name()));
             state.setUpgradeBought(upgrade);
         } else {
             throw new NullPointerException();

@@ -145,7 +145,7 @@ public class ImprovementCalculator {
             for (Upgrade upgrade : garden.getUpgrades()) {
                 if (!state.isUpgradeBought(upgrade)) {
                     for (UpgradeEffect effect : upgrade.getEffects()) {
-                        if (effect.getGenerator().baseProduction().currency().equals(currency)) {
+                        if (effect.generator().baseProduction().currency().equals(currency)) {
                             Improvement improvement = UpgradeImprovement.create(upgrade, effect, state);
                             if (improvement.getCost().currency().equals(currency)) {
                                 currencyImprovements.add(improvement);

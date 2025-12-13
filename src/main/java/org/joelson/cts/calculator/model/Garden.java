@@ -55,8 +55,8 @@ public class Garden {
         for (Upgrade upgrade : upgrades) {
             if (state.isUpgradeBought(upgrade)) {
                 for (UpgradeEffect effect : upgrade.getEffects()) {
-                    generatorEfficiencies.compute(effect.getGenerator().name(),
-                            (_, generatorEfficiency) -> generatorEfficiency * effect.getEfficiency());
+                    generatorEfficiencies.compute(effect.generator().name(),
+                            (_, generatorEfficiency) -> generatorEfficiency * effect.efficiency());
                 }
             }
         }

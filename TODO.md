@@ -2,7 +2,6 @@
 
 ## TODO
 
-- Make improvement implementations be pure records without calculations.
 - Or actually record Improvement? How to execute improvement?
 - Rename Generator.incrementCost
 - move Garden.updateEfficiency to GardenState.

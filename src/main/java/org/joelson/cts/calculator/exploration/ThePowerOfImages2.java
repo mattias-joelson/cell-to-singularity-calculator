@@ -127,9 +127,9 @@ void main() {
             float cost = upgrade.getCost().amount();
             float increase = 0;
             for (UpgradeEffect effect : upgrade.getEffects()) {
-                Generator generator = effect.getGenerator();
+                Generator generator = effect.generator();
                 GeneratorState generatorState = state.getGeneratorState(generator);
-                increase += (effect.getEfficiency() - 1) * generator.baseProduction().amount()
+                increase += (effect.efficiency() - 1) * generator.baseProduction().amount()
                         * generatorState.count() * generatorState.efficiency();
             }
             float ratio = increase / cost;
