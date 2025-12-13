@@ -24,19 +24,19 @@ public class GardenState {
     }
 
     public void setGeneratorState(Generator generator, GeneratorState state) {
-        generatorStates.put(generator.getName(), state);
+        generatorStates.put(generator.name(), state);
     }
 
     public void setGeneratorCount(Generator generator, int count) {
-        GeneratorState state = generatorStates.computeIfPresent(generator.getName(),
+        GeneratorState state = generatorStates.computeIfPresent(generator.name(),
                 (n, s) -> new GeneratorState(count, s.efficiency()));
         if (state == null) {
-            throw new NullPointerException("No generator " + generator.getName() + " present.");
+            throw new NullPointerException("No generator " + generator.name() + " present.");
         }
     }
 
     public GeneratorState getGeneratorState(Generator generator) {
-        GeneratorState state = generatorStates.get(generator.getName());
+        GeneratorState state = generatorStates.get(generator.name());
         if (state == null) {
             state = GeneratorState.EMPTY;
         }

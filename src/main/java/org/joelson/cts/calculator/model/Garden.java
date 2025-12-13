@@ -50,19 +50,19 @@ public class Garden {
     public void updateEfficiency(GardenState state) {
         Map<String, Float> generatorEfficiencies = new HashMap<>(generators.size());
         for (Generator generator : generators) {
-            generatorEfficiencies.put(generator.getName(), 1f);
+            generatorEfficiencies.put(generator.name(), 1f);
         }
         for (Upgrade upgrade : upgrades) {
             if (state.isUpgradeBought(upgrade)) {
                 for (UpgradeEffect effect : upgrade.getEffects()) {
-                    generatorEfficiencies.compute(effect.getGenerator().getName(),
+                    generatorEfficiencies.compute(effect.getGenerator().name(),
                             (_, generatorEfficiency) -> generatorEfficiency * effect.getEfficiency());
                 }
             }
         }
         for (Generator generator : generators) {
             GeneratorState generatorState = state.getGeneratorState(generator);
-            float efficiency = generatorEfficiencies.get(generator.getName());
+            float efficiency = generatorEfficiencies.get(generator.name());
             state.setGeneratorState(generator, new GeneratorState(generatorState.count(), efficiency));
         }
     }

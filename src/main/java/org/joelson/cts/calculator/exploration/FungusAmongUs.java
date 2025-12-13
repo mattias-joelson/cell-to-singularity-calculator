@@ -135,12 +135,12 @@ void main() {
         if (improvement instanceof GeneratorImprovement generatorImprovement) {
             Generator generator = generatorImprovement.generator();
             int count = generatorImprovement.state().count();
-            actions.add(String.format("Generator %s: %d -> %d", generator.getName(), count, count + 1));
+            actions.add(String.format("Generator %s: %d -> %d", generator.name(), count, count + 1));
             state.setGeneratorCount(generator, count + 1);
         } else if (improvement instanceof UpgradeImprovement upgradeImprovement) {
             Upgrade upgrade = upgradeImprovement.upgrade();
             UpgradeEffect effect = upgrade.getEffects().getFirst();
-            actions.add(String.format("Upgrade %s (%s)", upgrade.getName(), effect.getGenerator().getName()));
+            actions.add(String.format("Upgrade %s (%s)", upgrade.getName(), effect.getGenerator().name()));
             state.setUpgradeBought(upgrade);
         } else {
             throw new NullPointerException();

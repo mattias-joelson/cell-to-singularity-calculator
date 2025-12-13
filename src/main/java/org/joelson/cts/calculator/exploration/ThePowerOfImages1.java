@@ -9,7 +9,7 @@ void main() {
     //Generator generator = new Generator("Composition", 2.5e6f, 1.15f, 1000);
     Generator generator = new Generator("Photography", new Amount(CURRENCY, 1.5e11f), 1.15f,
             new Amount(CURRENCY, 5e7f));
-    float generatorProduction = generator.getBaseProduction().amount() * 11;
+    float generatorProduction = generator.baseProduction().amount() * 11;
     System.out.println("generatorProduction: " + generatorProduction);
 
     float lineProduction = (1 * 2 * 3 * 2.5f) * 38;

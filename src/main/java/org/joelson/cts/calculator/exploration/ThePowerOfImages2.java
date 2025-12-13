@@ -94,11 +94,11 @@ void main() {
     for (Generator generator : garden.getGenerators().reversed()) {
         GeneratorState generatorState = state.getGeneratorState(generator);
         int count = generatorState.count();
-        float baseProduction = generator.getBaseProduction().amount();
+        float baseProduction = generator.baseProduction().amount();
         float efficiency = generatorState.efficiency();
         float production = baseProduction * efficiency * count;
         System.out.printf("Generator %s:\tcount %d (next %.2e), base %.2e, each %.2e, total %.3e%n",
-                generator.getName(), count, generator.getCost(count).amount(), baseProduction,
+                generator.name(), count, generator.getCost(count).amount(), baseProduction,
                 baseProduction * efficiency,
                 production);
         totalProduction += production;
@@ -111,16 +111,16 @@ void main() {
     for (Generator generator : garden.getGenerators().reversed()) {
         GeneratorState generatorState = state.getGeneratorState(generator);
         float cost = generator.getCost(generatorState.count()).amount();
-        float increase = generator.getBaseProduction().amount() * generatorState.efficiency();
+        float increase = generator.baseProduction().amount() * generatorState.efficiency();
         float ratio = increase / cost;
         if (ratio > maxRatio) {
             maxRatio = ratio;
-            which = generator.getName();
+            which = generator.name();
         }
         float time = cost / totalProduction;
         Duration duration = Duration.of(Math.round(time), ChronoUnit.SECONDS);
         System.out.printf("Generator %s: cost %.2e, increase %.2e, ratio %.7f, time %s%n",
-                generator.getName(), cost, increase, ratio, duration);
+                generator.name(), cost, increase, ratio, duration);
     }
     for (Upgrade upgrade : garden.getUpgrades()) {
         if (!state.isUpgradeBought(upgrade)) {
@@ -129,7 +129,7 @@ void main() {
             for (UpgradeEffect effect : upgrade.getEffects()) {
                 Generator generator = effect.getGenerator();
                 GeneratorState generatorState = state.getGeneratorState(generator);
-                increase += (effect.getEfficiency() - 1) * generator.getBaseProduction().amount()
+                increase += (effect.getEfficiency() - 1) * generator.baseProduction().amount()
                         * generatorState.count() * generatorState.efficiency();
             }
             float ratio = increase / cost;

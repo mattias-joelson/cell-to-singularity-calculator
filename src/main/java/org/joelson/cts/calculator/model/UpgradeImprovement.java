@@ -15,7 +15,7 @@ public record UpgradeImprovement(Upgrade upgrade, UpgradeEffect effect, Generato
 
     @Override
     public Amount getIncrease() {
-        return effect.getGenerator().getBaseProduction().times(generatorState.efficiency())
+        return effect.getGenerator().baseProduction().times(generatorState.efficiency())
                 .times(generatorState.count()).times(effect.getEfficiency() - 1);
     }
 
