@@ -29,7 +29,7 @@ public class GardenState {
 
     public void setGeneratorCount(Generator generator, int count) {
         GeneratorState state = generatorStates.computeIfPresent(generator.name(),
-                (n, s) -> new GeneratorState(count, s.efficiency()));
+                (_, s) -> new GeneratorState(count, s.efficiency()));
         if (state == null) {
             throw new NullPointerException("No generator " + generator.name() + " present.");
         }
@@ -68,6 +68,26 @@ public class GardenState {
 
     public int getBoost() {
         return boost;
+    }
+
+    public void updateEfficiency(Garden garden) {
+        Map<String, Float> generatorEfficiencies = new HashMap<>(garden.getGenerators().size());
+        for (Generator generator : garden.getGenerators()) {
+            generatorEfficiencies.put(generator.name(), 1f);
+        }
+        for (Upgrade upgrade : garden.getUpgrades()) {
+            if (isUpgradeBought(upgrade)) {
+                for (UpgradeEffect effect : upgrade.getEffects()) {
+                    generatorEfficiencies.compute(effect.generator().name(),
+                            (_, generatorEfficiency) -> generatorEfficiency * effect.efficiency());
+                }
+            }
+        }
+        for (Generator generator : garden.getGenerators()) {
+            GeneratorState generatorState = getGeneratorState(generator);
+            float efficiency = generatorEfficiencies.get(generator.name());
+            setGeneratorState(generator, new GeneratorState(generatorState.count(), efficiency));
+        }
     }
 
     public GardenState copy() {

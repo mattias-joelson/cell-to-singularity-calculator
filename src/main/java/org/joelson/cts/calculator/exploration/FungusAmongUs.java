@@ -113,7 +113,7 @@ void main() {
             .addUpgrade("Scent & Taste", 1e27f, 2, false, false) // Mind-Altering
             .generator();
 
-    GARDEN.updateEfficiency(STATE);
+    STATE.updateEfficiency(GARDEN);
     STATE.setBoost(4);
 
     setGeneratorCount(mindAlteringFungi, 35);
@@ -142,10 +142,10 @@ void main() {
             UpgradeEffect effect = upgrade.getEffects().getFirst();
             actions.add(String.format("Upgrade %s (%s)", upgrade.getName(), effect.generator().name()));
             state.setUpgradeBought(upgrade);
+            STATE.updateEfficiency(GARDEN);
         } else {
             throw new NullPointerException();
         }
-        GARDEN.updateEfficiency(state);
     }
 
     actions.stream().forEach(System.out::println);

@@ -124,7 +124,7 @@ void main() {
     createUpgrade(goodVibrations, state, briefHistory, "Beyond Borders", songs(3e16f), 4); // new world
     createUpgrade(goodVibrations, state, briefHistory, "Global Sensations", songs(1.5e17f), 3); // beyond borders
 
-    goodVibrations.updateEfficiency(state);
+    state.updateEfficiency(goodVibrations);
     state.setBoost(2);
 
     state.setGeneratorCount(briefHistory, 53);
