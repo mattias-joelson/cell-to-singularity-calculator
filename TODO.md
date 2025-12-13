@@ -6,7 +6,6 @@
 - Or actually record Improvement? How to execute improvement?
 - Rename Generator.incrementCost
 - move Garden.updateEfficiency to GardenState.
-- rename Generator.incrementCost. base-exponent? base multiple?
 - other currency subtracts, not before
 
 - Improvement can send lambda with message
