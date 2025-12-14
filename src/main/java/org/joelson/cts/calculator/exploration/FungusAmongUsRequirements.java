@@ -379,6 +379,7 @@ void main() {
 
     GardenState state = STATE.copy();
     List<String> actions = new ArrayList<>();
+    printUnlocked(GARDEN, state, actions);
     for (int i = 0; i < 20; i += 1) {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         Improvement improvement = ImprovementCalculator.calculateImprovement(GARDEN, state);
@@ -397,7 +398,7 @@ void main() {
             UpgradeEffect effect = upgrade.getEffects().getFirst();
             actions.add(String.format("(%d) Upgrade %s (%s)", i + 1, upgrade.getName(), effect.generator().name()));
             state.setUpgradeBought(upgrade);
-            STATE.updateEfficiency(GARDEN);
+            state.updateEfficiency(GARDEN);
             printUnlocked(GARDEN, state, actions);
         } else {
             throw new NullPointerException();
