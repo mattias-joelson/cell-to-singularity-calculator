@@ -10,4 +10,9 @@ public record Generator(String name, Amount baseCost, float compoundingCost, Amo
     public CurrencyMapping getMapping() {
         return new CurrencyMapping(baseCost.currency(), baseProduction.currency());
     }
+
+    @Override
+    public String getName() {
+        return name;
+    }
 }

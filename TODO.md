@@ -10,3 +10,5 @@
 - Improvement other currency should deduct
 
 - offline time doubles when boosted, minimum 3 minutes?
+
+- gardenState can hold cost and production multiples
