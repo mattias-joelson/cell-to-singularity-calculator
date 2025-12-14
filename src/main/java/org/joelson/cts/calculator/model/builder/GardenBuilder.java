@@ -21,23 +21,32 @@ public class GardenBuilder {
     private final Garden garden;
     private final GardenState state;
     private final Map<String, List<UnresolvedRequirement>> unresolvedRequirements;
+    private final int costMultiplier;
+    private final int productionMultiplier;
 
-    public GardenBuilder(Garden garden, GardenState state) {
+    public GardenBuilder(Garden garden, GardenState state, int costMultiplier, int productionMultiplier) {
         this.garden = garden;
         this.state = state;
         this.unresolvedRequirements = new HashMap<>();
+        this.costMultiplier = costMultiplier;
+        this.productionMultiplier = productionMultiplier;
+    }
+
+    public GardenBuilder(Garden garden, GardenState state) {
+        this(garden, state, 1, 1);
     }
 
     public GeneratorBuilder createGenerator(
             String name, Amount baseCost, float compoundingCost, Amount baseProduction) {
-        Generator generator = new Generator(name, baseCost, compoundingCost, baseProduction);
+        Generator generator = new Generator(name, baseCost.times(costMultiplier), compoundingCost,
+                baseProduction.times(productionMultiplier));
         garden.addGenerator(generator);
         return new GeneratorBuilder(this, generator);
     }
 
     public UpgradeBuilder addGeneratorUpgrade(
             Generator generator, String name, Amount cost, float efficiency, boolean bought) {
-        Upgrade upgrade = new Upgrade(name, cost);
+        Upgrade upgrade = new Upgrade(name, cost.times(costMultiplier));
         upgrade.addEffect(new UpgradeEffect(generator, efficiency));
         garden.addUpgrade(upgrade);
         state.setUpgradeBought(upgrade, bought);
