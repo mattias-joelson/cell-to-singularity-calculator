@@ -3,7 +3,6 @@
 ## TODO
 
 - Or actually record Improvement? How to execute improvement?
-- Rename Generator.incrementCost
 - other currency subtracts, not built before
 
 - Improvement can send lambda with message

@@ -16,7 +16,7 @@ public class ImprovementCalculator {
 
     public static Map<String, Float> calculateProduction(Garden garden, GardenState state) {
         Map<String, Float> totalProduction = new HashMap<>();
-        for (Generator generator : garden.getGenerators().reversed()) {
+        for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
             GeneratorState generatorState = state.getGeneratorState(generator);
             int count = generatorState.count();
             String currencyName = generator.baseProduction().currency();
@@ -39,11 +39,11 @@ public class ImprovementCalculator {
         Map<String, Float> totalProduction = calculateProduction(garden, state);
 
         Map<CurrencyMapping, List<Improvement>> improvements = new HashMap<>();
-        for (Generator generator : garden.getGenerators().reversed()) {
+        for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
             improvements.computeIfAbsent(generator.getMapping(), _ -> new ArrayList<>()).add(
                     GeneratorImprovement.create(generator, state));
         }
-        for (Upgrade upgrade : garden.getUpgrades()) {
+        for (Upgrade upgrade : garden.getUnlockedUpgrades(state)) {
             if (!state.isUpgradeBought(upgrade)) {
                 for (UpgradeEffect effect : upgrade.getEffects()) {
                     Improvement improvement = UpgradeImprovement.create(upgrade, effect, state);

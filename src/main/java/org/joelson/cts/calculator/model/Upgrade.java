@@ -3,7 +3,7 @@ package org.joelson.cts.calculator.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Upgrade {
+public class Upgrade implements Unlockable {
 
     private final String name;
     private final Amount cost;
