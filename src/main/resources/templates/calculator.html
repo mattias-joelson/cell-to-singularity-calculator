@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cell to Singularity Calculator</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<h1>Cell to Singularity Calculator</h1>
+
+<ul th:each="simulation : ${calculator.simulations}">
+    <li th:text="${simulation.name}"/>
+    <ul th:each="gardenWithState : ${simulation.gardenWithStates}">
+        <li th:text="|${gardenWithState.garden.name}|"/>
+        <ul th:each="currency : ${gardenWithState.garden.currencies}">
+            <li th:text="|${currency}|"/>
+        </ul>
+        <ul th:each="generator : ${gardenWithState.garden.generators}">
+            <li th:text="|${generator.name}: count ${gardenWithState.state.getGeneratorState(generator).count} * base production ${generator.baseProduction.amount} * efficiency ${gardenWithState.state.getGeneratorState(generator).efficiency} = ${gardenWithState.state.getGeneratorState(generator).count * generator.baseProduction.amount * gardenWithState.state.getGeneratorState(generator).efficiency}|"/>
+        </ul>
+        <ul th:each="upgrade : ${gardenWithState.garden.upgrades}">
+            <li th:text="|${upgrade.name}: ${gardenWithState.state.isUpgradeBought(upgrade)}|"/>
+            <ul th:each="effect : ${upgrade.effects}">
+                <li th:text="|${effect.generator.name}: ${effect.efficiency}|"/>
+            </ul>
+        </ul>
+    </ul>
+</ul>
+
+</body>
+</html>
