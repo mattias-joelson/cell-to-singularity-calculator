@@ -188,7 +188,7 @@ void main() {
 
     builder.resolveRequirements();
     STATE.updateEfficiency(GARDEN);
-    STATE.setBoost(2);
+    //STATE.setBoost(2);
 
     setGeneratorCount(mindAlteringFungi, 0);
     setGeneratorCount(unwelcomeFungi, 0);
