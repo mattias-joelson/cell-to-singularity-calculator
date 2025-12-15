@@ -35,7 +35,7 @@ public class ImprovementCalculator {
         return totalProduction;
     }
 
-    public static Improvement calculateImprovement(Garden garden, GardenState state) {
+    public static Map<CurrencyMapping, Improvement> calculateImprovement(Garden garden, GardenState state) {
         Map<String, Float> totalProduction = calculateProduction(garden, state);
 
         Map<CurrencyMapping, List<Improvement>> improvements = new HashMap<>();
@@ -52,12 +52,13 @@ public class ImprovementCalculator {
             }
         }
 
-        Improvement improvement = null;
+        Map<CurrencyMapping, Improvement> improvementMap = new HashMap<>();
         for (Map.Entry<CurrencyMapping, List<Improvement>> improvementsEntry : improvements.entrySet()) {
-            improvement = calculateMappingImprovement(improvementsEntry, totalProduction, improvements);
+            Improvement improvement = calculateMappingImprovement(improvementsEntry, totalProduction, improvements);
+            improvementMap.put(improvementsEntry.getKey(), improvement);
             System.out.println();
         }
-        return improvement;
+        return improvementMap;
     }
 
     private static Improvement calculateMappingImprovement(
