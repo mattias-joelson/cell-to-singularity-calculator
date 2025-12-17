@@ -1,4 +1,5 @@
 import org.joelson.cts.calculator.model.Amount;
+import org.joelson.cts.calculator.model.CurrencyMapping;
 import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
@@ -200,11 +201,12 @@ void main() {
     setGeneratorCount(fungi, 1);
 
     GardenState state = STATE.copy();
+    CurrencyMapping mapping = new CurrencyMapping(CURRENCY, CURRENCY);
     List<String> actions = new ArrayList<>();
     printUnlocked(GARDEN, state, actions);
     for (int i = 0; i < 20; i += 1) {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        Improvement improvement = ImprovementCalculator.calculateImprovement(GARDEN, state);
+        Improvement improvement = ImprovementCalculator.calculateImprovement(GARDEN, state).get(mapping);
         System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         System.out.println();
         if (improvement instanceof GeneratorImprovement(Generator generator, GeneratorState generatorState)) {
