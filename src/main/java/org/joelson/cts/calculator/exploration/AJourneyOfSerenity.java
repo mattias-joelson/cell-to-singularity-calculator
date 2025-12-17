@@ -109,7 +109,7 @@ void main() {
             .addUpgrade("Vertical Farming", leaves(6e15f), 3.5f, false)
             .addUpgradeRequirement("Pest and Disease Control")
 
-            .addUpgrade("Irrigation System", leaves(1.5e16f), 4, true)
+            .addUpgrade("Irrigation System", leaves(1.5e16f), 4, false)
             .addUpgradeRequirement("Harvesting Machinery")
             .addUpgradeRequirement("Vertical Farming")
 
