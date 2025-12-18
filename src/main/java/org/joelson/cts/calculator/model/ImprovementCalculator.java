@@ -23,9 +23,11 @@ public class ImprovementCalculator {
             float baseProduction = generator.baseProduction().amount();
             float efficiency = generatorState.efficiency();
             float production = baseProduction * efficiency * count;
-            System.out.printf("Generator %s: count %d (next %.2e), base %.2e %s, each %.2e %s, total %.3e %s%n",
-                    generator.name(), count, generator.getCost(count).amount(), baseProduction, currencyName,
-                    baseProduction * efficiency, currencyName, production, currencyName);
+            System.out.printf("Generator %s: count %d (next %s), base %s, each %s, total %s%n",
+                    generator.name(), count, generator.getCost(count).asString(),
+                    new Amount(currencyName, baseProduction).asString(),
+                    new Amount(currencyName, baseProduction * efficiency).asString(),
+                    new Amount(currencyName, production).asString());
             totalProduction.put(currencyName, totalProduction.getOrDefault(currencyName, 0f) + production);
         }
         for (String currency : garden.getCurrencies()) {

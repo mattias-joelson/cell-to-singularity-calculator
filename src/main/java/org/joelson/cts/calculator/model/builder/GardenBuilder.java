@@ -38,15 +38,15 @@ public class GardenBuilder {
 
     public GeneratorBuilder createGenerator(
             String name, Amount baseCost, float compoundingCost, Amount baseProduction) {
-        Generator generator = new Generator(name, baseCost.times(costMultiplier), compoundingCost,
-                baseProduction.times(productionMultiplier));
+        Generator generator = new Generator(name, baseCost.multiplyBy(costMultiplier), compoundingCost,
+                baseProduction.multiplyBy(productionMultiplier));
         garden.addGenerator(generator);
         return new GeneratorBuilder(this, generator);
     }
 
     public UpgradeBuilder addGeneratorUpgrade(
             Generator generator, String name, Amount cost, float efficiency, boolean bought) {
-        Upgrade upgrade = new Upgrade(name, cost.times(costMultiplier));
+        Upgrade upgrade = new Upgrade(name, cost.multiplyBy(costMultiplier));
         upgrade.addEffect(new UpgradeEffect(generator, efficiency));
         garden.addUpgrade(upgrade);
         state.setUpgradeBought(upgrade, bought);
