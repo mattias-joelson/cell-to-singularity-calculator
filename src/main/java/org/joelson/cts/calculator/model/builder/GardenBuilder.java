@@ -6,6 +6,7 @@ import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
 import org.joelson.cts.calculator.model.GeneratorRequirement;
 import org.joelson.cts.calculator.model.Unlockable;
+import org.joelson.cts.calculator.model.UntimedGenerator;
 import org.joelson.cts.calculator.model.Upgrade;
 import org.joelson.cts.calculator.model.UpgradeEffect;
 import org.joelson.cts.calculator.model.UpgradeRequirement;
@@ -38,7 +39,7 @@ public class GardenBuilder {
 
     public GeneratorBuilder createGenerator(
             String name, Amount baseCost, float compoundingCost, Amount baseProduction) {
-        Generator generator = new Generator(name, baseCost.multiplyBy(costMultiplier), compoundingCost,
+        Generator generator = new UntimedGenerator(name, baseCost.multiplyBy(costMultiplier), compoundingCost,
                 baseProduction.multiplyBy(productionMultiplier));
         garden.addGenerator(generator);
         return new GeneratorBuilder(this, generator);

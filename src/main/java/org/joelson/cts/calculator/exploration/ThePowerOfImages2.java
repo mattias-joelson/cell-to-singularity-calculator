@@ -3,6 +3,7 @@ import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
 import org.joelson.cts.calculator.model.GeneratorState;
+import org.joelson.cts.calculator.model.UntimedGenerator;
 import org.joelson.cts.calculator.model.Upgrade;
 import org.joelson.cts.calculator.model.UpgradeEffect;
 
@@ -18,19 +19,19 @@ void main() {
     GardenState state = new GardenState();
     garden.addCurrency(CURRENCY);
 
-    Generator line = new Generator("Line", amount(40), 1.15f, amount(1));
+    Generator line = new UntimedGenerator("Line", amount(40), 1.15f, amount(1));
     garden.addGenerator(line);
     createUpgrade(garden, state, line, "Imagination", 20, 2);
     createUpgrade(garden, state, line, "Drawing", 100, 3);
     createUpgrade(garden, state, line, "Body Paint", 400, 2.5f);
 
-    Generator symbol = new Generator("Symbol", amount(7500), 1.15f, amount(50));
+    Generator symbol = new UntimedGenerator("Symbol", amount(7500), 1.15f, amount(50));
     garden.addGenerator(symbol);
     createUpgrade(garden, state, symbol, "Tattoo", 30_000, 2.5f);
     createUpgrade(garden, state, symbol, "Glyphs", 150_000, 2);
     createUpgrade(garden, state, symbol, "Brush Strokes", 800_000, 2);
 
-    Generator composition = new Generator("Composition", amount(2_500_000), 1.15f, amount(2000));
+    Generator composition = new UntimedGenerator("Composition", amount(2_500_000), 1.15f, amount(2000));
     garden.addGenerator(composition);
     createUpgrade(garden, state, composition, "Ancient Art", 3.2e6f, 2);
     createUpgrade(garden, state, composition, "Folk Art", 1.2e7f, 2);
@@ -38,7 +39,7 @@ void main() {
     createUpgrade(garden, state, composition, "Church as King", 2e8f, 2);
     createUpgrade(garden, state, composition, "The First Projection", 8e8f, 2);
 
-    Generator renaissance = new Generator("Renaissance", amount(625_000_000), 1.15f, amount(500_000));
+    Generator renaissance = new UntimedGenerator("Renaissance", amount(625_000_000), 1.15f, amount(500_000));
     garden.addGenerator(renaissance);
     createUpgrade(garden, state, renaissance, "Artisans", 2e9f, 2);
     createUpgrade(garden, state, renaissance, "Patrons", 8e9f, 2);
@@ -47,12 +48,12 @@ void main() {
     createUpgrade(garden, state, renaissance, "Realism", 1.25e11f, 2);
     createUpgrade(garden, state, renaissance, "Post Impressionism", 2e12f, 5);
 
-    Generator photography = new Generator("Photography", amount(150_000_000_000f), 1.15f, amount(50_000_000));
+    Generator photography = new UntimedGenerator("Photography", amount(150_000_000_000f), 1.15f, amount(50_000_000));
     garden.addGenerator(photography);
     createUpgrade(garden, state, photography, "Memory as an Object", 1e12f, 11);
     createUpgrade(garden, state, photography, "Tricking the Eye", 1.5e16f, 1001);
 
-    Generator modernism = new Generator("Modernism", amount(40_000_000_000_000f), 1.15f, amount(5_000_000_000f));
+    Generator modernism = new UntimedGenerator("Modernism", amount(40_000_000_000_000f), 1.15f, amount(5_000_000_000f));
     garden.addGenerator(modernism);
     createUpgrade(garden, state, modernism, "Expressionism", 5e13f, 2);
     createUpgrade(garden, state, modernism, "Artist Entrepreneur", 2e14f, 2.25f);
@@ -60,19 +61,19 @@ void main() {
     createUpgrade(garden, state, modernism, "Museum", 3e15f, 2);
     createUpgrade(garden, state, modernism, "Abstract Expressionism", 6e17f, 21);
 
-    Generator artCelebrity = new Generator("Art Celebrity", amount(1e16f), 1.15f, amount(3e12f));
+    Generator artCelebrity = new UntimedGenerator("Art Celebrity", amount(1e16f), 1.15f, amount(3e12f));
     garden.addGenerator(artCelebrity);
     createUpgrade(garden, state, artCelebrity, "Critic", 5e16f, 3.5f);
     createUpgrade(garden, state, artCelebrity, "Dealer", 8e19f, 151);
 
-    Generator postModernism = new Generator("Post Modernism", amount(5e17f), 1.15f, amount(9e13f));
+    Generator postModernism = new UntimedGenerator("Post Modernism", amount(5e17f), 1.15f, amount(9e13f));
     garden.addGenerator(postModernism);
     createUpgrade(garden, state, postModernism, "Dadaism", 2e18f, 3.5f);
     createUpgrade(garden, state, postModernism, "Surrealism", 1.5e19f, 3);
     createUpgrade(garden, state, postModernism, "Pop Art", 5e20f, 21);
     createUpgrade(garden, state, postModernism, "Feminist Art", 1.5e23f, 201, false);
 
-    Generator movingImages = new Generator("Moving Images", amount(1.5e20f), 1.15f, amount(8e15f));
+    Generator movingImages = new UntimedGenerator("Moving Images", amount(1.5e20f), 1.15f, amount(8e15f));
     garden.addGenerator(movingImages);
     createUpgrade(garden, state, movingImages, "Hand-Drawn Animation", 3e21f, 4);
     createUpgrade(garden, state, movingImages, "Silent to Talkie", 8e21f, 6);

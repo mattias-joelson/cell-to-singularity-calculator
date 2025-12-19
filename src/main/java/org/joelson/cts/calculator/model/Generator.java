@@ -1,18 +1,25 @@
 package org.joelson.cts.calculator.model;
 
-public record Generator(String name, Amount baseCost, float compoundingCost, Amount baseProduction)
-        implements Unlockable {
+public interface Generator extends Unlockable {
 
-    public Amount getCost(int level) {
-        return new Amount(baseCost.currency(), (float) (baseCost.amount() * Math.pow(compoundingCost, level)));
+    String name();
+
+    Amount baseCost();
+
+    float compoundingCost();
+
+    Amount baseProduction();
+
+    default Amount getCost(int level) {
+        return new Amount(baseCost().currency(), (float) (baseCost().amount() * Math.pow(compoundingCost(), level)));
     }
 
-    public CurrencyMapping getMapping() {
-        return new CurrencyMapping(baseCost.currency(), baseProduction.currency());
+    default CurrencyMapping getMapping() {
+        return new CurrencyMapping(baseCost().currency(), baseProduction().currency());
     }
 
     @Override
-    public String getName() {
-        return name;
+    default String getName() {
+        return name();
     }
 }

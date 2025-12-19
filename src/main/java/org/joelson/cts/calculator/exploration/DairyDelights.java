@@ -3,6 +3,7 @@ import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
 import org.joelson.cts.calculator.model.ImprovementCalculator;
+import org.joelson.cts.calculator.model.UntimedGenerator;
 import org.joelson.cts.calculator.model.Upgrade;
 import org.joelson.cts.calculator.model.UpgradeEffect;
 
@@ -36,7 +37,7 @@ void main() {
 
     GardenState dairyDelightsState = new GardenState();
 
-    Generator milkGenerator = new Generator("Milk", milk(50), 1.4f, milk(1));
+    Generator milkGenerator = new UntimedGenerator("Milk", milk(50), 1.4f, milk(1));
     dairyDelights.addGenerator(milkGenerator);
     Upgrade lactose = new Upgrade("Lactose", milk(250));
     lactose.addEffect(new UpgradeEffect(milkGenerator, 1.5f));
@@ -54,31 +55,31 @@ void main() {
     createUpgrade(dairyDelights, dairyDelightsState, milkGenerator, "Ricotta", 8e13f, 11, true);
     createUpgrade(dairyDelights, dairyDelightsState, milkGenerator, "The Big Cheese", 3.5e16f, 2, false);
 
-    Generator freshCheese = new Generator("Fresh Cheese", milk(1_000), 1.15f, cheese(1));
+    Generator freshCheese = new UntimedGenerator("Fresh Cheese", milk(1_000), 1.15f, cheese(1));
     dairyDelights.addGenerator(freshCheese);
     createUpgrade(dairyDelights, dairyDelightsState, freshCheese, "Cottage Cheese", 150, 3, true);
     createUpgrade(dairyDelights, dairyDelightsState, freshCheese, "Cream Cheese", 500_000, 5, true);
     createUpgrade(dairyDelights, dairyDelightsState, freshCheese, "Kefir", 2e7f, 6, true);
     createUpgrade(dairyDelights, dairyDelightsState, freshCheese, "Feta", 2e10f, 301, true);
 
-    Generator softRipenedCheese = new Generator("Soft-Ripened Cheese", milk(50_000), 1.15f, cheese(100));
+    Generator softRipenedCheese = new UntimedGenerator("Soft-Ripened Cheese", milk(50_000), 1.15f, cheese(100));
     dairyDelights.addGenerator(softRipenedCheese);
     createUpgrade(dairyDelights, dairyDelightsState, softRipenedCheese, "Brie", 150_000, 1.5f, true);
     createUpgrade(dairyDelights, dairyDelightsState, softRipenedCheese, "Chévre", 6e10f, 601, true);
     createUpgrade(dairyDelights, dairyDelightsState, softRipenedCheese, "Paneer", 1.5e15f, 11001, false);
 
-    Generator semiSoftCheese = new Generator("Semi-Soft Cheese", milk(1.2e6f), 1.25f, cheese(1000));
+    Generator semiSoftCheese = new UntimedGenerator("Semi-Soft Cheese", milk(1.2e6f), 1.25f, cheese(1000));
     dairyDelights.addGenerator(semiSoftCheese);
     createUpgrade(dairyDelights, dairyDelightsState, semiSoftCheese, "Morbier", 7e6f, 1.5f, true);
     createUpgrade(dairyDelights, dairyDelightsState, semiSoftCheese, "Havarti", 1.5e11f, 201, true);
 
-    Generator blueCheese = new Generator("Blue Cheese", milk(1.5e7f), 1.15f, cheese(10_000));
+    Generator blueCheese = new UntimedGenerator("Blue Cheese", milk(1.5e7f), 1.15f, cheese(10_000));
     dairyDelights.addGenerator(blueCheese);
     createUpgrade(dairyDelights, dairyDelightsState, blueCheese, "Roquefort", 2e8f, 1.5f, true);
     createUpgrade(dairyDelights, dairyDelightsState, blueCheese, "Stilton", 7e8f, 2, true);
     createUpgrade(dairyDelights, dairyDelightsState, blueCheese, "Gorgonzola", 1.25e9f, 1.5f, true);
 
-    Generator semiFirmCheese = new Generator("Semi-Firm Cheese", milk(3e8f), 1.15f, cheese(1e6f));
+    Generator semiFirmCheese = new UntimedGenerator("Semi-Firm Cheese", milk(3e8f), 1.15f, cheese(1e6f));
     dairyDelights.addGenerator(semiFirmCheese);
     createUpgrade(dairyDelights, dairyDelightsState, semiFirmCheese, "Halloumi", 1.5e10f, 1.5f, true);
     createUpgrade(dairyDelights, dairyDelightsState, semiFirmCheese, "Emmental", 3e11f, 4, true);
@@ -88,12 +89,12 @@ void main() {
     createUpgrade(dairyDelights, dairyDelightsState, semiFirmCheese, "Limburger", 6e14f, 6f, true);
     createUpgrade(dairyDelights, dairyDelightsState, semiFirmCheese, "Gouda", 9e14f, 4f, true);
 
-    Generator notQuiteCheese = new Generator("Not-Quite-Cheese", cheese(3e11f), 1.15f, cheese(1e7f));
+    Generator notQuiteCheese = new UntimedGenerator("Not-Quite-Cheese", cheese(3e11f), 1.15f, cheese(1e7f));
     dairyDelights.addGenerator(notQuiteCheese);
     createUpgrade(dairyDelights, dairyDelightsState, notQuiteCheese, "Non-Dairy", 7e11f, 3, true);
     createUpgrade(dairyDelights, dairyDelightsState, notQuiteCheese, "Processed", 1.5e13f, 11, true);
 
-    Generator hardCheese = new Generator("Hard Cheese", milk(6e11f), 1.15f, cheese(1e9f));
+    Generator hardCheese = new UntimedGenerator("Hard Cheese", milk(6e11f), 1.15f, cheese(1e9f));
     dairyDelights.addGenerator(hardCheese);
     createUpgrade(dairyDelights, dairyDelightsState, hardCheese, "Pecorino", 1.8e14f, 2, true);
     createUpgrade(dairyDelights, dairyDelightsState, hardCheese, "Manchego", 4e14f, 2, true);

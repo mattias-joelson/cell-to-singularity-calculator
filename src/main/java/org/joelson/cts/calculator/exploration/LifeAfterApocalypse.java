@@ -1,11 +1,12 @@
 import org.joelson.cts.calculator.model.Amount;
 import org.joelson.cts.calculator.model.Generator;
+import org.joelson.cts.calculator.model.UntimedGenerator;
 
 static final String CURRENCY = "currency";
 
 void main() {
     //Generator generator = new Generator("Age of Mammals", 8e15f, 1.12f, 1e12f);
-    Generator generator = new Generator("Cockroach World?", new Amount(CURRENCY, 5e18f), 1.12f,
+    Generator generator = new UntimedGenerator("Cockroach World?", new Amount(CURRENCY, 5e18f), 1.12f,
             new Amount(CURRENCY, 1e15f));
     float generatorProduction = generator.baseProduction().amount() * 10001 * 2;
     System.out.println("generatorProduction: " + generatorProduction);
