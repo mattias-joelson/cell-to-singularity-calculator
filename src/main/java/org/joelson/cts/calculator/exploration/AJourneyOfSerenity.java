@@ -120,7 +120,7 @@ void main() {
             .addUpgradeRequirement("Mechanical Plucking")
 
             .addUpgrade("Monitoring System", leaves(2e19f), 6, false)
-            .addUpgradeRequirement("Harvesting Machinery") // ? Drone Tech
+            .addUpgradeRequirement("Drone Technology") // ? Drone Tech
 
             .addUpgrade("Storing", leaves(3e8f), 2.5f, false)
             .addGeneratorRequirement("Tea Plantation", 1)
