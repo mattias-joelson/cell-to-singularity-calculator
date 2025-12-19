@@ -8,7 +8,6 @@ import org.joelson.cts.calculator.model.GardenWithState;
 import org.joelson.cts.calculator.model.Generator;
 import org.joelson.cts.calculator.model.GeneratorState;
 import org.joelson.cts.calculator.model.Simulation;
-import org.joelson.cts.calculator.model.UntimedGenerator;
 import org.joelson.cts.calculator.model.Upgrade;
 import org.joelson.cts.calculator.model.UpgradeEffect;
 import org.springframework.stereotype.Service;
@@ -51,8 +50,7 @@ public class CalculatorService {
         GardenState extinctionState = new GardenState();
         extinction.addCurrency(laaCurrency);
         lifeAfterApocalypse.addGardenWithState(new GardenWithState(extinction, extinctionState));
-        Generator luca = new UntimedGenerator("L.U.C.A.", new Amount(laaCurrency, 40), 1.05f,
-                new Amount(laaCurrency, 1));
+        Generator luca = new Generator("L.U.C.A.", new Amount(laaCurrency, 40), 1.05f, new Amount(laaCurrency, 1));
         extinction.addGenerator(luca);
         extinctionState.setGeneratorState(luca, new GeneratorState(753, 1));
 
@@ -87,7 +85,7 @@ public class CalculatorService {
         extinction.addUpgrade(tyrannosaurusRex);
         extinctionState.setUpgradeBought(tyrannosaurusRex);
 
-        Generator dinosaurs = new UntimedGenerator("Reign of Dinosaurs", new Amount(laaCurrency, 8e12f), 1.12f,
+        Generator dinosaurs = new Generator("Reign of Dinosaurs", new Amount(laaCurrency, 8e12f), 1.12f,
                 new Amount(laaCurrency, 5e9f));
         extinction.addGenerator(dinosaurs);
         extinctionState.setGeneratorState(dinosaurs, new GeneratorState(103, 1));

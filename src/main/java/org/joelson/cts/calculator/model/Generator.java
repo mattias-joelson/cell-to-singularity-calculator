@@ -1,25 +1,45 @@
 package org.joelson.cts.calculator.model;
 
-public interface Generator extends Unlockable {
+public class Generator implements Unlockable {
 
-    String name();
+    public static int UNTIMED_CHARGE_TIME = -1;
 
-    Amount baseCost();
+    private final String name;
+    private final Amount baseCost;
+    private final float compoundingCost;
+    private final Amount baseProduction;
+    private final int baseChargeTime;
 
-    float compoundingCost();
-
-    Amount baseProduction();
-
-    default Amount getCost(int level) {
-        return new Amount(baseCost().currency(), (float) (baseCost().amount() * Math.pow(compoundingCost(), level)));
+    public Generator(String name, Amount baseCost, float compoundingCost, Amount baseProduction) {
+        this(name, baseCost, compoundingCost, baseProduction, UNTIMED_CHARGE_TIME);
     }
 
-    default CurrencyMapping getMapping() {
-        return new CurrencyMapping(baseCost().currency(), baseProduction().currency());
+    public Generator(String name, Amount baseCost, float compoundingCost, Amount baseProduction, int baseChargeTime) {
+        this.name = name;
+        this.baseCost = baseCost;
+        this.compoundingCost = compoundingCost;
+        this.baseProduction = baseProduction;
+        this.baseChargeTime = baseChargeTime;
     }
 
     @Override
-    default String getName() {
-        return name();
+    public String getName() {
+        return name;
+    }
+
+    public Amount getBaseCost() {
+        return baseCost;
+    }
+
+    public Amount getBaseProduction() {
+        return baseProduction;
+    }
+
+    public Amount getCost(int level) {
+        return new Amount(baseCost.currency(), (float) (baseCost.amount() * Math.pow(compoundingCost, level)));
+    }
+
+    public CurrencyMapping getMapping() {
+        return new CurrencyMapping(baseCost.currency(), baseProduction.currency());
     }
 }

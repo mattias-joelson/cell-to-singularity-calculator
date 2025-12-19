@@ -1,6 +1,5 @@
 import org.joelson.cts.calculator.model.Amount;
 import org.joelson.cts.calculator.model.Generator;
-import org.joelson.cts.calculator.model.UntimedGenerator;
 
 static final String CURRENCY = "Currency";
 
@@ -8,9 +7,9 @@ void main() {
     //Generator generator = new Generator("Age of Mammals", 8e15f, 1.12f, 1e12f);
     //Generator generator = new Generator("Symbol", 7500, 1.15f, 50);
     //Generator generator = new Generator("Composition", 2.5e6f, 1.15f, 1000);
-    Generator generator = new UntimedGenerator("Photography", new Amount(CURRENCY, 1.5e11f), 1.15f,
+    Generator generator = new Generator("Photography", new Amount(CURRENCY, 1.5e11f), 1.15f,
             new Amount(CURRENCY, 5e7f));
-    float generatorProduction = generator.baseProduction().amount() * 11;
+    float generatorProduction = generator.getBaseProduction().amount() * 11;
     System.out.println("generatorProduction: " + generatorProduction);
 
     float lineProduction = (1 * 2 * 3 * 2.5f) * 38;

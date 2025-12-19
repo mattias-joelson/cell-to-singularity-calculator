@@ -291,7 +291,7 @@ void main() {
             }
             if (entry.getValue() instanceof GeneratorImprovement(Generator generator, GeneratorState generatorState)) {
                 int count = generatorState.count();
-                actions.add(String.format("(%d) Generator %s: %d -> %d", i + 1, generator.name(), count, count + 1));
+                actions.add(String.format("(%d) Generator %s: %d -> %d", i + 1, generator.getName(), count, count + 1));
                 state.setGeneratorCount(generator, count + 1);
                 if (count == 0) {
                     printUnlocked(GARDEN, state, actions);
@@ -299,7 +299,8 @@ void main() {
             } else if (entry.getValue() instanceof UpgradeImprovement upgradeImprovement) {
                 Upgrade upgrade = upgradeImprovement.upgrade();
                 UpgradeEffect effect = upgrade.getEffects().getFirst();
-                actions.add(String.format("(%d) Upgrade %s (%s)", i + 1, upgrade.getName(), effect.generator().name()));
+                actions.add(String.format("(%d) Upgrade %s (%s)",
+                        i + 1, upgrade.getName(), effect.generator().getName()));
                 state.setUpgradeBought(upgrade);
                 state.updateEfficiency(GARDEN);
                 printUnlocked(GARDEN, state, actions);
@@ -318,7 +319,7 @@ void main() {
 private static void printUnlocked(Garden garden, GardenState state, List<String> actions) {
     for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
         if (state.getGeneratorState(generator).count() == 0) {
-            actions.add(String.format(" *** unlocked generator %s", generator.name()));
+            actions.add(String.format(" *** unlocked generator %s", generator.getName()));
         }
     }
     for (Upgrade upgrade : garden.getUnlockedUpgrades(state)) {

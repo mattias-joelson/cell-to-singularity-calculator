@@ -4,7 +4,7 @@ public record GeneratorImprovement(Generator generator, GeneratorState state) im
 
     @Override
     public String getName() {
-        return generator.name();
+        return generator.getName();
     }
 
     @Override
@@ -14,7 +14,7 @@ public record GeneratorImprovement(Generator generator, GeneratorState state) im
 
     @Override
     public Amount getIncrease() {
-        return generator.baseProduction().multiplyBy(state.efficiency());
+        return generator.getBaseProduction().multiplyBy(state.efficiency());
     }
 
     public static GeneratorImprovement create(Generator generator, GardenState state) {
