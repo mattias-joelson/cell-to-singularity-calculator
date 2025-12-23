@@ -36,7 +36,7 @@ public class Generator implements Unlockable {
     }
 
     public Amount getCost(int level) {
-        return new Amount(baseCost.currency(), (float) (baseCost.amount() * Math.pow(compoundingCost, level)));
+        return new Amount(baseCost.currency(), baseCost.amount() * Math.pow(compoundingCost, level));
     }
 
     public CurrencyMapping getMapping() {

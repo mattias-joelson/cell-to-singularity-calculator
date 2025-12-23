@@ -8,7 +8,7 @@ import org.joelson.cts.calculator.model.UpgradeEffect;
 
 static final String CURRENCY = "Creativity";
 
-static Amount amount(float amount) {
+static Amount amount(double amount) {
     return new Amount(CURRENCY, amount);
 }
 
@@ -47,12 +47,12 @@ void main() {
     createUpgrade(garden, state, renaissance, "Realism", 1.25e11f, 2);
     createUpgrade(garden, state, renaissance, "Post Impressionism", 2e12f, 5);
 
-    Generator photography = new Generator("Photography", amount(150_000_000_000f), 1.15f, amount(50_000_000));
+    Generator photography = new Generator("Photography", amount(150_000_000_000d), 1.15f, amount(50_000_000));
     garden.addGenerator(photography);
     createUpgrade(garden, state, photography, "Memory as an Object", 1e12f, 11);
     createUpgrade(garden, state, photography, "Tricking the Eye", 1.5e16f, 1001);
 
-    Generator modernism = new Generator("Modernism", amount(40_000_000_000_000f), 1.15f, amount(5_000_000_000f));
+    Generator modernism = new Generator("Modernism", amount(40_000_000_000_000d), 1.15f, amount(5_000_000_000d));
     garden.addGenerator(modernism);
     createUpgrade(garden, state, modernism, "Expressionism", 5e13f, 2);
     createUpgrade(garden, state, modernism, "Artist Entrepreneur", 2e14f, 2.25f);
@@ -60,19 +60,19 @@ void main() {
     createUpgrade(garden, state, modernism, "Museum", 3e15f, 2);
     createUpgrade(garden, state, modernism, "Abstract Expressionism", 6e17f, 21);
 
-    Generator artCelebrity = new Generator("Art Celebrity", amount(1e16f), 1.15f, amount(3e12f));
+    Generator artCelebrity = new Generator("Art Celebrity", amount(1e16), 1.15f, amount(3e12));
     garden.addGenerator(artCelebrity);
     createUpgrade(garden, state, artCelebrity, "Critic", 5e16f, 3.5f);
     createUpgrade(garden, state, artCelebrity, "Dealer", 8e19f, 151);
 
-    Generator postModernism = new Generator("Post Modernism", amount(5e17f), 1.15f, amount(9e13f));
+    Generator postModernism = new Generator("Post Modernism", amount(5e17), 1.15f, amount(9e13));
     garden.addGenerator(postModernism);
     createUpgrade(garden, state, postModernism, "Dadaism", 2e18f, 3.5f);
     createUpgrade(garden, state, postModernism, "Surrealism", 1.5e19f, 3);
     createUpgrade(garden, state, postModernism, "Pop Art", 5e20f, 21);
     createUpgrade(garden, state, postModernism, "Feminist Art", 1.5e23f, 201, false);
 
-    Generator movingImages = new Generator("Moving Images", amount(1.5e20f), 1.15f, amount(8e15f));
+    Generator movingImages = new Generator("Moving Images", amount(1.5e20), 1.15f, amount(8e15));
     garden.addGenerator(movingImages);
     createUpgrade(garden, state, movingImages, "Hand-Drawn Animation", 3e21f, 4);
     createUpgrade(garden, state, movingImages, "Silent to Talkie", 8e21f, 6);
@@ -90,13 +90,13 @@ void main() {
     state.setGeneratorCount(symbol, 120);
     state.setGeneratorCount(line, 68);
 
-    float totalProduction = 0;
+    double totalProduction = 0;
     for (Generator generator : garden.getGenerators().reversed()) {
         GeneratorState generatorState = state.getGeneratorState(generator);
         int count = generatorState.count();
-        float baseProduction = generator.getBaseProduction().amount();
+        double baseProduction = generator.getBaseProduction().amount();
         float efficiency = generatorState.efficiency();
-        float production = baseProduction * efficiency * count;
+        double production = baseProduction * efficiency * count;
         System.out.printf("Generator %s:\tcount %d (next %.2e), base %.2e, each %.2e, total %.3e%n",
                 generator.getName(), count, generator.getCost(count).amount(), baseProduction,
                 baseProduction * efficiency,
@@ -106,38 +106,38 @@ void main() {
     System.out.printf("Total production: %.2e%n", totalProduction);
     System.out.println();
 
-    float maxRatio = 0;
+    double maxRatio = 0;
     String which = "";
     for (Generator generator : garden.getGenerators().reversed()) {
         GeneratorState generatorState = state.getGeneratorState(generator);
-        float cost = generator.getCost(generatorState.count()).amount();
-        float increase = generator.getBaseProduction().amount() * generatorState.efficiency();
-        float ratio = increase / cost;
+        double cost = generator.getCost(generatorState.count()).amount();
+        double increase = generator.getBaseProduction().amount() * generatorState.efficiency();
+        double ratio = increase / cost;
         if (ratio > maxRatio) {
             maxRatio = ratio;
             which = generator.getName();
         }
-        float time = cost / totalProduction;
+        double time = cost / totalProduction;
         Duration duration = Duration.of(Math.round(time), ChronoUnit.SECONDS);
         System.out.printf("Generator %s: cost %.2e, increase %.2e, ratio %.7f, time %s%n",
                 generator.getName(), cost, increase, ratio, duration);
     }
     for (Upgrade upgrade : garden.getUpgrades()) {
         if (!state.isUpgradeBought(upgrade)) {
-            float cost = upgrade.getCost().amount();
-            float increase = 0;
+            double cost = upgrade.getCost().amount();
+            double increase = 0;
             for (UpgradeEffect effect : upgrade.getEffects()) {
                 Generator generator = effect.generator();
                 GeneratorState generatorState = state.getGeneratorState(generator);
                 increase += (effect.efficiency() - 1) * generator.getBaseProduction().amount()
                         * generatorState.count() * generatorState.efficiency();
             }
-            float ratio = increase / cost;
+            double ratio = increase / cost;
             if (ratio > maxRatio) {
                 maxRatio = ratio;
                 which = upgrade.getName();
             }
-            float time = cost / totalProduction;
+            double time = cost / totalProduction;
             Duration duration = Duration.of(Math.round(time), ChronoUnit.SECONDS);
             System.out.printf("Upgrade %s: cost %.2e, increase %.2e, ratio %.7f, time %s%n",
                     upgrade.getName(), cost, increase, ratio, duration);
@@ -148,7 +148,7 @@ void main() {
 }
 
 private static Upgrade createUpgrade(
-        Garden garden, GardenState state, Generator generator, String name, float cost, float efficiency) {
+        Garden garden, GardenState state, Generator generator, String name, double cost, float efficiency) {
     Upgrade upgrade = new Upgrade(name, amount(cost));
     upgrade.addEffect(new UpgradeEffect(generator, efficiency));
     garden.addUpgrade(upgrade);
@@ -157,7 +157,7 @@ private static Upgrade createUpgrade(
 }
 
 private static Upgrade createUpgrade(
-        Garden garden, GardenState state, Generator generator, String name, float cost, float efficiency,
+        Garden garden, GardenState state, Generator generator, String name, double cost, float efficiency,
         boolean bought) {
     Upgrade upgrade = createUpgrade(garden, state, generator, name, cost, efficiency);
     state.setUpgradeBought(upgrade, bought);

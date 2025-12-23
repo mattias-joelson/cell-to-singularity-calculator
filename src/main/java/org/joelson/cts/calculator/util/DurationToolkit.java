@@ -8,7 +8,7 @@ public class DurationToolkit {
         throw new InstantiationException("Should not be instantiated.");
     }
 
-    public static String durationString(float seconds) {
+    public static String durationString(double seconds) {
         Duration duration = Duration.ofSeconds(Math.round(seconds));
         if (duration.toDays() > 1) {
             return String.format("%d days %d:%02d:%02d", duration.toDays(), duration.toHoursPart(),
