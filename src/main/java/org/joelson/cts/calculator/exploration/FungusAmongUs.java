@@ -7,6 +7,7 @@ import org.joelson.cts.calculator.model.GeneratorImprovement;
 import org.joelson.cts.calculator.model.GeneratorState;
 import org.joelson.cts.calculator.model.Improvement;
 import org.joelson.cts.calculator.model.ImprovementCalculator;
+import org.joelson.cts.calculator.model.ImprovementDescription;
 import org.joelson.cts.calculator.model.Upgrade;
 import org.joelson.cts.calculator.model.UpgradeEffect;
 import org.joelson.cts.calculator.model.UpgradeImprovement;
@@ -206,12 +207,15 @@ void main() {
     printUnlocked(GARDEN, state, actions);
     for (int i = 0; i < 20; i += 1) {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        Improvement improvement = ImprovementCalculator.calculateImprovement(GARDEN, state).get(mapping);
+        ImprovementDescription improvementDescription =
+                ImprovementCalculator.calculateImprovement(GARDEN, state).get(mapping);
         System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         System.out.println();
+        Improvement improvement = improvementDescription.improvement();
         if (improvement instanceof GeneratorImprovement(Generator generator, GeneratorState generatorState)) {
             int count = generatorState.count();
-            actions.add(String.format("(%d) Generator %s: %d -> %d", i + 1, generator.name(), count, count + 1));
+            actions.add(String.format("(%d) Generator %s: %d -> %d : %s",
+                    i + 1, generator.name(), count, count + 1, improvementDescription.description()));
             state.setGeneratorCount(generator, count + 1);
             if (count == 0) {
                 printUnlocked(GARDEN, state, actions);
@@ -219,7 +223,8 @@ void main() {
         } else if (improvement instanceof UpgradeImprovement upgradeImprovement) {
             Upgrade upgrade = upgradeImprovement.upgrade();
             UpgradeEffect effect = upgrade.getEffects().getFirst();
-            actions.add(String.format("(%d) Upgrade %s (%s)", i + 1, upgrade.getName(), effect.generator().name()));
+            actions.add(String.format("(%d) Upgrade %s (%s) : %s",
+                    i + 1, upgrade.getName(), effect.generator().name(), improvementDescription.description()));
             state.setUpgradeBought(upgrade);
             state.updateEfficiency(GARDEN);
             printUnlocked(GARDEN, state, actions);

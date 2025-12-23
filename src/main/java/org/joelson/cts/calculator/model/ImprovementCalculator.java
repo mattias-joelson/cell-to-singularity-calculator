@@ -35,7 +35,7 @@ public class ImprovementCalculator {
         return totalProduction;
     }
 
-    public static Map<CurrencyMapping, Improvement> calculateImprovement(Garden garden, GardenState state) {
+    public static Map<CurrencyMapping, ImprovementDescription> calculateImprovement(Garden garden, GardenState state) {
         Map<String, Float> totalProduction = calculateProduction(garden, state);
 
         Map<CurrencyMapping, List<Improvement>> improvements = new HashMap<>();
@@ -52,16 +52,17 @@ public class ImprovementCalculator {
             }
         }
 
-        Map<CurrencyMapping, Improvement> improvementMap = new HashMap<>();
+        Map<CurrencyMapping, ImprovementDescription> improvementResultMap = new HashMap<>();
         for (Map.Entry<CurrencyMapping, List<Improvement>> improvementsEntry : improvements.entrySet()) {
-            Improvement improvement = calculateMappingImprovement(improvementsEntry, totalProduction, improvements);
-            improvementMap.put(improvementsEntry.getKey(), improvement);
+            ImprovementDescription improvementDescription =
+                    calculateMappingImprovement(improvementsEntry, totalProduction, improvements);
+            improvementResultMap.put(improvementsEntry.getKey(), improvementDescription);
             System.out.println();
         }
-        return improvementMap;
+        return improvementResultMap;
     }
 
-    private static Improvement calculateMappingImprovement(
+    private static ImprovementDescription calculateMappingImprovement(
             Map.Entry<CurrencyMapping, List<Improvement>> improvementsEntry, Map<String, Float> totalProduction,
             Map<CurrencyMapping, List<Improvement>> improvements) {
         System.out.printf("Improvements from %s to %s:%n", improvementsEntry.getKey().from(),
@@ -77,12 +78,12 @@ public class ImprovementCalculator {
                     improvement.getName(), cost.asString(), increase.asString(), ratio, durationString(time));
         }
         Improvement best = mappingImprovements.getLast();
-        return calculateSpecificImprovement(totalProduction, improvements, best);
+        return calculateSpecificImprovement(totalProduction, improvements, best, "");
     }
 
-    private static Improvement calculateSpecificImprovement(
+    private static ImprovementDescription calculateSpecificImprovement(
             Map<String, Float> totalProduction, Map<CurrencyMapping, List<Improvement>> improvements,
-            Improvement best) {
+            Improvement best, String description) {
         System.out.printf("Best: %s, (%s)%n", best.getName(), best.getMapping());
         List<Improvement> candidates = new ArrayList<>();
         for (Map.Entry<CurrencyMapping, List<Improvement>> candidateEntry : improvements.entrySet()) {
@@ -100,7 +101,7 @@ public class ImprovementCalculator {
         Amount bestCost = best.getCost();
         float bestTime = bestCost.amount() / totalProduction.get(bestCost.currency());
         float shortestTime = bestTime;
-        Improvement bestImprovement = null;
+        Improvement bestBefore = null;
         System.out.printf("%s: time %s%n", best.getName(), durationString(bestTime));
         for (Improvement candidate : candidates) {
             Amount candidateCost = candidate.getCost();
@@ -113,16 +114,42 @@ public class ImprovementCalculator {
                     durationString(candidateTime), durationString(bestImprovedTime), durationString(totalTime));
             if (totalTime < shortestTime) {
                 shortestTime = totalTime;
-                bestImprovement = candidate;
+                bestBefore = candidate;
             }
         }
-        if (bestImprovement != null) {
-            System.out.printf(">>> Do %s before %s%n", bestImprovement.getName(), best.getName());
-            return calculateSpecificImprovement(totalProduction, improvements, bestImprovement);
+        if (bestBefore != null) {
+            System.out.printf(">>> Do %s before %s%n", bestBefore.getName(), best.getName());
+            String extendedDescription =
+                    extendDescriptionWithBestBefore(totalProduction, best, description, bestBefore, bestCost, bestTime);
+            return calculateSpecificImprovement(totalProduction, improvements, bestBefore, extendedDescription);
         }
 
         System.out.printf("*** Do %s by itself%n", best.getName());
-        return best;
+        String endDescription = extendDescriptionWithBest(totalProduction, best, description, bestTime);
+        return new ImprovementDescription(best, endDescription);
+    }
+
+    private static String extendDescriptionWithBest(
+            Map<String, Float> totalProduction, Improvement best, String description, float bestTime) {
+        String currency = best.getIncrease().currency();
+        float productionBefore = totalProduction.get(currency);
+        float productionAfter = productionBefore + best.getIncrease().amount();
+        return description + String.format("%s (%s) : %s -> %s", best.getName(), durationString(bestTime),
+                new Amount(currency, productionBefore).asString(), new Amount(currency, productionAfter).asString());
+    }
+
+    private static String extendDescriptionWithBestBefore(
+            Map<String, Float> totalProduction, Improvement best, String description, Improvement bestBefore,
+            Amount bestCost, float bestTime) {
+        Amount bestBeforeCost = bestBefore.getCost();
+        float bestBeforeTime = bestBeforeCost.amount() / totalProduction.get(bestBeforeCost.currency());
+        Amount bestBeforeIncrease = bestBefore.getIncrease();
+        float bestImprovedTime = bestCost.amount() / (totalProduction.get(bestBeforeIncrease.currency())
+                + bestBeforeIncrease.amount());
+        float totalTime = bestBeforeTime + bestImprovedTime;
+        return description + String.format("%s (%s) -> %s (%s) + %s (%s) = (%s); ",
+                best.getName(), durationString(bestTime), bestBefore.getName(), durationString(bestBeforeTime),
+                best.getName(), durationString(bestImprovedTime), durationString(totalTime));
     }
 
     public static void calculateImprovementNew(Garden garden, GardenState state) {
