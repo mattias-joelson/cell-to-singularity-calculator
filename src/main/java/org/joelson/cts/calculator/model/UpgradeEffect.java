@@ -1,5 +1,8 @@
 package org.joelson.cts.calculator.model;
 
-public record UpgradeEffect(Generator generator, float efficiency) {
+public record UpgradeEffect(Generator generator, float efficiency, int speed) {
 
+    public UpgradeEffect(Generator generator, float efficiency) {
+        this(generator, efficiency, 1);
+    }
 }

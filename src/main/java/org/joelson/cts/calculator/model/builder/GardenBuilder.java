@@ -44,10 +44,23 @@ public class GardenBuilder {
         return new GeneratorBuilder(this, generator);
     }
 
-    public UpgradeBuilder addGeneratorUpgrade(
+    public GeneratorBuilder createGenerator(
+            String name, Amount baseCost, float compoundingCost, Amount baseProduction, int baseChargeTime) {
+        Generator generator = new Generator(name, baseCost.multiplyBy(costMultiplier), compoundingCost, baseProduction,
+                baseChargeTime / productionMultiplier);
+        garden.addGenerator(generator);
+        return new GeneratorBuilder(this, generator);
+    }
+
+    UpgradeBuilder addGeneratorUpgrade(
             Generator generator, String name, Amount cost, float efficiency, boolean bought) {
+        return addGeneratorUpgrade(generator, name, cost, efficiency, 1, bought);
+    }
+
+    UpgradeBuilder addGeneratorUpgrade(
+            Generator generator, String name, Amount cost, float efficiency, int speed, boolean bought) {
         Upgrade upgrade = new Upgrade(name, cost.multiplyBy(costMultiplier));
-        upgrade.addEffect(new UpgradeEffect(generator, efficiency));
+        upgrade.addEffect(new UpgradeEffect(generator, efficiency, speed));
         garden.addUpgrade(upgrade);
         state.setUpgradeBought(upgrade, bought);
         return new UpgradeBuilder(this, generator, upgrade);
