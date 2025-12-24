@@ -72,7 +72,7 @@ public class ImprovementCalculator {
         mappingImprovements.sort(Comparator.comparing(Improvement::getRatio));
         for (Improvement improvement : mappingImprovements.reversed()) {
             Amount cost = improvement.getCost();
-            float ratio = improvement.getRatio();
+            double ratio = improvement.getRatio();
             Amount increase = improvement.getIncrease();
             double time = cost.amount() / totalProduction.get(cost.currency());
             System.out.printf("%s: cost %s, increase %s, ratio %.7f, time %s%n",
