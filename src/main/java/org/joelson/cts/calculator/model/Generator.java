@@ -31,6 +31,10 @@ public class Generator implements Unlockable {
         return baseCost;
     }
 
+    public float getCompoundingCost() {
+        return compoundingCost;
+    }
+
     public Amount getBaseProduction() {
         return baseProduction;
     }

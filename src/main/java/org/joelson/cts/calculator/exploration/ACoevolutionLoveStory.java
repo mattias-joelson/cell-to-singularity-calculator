@@ -7,6 +7,7 @@ import org.joelson.cts.calculator.model.GeneratorImprovement;
 import org.joelson.cts.calculator.model.GeneratorState;
 import org.joelson.cts.calculator.model.Improvement;
 import org.joelson.cts.calculator.model.ImprovementCalculator;
+import org.joelson.cts.calculator.model.ImprovementDescription;
 import org.joelson.cts.calculator.model.Upgrade;
 import org.joelson.cts.calculator.model.UpgradeEffect;
 import org.joelson.cts.calculator.model.UpgradeImprovement;
@@ -253,7 +254,8 @@ void main() {
     printUnlocked(GARDEN, state, actions);
     for (int i = 0; i < 20; i += 1) {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        Improvement improvement = ImprovementCalculator.calculateImprovement(GARDEN, state).get(mapping);
+        ImprovementDescription improvementDescription = ImprovementCalculator.calculateImprovement(GARDEN, state).get(mapping);
+        Improvement improvement = improvementDescription.improvement();
         System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         System.out.println();
         if (improvement instanceof GeneratorImprovement(Generator generator, GeneratorState generatorState)) {
