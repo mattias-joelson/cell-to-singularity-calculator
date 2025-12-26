@@ -6,6 +6,10 @@ import org.joelson.cts.calculator.model.Upgrade;
 
 public record UpgradeBuilder(GardenBuilder gardenBuilder, Generator generator, Upgrade upgrade) {
 
+    public UpgradeBuilder addGeneratorRequirement(String requiredGeneratorName) {
+        return addGeneratorRequirement(requiredGeneratorName, 1);
+    }
+
     public UpgradeBuilder addGeneratorRequirement(String requiredGeneratorName, int count) {
         gardenBuilder.addUnresolvedRequirement(upgrade, requiredGeneratorName, count);
         return this;
