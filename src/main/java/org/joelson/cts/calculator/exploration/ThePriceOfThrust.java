@@ -16,11 +16,11 @@ import org.joelson.cts.calculator.model.builder.GardenBuilder;
 private static final Garden GARDEN = new Garden("The Price of Thrust");
 private static final GardenState STATE = new GardenState();
 
-private static final String COMMODITY_CURRENCY = "Shells";
-private static final String COINS_CURRENCY = "Coins";
-private static final String PAPER_CURRENCY = "Notes";
-private static final String ELECTRONIC_CURRENCY = "Electronic Money";
-private static final String FUTURE_CURRENCY = "Future Money";
+private static final String COMMODITY_CURRENCY = "Labor";
+private static final String COINS_CURRENCY = "Coinage";
+private static final String PAPER_CURRENCY = "Banknotes";
+private static final String ELECTRONIC_CURRENCY = "Credit";
+private static final String FUTURE_CURRENCY = "Cryptocurrency";
 
 private static final String[] CURRENCIES =
         { COMMODITY_CURRENCY, COINS_CURRENCY, PAPER_CURRENCY, ELECTRONIC_CURRENCY, FUTURE_CURRENCY };
@@ -165,7 +165,7 @@ void main() {
 
             .addUpgrade("Deposit Lending", coins(1e12), 2.5f, false)
             .addUpgradeRequirement("Banking")
-            .addGeneratorRequirement("Paper Money")
+            //.addGeneratorRequirement("Paper Money")
 
             .addUpgrade("Counterfeiting", coins(5e12), 8, false)
             .addUpgradeRequirement("Iconography")
@@ -204,7 +204,7 @@ void main() {
 
             .addUpgrade("Stock Market", paper(1e8), 3, false)
             .addGeneratorRequirement("Paper Money")
-            .addUpgradeRequirement("Fiat Money")
+            //.addUpgradeRequirement("Fiat Money")
 
             .addUpgrade("Speculative Bubbles", paper(4e8), 6, false)
             .addUpgradeRequirement("Stock Market")
@@ -218,9 +218,12 @@ void main() {
 
             .addUpgrade("Euro", future(2.5e9), 1_001, false)
             .addUpgradeRequirement("Fiat Money")
+            .addGeneratorRequirement("Future Money")
             .generator();
 
     Generator electronic = builder.createGenerator("Electronic Money", paper(1e9), 1.13f, electronic(1))
+// when Future Money bought changes to produce future (cryptocurrency)
+//    Generator electronic = builder.createGenerator("Electronic Money", paper(1e9), 1.13f, future(1))
             .addGeneratorRequirement("Paper Money")
             .addUpgradeRequirement("Fiat Money")
 
@@ -245,16 +248,21 @@ void main() {
 
             .addUpgrade("ETF", electronic(4e8), 3, false)
             .addUpgradeRequirement("Stock Market")
+            .addUpgradeRequirement("e-commerce")
 
             .addUpgrade("Bank Run", future(2e10), 26, false)
             .addUpgradeRequirement("Inflation")
+            .addGeneratorRequirement("Future Money")
 
             .addUpgrade("Algorithmic Trading", future(3e11), 6, false)
             .addUpgradeRequirement("ETF")
 
             .generator();
 
-    Generator future = builder.createGenerator("Future Money", electronic(1e9), 1.15f, future(400_000))
+    Generator future = builder.createGenerator("Future Money", electronic(1e9), 1.15f, future(100_000))
+// when bought cost changes to future (cryptocurrency)
+//    Generator future = builder.createGenerator("Future Money", future(1e9), 1.15f, future(100_000))
+
             .addGeneratorRequirement("Electronic Money")
             .addUpgradeRequirement("Mobile Payment")
 
@@ -283,43 +291,83 @@ void main() {
 
             .addUpgrade("Decentralized Utopia?", future(4e13), 3, false)
             .addUpgradeRequirement("What's next?")
+            .addUpgradeRequirement("One world, One Currency?")
 
             .addUpgrade("Post-scarcity Society?", future(1e14), 2, false)
             .addUpgradeRequirement("What's next?")
+            .addUpgradeRequirement("Decentralized Utopia?")
             .generator();
 
     builder.resolveRequirements();
     STATE.updateEfficiency(GARDEN);
-    STATE.setBoost(4);
+//    STATE.setBoost(4);
 
     setGeneratorCount(future, 0);
     setGeneratorCount(electronic, 0);
     setGeneratorCount(paper, 0);
-    setGeneratorCount(coins, 87);
-    setGeneratorCount(commodity, 370);
+    setGeneratorCount(coins, 0);
+    setGeneratorCount(commodity, 1);
 
     String[] boughtUpdates = {
-            "Debt",
-            "Tally Sticks",
-            "Bartering",
-            "Wampum",
-            "Recordkeeping",
-            "Intrinsic Value",
-            "Precious Metals",
-            "Metallurgy",
-            "Cowrie Shells",
-            "Bronze Shells",
-            "Government Mints",
-            "Shekels",
-            "Rai Stones",
-//            "Quipu",
+//            "Debt",
+//            "Tally Sticks",
+//            "Bartering",
+//            "Wampum",
+//            "Recordkeeping",
+//            "Intrinsic Value",
+//            "Precious Metals",
+//            "Metallurgy",
+//            "Cowrie Shells",
+//            "Bronze Shells",
+//            "Government Mints",
+//            "Shekels", // coins
+//            "Rai Stones", // coins
+//            "Quipu", // paper
 
-            "Lydian Coinage",
-            "Chinese Coins",
-            "Interest",
-            "Usury",
-            "Roman Coinage",
-            "Carolingian Coinage"
+//            "Lydian Coinage",
+//            "Chinese Coins",
+//            "Interest",
+//            "Usury",
+//            "Roman Coinage",
+//            "Carolingian Coinage",
+//            "Negotiable Instruments",
+//            "Banking",
+//            "Iconography",
+//            "Deposit Lending",
+//            "Counterfeiting",
+//            "Credit", // paper
+//            "Piece of Eight", // paper
+//            "Taxation", // credit
+
+//            "Flying Money",
+//            "Central Bank",
+//            "Gold Standard",
+//            "Fiat Money",
+//            "Stock Market",
+//            "Speculative Bubbles",
+//            "Inflation",
+//            "ATM", // credit
+//            "Euro", // future
+
+//            "Information Security",
+//            "Payment Cards",
+//            "Online Banking",
+//            "e-commerce",
+//            "Wire Transfer",
+//            "Mobile Payment",
+//            "ETF",
+//            "Bank Run", // future
+//            "Algorithmic Trading", // future
+
+//            "Darwinium Cube",
+//            "Blockchain",
+//            "Cryptocurrency",
+//            "Virtual Currencies",
+//            "What's next?",
+//            "Unregulated",
+//            "One world, One Currency?",
+//            "Decentralized Utopia?",
+//            "Post-scarcity Society?",
     };
     for (String upgradeName : boughtUpdates) {
         STATE.setUpgradeBought(GARDEN.getUpgrade(upgradeName));
