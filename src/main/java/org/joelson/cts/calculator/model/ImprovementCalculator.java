@@ -31,7 +31,10 @@ public class ImprovementCalculator {
             totalProduction.put(currencyName, totalProduction.getOrDefault(currencyName, 0d) + production);
         }
         for (String currency : garden.getCurrencies()) {
-            System.out.printf("%s production: %.2e%n", currency, totalProduction.get(currency));
+            Double amount = totalProduction.get(currency);
+            if (amount != null) {
+                System.out.printf("%s production: %s / s%n", currency, new Amount(currency, amount).asString());
+            }
         }
         System.out.println();
         return totalProduction;
