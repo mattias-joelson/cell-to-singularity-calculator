@@ -73,56 +73,56 @@ void main() {
     Generator commodity = builder.createGenerator("Commodity Currency", commodity(25), 1.07f, commodity(1))
             .addUpgradeRequirement("Specializing")
 
-            .addUpgrade("Debt", commodity(125), 2.5f, false)
+            .addUpgrade("Debt", commodity(125), 2.5f)
             .addGeneratorRequirement("Commodity Currency")
             .addUpgradeRequirement("Gifting")
 
-            .addUpgrade("Tally Sticks", commodity(5000), 2, false)
+            .addUpgrade("Tally Sticks", commodity(5000), 2)
             .addUpgradeRequirement("Debt")
 
-            .addUpgrade("Bartering", commodity(20_000), 2, false)
+            .addUpgrade("Bartering", commodity(20_000), 2)
             .addUpgradeRequirement("Settling")
             .addUpgradeRequirement("Tally Sticks")
 
-            .addUpgrade("Wampum", commodity(250_000), 2.5f, false)
+            .addUpgrade("Wampum", commodity(250_000), 2.5f)
             .addUpgradeRequirement("Gifting")
             .addUpgradeRequirement("Bartering")
 
-            .addUpgrade("Recordkeeping", commodity(800_000), 2.5f, false)
+            .addUpgrade("Recordkeeping", commodity(800_000), 2.5f)
             .addGeneratorRequirement("Commodity Currency")
             .addUpgradeRequirement("Tally Sticks")
 
-            .addUpgrade("Intrinsic Value", commodity(3e6), 2, false)
+            .addUpgrade("Intrinsic Value", commodity(3e6), 2)
             .addGeneratorRequirement("Commodity Currency")
             .addUpgradeRequirement("Bartering")
 
-            .addUpgrade("Precious Metals", commodity(9e6), 2.5f, false)
+            .addUpgrade("Precious Metals", commodity(9e6), 2.5f)
             .addGeneratorRequirement("Commodity Currency")
             .addUpgradeRequirement("Intrinsic Value")
 
-            .addUpgrade("Metallurgy", commodity(4e7), 2.5f, false)
+            .addUpgrade("Metallurgy", commodity(4e7), 2.5f)
             .addUpgradeRequirement("Precious Metals")
 
-            .addUpgrade("Cowrie Shells", commodity(2.5e8), 3, false)
+            .addUpgrade("Cowrie Shells", commodity(2.5e8), 3)
             .addUpgradeRequirement("Intrinsic Value")
             //.addUpgradeRequirement("Metallurgy")
 
-            .addUpgrade("Bronze Shells", commodity(7.5e8), 5, false)
+            .addUpgrade("Bronze Shells", commodity(7.5e8), 5)
             .addUpgradeRequirement("Cowrie Shells")
 
-            .addUpgrade("Government Mints", commodity(4e10), 3, false)
+            .addUpgrade("Government Mints", commodity(4e10), 3)
             .addUpgradeRequirement("Metallurgy")
 
-            .addUpgrade("Shekels", coins(600), 4, false)
+            .addUpgrade("Shekels", coins(600), 4)
             .addUpgradeRequirement("Precious Metals")
             .addGeneratorRequirement("Coins")
 
-            .addUpgrade("Rai Stones", coins(1e7), 101, false)
+            .addUpgrade("Rai Stones", coins(1e7), 101)
             .addUpgradeRequirement("Recordkeeping")
             .addUpgradeRequirement("Government Mints")
             .addUpgradeRequirement("Interest")
 
-            .addUpgrade("Quipu", paper(750), 1_001, false)
+            .addUpgrade("Quipu", paper(750), 1_001)
             .addUpgradeRequirement("Recordkeeping")
             .addGeneratorRequirement("Paper Money")
             .generator();
@@ -131,54 +131,54 @@ void main() {
             .addGeneratorRequirement("Commodity Currency")
             .addUpgradeRequirement("Metallurgy")
 
-            .addUpgrade("Lydian Coinage", coins(5_000), 1.75f, false)
+            .addUpgrade("Lydian Coinage", coins(5_000), 1.75f)
             .addUpgradeRequirement("Bronze Shells")
             .addGeneratorRequirement("Coins")
 
-            .addUpgrade("Chinese Coins", coins(150_000), 2, false)
+            .addUpgrade("Chinese Coins", coins(150_000), 2)
             .addUpgradeRequirement("Lydian Coinage")
 
-            .addUpgrade("Interest", coins(400_000), 1.75f, false)
+            .addUpgrade("Interest", coins(400_000), 1.75f)
             .addUpgradeRequirement("Recordkeeping")
             .addGeneratorRequirement("Coins")
 
-            .addUpgrade("Usury", coins(2e6), 2, false)
+            .addUpgrade("Usury", coins(2e6), 2)
             .addUpgradeRequirement("Interest")
 
-            .addUpgrade("Roman Coinage", coins(5e6), 2, false)
+            .addUpgrade("Roman Coinage", coins(5e6), 2)
             .addUpgradeRequirement("Lydian Coinage")
             .addUpgradeRequirement("Chinese Coins")
 
-            .addUpgrade("Carolingian Coinage", coins(1e7), 2, false)
+            .addUpgrade("Carolingian Coinage", coins(1e7), 2)
             .addUpgradeRequirement("Roman Coinage")
 
-            .addUpgrade("Negotiable Instruments", coins(2e7), 2.5f, false)
+            .addUpgrade("Negotiable Instruments", coins(2e7), 2.5f)
             .addGeneratorRequirement("Coins")
             .addUpgradeRequirement("Usury")
 
-            .addUpgrade("Banking", coins(8e7), 3, false)
+            .addUpgrade("Banking", coins(8e7), 3)
             .addUpgradeRequirement("Usury")
 
-            .addUpgrade("Iconography", coins(3e8), 4, false)
+            .addUpgrade("Iconography", coins(3e8), 4)
             .addGeneratorRequirement("Coins")
             .addUpgradeRequirement("Negotiable Instruments")
 
-            .addUpgrade("Deposit Lending", coins(1e12), 2.5f, false)
+            .addUpgrade("Deposit Lending", coins(1e12), 2.5f)
             .addUpgradeRequirement("Banking")
             //.addGeneratorRequirement("Paper Money")
 
-            .addUpgrade("Counterfeiting", coins(5e12), 8, false)
+            .addUpgrade("Counterfeiting", coins(5e12), 8)
             .addUpgradeRequirement("Iconography")
 
-            .addUpgrade("Credit", paper(300_000), 11, false)
+            .addUpgrade("Credit", paper(300_000), 11)
             .addUpgradeRequirement("Interest")
             .addGeneratorRequirement("Paper Money")
 
-            .addUpgrade("Piece of Eight", paper(7e6), 101, false)
+            .addUpgrade("Piece of Eight", paper(7e6), 101)
             .addUpgradeRequirement("Carolingian Coinage")
             .addGeneratorRequirement("Paper Money")
 
-            .addUpgrade("Taxation", electronic(900), 5001, false)
+            .addUpgrade("Taxation", electronic(900), 5001)
             .addUpgradeRequirement("Government Mints")
             .addGeneratorRequirement("Electronic Money")
             .generator();
@@ -187,36 +187,36 @@ void main() {
             .addGeneratorRequirement("Coins")
             .addUpgradeRequirement("Negotiable Instruments")
 
-            .addUpgrade("Flying Money", paper(1_500), 2, false)
+            .addUpgrade("Flying Money", paper(1_500), 2)
             .addUpgradeRequirement("Negotiable Instruments")
             .addGeneratorRequirement("Paper Money")
 
-            .addUpgrade("Central Bank", paper(20_000), 3, false)
+            .addUpgrade("Central Bank", paper(20_000), 3)
             .addUpgradeRequirement("Banking")
             .addGeneratorRequirement("Paper Money")
 
-            .addUpgrade("Gold Standard", paper(750_000), 4, false)
+            .addUpgrade("Gold Standard", paper(750_000), 4)
             .addUpgradeRequirement("Central Bank")
 
-            .addUpgrade("Fiat Money", paper(3e6), 4, false)
+            .addUpgrade("Fiat Money", paper(3e6), 4)
             .addUpgradeRequirement("Credit")
             .addUpgradeRequirement("Gold Standard")
 
-            .addUpgrade("Stock Market", paper(1e8), 3, false)
+            .addUpgrade("Stock Market", paper(1e8), 3)
             .addGeneratorRequirement("Paper Money")
             //.addUpgradeRequirement("Fiat Money")
 
-            .addUpgrade("Speculative Bubbles", paper(4e8), 6, false)
+            .addUpgrade("Speculative Bubbles", paper(4e8), 6)
             .addUpgradeRequirement("Stock Market")
 
-            .addUpgrade("Inflation", paper(3e11), 21, false)
+            .addUpgrade("Inflation", paper(3e11), 21)
             .addUpgradeRequirement("Deposit Lending")
             .addUpgradeRequirement("Fiat Money")
 
-            .addUpgrade("ATM", electronic(500_000), 51, false)
+            .addUpgrade("ATM", electronic(500_000), 51)
             .addUpgradeRequirement("Payment Cards")
 
-            .addUpgrade("Euro", future(2.5e9), 1_001, false)
+            .addUpgrade("Euro", future(2.5e9), 1_001)
             .addUpgradeRequirement("Fiat Money")
             .addGeneratorRequirement("Future Money")
             .generator();
@@ -227,35 +227,36 @@ void main() {
             .addGeneratorRequirement("Paper Money")
             .addUpgradeRequirement("Fiat Money")
 
-            .addUpgrade("Information Security", electronic(10_000), 2, false)
+            .addUpgrade("Information Security", electronic(10_000), 2)
             .addGeneratorRequirement("Electronic Money")
 
-            .addUpgrade("Payment Cards", electronic(50_000), 2, false)
+            .addUpgrade("Payment Cards", electronic(50_000), 2)
             .addGeneratorRequirement("Electronic Money")
 
-            .addUpgrade("Online Banking", electronic(200_000), 5, false)
+            .addUpgrade("Online Banking", electronic(200_000), 5)
             .addGeneratorRequirement("Electronic Money")
 
-            .addUpgrade("e-commerce", electronic(6e6), 6, false)
+            .addUpgrade("e-commerce", electronic(6e6), 6)
             .addUpgradeRequirement("Online Banking")
 
-            .addUpgrade("Wire Transfer", electronic(5e7), 2.5f, false)
+            .addUpgrade("Wire Transfer", electronic(5e7), 2.5f)
             .addUpgradeRequirement("Information Security")
             .addUpgradeRequirement("Online Banking")
 
-            .addUpgrade("Mobile Payment", electronic(1.5e8), 4, false)
+            .addUpgrade("Mobile Payment", electronic(1.5e8), 4)
             .addUpgradeRequirement("Payment Cards")
 
-            .addUpgrade("ETF", electronic(4e8), 3, false)
+            .addUpgrade("ETF", electronic(4e8), 3)
             .addUpgradeRequirement("Stock Market")
             .addUpgradeRequirement("e-commerce")
 
-            .addUpgrade("Bank Run", future(2e10), 26, false)
+            .addUpgrade("Bank Run", future(2e10), 26)
             .addUpgradeRequirement("Inflation")
             .addGeneratorRequirement("Future Money")
 
-            .addUpgrade("Algorithmic Trading", future(3e11), 6, false)
+            .addUpgrade("Algorithmic Trading", future(3e11), 6)
             .addUpgradeRequirement("ETF")
+            .addGeneratorRequirement("Future Money")
 
             .generator();
 
@@ -266,34 +267,34 @@ void main() {
             .addGeneratorRequirement("Electronic Money")
             .addUpgradeRequirement("Mobile Payment")
 
-            .addUpgrade("Darwinium Cube", future(1), 3, false)
+            .addUpgrade("Darwinium Cube", future(1), 3)
             .addUpgradeRequirement("Virtual Currencies")
 
-            .addUpgrade("Blockchain", future(2e9), 3, false)
+            .addUpgrade("Blockchain", future(2e9), 3)
             .addGeneratorRequirement("Future Money")
 
-            .addUpgrade("Cryptocurrency", future(1e11), 3, false)
+            .addUpgrade("Cryptocurrency", future(1e11), 3)
             .addUpgradeRequirement("Blockchain")
 
-            .addUpgrade("Virtual Currencies", future(7.5e11), 2.5f, false)
+            .addUpgrade("Virtual Currencies", future(7.5e11), 2.5f)
             .addUpgradeRequirement("Mobile Payment")
             .addUpgradeRequirement("Algorithmic Trading")
 
-            .addUpgrade("What's next?", future(9e11), 3, false)
+            .addUpgrade("What's next?", future(9e11), 3)
             .addUpgradeRequirement("Cryptocurrency")
             .addUpgradeRequirement("Virtual Currencies")
 
-            .addUpgrade("Unregulated", future(2e12), 3.5f, false)
+            .addUpgrade("Unregulated", future(2e12), 3.5f)
             .addUpgradeRequirement("Cryptocurrency")
 
-            .addUpgrade("One world, One Currency?", future(1e13), 3, false)
+            .addUpgrade("One world, One Currency?", future(1e13), 3)
             .addUpgradeRequirement("What's next?")
 
-            .addUpgrade("Decentralized Utopia?", future(4e13), 3, false)
+            .addUpgrade("Decentralized Utopia?", future(4e13), 3)
             .addUpgradeRequirement("What's next?")
             .addUpgradeRequirement("One world, One Currency?")
 
-            .addUpgrade("Post-scarcity Society?", future(1e14), 2, false)
+            .addUpgrade("Post-scarcity Society?", future(1e14), 2)
             .addUpgradeRequirement("What's next?")
             .addUpgradeRequirement("Decentralized Utopia?")
             .generator();
