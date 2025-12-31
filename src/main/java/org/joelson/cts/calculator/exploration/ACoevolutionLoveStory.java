@@ -255,14 +255,16 @@ void main() {
     boolean possibleUnlock = false;
     for (int i = 0; i < 20 || !possibleUnlock; i += 1) {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        ImprovementDescription improvementDescription = ImprovementCalculator.calculateImprovement(GARDEN, state).get(mapping);
+        ImprovementDescription improvementDescription = ImprovementCalculator.calculateImprovement(GARDEN, state)
+                .get(mapping);
         Improvement improvement = improvementDescription.improvement();
         System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         System.out.println();
         possibleUnlock = false;
         if (improvement instanceof GeneratorImprovement(Generator generator, GeneratorState generatorState)) {
             int count = generatorState.count();
-            actions.add(String.format("(%d) Generator %s: %d -> %d : %s", i + 1, generator.getName(), count, count + 1, improvementDescription.description()));
+            actions.add(String.format("(%d) Generator %s: %d -> %d : %s", i + 1, generator.getName(), count, count + 1,
+                    improvementDescription.description()));
             state.setGeneratorCount(generator, count + 1);
             if (count == 0) {
                 printUnlocked(GARDEN, state, actions);
@@ -277,7 +279,8 @@ void main() {
                 }
                 improvedGenerators.append(effect.generator().getName());
             }
-            actions.add(String.format("(%d) Upgrade %s (%s) : %s", i + 1, upgrade.getName(), improvedGenerators, improvementDescription.description()));
+            actions.add(String.format("(%d) Upgrade %s (%s) : %s", i + 1, upgrade.getName(), improvedGenerators,
+                    improvementDescription.description()));
             state.setUpgradeBought(upgrade);
             state.updateGeneratorStates(GARDEN);
             printUnlocked(GARDEN, state, actions);
@@ -294,7 +297,8 @@ private static void printUnlocked(Garden garden, GardenState state, List<String>
     for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
         if (state.getGeneratorState(generator).count() == 0) {
             if (generator.isTimed()) {
-                actions.add(String.format(" *** unlocked generator %s: base cost %s, inc %.2f, base production %s, base charge time %,.2f",
+                actions.add(String.format(" *** unlocked generator %s: base cost %s, inc %.2f, base production %s, "
+                                + "base charge time %,.2f",
                         generator.getName(), generator.getBaseCost().asString(), generator.getCompoundingCost(),
                         generator.getBaseProduction().asString(), generator.getBaseChargeTime() / STATE.getBoost()));
             } else {

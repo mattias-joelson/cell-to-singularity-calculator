@@ -254,8 +254,8 @@ void main() {
         } else if (improvementDescription.improvement() instanceof UpgradeImprovement upgradeImprovement) {
             Upgrade upgrade = upgradeImprovement.upgrade();
             UpgradeEffect effect = upgrade.getEffects().getFirst();
-            actions.add(String.format("(%d) Upgrade %s (%s) : %s", i + 1, upgrade.getName(), effect.generator().getName(),
-                    improvementDescription.description()));
+            actions.add(String.format("(%d) Upgrade %s (%s) : %s", i + 1, upgrade.getName(),
+                    effect.generator().getName(), improvementDescription.description()));
             state.setUpgradeBought(upgrade);
             state.updateGeneratorStates(GARDEN);
             printUnlocked(GARDEN, state, actions);

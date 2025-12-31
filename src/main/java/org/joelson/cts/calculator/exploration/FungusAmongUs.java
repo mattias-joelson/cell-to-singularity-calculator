@@ -237,7 +237,7 @@ void main() {
 }
 
 private static void printUnlocked(Garden garden, GardenState state, List<String> actions) {
-    for(Generator generator : garden.getUnlockedGenerators(state).reversed()) {
+    for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
         if (state.getGeneratorState(generator).count() == 0) {
             actions.add(String.format(" *** unlocked generator %s", generator.getName()));
         }

@@ -22,7 +22,8 @@ public record UpgradeImprovement(Upgrade upgrade, GardenState state)
             } else {
                 Amount effectAmount = getEffectIncrease(effect);
                 if (!effectAmount.currency().equals(amount.currency())) {
-                    throw new IllegalStateException("Different currencies " + amount.currency() + " and " + effectAmount.currency() + ".");
+                    throw new IllegalStateException("Different currencies " + amount.currency() + " and "
+                            + effectAmount.currency() + ".");
                 }
                 amount = new Amount(amount.currency(), amount.amount() + effectAmount.amount());
             }
@@ -35,7 +36,8 @@ public record UpgradeImprovement(Upgrade upgrade, GardenState state)
 
     private Amount getEffectIncrease(UpgradeEffect effect) {
         GeneratorState generatorState = state.getGeneratorState(effect.generator());
-        return (effect.generator().isTimed()) ? getIncreaseTimed(effect, generatorState) : getIncreaseUntimed(effect, generatorState);
+        return (effect.generator().isTimed()) ? getIncreaseTimed(effect, generatorState)
+                : getIncreaseUntimed(effect, generatorState);
     }
 
     private Amount getIncreaseTimed(UpgradeEffect effect, GeneratorState generatorState) {
