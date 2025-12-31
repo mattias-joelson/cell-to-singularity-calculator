@@ -34,50 +34,51 @@ void main() {
     GARDEN.addCurrency(LEAVES_CURRENCY);
     GARDEN.addCurrency(CUPS_CURRENCY);
 
-    GardenBuilder builder = new GardenBuilder(GARDEN, STATE);
+    GardenBuilder builder = new GardenBuilder(GARDEN);
 
     Generator wildTeaPlant = builder.createGenerator("Wild Tea Plant", leaves(15), 1.13f, leaves(1))
 
-            .addUpgrade("Cultivation", leaves(150), 2.25f, false)
+            .addUpgrade("Cultivation", leaves(150), 2.25f)
             .addGeneratorRequirement("Wild Tea Plant", 1)
 
-            .addUpgrade("Health Benefits", leaves(1_000), 2, false)
+            .addUpgrade("Health Benefits", leaves(1_000), 2)
             .addUpgradeRequirement("Cultivation")
 
-            .addUpgrade("Defense Response", leaves(2_500), 2, false)
+            .addUpgrade("Defense Response", leaves(2_500), 2)
             .addUpgradeRequirement("Health Benefits")
 
-            .addUpgrade("Tea Meals", leaves(8_000), 2.25f, false)
+            .addUpgrade("Tea Meals", leaves(8_000), 2.25f)
             .addUpgradeRequirement("Health Benefits")
 
-            .addUpgrade("Chagayu", leaves(200_000), 2, false)
+            .addUpgrade("Chagayu", leaves(200_000), 2)
             .addUpgradeRequirement("Tea Meals")
             .addGeneratorRequirement("Domesticated Tea Plant", 1)
 
-            .addUpgrade("Herbal Medicine", leaves(400_000), 3, false)
+            .addUpgrade("Herbal Medicine", leaves(400_000), 3)
             .addUpgradeRequirement("Chagayu")
 
-            .addUpgrade("Ochazuke", leaves(2.5e12), 100_001, false)
+            .addUpgrade("Ochazuke", leaves(2.5e12), 100_001)
             .addUpgradeRequirement("Tea Meals")
             .addUpgradeRequirement("Anti-inflammatory")
             .generator();
 
-    Generator domesticatedTeaPlant = builder.createGenerator("Domesticated Tea Plant", leaves(75_000), 1.15f, leaves(500))
+    Generator domesticatedTeaPlant = builder.createGenerator("Domesticated Tea Plant", leaves(75_000), 1.15f,
+                    leaves(500))
             .addUpgradeRequirement("Cultivation")
 
-            .addUpgrade("Origin Myth", leaves(2e6), 2, false)
+            .addUpgrade("Origin Myth", leaves(2e6), 2)
             .addGeneratorRequirement("Domesticated Tea Plant", 1)
 
-            .addUpgrade("Calm Body and Mind", leaves(1e7), 3, false)
+            .addUpgrade("Calm Body and Mind", leaves(1e7), 3)
             .addUpgradeRequirement("Herbal Medicine")
 
-            .addUpgrade("Digestion", leaves(4e7), 2.5f, false)
+            .addUpgrade("Digestion", leaves(4e7), 2.5f)
             .addUpgradeRequirement("Calm Body and Mind")
 
-            .addUpgrade("Anti-inflammatory", leaves(7e8), 21, false)
+            .addUpgrade("Anti-inflammatory", leaves(7e8), 21)
             .addUpgradeRequirement("Calm Body and Mind")
 
-            .addUpgrade("Weight Management", leaves(2e13), 1001, false)
+            .addUpgrade("Weight Management", leaves(2e13), 1001)
             .addUpgradeRequirement("Cultivation")
             .addUpgradeRequirement("Anti-inflammatory")
             .generator();
@@ -85,89 +86,89 @@ void main() {
     Generator teaPlantation = builder.createGenerator("Tea Plantation", leaves(5e7), 1.15f, leaves(100_000))
             .addUpgradeRequirement("Origin Myth")
 
-            .addUpgrade("Pruning", leaves(9e9), 2.25f, false)
+            .addUpgrade("Pruning", leaves(9e9), 2.25f)
             .addGeneratorRequirement("Tea Plantation", 1)
 
-            .addUpgrade("Harvesting", leaves(1.5e11), 2.5f, false)
+            .addUpgrade("Harvesting", leaves(1.5e11), 2.5f)
             .addUpgradeRequirement("Pruning")
 
-            .addUpgrade("Scissors", leaves(4e11), 2, false)
+            .addUpgrade("Scissors", leaves(4e11), 2)
             .addUpgradeRequirement("Harvesting")
 
-            .addUpgrade("Harvesting Machinery", leaves(6e12), 2, false)
+            .addUpgrade("Harvesting Machinery", leaves(6e12), 2)
             .addUpgradeRequirement("Scissors")
 
-            .addUpgrade("Soil Acidity", leaves(1e13), 5, false)
+            .addUpgrade("Soil Acidity", leaves(1e13), 5)
             .addUpgradeRequirement("Harvesting Machinery")
 
-            .addUpgrade("Fertilizer", leaves(9e13), 2, false)
+            .addUpgrade("Fertilizer", leaves(9e13), 2)
             .addUpgradeRequirement("Soil Acidity")
 
-            .addUpgrade("Pest and Disease Control", leaves(9e14), 4, false)
+            .addUpgrade("Pest and Disease Control", leaves(9e14), 4)
             .addUpgradeRequirement("Fertilizer")
 
-            .addUpgrade("Vertical Farming", leaves(6e15), 3.5f, false)
+            .addUpgrade("Vertical Farming", leaves(6e15), 3.5f)
             .addUpgradeRequirement("Pest and Disease Control")
 
-            .addUpgrade("Irrigation System", leaves(1.5e16), 4, false)
+            .addUpgrade("Irrigation System", leaves(1.5e16), 4)
             .addUpgradeRequirement("Harvesting Machinery")
             .addUpgradeRequirement("Vertical Farming")
 
-            .addUpgrade("Mechanical Plucking", leaves(2e17), 8.5f, false)
+            .addUpgrade("Mechanical Plucking", leaves(2e17), 8.5f)
             .addUpgradeRequirement("Irrigation System")
 
-            .addUpgrade("Drone Technology", leaves(8e17), 11, false)
+            .addUpgrade("Drone Technology", leaves(8e17), 11)
             .addUpgradeRequirement("Mechanical Plucking")
 
-            .addUpgrade("Monitoring System", leaves(2e19), 6, false)
+            .addUpgrade("Monitoring System", leaves(2e19), 6)
             .addUpgradeRequirement("Drone Technology") // ? Drone Tech
 
-            .addUpgrade("Storing", leaves(3e8), 2.5f, false)
+            .addUpgrade("Storing", leaves(3e8), 2.5f)
             .addGeneratorRequirement("Tea Plantation", 1)
 
-            .addUpgrade("Drying", leaves(3e10), 2, false)
+            .addUpgrade("Drying", leaves(3e10), 2)
             .addUpgradeRequirement("Storing")
 
-            .addUpgrade("Roasting", leaves(8e11), 2.25f, false)
+            .addUpgrade("Roasting", leaves(8e11), 2.25f)
             .addUpgradeRequirement("Drying")
 
-            .addUpgrade("Fermentation", leaves(3e14), 3.5f, false)
+            .addUpgrade("Fermentation", leaves(3e14), 3.5f)
             .addUpgradeRequirement("Grinding")
             .generator();
 
     Generator teaEvolution = builder.createGenerator("Tea Evolution", leaves(2e6), 1.13f, cups(3))
             .addUpgradeRequirement("Origin Myth")
 
-            .addUpgrade("Tea Contest", cups(1_000), 5, false)
+            .addUpgrade("Tea Contest", cups(1_000), 5)
             .addGeneratorRequirement("Tea Evolution", 1)
 
-            .addUpgrade("Silk Road Trade", cups(1e8), 16, false)
+            .addUpgrade("Silk Road Trade", cups(1e8), 16)
             .addGeneratorRequirement("Matcha", 1)
 
-            .addUpgrade("Arabic Shai", cups(2.5e8), 3.5f, false)
+            .addUpgrade("Arabic Shai", cups(2.5e8), 3.5f)
             .addUpgradeRequirement("Silk Road Trade")
 
-            .addUpgrade("Moroccan Atai", cups(4e8), 3f, false)
+            .addUpgrade("Moroccan Atai", cups(4e8), 3f)
             .addUpgradeRequirement("Silk Road Trade")
 
-            .addUpgrade("AI Automation", leaves(9e19), 20_000_000_000_001f, false)
+            .addUpgrade("AI Automation", leaves(9e19), 20_000_000_000_001f)
             .addUpgradeRequirement("Monitoring System")
             .generator();
 
     Generator matcha = builder.createGenerator("Matcha", cups(1e6), 1.15f, cups(200))
             .addGeneratorRequirement("Tea Evolution", 1)
 
-            .addUpgrade("Whisking", cups(1.5e7), 2f, false)
+            .addUpgrade("Whisking", cups(1.5e7), 2f)
             .addGeneratorRequirement("Matcha", 1)
 
-            .addUpgrade("Foam Art", cups(5e11), 10_001, false)
+            .addUpgrade("Foam Art", cups(5e11), 10_001)
             .addUpgradeRequirement("Whisking")
             .addUpgradeRequirement("Trade to Europe")
 
-            .addUpgrade("Chanoyu", cups(5e12), 16, false)
+            .addUpgrade("Chanoyu", cups(5e12), 16)
             .addUpgradeRequirement("Foam Art")
 
-            .addUpgrade("Grinding", leaves(4e13), 2.5f, false)
+            .addUpgrade("Grinding", leaves(4e13), 2.5f)
             .addGeneratorRequirement("Matcha", 1)
             .addUpgradeRequirement("Roasting")
             .generator();
@@ -176,19 +177,19 @@ void main() {
             .addUpgradeRequirement("Arabic Shai")
             .addUpgradeRequirement("Moroccan Atai")
 
-            .addUpgrade("Steeping", cups(2.5e9), 3, false)
+            .addUpgrade("Steeping", cups(2.5e9), 3)
             .addGeneratorRequirement("Loose-Leaf Tea", 1)
 
-            .addUpgrade("Darye", cups(3e10), 3.5f, false)
+            .addUpgrade("Darye", cups(3e10), 3.5f)
             .addUpgradeRequirement("Steeping")
 
-            .addUpgrade("Trade to Europe", cups(8e10), 4, false)
+            .addUpgrade("Trade to Europe", cups(8e10), 4)
             .addGeneratorRequirement("Loose-Leaf Tea", 1)
 
-            .addUpgrade("Yunnan Pu-erh Tea", leaves(5e15), 5, false)
+            .addUpgrade("Yunnan Pu-erh Tea", leaves(5e15), 5)
             .addGeneratorRequirement("Loose-Leaf Tea", 1)
 
-            .addUpgrade("Tea Brick", leaves(5e16), 51, false)
+            .addUpgrade("Tea Brick", leaves(5e16), 51)
             .addUpgradeRequirement("Yunnan Pu-erh Tea")
             .addUpgradeRequirement("Fermentation")
             .generator();
@@ -196,26 +197,26 @@ void main() {
     Generator infusedTea = builder.createGenerator("Infused Tea", cups(4e13), 1.15f, cups(2e9))
             .addUpgradeRequirement("Trade to Europe")
 
-            .addUpgrade("British Tea", cups(1e14), 9, false)
+            .addUpgrade("British Tea", cups(1e14), 9)
             .addGeneratorRequirement("Infused Tea", 1)
 
-            .addUpgrade("Masala Chai", cups(1e15), 2, false)
+            .addUpgrade("Masala Chai", cups(1e15), 2)
             .addGeneratorRequirement("Infused Tea", 1)
 
-            .addUpgrade("Boiling", cups(7.5e15), 4, false)
+            .addUpgrade("Boiling", cups(7.5e15), 4)
             .addUpgradeRequirement("Masala Chai")
 
-            .addUpgrade("High Tea", cups(1.2e17), 8.5f, false)
+            .addUpgrade("High Tea", cups(1.2e17), 8.5f)
             .addUpgradeRequirement("British Tea")
 
-            .addUpgrade("Tea House", cups(8e21), 2_001, false)
+            .addUpgrade("Tea House", cups(8e21), 2_001)
             .addUpgradeRequirement("High Tea")
             .addGeneratorRequirement("Unconventional Tea", 1)
 
-            .addUpgrade("Assam Tea", leaves(4e17), 2, false)
+            .addUpgrade("Assam Tea", leaves(4e17), 2)
             .addUpgradeRequirement("Masala Chai")
 
-            .addUpgrade("Storage Jar", leaves(6e17), 6, false)
+            .addUpgrade("Storage Jar", leaves(6e17), 6)
             .addUpgradeRequirement("Assam Tea")
             .addUpgradeRequirement("Tea Brick")
             .generator();
@@ -223,42 +224,42 @@ void main() {
     Generator unconventionalTea = builder.createGenerator("Unconventional Tea", cups(5e18), 1.15f, cups(1e15))
             .addUpgradeRequirement("Masala Chai")
 
-            .addUpgrade("Iced Tea", cups(4e20), 2, false)
+            .addUpgrade("Iced Tea", cups(4e20), 2)
             .addGeneratorRequirement("Unconventional Tea", 1)
 
-            .addUpgrade("Cold Brew", cups(3e21), 2.5f, false)
+            .addUpgrade("Cold Brew", cups(3e21), 2.5f)
             .addUpgradeRequirement("Iced Tea")
 
-            .addUpgrade("Herbal Tea", cups(7e22), 6, false)
+            .addUpgrade("Herbal Tea", cups(7e22), 6)
             .addUpgradeRequirement("Iced Tea")
 
-            .addUpgrade("Tea Latte", cups(2e23), 5, false)
+            .addUpgrade("Tea Latte", cups(2e23), 5)
             .addUpgradeRequirement("Herbal Tea")
 
-            .addUpgrade("Tea Cocktail", cups(1.5e24), 201f, false)
+            .addUpgrade("Tea Cocktail", cups(1.5e24), 201f)
             .addUpgradeRequirement("Herbal Tea")
 
-            .addUpgrade("Bubble Tea", cups(3e25), 6, false)
+            .addUpgrade("Bubble Tea", cups(3e25), 6)
             .addUpgradeRequirement("Tea Latte")
 
-            .addUpgrade("Tea Bag", leaves(6e18), 2.5f, false)
+            .addUpgrade("Tea Bag", leaves(6e18), 2.5f)
             .addGeneratorRequirement("Unconventional Tea", 1)
             .addUpgradeRequirement("Storage Jar")
 
-            .addUpgrade("Vacuum Sealer", leaves(3e19), 2.5f, false)
+            .addUpgrade("Vacuum Sealer", leaves(3e19), 2.5f)
             .addUpgradeRequirement("Tea Bag")
             .generator();
 
     Generator virtualTea = builder.createGenerator("Virtual Tea", cups(5e22), 1.15f, cups(4e18))
             .addUpgradeRequirement("AI Automation")
 
-            .addUpgrade("Tea Simulator", cups(5e23), 4f, false)
+            .addUpgrade("Tea Simulator", cups(5e23), 4f)
             .addGeneratorRequirement("Virtual Tea", 1)
 
-            .addUpgrade("Online Tea Ceremony", cups(1e25), 6f, false)
+            .addUpgrade("Online Tea Ceremony", cups(1e25), 6f)
             .addGeneratorRequirement("Virtual Tea", 1)
 
-            .addUpgrade("Shared Serenity", cups(1e26), 2, false)
+            .addUpgrade("Shared Serenity", cups(1e26), 2)
             .addUpgradeRequirement("Tea Simulator")
             .addUpgradeRequirement("Online Tea Ceremony")
             .generator();

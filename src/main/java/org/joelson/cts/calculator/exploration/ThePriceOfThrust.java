@@ -55,7 +55,7 @@ void main() {
         GARDEN.addCurrency(currency);
     }
 
-    GardenBuilder builder = new GardenBuilder(GARDEN, STATE);
+    GardenBuilder builder = new GardenBuilder(GARDEN);
 
     Generator commodity = builder.createGenerator("Commodity Currency", commodity(25), 1.07f, commodity(1))
             //.addUpgradeRequirement("Specializing")

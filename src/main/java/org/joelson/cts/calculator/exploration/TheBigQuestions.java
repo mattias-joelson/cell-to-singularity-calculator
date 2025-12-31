@@ -28,7 +28,7 @@ private void setGeneratorCount(Generator generator, int count) {
 void main() {
 
     GARDEN.addCurrency(CURRENCY);
-    GardenBuilder builder = new GardenBuilder(GARDEN, STATE);
+    GardenBuilder builder = new GardenBuilder(GARDEN);
 
     Generator philosophy = builder.createGenerator("Philosophy", questions(25), 1.15f, questions(1))
 

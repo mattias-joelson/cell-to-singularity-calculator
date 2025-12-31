@@ -2,7 +2,6 @@ package org.joelson.cts.calculator.model.builder;
 
 import org.joelson.cts.calculator.model.Amount;
 import org.joelson.cts.calculator.model.Garden;
-import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
 import org.joelson.cts.calculator.model.GeneratorRequirement;
 import org.joelson.cts.calculator.model.Unlockable;
@@ -19,29 +18,24 @@ import java.util.Map;
 public class GardenBuilder {
 
     private final Garden garden;
-    private final GardenState state;
     private final Map<String, List<UnresolvedRequirement>> unresolvedRequirements;
     private final int costMultiplier;
     private final int productionMultiplier;
 
-    public GardenBuilder(Garden garden, GardenState state, int costMultiplier, int productionMultiplier) {
+    public GardenBuilder(Garden garden, int costMultiplier, int productionMultiplier) {
         this.garden = garden;
-        this.state = state;
         this.unresolvedRequirements = new HashMap<>();
         this.costMultiplier = costMultiplier;
         this.productionMultiplier = productionMultiplier;
     }
 
-    public GardenBuilder(Garden garden, GardenState state) {
-        this(garden, state, 1, 1);
+    public GardenBuilder(Garden garden) {
+        this(garden, 1, 1);
     }
 
     public GeneratorBuilder createGenerator(
             String name, Amount baseCost, float compoundingCost, Amount baseProduction) {
-        Generator generator = new Generator(name, baseCost.multiplyBy(costMultiplier), compoundingCost,
-                baseProduction.multiplyBy(productionMultiplier));
-        garden.addGenerator(generator);
-        return new GeneratorBuilder(this, generator);
+        return createGenerator(name, baseCost, compoundingCost, baseProduction, Generator.UNTIMED_CHARGE_TIME);
     }
 
     public GeneratorBuilder createGenerator(
@@ -53,16 +47,15 @@ public class GardenBuilder {
     }
 
     UpgradeBuilder addGeneratorUpgrade(
-            Generator generator, String name, Amount cost, float efficiency, boolean bought) {
-        return addGeneratorUpgrade(generator, name, cost, efficiency, 1, bought);
+            Generator generator, String name, Amount cost, float efficiency) {
+        return addGeneratorUpgrade(generator, name, cost, efficiency, 1);
     }
 
     UpgradeBuilder addGeneratorUpgrade(
-            Generator generator, String name, Amount cost, float efficiency, int speed, boolean bought) {
+            Generator generator, String name, Amount cost, float efficiency, int speed) {
         Upgrade upgrade = new Upgrade(name, cost.multiplyBy(costMultiplier));
         upgrade.addEffect(new UpgradeEffect(generator, efficiency, speed));
         garden.addUpgrade(upgrade);
-        state.setUpgradeBought(upgrade, bought);
         return new UpgradeBuilder(this, generator, upgrade);
     }
 
