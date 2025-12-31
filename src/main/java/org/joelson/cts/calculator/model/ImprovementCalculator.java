@@ -1,5 +1,7 @@
 package org.joelson.cts.calculator.model;
 
+import org.joelson.cts.calculator.util.DurationToolkit;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -22,12 +24,28 @@ public class ImprovementCalculator {
             String currencyName = generator.getBaseProduction().currency();
             double baseProduction = generator.getBaseProduction().amount();
             float efficiency = generatorState.efficiency();
-            double production = baseProduction * efficiency * count;
-            System.out.printf("Generator %s: count %d (next %s), base %s, each %s, total %s%n",
-                    generator.getName(), count, generator.getCost(count).asString(),
-                    new Amount(currencyName, baseProduction).asString(),
-                    new Amount(currencyName, baseProduction * efficiency).asString(),
-                    new Amount(currencyName, production).asString());
+            double production;
+            if (generator.getBaseChargeTime() > 0) {
+                double productionPerCycle = baseProduction * efficiency * count;
+                float speed = generatorState.speed();
+                float cycleTime = generator.getBaseChargeTime() / speed;
+                production = productionPerCycle / cycleTime;
+                System.out.printf("Generator %s: count %d (next %s), base %s, each %s, total per cycle %s in %s"
+                                + ", total per second %s%n",
+                        generator.getName(), count, generator.getCost(count).asString(),
+                        new Amount(currencyName, baseProduction).asString(),
+                        new Amount(currencyName, baseProduction * efficiency).asString(),
+                        new Amount(currencyName, productionPerCycle).asString(),
+                        DurationToolkit.durationString(cycleTime),
+                        new Amount(currencyName, production).asString());
+            } else {
+                production = baseProduction * efficiency * count;
+                System.out.printf("Generator %s: count %d (next %s), base %s, each %s, total %s%n",
+                        generator.getName(), count, generator.getCost(count).asString(),
+                        new Amount(currencyName, baseProduction).asString(),
+                        new Amount(currencyName, baseProduction * efficiency).asString(),
+                        new Amount(currencyName, production).asString());
+            }
             totalProduction.put(currencyName, totalProduction.getOrDefault(currencyName, 0d) + production);
         }
         for (String currency : garden.getCurrencies()) {

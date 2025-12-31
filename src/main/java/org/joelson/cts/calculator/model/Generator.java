@@ -39,6 +39,14 @@ public class Generator implements Unlockable {
         return baseProduction;
     }
 
+    public boolean isTimed() {
+        return baseChargeTime > 0;
+    }
+
+    public int getBaseChargeTime() {
+        return baseChargeTime;
+    }
+
     public Amount getCost(int level) {
         return new Amount(baseCost.currency(), baseCost.amount() * Math.pow(compoundingCost, level));
     }

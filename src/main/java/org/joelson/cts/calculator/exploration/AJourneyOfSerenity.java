@@ -264,7 +264,7 @@ void main() {
             .generator();
 
     builder.resolveRequirements();
-    STATE.updateEfficiency(GARDEN);
+    STATE.updateGeneratorStates(GARDEN);
     //STATE.setBoost(2);
 
     setGeneratorCount(virtualTea, 0);
@@ -306,7 +306,7 @@ void main() {
                 actions.add(String.format("(%d) Upgrade %s (%s) : %s",
                         i + 1, upgrade.getName(), effect.generator().getName(), improvementDescription.description()));
                 state.setUpgradeBought(upgrade);
-                state.updateEfficiency(GARDEN);
+                state.updateGeneratorStates(GARDEN);
                 printUnlocked(GARDEN, state, actions);
             } else {
                 throw new NullPointerException();

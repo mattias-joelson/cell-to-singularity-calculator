@@ -99,7 +99,7 @@ void main() {
     createUpgrade(dairyDelights, dairyDelightsState, hardCheese, "Manchego", 4e14, 2, true);
     createUpgrade(dairyDelights, dairyDelightsState, hardCheese, "Cotija", 2e15, 3, false);
 
-    dairyDelightsState.updateEfficiency(dairyDelights);
+    dairyDelightsState.updateGeneratorStates(dairyDelights);
 
     dairyDelightsState.setGeneratorCount(hardCheese, 6);
     dairyDelightsState.setGeneratorCount(notQuiteCheese, 35);

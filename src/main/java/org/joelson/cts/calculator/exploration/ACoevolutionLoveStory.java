@@ -207,25 +207,25 @@ void main() {
     Generator human = builder.createGenerator("Human", pollen(2.8e31), 1.15f, pollen(2.88e32), 7_200)
             .addUpgradeRequirement("A New Suitor")
 
-            .addUpgrade("The Crops We Crave", pollen(8e31), 1, 2, false)
+            .addUpgrade("The Crops We Crave", pollen(8e31), 1, 2, true)
             .addGeneratorRequirement("Human", 1)
 
-            .addUpgrade("Our Favorite Bee", pollen(4e32), 1, 10, false)
+            .addUpgrade("Our Favorite Bee", pollen(4e32), 1, 10, true)
             .addUpgradeRequirement("The Crops We Crave")
 
-            .addUpgrade("Africanized Bees", pollen(7e33), 1, 10, false)
+            .addUpgrade("Africanized Bees", pollen(7e33), 1, 10, true)
             .addUpgradeRequirement("Our Favorite Bee")
 
-            .addUpgrade("Wild Decline", pollen(1e35), 11, false)
+            .addUpgrade("Wild Decline", pollen(1e35), 11, true)
             .addGeneratorRequirement("Human", 1)
 
-            .addUpgrade("Habitat Destruction", pollen(3e36), 1, 3, false)
+            .addUpgrade("Habitat Destruction", pollen(3e36), 1, 3, true)
             .addUpgradeRequirement("Wild Decline")
 
-            .addUpgrade("Varroa Destructor", pollen(4e37), 3, false)
+            .addUpgrade("Varroa Destructor", pollen(4e37), 3, true)
             .addGeneratorRequirement("Human", 1)
 
-            .addUpgrade("Colony Collapse Disorder", pollen(5e38), 6, false)
+            .addUpgrade("Colony Collapse Disorder", pollen(5e38), 6, true)
             .addUpgradeRequirement("Varroa Destructor")
 
             .addUpgrade("Till Death Do Us Part?", pollen(2e39), 6, false)
@@ -235,7 +235,7 @@ void main() {
             .generator();
 
     builder.resolveRequirements();
-    STATE.updateEfficiency(GARDEN);
+    STATE.updateGeneratorStates(GARDEN);
     //STATE.setBoost(2);
 
     setGeneratorCount(human, 0);
@@ -252,26 +252,31 @@ void main() {
     CurrencyMapping mapping = new CurrencyMapping(CURRENCY, CURRENCY);
     List<String> actions = new ArrayList<>();
     printUnlocked(GARDEN, state, actions);
-    for (int i = 0; i < 20; i += 1) {
+    boolean possibleUnlock = false;
+    for (int i = 0; i < 20 || !possibleUnlock; i += 1) {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         ImprovementDescription improvementDescription = ImprovementCalculator.calculateImprovement(GARDEN, state).get(mapping);
         Improvement improvement = improvementDescription.improvement();
         System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         System.out.println();
+        possibleUnlock = false;
         if (improvement instanceof GeneratorImprovement(Generator generator, GeneratorState generatorState)) {
             int count = generatorState.count();
-            actions.add(String.format("(%d) Generator %s: %d -> %d", i + 1, generator.getName(), count, count + 1));
+            actions.add(String.format("(%d) Generator %s: %d -> %d : %s", i + 1, generator.getName(), count, count + 1, improvementDescription.description()));
             state.setGeneratorCount(generator, count + 1);
             if (count == 0) {
                 printUnlocked(GARDEN, state, actions);
+                possibleUnlock = true;
             }
         } else if (improvement instanceof UpgradeImprovement upgradeImprovement) {
             Upgrade upgrade = upgradeImprovement.upgrade();
-            UpgradeEffect effect = upgrade.getEffects().getFirst();
-            actions.add(String.format("(%d) Upgrade %s (%s)", i + 1, upgrade.getName(), effect.generator().getName()));
+            for (UpgradeEffect effect : upgrade.getEffects()) {
+                actions.add(String.format("(%d) Upgrade %s (%s) : %s", i + 1, upgrade.getName(), effect.generator().getName(), improvementDescription.description()));
+            }
             state.setUpgradeBought(upgrade);
-            state.updateEfficiency(GARDEN);
+            state.updateGeneratorStates(GARDEN);
             printUnlocked(GARDEN, state, actions);
+            possibleUnlock = true;
         } else {
             throw new NullPointerException();
         }
@@ -283,12 +288,24 @@ void main() {
 private static void printUnlocked(Garden garden, GardenState state, List<String> actions) {
     for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
         if (state.getGeneratorState(generator).count() == 0) {
-            actions.add(String.format(" *** unlocked generator %s", generator.getName()));
+            if (generator.isTimed()) {
+                actions.add(String.format(" *** unlocked generator %s: base cost %s, inc %.2f, base production %s, base charge time %,d",
+                        generator.getName(), generator.getBaseCost().asString(), generator.getCompoundingCost(),
+                        generator.getBaseProduction().asString(), generator.getBaseChargeTime() / STATE.getBoost()));
+            } else {
+                actions.add(String.format(" *** unlocked generator %s: base cost %s, inc %.2f, base production %s",
+                        generator.getName(), generator.getBaseCost().asString(), generator.getCompoundingCost(),
+                        generator.getBaseProduction().multiplyBy(STATE.getBoost()).asString()));
+            }
         }
     }
     for (Upgrade upgrade : garden.getUnlockedUpgrades(state)) {
         if (!state.isUpgradeBought(upgrade)) {
-            actions.add(String.format(" *** unlocked upgrade %s", upgrade.getName()));
+            for (UpgradeEffect effect : upgrade.getEffects()) {
+                actions.add(String.format(" *** unlocked upgrade %s: %s efficiency %.2f, speed %,d, cost %s",
+                        upgrade.getName(), effect.generator().getName(), effect.efficiency(), effect.speed(),
+                        upgrade.getCost().asString()));
+            }
         }
     }
 }
