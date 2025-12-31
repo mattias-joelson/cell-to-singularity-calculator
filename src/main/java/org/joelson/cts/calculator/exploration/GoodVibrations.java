@@ -9,11 +9,11 @@ import org.joelson.cts.calculator.model.UpgradeEffect;
 static String NOTES = "Notes";
 static String SONGS = "Songs";
 
-private static Amount notes(float amount) {
+private static Amount notes(double amount) {
     return new Amount(NOTES, amount);
 }
 
-private static Amount songs(float amount) {
+private static Amount songs(double amount) {
     return new Amount(SONGS, amount);
 }
 
@@ -58,73 +58,73 @@ void main() {
     goodVibrations.addGenerator(soundWaves);
     createUpgrade(goodVibrations, state, soundWaves, "Amplitude", notes(44_000), 2.5f); // sound waves
     createUpgrade(goodVibrations, state, soundWaves, "Wavelength", notes(600_000), 2.5f); // amplitude
-    createUpgrade(goodVibrations, state, soundWaves, "Frequency", notes(2e6f), 2.25f); // wavelength
-    createUpgrade(goodVibrations, state, soundWaves, "Harmonics", notes(1e7f), 2.5f); // frequency
-    createUpgrade(goodVibrations, state, soundWaves, "Color of a Note", notes(3e7f), 2.25f); // harmonics
-    createUpgrade(goodVibrations, state, soundWaves, "Vibrato", notes(5e7f), 1.75f); // harmonics
+    createUpgrade(goodVibrations, state, soundWaves, "Frequency", notes(2e6), 2.25f); // wavelength
+    createUpgrade(goodVibrations, state, soundWaves, "Harmonics", notes(1e7), 2.5f); // frequency
+    createUpgrade(goodVibrations, state, soundWaves, "Color of a Note", notes(3e7), 2.25f); // harmonics
+    createUpgrade(goodVibrations, state, soundWaves, "Vibrato", notes(5e7), 1.75f); // harmonics
 
-    Generator theory = new Generator("Theory", notes(5e7f), 1.15f, notes(10_000)); // inc // Color of a note
+    Generator theory = new Generator("Theory", notes(5e7), 1.15f, notes(10_000)); // inc // Color of a note
     goodVibrations.addGenerator(theory);
-    createUpgrade(goodVibrations, state, theory, "Pitch", notes(1.5e8f), 2); // theory
-    createUpgrade(goodVibrations, state, theory, "Rhythm", notes(4e8f), 2); // theory
-    createUpgrade(goodVibrations, state, theory, "African Polyrhythm", notes(7.5e8f), 2); // rhythm
-    createUpgrade(goodVibrations, state, theory, "Notation", notes(3e9f), 2.5f); // pitch
-    createUpgrade(goodVibrations, state, theory, "Semitones", notes(6e10f), 2.5f); // notation, early innovation
-    createUpgrade(goodVibrations, state, theory, "Arabic Maqam", notes(2e11f), 2f); // pitch, african polyrhythm
-    createUpgrade(goodVibrations, state, theory, "Chinese Shi'er lü", notes(4.5e11f), 2.5f); // Arabic Maqam
-    createUpgrade(goodVibrations, state, theory, "Chords", notes(9e11f), 2.5f); // semitones
-    createUpgrade(goodVibrations, state, theory, "Octave", notes(8.8e12f), 5.4f); // chords
-    createUpgrade(goodVibrations, state, theory, "Pentatonic Scale", notes(5e13f), 6); // // chinese
-    createUpgrade(goodVibrations, state, theory, "Melody", notes(1e14f), 4); // // octave, pentatonic
+    createUpgrade(goodVibrations, state, theory, "Pitch", notes(1.5e8), 2); // theory
+    createUpgrade(goodVibrations, state, theory, "Rhythm", notes(4e8), 2); // theory
+    createUpgrade(goodVibrations, state, theory, "African Polyrhythm", notes(7.5e8), 2); // rhythm
+    createUpgrade(goodVibrations, state, theory, "Notation", notes(3e9), 2.5f); // pitch
+    createUpgrade(goodVibrations, state, theory, "Semitones", notes(6e10), 2.5f); // notation, early innovation
+    createUpgrade(goodVibrations, state, theory, "Arabic Maqam", notes(2e11), 2f); // pitch, african polyrhythm
+    createUpgrade(goodVibrations, state, theory, "Chinese Shi'er lü", notes(4.5e11), 2.5f); // Arabic Maqam
+    createUpgrade(goodVibrations, state, theory, "Chords", notes(9e11), 2.5f); // semitones
+    createUpgrade(goodVibrations, state, theory, "Octave", notes(8.8e12), 5.4f); // chords
+    createUpgrade(goodVibrations, state, theory, "Pentatonic Scale", notes(5e13), 6); // // chinese
+    createUpgrade(goodVibrations, state, theory, "Melody", notes(1e14), 4); // // octave, pentatonic
 
-    Generator earlyInnovations = new Generator("Early Innovations", notes(2e10f), 1.15f, notes(1e6f));// vibrato
+    Generator earlyInnovations = new Generator("Early Innovations", notes(2e10), 1.15f, notes(1e6));// vibrato
     goodVibrations.addGenerator(earlyInnovations);
-    createUpgrade(goodVibrations, state, earlyInnovations, "Sticks and Rocks", notes(3e10f), 2.25f); // early innovations
-    createUpgrade(goodVibrations, state, earlyInnovations, "Bone Flute", notes(8e11f), 7); // sticks and rocks
-    createUpgrade(goodVibrations, state, earlyInnovations, "Write That Down", notes(2.5e12f), 4); // Bone Flute
-    createUpgrade(goodVibrations, state, earlyInnovations, "Clay Tablets", notes(3e13f), 6); // write that down
+    createUpgrade(goodVibrations, state, earlyInnovations, "Sticks and Rocks", notes(3e10), 2.25f); // early innovations
+    createUpgrade(goodVibrations, state, earlyInnovations, "Bone Flute", notes(8e11), 7); // sticks and rocks
+    createUpgrade(goodVibrations, state, earlyInnovations, "Write That Down", notes(2.5e12), 4); // Bone Flute
+    createUpgrade(goodVibrations, state, earlyInnovations, "Clay Tablets", notes(3e13), 6); // write that down
 
-    Generator instruments = new Generator("Instruments", notes(1e12f), 1.15f, songs(1));
+    Generator instruments = new Generator("Instruments", notes(1e12), 1.15f, songs(1));
     goodVibrations.addGenerator(instruments);
     createUpgrade(goodVibrations, state, instruments, "Wind", songs(100), 2); // instruments
     createUpgrade(goodVibrations, state, instruments, "Voice", songs(1_500), 2.25f); // instruments
     createUpgrade(goodVibrations, state, instruments, "Ocarina", songs(8_000), 2); // instruments
     createUpgrade(goodVibrations, state, instruments, "Keyboard", songs(150_000), 2.5f); // instruments
     createUpgrade(goodVibrations, state, instruments, "Percussion", songs(900_000), 1.75f); // instruments
-    createUpgrade(goodVibrations, state, instruments, "Autotune", songs(8e6f), 2f); // autotune
-    createUpgrade(goodVibrations, state, instruments, "Electrophones", songs(1.5e7f), 2); // instruments
-    createUpgrade(goodVibrations, state, instruments, "The King of Instruments", songs(4e7f), 2); // keyboard
-    createUpgrade(goodVibrations, state, instruments, "Xylophone", songs(9e7f), 2); // percussion
-    createUpgrade(goodVibrations, state, instruments, "String", songs(2.5e8f), 3); // instruments
-    createUpgrade(goodVibrations, state, instruments, "Synthesizer", songs(8e8f), 3.5f); // electrophones
-    createUpgrade(goodVibrations, state, instruments, "Lyre, Lyre", songs(3e9f), 3.5f); // String
-    createUpgrade(goodVibrations, state, instruments, "Hurricane Hymn No. 6", songs(7e9f), 6); // melody, lyre, clay tablets
-    Upgrade whatsNext = new Upgrade("What's Next?", notes(8e14f));
+    createUpgrade(goodVibrations, state, instruments, "Autotune", songs(8e6), 2f); // autotune
+    createUpgrade(goodVibrations, state, instruments, "Electrophones", songs(1.5e7), 2); // instruments
+    createUpgrade(goodVibrations, state, instruments, "The King of Instruments", songs(4e7), 2); // keyboard
+    createUpgrade(goodVibrations, state, instruments, "Xylophone", songs(9e7), 2); // percussion
+    createUpgrade(goodVibrations, state, instruments, "String", songs(2.5e8), 3); // instruments
+    createUpgrade(goodVibrations, state, instruments, "Synthesizer", songs(8e8), 3.5f); // electrophones
+    createUpgrade(goodVibrations, state, instruments, "Lyre, Lyre", songs(3e9), 3.5f); // String
+    createUpgrade(goodVibrations, state, instruments, "Hurricane Hymn No. 6", songs(7e9), 6); // melody, lyre, clay tablets
+    Upgrade whatsNext = new Upgrade("What's Next?", notes(8e14));
     whatsNext.addEffect(new UpgradeEffect(instruments, 2.5f));
     state.setUpgradeBought(whatsNext);
     goodVibrations.addUpgrade(whatsNext);
 
-    Generator modernInnovations = new Generator("Modern Innovations", songs(1e10f), 1.15f, songs(1e6f)); // what's next
+    Generator modernInnovations = new Generator("Modern Innovations", songs(1e10), 1.15f, songs(1e6)); // what's next
     goodVibrations.addGenerator(modernInnovations);
-    createUpgrade(goodVibrations, state, modernInnovations, "Phonograph", songs(2e11f), 6); // modern
-    createUpgrade(goodVibrations, state, modernInnovations, "Mic Check", songs(7e11f), 2); // phonograph
-    createUpgrade(goodVibrations, state, modernInnovations, "Listen Up", songs(2.5e12f), 3); // mic
-    createUpgrade(goodVibrations, state, modernInnovations, "Radio", songs(1.5e14f), 76); // listen
-    createUpgrade(goodVibrations, state, modernInnovations, "Portable Player", songs(2e15f), 4); // listen
-    createUpgrade(goodVibrations, state, modernInnovations, "Digital Age", songs(8e16f), 16); // player
-    createUpgrade(goodVibrations, state, modernInnovations, "Streaming", songs(4e17f), 6); // digital age
-    createUpgrade(goodVibrations, state, modernInnovations, "Here, There, and Everywhere", songs(1e18f), 2, false); // streaming
+    createUpgrade(goodVibrations, state, modernInnovations, "Phonograph", songs(2e11), 6); // modern
+    createUpgrade(goodVibrations, state, modernInnovations, "Mic Check", songs(7e11), 2); // phonograph
+    createUpgrade(goodVibrations, state, modernInnovations, "Listen Up", songs(2.5e12), 3); // mic
+    createUpgrade(goodVibrations, state, modernInnovations, "Radio", songs(1.5e14), 76); // listen
+    createUpgrade(goodVibrations, state, modernInnovations, "Portable Player", songs(2e15), 4); // listen
+    createUpgrade(goodVibrations, state, modernInnovations, "Digital Age", songs(8e16), 16); // player
+    createUpgrade(goodVibrations, state, modernInnovations, "Streaming", songs(4e17), 6); // digital age
+    createUpgrade(goodVibrations, state, modernInnovations, "Here, There, and Everywhere", songs(1e18), 2, false); // streaming
 
-    Generator briefHistory = new Generator("A Brief History", songs(5e12f), 1.15f, songs(3e8f)); // what's next
+    Generator briefHistory = new Generator("A Brief History", songs(5e12), 1.15f, songs(3e8)); // what's next
     goodVibrations.addGenerator(briefHistory);
-    createUpgrade(goodVibrations, state, briefHistory, "Ancient Times", songs(1.2e13f), 4); // brief
-    createUpgrade(goodVibrations, state, briefHistory, "Middle Ages", songs(7e13f), 2); // ancient
-    createUpgrade(goodVibrations, state, briefHistory, "Classical Clientele", songs(8e14f), 3); // middle
-    createUpgrade(goodVibrations, state, briefHistory, "A New World", songs(7e15f), 6); // classic
-    createUpgrade(goodVibrations, state, briefHistory, "Beyond Borders", songs(3e16f), 4); // new world
-    createUpgrade(goodVibrations, state, briefHistory, "Global Sensations", songs(1.5e17f), 3); // beyond borders
+    createUpgrade(goodVibrations, state, briefHistory, "Ancient Times", songs(1.2e13), 4); // brief
+    createUpgrade(goodVibrations, state, briefHistory, "Middle Ages", songs(7e13), 2); // ancient
+    createUpgrade(goodVibrations, state, briefHistory, "Classical Clientele", songs(8e14), 3); // middle
+    createUpgrade(goodVibrations, state, briefHistory, "A New World", songs(7e15), 6); // classic
+    createUpgrade(goodVibrations, state, briefHistory, "Beyond Borders", songs(3e16), 4); // new world
+    createUpgrade(goodVibrations, state, briefHistory, "Global Sensations", songs(1.5e17), 3); // beyond borders
 
-    state.updateEfficiency(goodVibrations);
+    state.updateGeneratorStates(goodVibrations);
     state.setBoost(2);
 
     state.setGeneratorCount(briefHistory, 53);

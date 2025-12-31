@@ -1,18 +1,57 @@
 package org.joelson.cts.calculator.model;
 
-public record Generator(String name, Amount baseCost, float compoundingCost, Amount baseProduction)
-        implements Unlockable {
+public class Generator implements Unlockable {
 
-    public Amount getCost(int level) {
-        return new Amount(baseCost.currency(), (float) (baseCost.amount() * Math.pow(compoundingCost, level)));
+    public static int UNTIMED_CHARGE_TIME = -1;
+
+    private final String name;
+    private final Amount baseCost;
+    private final float compoundingCost;
+    private final Amount baseProduction;
+    private final float baseChargeTime;
+
+    public Generator(String name, Amount baseCost, float compoundingCost, Amount baseProduction) {
+        this(name, baseCost, compoundingCost, baseProduction, UNTIMED_CHARGE_TIME);
     }
 
-    public CurrencyMapping getMapping() {
-        return new CurrencyMapping(baseCost.currency(), baseProduction.currency());
+    public Generator(String name, Amount baseCost, float compoundingCost, Amount baseProduction, float baseChargeTime) {
+        this.name = name;
+        this.baseCost = baseCost;
+        this.compoundingCost = compoundingCost;
+        this.baseProduction = baseProduction;
+        this.baseChargeTime = baseChargeTime;
     }
 
     @Override
     public String getName() {
         return name;
+    }
+
+    public Amount getBaseCost() {
+        return baseCost;
+    }
+
+    public float getCompoundingCost() {
+        return compoundingCost;
+    }
+
+    public Amount getBaseProduction() {
+        return baseProduction;
+    }
+
+    public boolean isTimed() {
+        return baseChargeTime > 0;
+    }
+
+    public float getBaseChargeTime() {
+        return baseChargeTime;
+    }
+
+    public Amount getCost(int level) {
+        return new Amount(baseCost.currency(), baseCost.amount() * Math.pow(compoundingCost, level));
+    }
+
+    public CurrencyMapping getMapping() {
+        return new CurrencyMapping(baseCost.currency(), baseProduction.currency());
     }
 }

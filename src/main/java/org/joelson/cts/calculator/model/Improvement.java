@@ -12,7 +12,7 @@ public interface Improvement {
         return new CurrencyMapping(getCost().currency(), getIncrease().currency());
     }
 
-    default float getRatio() {
+    default double getRatio() {
         return getIncrease().amount() / getCost().amount();
     }
 }

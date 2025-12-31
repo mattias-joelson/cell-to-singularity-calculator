@@ -53,6 +53,15 @@ public class Garden {
         return upgrades;
     }
 
+    public Upgrade getUpgrade(String name) {
+        for (Upgrade upgrade : upgrades) {
+            if (upgrade.getName().equals(name)) {
+                return upgrade;
+            }
+        }
+        return null;
+    }
+
     public List<Upgrade> getUnlockedUpgrades(GardenState state) {
         return getUnlocked(upgrades, state);
     }

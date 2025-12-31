@@ -1,9 +1,13 @@
 package org.joelson.cts.calculator.model;
 
-public record Amount(String currency, float amount) {
+public record Amount(String currency, double amount) {
 
-    public Amount times(float f) {
+    public Amount multiplyBy(double f) {
         return new Amount(currency, amount * f);
+    }
+
+    public Amount divideBy(double f) {
+        return new Amount(currency, amount / f);
     }
 
     public String asString() {
