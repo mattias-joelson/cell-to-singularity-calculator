@@ -270,9 +270,14 @@ void main() {
             }
         } else if (improvement instanceof UpgradeImprovement upgradeImprovement) {
             Upgrade upgrade = upgradeImprovement.upgrade();
+            StringBuilder improvedGenerators = new StringBuilder();
             for (UpgradeEffect effect : upgrade.getEffects()) {
-                actions.add(String.format("(%d) Upgrade %s (%s) : %s", i + 1, upgrade.getName(), effect.generator().getName(), improvementDescription.description()));
+                if (!improvedGenerators.isEmpty()) {
+                    improvedGenerators.append(", ");
+                }
+                improvedGenerators.append(effect.generator().getName());
             }
+            actions.add(String.format("(%d) Upgrade %s (%s) : %s", i + 1, upgrade.getName(), improvedGenerators, improvementDescription.description()));
             state.setUpgradeBought(upgrade);
             state.updateGeneratorStates(GARDEN);
             printUnlocked(GARDEN, state, actions);

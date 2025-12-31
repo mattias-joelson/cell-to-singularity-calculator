@@ -65,10 +65,8 @@ public class ImprovementCalculator {
         }
         for (Upgrade upgrade : garden.getUnlockedUpgrades(state)) {
             if (!state.isUpgradeBought(upgrade)) {
-                for (UpgradeEffect effect : upgrade.getEffects()) {
-                    Improvement improvement = UpgradeImprovement.create(upgrade, effect, state);
-                    improvements.computeIfAbsent(improvement.getMapping(), _ -> new ArrayList<>()).add(improvement);
-                }
+                Improvement improvement = UpgradeImprovement.create(upgrade, state);
+                improvements.computeIfAbsent(improvement.getMapping(), _ -> new ArrayList<>()).add(improvement);
             }
         }
 
@@ -194,7 +192,7 @@ public class ImprovementCalculator {
                 if (!state.isUpgradeBought(upgrade)) {
                     for (UpgradeEffect effect : upgrade.getEffects()) {
                         if (effect.generator().getBaseProduction().currency().equals(currency)) {
-                            Improvement improvement = UpgradeImprovement.create(upgrade, effect, state);
+                            Improvement improvement = UpgradeImprovement.create(upgrade, state);
                             if (improvement.getCost().currency().equals(currency)) {
                                 currencyImprovements.add(improvement);
                             } else {
