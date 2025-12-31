@@ -300,7 +300,7 @@ void main() {
             .generator();
 
     builder.resolveRequirements();
-    STATE.updateEfficiency(GARDEN);
+    STATE.updateGeneratorStates(GARDEN);
 //    STATE.setBoost(4);
 
     setGeneratorCount(future, 0);
@@ -373,7 +373,7 @@ void main() {
     for (String upgradeName : boughtUpdates) {
         STATE.setUpgradeBought(GARDEN.getUpgrade(upgradeName));
     }
-    STATE.updateEfficiency(GARDEN);
+    STATE.updateGeneratorStates(GARDEN);
 
     GardenState state = STATE.copy();
     List<String> actions = new ArrayList<>();
@@ -446,7 +446,7 @@ private static void candidateApproach(GardenState state, List<String> actions) {
                             upgrade.getName(), effect.generator().getName(), improvementDescription.description()));
                 }
                 state.setUpgradeBought(upgrade);
-                state.updateEfficiency(GARDEN);
+                state.updateGeneratorStates(GARDEN);
                 printUnlocked(GARDEN, state, actions);
                 possibleUnlock = true;
             } else {

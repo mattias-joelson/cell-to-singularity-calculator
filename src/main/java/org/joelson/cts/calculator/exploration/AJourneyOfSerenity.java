@@ -255,16 +255,16 @@ void main() {
             .addUpgrade("Tea Simulator", cups(5e23), 4f, false)
             .addGeneratorRequirement("Virtual Tea", 1)
 
-            .addUpgrade("Online Tea Cermony", cups(1e25), 6f, false)
+            .addUpgrade("Online Tea Ceremony", cups(1e25), 6f, false)
             .addGeneratorRequirement("Virtual Tea", 1)
 
             .addUpgrade("Shared Serenity", cups(1e26), 2, false)
             .addUpgradeRequirement("Tea Simulator")
-            .addUpgradeRequirement("Online Tea Cermony")
+            .addUpgradeRequirement("Online Tea Ceremony")
             .generator();
 
     builder.resolveRequirements();
-    STATE.updateEfficiency(GARDEN);
+    STATE.updateGeneratorStates(GARDEN);
     //STATE.setBoost(2);
 
     setGeneratorCount(virtualTea, 0);
@@ -306,7 +306,7 @@ void main() {
                 actions.add(String.format("(%d) Upgrade %s (%s) : %s",
                         i + 1, upgrade.getName(), effect.generator().getName(), improvementDescription.description()));
                 state.setUpgradeBought(upgrade);
-                state.updateEfficiency(GARDEN);
+                state.updateGeneratorStates(GARDEN);
                 printUnlocked(GARDEN, state, actions);
             } else {
                 throw new NullPointerException();

@@ -276,7 +276,7 @@ void main() {
             .generator();
 
     builder.resolveRequirements();
-    STATE.updateEfficiency(GARDEN);
+    STATE.updateGeneratorStates(GARDEN);
 //    STATE.setBoost(4);
 
     setGeneratorCount(meaningOfLife, 0);
@@ -365,7 +365,7 @@ void main() {
         Upgrade upgrade = GARDEN.getUpgrade(boughtUpgrade);
         STATE.setUpgradeBought(upgrade);
     }
-    STATE.updateEfficiency(GARDEN);
+    STATE.updateGeneratorStates(GARDEN);
 
     GardenState state = STATE.copy();
     CurrencyMapping mapping = new CurrencyMapping(CURRENCY, CURRENCY);
@@ -395,7 +395,7 @@ void main() {
             actions.add(String.format("(%d) Upgrade %s (%s) : %s",
                     i + 1, upgrade.getName(), effect.generator().getName(), improvementDescription.description()));
             state.setUpgradeBought(upgrade);
-            state.updateEfficiency(GARDEN);
+            state.updateGeneratorStates(GARDEN);
             printUnlocked(GARDEN, state, actions);
             possibleUnlock = true;
         } else {

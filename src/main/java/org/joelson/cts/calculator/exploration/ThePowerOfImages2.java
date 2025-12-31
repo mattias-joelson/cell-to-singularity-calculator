@@ -79,7 +79,7 @@ void main() {
     createUpgrade(garden, state, movingImages, "Grayscale to Color", 4e22f, 4, false);
     createUpgrade(garden, state, movingImages, "Computer Animation", 1e26f, 2.5f, false);
 
-    state.updateEfficiency(garden);
+    state.updateGeneratorStates(garden);
     state.setGeneratorCount(movingImages, 18);
     state.setGeneratorCount(postModernism, 51);
     state.setGeneratorCount(artCelebrity, 61);

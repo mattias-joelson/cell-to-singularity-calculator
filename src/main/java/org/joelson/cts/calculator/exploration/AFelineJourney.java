@@ -215,7 +215,7 @@ void main() {
             .generator();
 
     builder.resolveRequirements();
-    STATE.updateEfficiency(GARDEN);
+    STATE.updateGeneratorStates(GARDEN);
     STATE.setBoost(1);
 
     setGeneratorCount(houseCats, 0);
@@ -254,10 +254,10 @@ void main() {
         } else if (improvementDescription.improvement() instanceof UpgradeImprovement upgradeImprovement) {
             Upgrade upgrade = upgradeImprovement.upgrade();
             UpgradeEffect effect = upgrade.getEffects().getFirst();
-            actions.add(String.format("(%d) Upgrade %s (%s) : %s", i + 1, upgrade.getName(), effect.generator().getName(),
-                    improvementDescription.description()));
+            actions.add(String.format("(%d) Upgrade %s (%s) : %s", i + 1, upgrade.getName(),
+                    effect.generator().getName(), improvementDescription.description()));
             state.setUpgradeBought(upgrade);
-            state.updateEfficiency(GARDEN);
+            state.updateGeneratorStates(GARDEN);
             printUnlocked(GARDEN, state, actions);
             possibleUnlock = true;
         } else {
