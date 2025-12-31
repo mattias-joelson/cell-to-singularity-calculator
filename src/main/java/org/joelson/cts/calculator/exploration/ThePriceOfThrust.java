@@ -45,14 +45,6 @@ private static Amount future(double amount) {
     return new Amount(FUTURE_CURRENCY, amount);
 }
 
-private static void miscellaneousUpgrade(String name, double commodityAmount, boolean bought) {
-    Upgrade upgrade = new Upgrade(name, commodity(commodityAmount));
-    GARDEN.addUpgrade(upgrade);
-    if (bought) {
-        STATE.setUpgradeBought(upgrade);
-    }
-}
-
 private void setGeneratorCount(Generator generator, int count) {
     STATE.setGeneratorCount(generator, count);
 }
@@ -63,29 +55,24 @@ void main() {
         GARDEN.addCurrency(currency);
     }
 
-    miscellaneousUpgrade("Hunting and Gathering", 0.0004, true);
-    miscellaneousUpgrade("Gifting", 0.0005, true);
-    miscellaneousUpgrade("Settling", 0.006, true);
-    miscellaneousUpgrade("Specializing", 1, true);
-
     GardenBuilder builder = new GardenBuilder(GARDEN, STATE);
 
     Generator commodity = builder.createGenerator("Commodity Currency", commodity(25), 1.07f, commodity(1))
-            .addUpgradeRequirement("Specializing")
+            //.addUpgradeRequirement("Specializing")
 
             .addUpgrade("Debt", commodity(125), 2.5f)
             .addGeneratorRequirement("Commodity Currency")
-            .addUpgradeRequirement("Gifting")
+            //.addUpgradeRequirement("Gifting")
 
             .addUpgrade("Tally Sticks", commodity(5000), 2)
             .addUpgradeRequirement("Debt")
 
             .addUpgrade("Bartering", commodity(20_000), 2)
-            .addUpgradeRequirement("Settling")
+            //.addUpgradeRequirement("Settling")
             .addUpgradeRequirement("Tally Sticks")
 
             .addUpgrade("Wampum", commodity(250_000), 2.5f)
-            .addUpgradeRequirement("Gifting")
+            //.addUpgradeRequirement("Gifting")
             .addUpgradeRequirement("Bartering")
 
             .addUpgrade("Recordkeeping", commodity(800_000), 2.5f)
@@ -395,7 +382,6 @@ private static void candidateApproach(GardenState state, List<String> actions) {
         possibleUnlock = false;
         Map<Improvement, Set<Map.Entry<CurrencyMapping, ImprovementDescription>>> improvementMap = new HashMap<>();
         for (Map.Entry<CurrencyMapping, ImprovementDescription> entry : improvementDescriptions.entrySet()) {
-            CurrencyMapping currencyMapping = entry.getKey();
             Improvement improvement = entry.getValue().improvement();
             Set<Map.Entry<CurrencyMapping, ImprovementDescription>> set = improvementMap.get(improvement);
             if (set == null) {
