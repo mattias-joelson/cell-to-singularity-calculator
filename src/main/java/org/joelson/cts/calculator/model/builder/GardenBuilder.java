@@ -35,7 +35,10 @@ public class GardenBuilder {
 
     public GeneratorBuilder createGenerator(
             String name, Amount baseCost, float compoundingCost, Amount baseProduction) {
-        return createGenerator(name, baseCost, compoundingCost, baseProduction, Generator.UNTIMED_CHARGE_TIME);
+        Generator generator = new Generator(name, baseCost.multiplyBy(costMultiplier), compoundingCost,
+                baseProduction.multiplyBy(productionMultiplier));
+        garden.addGenerator(generator);
+        return new GeneratorBuilder(this, generator);
     }
 
     public GeneratorBuilder createGenerator(
