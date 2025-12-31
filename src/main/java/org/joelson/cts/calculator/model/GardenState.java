@@ -24,19 +24,19 @@ public class GardenState {
     }
 
     public void setGeneratorState(Generator generator, GeneratorState state) {
-        generatorStates.put(generator.getName(), state);
+        generatorStates.put(generator.name(), state);
     }
 
     public void setGeneratorCount(Generator generator, int count) {
-        GeneratorState state = generatorStates.computeIfPresent(generator.getName(),
-                (n, s) -> new GeneratorState(count, s.efficiency()));
+        GeneratorState state = generatorStates.computeIfPresent(generator.name(),
+                (_, s) -> new GeneratorState(count, s.efficiency()));
         if (state == null) {
-            throw new NullPointerException("No generator " + generator.getName() + " present.");
+            throw new NullPointerException("No generator " + generator.name() + " present.");
         }
     }
 
     public GeneratorState getGeneratorState(Generator generator) {
-        GeneratorState state = generatorStates.get(generator.getName());
+        GeneratorState state = generatorStates.get(generator.name());
         if (state == null) {
             state = GeneratorState.EMPTY;
         }
@@ -68,6 +68,26 @@ public class GardenState {
 
     public int getBoost() {
         return boost;
+    }
+
+    public void updateEfficiency(Garden garden) {
+        Map<String, Float> generatorEfficiencies = new HashMap<>(garden.getGenerators().size());
+        for (Generator generator : garden.getGenerators()) {
+            generatorEfficiencies.put(generator.name(), 1f);
+        }
+        for (Upgrade upgrade : garden.getUpgrades()) {
+            if (isUpgradeBought(upgrade)) {
+                for (UpgradeEffect effect : upgrade.getEffects()) {
+                    generatorEfficiencies.compute(effect.generator().name(),
+                            (_, generatorEfficiency) -> generatorEfficiency * effect.efficiency());
+                }
+            }
+        }
+        for (Generator generator : garden.getGenerators()) {
+            GeneratorState generatorState = getGeneratorState(generator);
+            float efficiency = generatorEfficiencies.get(generator.name());
+            setGeneratorState(generator, new GeneratorState(generatorState.count(), efficiency));
+        }
     }
 
     public GardenState copy() {

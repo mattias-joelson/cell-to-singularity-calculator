@@ -11,12 +11,14 @@ public class Garden {
     private final List<String> currencies;
     private final List<Generator> generators;
     private final List<Upgrade> upgrades;
+    private final Map<Unlockable, List<Requirement>> requirements;
 
     public Garden(String name) {
         this.name = name;
         this.currencies = new ArrayList<>();
         this.generators = new ArrayList<>();
         this.upgrades = new ArrayList<>();
+        this.requirements = new HashMap<>();
     }
 
     public String getName() {
@@ -39,6 +41,10 @@ public class Garden {
         return generators;
     }
 
+    public List<Generator> getUnlockedGenerators(GardenState state) {
+        return getUnlocked(generators, state);
+    }
+
     public void addUpgrade(Upgrade upgrade) {
         upgrades.add(upgrade);
     }
@@ -47,23 +53,32 @@ public class Garden {
         return upgrades;
     }
 
-    public void updateEfficiency(GardenState state) {
-        Map<String, Float> generatorEfficiencies = new HashMap<>(generators.size());
-        for (Generator generator : generators) {
-            generatorEfficiencies.put(generator.getName(), 1f);
-        }
-        for (Upgrade upgrade : upgrades) {
-            if (state.isUpgradeBought(upgrade)) {
-                for (UpgradeEffect effect : upgrade.getEffects()) {
-                    generatorEfficiencies.compute(effect.getGenerator().getName(),
-                            (_, generatorEfficiency) -> generatorEfficiency * effect.getEfficiency());
+    public List<Upgrade> getUnlockedUpgrades(GardenState state) {
+        return getUnlocked(upgrades, state);
+    }
+
+    public void addRequirement(Unlockable unlockable, Requirement requirement) {
+        requirements.computeIfAbsent(unlockable, _ -> new ArrayList<>()).add(requirement);
+    }
+
+    private <T extends Unlockable> List<T> getUnlocked(List<T> unlockables, GardenState state) {
+        List<T> unlocked = new ArrayList<>();
+        for (T unlockable : unlockables) {
+            List<Requirement> requirements = this.requirements.get(unlockable);
+            if (requirements == null || requirements.isEmpty()) {
+                unlocked.add(unlockable);
+                continue;
+            }
+            for (Requirement requirement : requirements) {
+                if (!requirement.isFulfilled(state)) {
+                    unlockable = null;
+                    break;
                 }
             }
+            if (unlockable != null) {
+                unlocked.add(unlockable);
+            }
         }
-        for (Generator generator : generators) {
-            GeneratorState generatorState = state.getGeneratorState(generator);
-            float efficiency = generatorEfficiencies.get(generator.getName());
-            state.setGeneratorState(generator, new GeneratorState(generatorState.count(), efficiency));
-        }
+        return unlocked;
     }
 }

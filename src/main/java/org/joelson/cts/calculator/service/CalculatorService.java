@@ -123,7 +123,7 @@ public class CalculatorService {
         extinction.addUpgrade(cretaceousExtinction);
         extinctionState.setUpgradeBought(cretaceousExtinction, false);
 
-        extinction.updateEfficiency(extinctionState);
+        extinctionState.updateEfficiency(extinction);
 
         return calculator;
     }

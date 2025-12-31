@@ -16,15 +16,15 @@ public class ImprovementCalculator {
 
     public static Map<String, Float> calculateProduction(Garden garden, GardenState state) {
         Map<String, Float> totalProduction = new HashMap<>();
-        for (Generator generator : garden.getGenerators().reversed()) {
+        for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
             GeneratorState generatorState = state.getGeneratorState(generator);
             int count = generatorState.count();
-            String currencyName = generator.getBaseProduction().currency();
-            float baseProduction = generator.getBaseProduction().amount();
+            String currencyName = generator.baseProduction().currency();
+            float baseProduction = generator.baseProduction().amount();
             float efficiency = generatorState.efficiency();
             float production = baseProduction * efficiency * count;
             System.out.printf("Generator %s: count %d (next %.2e), base %.2e %s, each %.2e %s, total %.3e %s%n",
-                    generator.getName(), count, generator.getCost(count).amount(), baseProduction, currencyName,
+                    generator.name(), count, generator.getCost(count).amount(), baseProduction, currencyName,
                     baseProduction * efficiency, currencyName, production, currencyName);
             totalProduction.put(currencyName, totalProduction.getOrDefault(currencyName, 0f) + production);
         }
@@ -35,15 +35,15 @@ public class ImprovementCalculator {
         return totalProduction;
     }
 
-    public static Improvement calculateImprovement(Garden garden, GardenState state) {
+    public static Map<CurrencyMapping, ImprovementDescription> calculateImprovement(Garden garden, GardenState state) {
         Map<String, Float> totalProduction = calculateProduction(garden, state);
 
         Map<CurrencyMapping, List<Improvement>> improvements = new HashMap<>();
-        for (Generator generator : garden.getGenerators().reversed()) {
+        for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
             improvements.computeIfAbsent(generator.getMapping(), _ -> new ArrayList<>()).add(
                     GeneratorImprovement.create(generator, state));
         }
-        for (Upgrade upgrade : garden.getUpgrades()) {
+        for (Upgrade upgrade : garden.getUnlockedUpgrades(state)) {
             if (!state.isUpgradeBought(upgrade)) {
                 for (UpgradeEffect effect : upgrade.getEffects()) {
                     Improvement improvement = UpgradeImprovement.create(upgrade, effect, state);
@@ -52,15 +52,17 @@ public class ImprovementCalculator {
             }
         }
 
-        Improvement improvement = null;
+        Map<CurrencyMapping, ImprovementDescription> improvementResultMap = new HashMap<>();
         for (Map.Entry<CurrencyMapping, List<Improvement>> improvementsEntry : improvements.entrySet()) {
-            improvement = calculateMappingImprovement(improvementsEntry, totalProduction, improvements);
+            ImprovementDescription improvementDescription =
+                    calculateMappingImprovement(improvementsEntry, totalProduction, improvements);
+            improvementResultMap.put(improvementsEntry.getKey(), improvementDescription);
             System.out.println();
         }
-        return improvement;
+        return improvementResultMap;
     }
 
-    private static Improvement calculateMappingImprovement(
+    private static ImprovementDescription calculateMappingImprovement(
             Map.Entry<CurrencyMapping, List<Improvement>> improvementsEntry, Map<String, Float> totalProduction,
             Map<CurrencyMapping, List<Improvement>> improvements) {
         System.out.printf("Improvements from %s to %s:%n", improvementsEntry.getKey().from(),
@@ -76,12 +78,12 @@ public class ImprovementCalculator {
                     improvement.getName(), cost.asString(), increase.asString(), ratio, durationString(time));
         }
         Improvement best = mappingImprovements.getLast();
-        return calculateSpecificImprovement(totalProduction, improvements, best);
+        return calculateSpecificImprovement(totalProduction, improvements, best, "");
     }
 
-    private static Improvement calculateSpecificImprovement(
+    private static ImprovementDescription calculateSpecificImprovement(
             Map<String, Float> totalProduction, Map<CurrencyMapping, List<Improvement>> improvements,
-            Improvement best) {
+            Improvement best, String description) {
         System.out.printf("Best: %s, (%s)%n", best.getName(), best.getMapping());
         List<Improvement> candidates = new ArrayList<>();
         for (Map.Entry<CurrencyMapping, List<Improvement>> candidateEntry : improvements.entrySet()) {
@@ -99,7 +101,7 @@ public class ImprovementCalculator {
         Amount bestCost = best.getCost();
         float bestTime = bestCost.amount() / totalProduction.get(bestCost.currency());
         float shortestTime = bestTime;
-        Improvement bestImprovement = null;
+        Improvement bestBefore = null;
         System.out.printf("%s: time %s%n", best.getName(), durationString(bestTime));
         for (Improvement candidate : candidates) {
             Amount candidateCost = candidate.getCost();
@@ -112,16 +114,42 @@ public class ImprovementCalculator {
                     durationString(candidateTime), durationString(bestImprovedTime), durationString(totalTime));
             if (totalTime < shortestTime) {
                 shortestTime = totalTime;
-                bestImprovement = candidate;
+                bestBefore = candidate;
             }
         }
-        if (bestImprovement != null) {
-            System.out.printf(">>> Do %s before %s%n", bestImprovement.getName(), best.getName());
-            return calculateSpecificImprovement(totalProduction, improvements, bestImprovement);
+        if (bestBefore != null) {
+            System.out.printf(">>> Do %s before %s%n", bestBefore.getName(), best.getName());
+            String extendedDescription =
+                    extendDescriptionWithBestBefore(totalProduction, best, description, bestBefore, bestCost, bestTime);
+            return calculateSpecificImprovement(totalProduction, improvements, bestBefore, extendedDescription);
         }
 
         System.out.printf("*** Do %s by itself%n", best.getName());
-        return best;
+        String endDescription = extendDescriptionWithBest(totalProduction, best, description, bestTime);
+        return new ImprovementDescription(best, endDescription);
+    }
+
+    private static String extendDescriptionWithBest(
+            Map<String, Float> totalProduction, Improvement best, String description, float bestTime) {
+        String currency = best.getIncrease().currency();
+        float productionBefore = totalProduction.get(currency);
+        float productionAfter = productionBefore + best.getIncrease().amount();
+        return description + String.format("%s (%s) : %s -> %s", best.getName(), durationString(bestTime),
+                new Amount(currency, productionBefore).asString(), new Amount(currency, productionAfter).asString());
+    }
+
+    private static String extendDescriptionWithBestBefore(
+            Map<String, Float> totalProduction, Improvement best, String description, Improvement bestBefore,
+            Amount bestCost, float bestTime) {
+        Amount bestBeforeCost = bestBefore.getCost();
+        float bestBeforeTime = bestBeforeCost.amount() / totalProduction.get(bestBeforeCost.currency());
+        Amount bestBeforeIncrease = bestBefore.getIncrease();
+        float bestImprovedTime = bestCost.amount() / (totalProduction.get(bestBeforeIncrease.currency())
+                + bestBeforeIncrease.amount());
+        float totalTime = bestBeforeTime + bestImprovedTime;
+        return description + String.format("%s (%s) -> %s (%s) + %s (%s) = (%s); ",
+                best.getName(), durationString(bestTime), bestBefore.getName(), durationString(bestBeforeTime),
+                best.getName(), durationString(bestImprovedTime), durationString(totalTime));
     }
 
     public static void calculateImprovementNew(Garden garden, GardenState state) {
@@ -133,9 +161,9 @@ public class ImprovementCalculator {
             List<Improvement> currencyImprovements = new ArrayList<>();
             List<Improvement> otherImprovements = new ArrayList<>();
             for (Generator generator : garden.getGenerators().reversed()) {
-                if (generator.getBaseProduction().currency().equals(currency)) {
+                if (generator.baseProduction().currency().equals(currency)) {
                     GeneratorImprovement improvement = GeneratorImprovement.create(generator, state);
-                    if (generator.getBaseCost().currency().equals(currency)) {
+                    if (generator.baseCost().currency().equals(currency)) {
                         currencyImprovements.add(improvement);
                     } else {
                         otherImprovements.add(improvement);
@@ -145,7 +173,7 @@ public class ImprovementCalculator {
             for (Upgrade upgrade : garden.getUpgrades()) {
                 if (!state.isUpgradeBought(upgrade)) {
                     for (UpgradeEffect effect : upgrade.getEffects()) {
-                        if (effect.getGenerator().getBaseProduction().currency().equals(currency)) {
+                        if (effect.generator().baseProduction().currency().equals(currency)) {
                             Improvement improvement = UpgradeImprovement.create(upgrade, effect, state);
                             if (improvement.getCost().currency().equals(currency)) {
                                 currencyImprovements.add(improvement);

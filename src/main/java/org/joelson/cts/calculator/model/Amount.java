@@ -8,6 +8,6 @@ public record Amount(String currency, float amount) {
 
     public String asString() {
         return (amount < 1_000_000) ?
-                String.format("%,.2f %s", amount, currency) : String.format("%.2e %s", amount, currency);
+                String.format("%,.0f %s", amount, currency) : String.format("%.2e %s", amount, currency);
     }
 }
