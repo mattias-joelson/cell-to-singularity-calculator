@@ -289,7 +289,7 @@ private static void printUnlocked(Garden garden, GardenState state, List<String>
     for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
         if (state.getGeneratorState(generator).count() == 0) {
             if (generator.isTimed()) {
-                actions.add(String.format(" *** unlocked generator %s: base cost %s, inc %.2f, base production %s, base charge time %,d",
+                actions.add(String.format(" *** unlocked generator %s: base cost %s, inc %.2f, base production %s, base charge time %,.2f",
                         generator.getName(), generator.getBaseCost().asString(), generator.getCompoundingCost(),
                         generator.getBaseProduction().asString(), generator.getBaseChargeTime() / STATE.getBoost()));
             } else {

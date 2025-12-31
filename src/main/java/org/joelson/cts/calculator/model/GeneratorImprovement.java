@@ -14,7 +14,8 @@ public record GeneratorImprovement(Generator generator, GeneratorState state) im
 
     @Override
     public Amount getIncrease() {
-        return generator.getBaseProduction().multiplyBy(state.efficiency());
+        Amount production = generator.getBaseProduction().multiplyBy(state.efficiency());
+        return (generator.isTimed()) ? production.divideBy(generator.getBaseChargeTime() / state.speed()) : production;
     }
 
     public static GeneratorImprovement create(Generator generator, GardenState state) {

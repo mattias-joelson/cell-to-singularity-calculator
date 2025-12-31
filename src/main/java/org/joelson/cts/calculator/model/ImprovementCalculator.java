@@ -25,7 +25,7 @@ public class ImprovementCalculator {
             double baseProduction = generator.getBaseProduction().amount();
             float efficiency = generatorState.efficiency();
             double production;
-            if (generator.getBaseChargeTime() > 0) {
+            if (generator.isTimed()) {
                 double productionPerCycle = baseProduction * efficiency * count;
                 float speed = generatorState.speed();
                 float cycleTime = generator.getBaseChargeTime() / speed;

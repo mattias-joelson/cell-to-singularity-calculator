@@ -15,6 +15,17 @@ public record UpgradeImprovement(Upgrade upgrade, UpgradeEffect effect, Generato
 
     @Override
     public Amount getIncrease() {
+        return (effect.generator().isTimed()) ? getIncreaseTimed() : getIncreaseUntimed();
+    }
+
+    private Amount getIncreaseTimed() {
+        float effectChange = effect.efficiency() * effect.speed() - 1;
+        return effect.generator().getBaseProduction().multiplyBy(generatorState.efficiency())
+                .multiplyBy(generatorState.count()).divideBy(effect.generator().getBaseChargeTime())
+                .multiplyBy(generatorState.speed()).multiplyBy(effectChange);
+    }
+
+    public Amount getIncreaseUntimed() {
         return effect.generator().getBaseProduction().multiplyBy(generatorState.efficiency())
                 .multiplyBy(generatorState.count()).multiplyBy(effect.efficiency() - 1);
     }
