@@ -6,6 +6,10 @@ import org.joelson.cts.calculator.model.Upgrade;
 
 public record UpgradeBuilder(GardenBuilder gardenBuilder, Generator generator, Upgrade upgrade) {
 
+    public UpgradeBuilder addGeneratorRequirement(String requiredGeneratorName) {
+        return addGeneratorRequirement(requiredGeneratorName, 1);
+    }
+
     public UpgradeBuilder addGeneratorRequirement(String requiredGeneratorName, int count) {
         gardenBuilder.addUnresolvedRequirement(upgrade, requiredGeneratorName, count);
         return this;
@@ -16,11 +20,11 @@ public record UpgradeBuilder(GardenBuilder gardenBuilder, Generator generator, U
         return this;
     }
 
-    public UpgradeBuilder addUpgrade(String name, Amount cost, float efficiency, boolean bought) {
-        return gardenBuilder.addGeneratorUpgrade(generator, name, cost, efficiency, bought);
+    public UpgradeBuilder addUpgrade(String name, Amount cost, float efficiency) {
+        return gardenBuilder.addGeneratorUpgrade(generator, name, cost, efficiency);
     }
 
-    public UpgradeBuilder addUpgrade(String name, Amount cost, float efficiency, int speed, boolean bought) {
-        return gardenBuilder.addGeneratorUpgrade(generator, name, cost, efficiency, speed, bought);
+    public UpgradeBuilder addUpgrade(String name, Amount cost, float efficiency, int speed) {
+        return gardenBuilder.addGeneratorUpgrade(generator, name, cost, efficiency, speed);
     }
 }

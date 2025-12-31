@@ -27,153 +27,153 @@ private void setGeneratorCount(Generator generator, int count) {
 void main() {
 
     GARDEN.addCurrency(CURRENCY);
-    GardenBuilder builder = new GardenBuilder(GARDEN, STATE);
+    GardenBuilder builder = new GardenBuilder(GARDEN);
 
     Generator felidae = builder.createGenerator("Felidae", paws(30), 1.11f, paws(1))
 
-            .addUpgrade("Pantherinae", paws(100), 1.75f, false)
+            .addUpgrade("Pantherinae", paws(100), 1.75f)
             .addGeneratorRequirement("Felidae", 1)
 
-            .addUpgrade("Felinae", paws(750), 1.75f, false)
+            .addUpgrade("Felinae", paws(750), 1.75f)
             .addUpgradeRequirement("Pantherinae")
 
-            .addUpgrade("Digitigrade", paws(3_000), 1.5f, false)
+            .addUpgrade("Digitigrade", paws(3_000), 1.5f)
             .addUpgradeRequirement("Felinae")
 
-            .addUpgrade("Claws", paws(3e7), 501, false)
+            .addUpgrade("Claws", paws(3e7), 501)
             .addUpgradeRequirement("Digitigrade")
 
-            .addUpgrade("Acute Senses", paws(8e9), 16, false)
+            .addUpgrade("Acute Senses", paws(8e9), 16)
             .addUpgradeRequirement("Claws")
 
-            .addUpgrade("Flexibility", paws(6e12), 251, false)
+            .addUpgrade("Flexibility", paws(6e12), 251)
             .addUpgradeRequirement("Acute Senses")
 
-            .addUpgrade("Patterned Coats", paws(8e15), 1251, false)
+            .addUpgrade("Patterned Coats", paws(8e15), 1251)
             .addUpgradeRequirement("Flexibility")
 
-            .addUpgrade("Rough Tongue", paws(8e17), 101, false)
+            .addUpgrade("Rough Tongue", paws(8e17), 101)
             .addUpgradeRequirement("Patterned Coats")
 
-            .addUpgrade("Short Skull", paws(2.5e20), 101, false)
+            .addUpgrade("Short Skull", paws(2.5e20), 101)
             .addUpgradeRequirement("Rough Tongue")
 
-            .addUpgrade("Obligate Carnivores", paws(3e23), 2501, false)
+            .addUpgrade("Obligate Carnivores", paws(3e23), 2501)
             .addUpgradeRequirement("Short Skull")
 
-            .addUpgrade("Whiskers", paws(2.43e26), 501, false)
+            .addUpgrade("Whiskers", paws(2.43e26), 501)
             .addUpgradeRequirement("Obligate Carnivores")
             .generator();
 
     Generator panthera = builder.createGenerator("Panthera", paws(30000), 1.15f, paws(200))
             .addUpgradeRequirement("Digitigrade")
 
-            .addUpgrade("Clouded Leopard", paws(80_000), 2, false)
+            .addUpgrade("Clouded Leopard", paws(80_000), 2)
             .addGeneratorRequirement("Panthera", 1)
 
-            .addUpgrade("Tiger", paws(240_000), 1.75f, false)
+            .addUpgrade("Tiger", paws(240_000), 1.75f)
             .addUpgradeRequirement("Clouded Leopard")
 
-            .addUpgrade("Leopard", paws(720_000), 1.5f, false)
+            .addUpgrade("Leopard", paws(720_000), 1.5f)
             .addUpgradeRequirement("Tiger")
 
-            .addUpgrade("Snow Leopard", paws(2.16e6), 2, false)
+            .addUpgrade("Snow Leopard", paws(2.16e6), 2)
             .addUpgradeRequirement("Leopard")
 
-            .addUpgrade("Sunda Clouded Leopard", paws(2.7e9), 41, false)
+            .addUpgrade("Sunda Clouded Leopard", paws(2.7e9), 41)
             .addUpgradeRequirement("Asian Golden Cat")
 
-            .addUpgrade("Lion", paws(1.5e12), 101, false)
+            .addUpgrade("Lion", paws(1.5e12), 101)
             .addUpgradeRequirement("African Caracal")
 
-            .addUpgrade("Jaguar", paws(9e19), 1e7f + 1, false)
+            .addUpgrade("Jaguar", paws(9e19), 1e7f + 1)
             .addUpgradeRequirement("Cougar")
             .generator();
 
     Generator bayCat = builder.createGenerator("Bay Cat", paws(3e7), 1.15f, paws(40_000))
             .addUpgradeRequirement("Snow Leopard")
 
-            .addUpgrade("Bornean Bay Cat", paws(1e8), 1.5f, false)
+            .addUpgrade("Bornean Bay Cat", paws(1e8), 1.5f)
             .addGeneratorRequirement("Bay Cat", 1)
 
-            .addUpgrade("Asian Golden Cat", paws(3e8), 2f, false)
+            .addUpgrade("Asian Golden Cat", paws(3e8), 2f)
             .addGeneratorRequirement("Bay Cat", 1)
 
-            .addUpgrade("Marbled Cat", paws(9e8), 1.75f, false)
+            .addUpgrade("Marbled Cat", paws(9e8), 1.75f)
             .addUpgradeRequirement("Asian Golden Cat")
             .generator();
 
     Generator caracal = builder.createGenerator("Caracal", paws(3e10), 1.15f, paws(1e7))
             .addUpgradeRequirement("Marbled Cat")
 
-            .addUpgrade("African Caracal", paws(9e10), 1.75f, false)
+            .addUpgrade("African Caracal", paws(9e10), 1.75f)
             .addGeneratorRequirement("Caracal", 1)
 
-            .addUpgrade("Serval", paws(2.7e11), 2, false)
+            .addUpgrade("Serval", paws(2.7e11), 2)
             .addUpgradeRequirement("African Caracal")
             .generator();
 
     Generator ocelot = builder.createGenerator("Ocelot", paws(1e13), 1.15f, paws(2.5e9))
             .addUpgradeRequirement("Serval")
 
-            .addUpgrade("Ocelots", paws(7e13), 2.25f, false)
+            .addUpgrade("Ocelots", paws(7e13), 2.25f)
             .addGeneratorRequirement("Ocelot", 1)
 
-            .addUpgrade("Kodkod", paws(2e14), 2, false)
+            .addUpgrade("Kodkod", paws(2e14), 2)
             .addGeneratorRequirement("Ocelot", 1)
 
-            .addUpgrade("Andean Mountain Cat", paws(6e14), 1.75f, false)
+            .addUpgrade("Andean Mountain Cat", paws(6e14), 1.75f)
             .addUpgradeRequirement("Ocelots")
 
-            .addUpgrade("Geoffroy's Cat", paws(2e15), 1.5f, false)
+            .addUpgrade("Geoffroy's Cat", paws(2e15), 1.5f)
             .addUpgradeRequirement("Kodkod")
 
-            .addUpgrade("Margay", paws(4e15), 2, false)
+            .addUpgrade("Margay", paws(4e15), 2)
             .addUpgradeRequirement("Kodkod")
             .generator();
 
     Generator lynx = builder.createGenerator("Lynx", paws(1e16), 1.15f, paws(8e11))
             .addUpgradeRequirement("Geoffroy's Cat")
 
-            .addUpgrade("Eurasian Lynx", paws(5e16), 3, false)
+            .addUpgrade("Eurasian Lynx", paws(5e16), 3)
             .addGeneratorRequirement("Lynx", 1)
 
-            .addUpgrade("Iberian Lynx", paws(1.5e17), 2.25f, false)
+            .addUpgrade("Iberian Lynx", paws(1.5e17), 2.25f)
             .addGeneratorRequirement("Lynx", 1)
 
-            .addUpgrade("Bobcat", paws(3e17), 2.5f, false)
+            .addUpgrade("Bobcat", paws(3e17), 2.5f)
             .addUpgradeRequirement("Eurasian Lynx")
             .generator();
 
     Generator puma = builder.createGenerator("Puma", paws(1e18), 1.15f, paws(1.5e14))
             .addUpgradeRequirement("Iberian Lynx")
 
-            .addUpgrade("Cougar", paws(9e18), 2.75f, false)
+            .addUpgrade("Cougar", paws(9e18), 2.75f)
             .addGeneratorRequirement("Puma", 1)
 
-            .addUpgrade("Cheetah", paws(3e19), 2, false)
+            .addUpgrade("Cheetah", paws(3e19), 2)
             .addGeneratorRequirement("Puma", 1)
             .generator();
 
     Generator leopardCat = builder.createGenerator("Leopard Cat", paws(5e20), 1.15f, paws(4e16))
             .addUpgradeRequirement("Cheetah")
 
-            .addUpgrade("Leopard Cats", paws(1e21), 2.25f, false)
+            .addUpgrade("Leopard Cats", paws(1e21), 2.25f)
             .addGeneratorRequirement("Leopard Cat", 1)
 
-            .addUpgrade("Sunda Leopard Cat", paws(3e21), 2.25f, false)
+            .addUpgrade("Sunda Leopard Cat", paws(3e21), 2.25f)
             .addGeneratorRequirement("Leopard Cat", 1)
 
-            .addUpgrade("Fishing Cat", paws(9e21), 2, false)
+            .addUpgrade("Fishing Cat", paws(9e21), 2)
             .addUpgradeRequirement("Leopard Cats")
 
-            .addUpgrade("Flat-Headed Cat", paws(2.7e22), 2.25f, false)
+            .addUpgrade("Flat-Headed Cat", paws(2.7e22), 2.25f)
             .addUpgradeRequirement("Sunda Leopard Cat")
 
-            .addUpgrade("Rusty-Spotted Cat", paws(8.1e22), 2, false)
+            .addUpgrade("Rusty-Spotted Cat", paws(8.1e22), 2)
             .addUpgradeRequirement("Sunda Leopard Cat")
 
-            .addUpgrade("Pallas' Cat", paws(2.7e25), 151, false)
+            .addUpgrade("Pallas' Cat", paws(2.7e25), 151)
             .addGeneratorRequirement("Leopard Cat", 1)
             .addUpgradeRequirement("Jungle Cat")
             .generator();
@@ -181,16 +181,16 @@ void main() {
     Generator felis = builder.createGenerator("Felis", paws(5e23), 1.15f, paws(2e19))
             .addUpgradeRequirement("Flat-Headed Cat")
 
-            .addUpgrade("Jungle Cat", paws(1e24), 3.5f, false)
+            .addUpgrade("Jungle Cat", paws(1e24), 3.5f)
             .addGeneratorRequirement("Felis", 1)
 
-            .addUpgrade("Black-Footed Cat", paws(3e24), 2f, false)
+            .addUpgrade("Black-Footed Cat", paws(3e24), 2f)
             .addGeneratorRequirement("Felis", 1)
 
-            .addUpgrade("Sand Cat", paws(9e24), 2, false)
+            .addUpgrade("Sand Cat", paws(9e24), 2)
             .addUpgradeRequirement("Jungle Cat")
 
-            .addUpgrade("African Wildcat", paws(8.1e25), 3.5f, false)
+            .addUpgrade("African Wildcat", paws(8.1e25), 3.5f)
             .addUpgradeRequirement("Sand Cat")
             .generator();
 
@@ -198,19 +198,19 @@ void main() {
             .addUpgradeRequirement("Pallas' Cat")
             .addUpgradeRequirement("African Wildcat")
 
-            .addUpgrade("Fluffy", paws(6e26), 3, false)
+            .addUpgrade("Fluffy", paws(6e26), 3)
             .addGeneratorRequirement("House Cats", 1)
 
-            .addUpgrade("Australian Cats", paws(5e26), 1, false)
+            .addUpgrade("Australian Cats", paws(5e26), 1)
             .addUpgradeRequirement("Fluffy")
 
-            .addUpgrade("Hairless", paws(1.5e27), 5, false)
+            .addUpgrade("Hairless", paws(1.5e27), 5)
             .addUpgradeRequirement("Fluffy")
 
-            .addUpgrade("Orange", paws(7e27), 2, false)
+            .addUpgrade("Orange", paws(7e27), 2)
             .addUpgradeRequirement("Hairless")
 
-            .addUpgrade("Hunter at Heart", paws(2.5e28), 2, false)
+            .addUpgrade("Hunter at Heart", paws(2.5e28), 2)
             .addUpgradeRequirement("Orange")
             .generator();
 
