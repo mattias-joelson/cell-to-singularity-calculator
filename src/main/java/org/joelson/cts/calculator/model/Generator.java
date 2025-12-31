@@ -8,13 +8,13 @@ public class Generator implements Unlockable {
     private final Amount baseCost;
     private final float compoundingCost;
     private final Amount baseProduction;
-    private final int baseChargeTime;
+    private final float baseChargeTime;
 
     public Generator(String name, Amount baseCost, float compoundingCost, Amount baseProduction) {
         this(name, baseCost, compoundingCost, baseProduction, UNTIMED_CHARGE_TIME);
     }
 
-    public Generator(String name, Amount baseCost, float compoundingCost, Amount baseProduction, int baseChargeTime) {
+    public Generator(String name, Amount baseCost, float compoundingCost, Amount baseProduction, float baseChargeTime) {
         this.name = name;
         this.baseCost = baseCost;
         this.compoundingCost = compoundingCost;
@@ -43,7 +43,7 @@ public class Generator implements Unlockable {
         return baseChargeTime > 0;
     }
 
-    public int getBaseChargeTime() {
+    public float getBaseChargeTime() {
         return baseChargeTime;
     }
 
