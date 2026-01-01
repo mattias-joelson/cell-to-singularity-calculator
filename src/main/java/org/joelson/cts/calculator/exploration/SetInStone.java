@@ -55,7 +55,7 @@ public class SetInStone {
 
         GardenBuilder builder = new GardenBuilder(garden, costMultiplier, productionMultiplier);
 
-        Generator mineral = builder.createGenerator("Mineral", minerals(150), 1.15f, minerals(2))
+        builder.createGenerator("Mineral", minerals(150), 1.15f, minerals(2))
                 //.addUpgradeRequirement("Earthly Origins")
 
                 .addUpgrade("Olivine", minerals(400), 1.5f)
@@ -112,10 +112,9 @@ public class SetInStone {
 
                 .addUpgrade("Coal", rocks(9e16), 101)
                 .addGeneratorRequirement("Sedimentary Rock")
-                .addUpgradeRequirement("Topaz")
-                .generator();
+                .addUpgradeRequirement("Topaz");
 
-        Generator igneousRock = builder.createGenerator("Igneous Rock", minerals(50_000), 1.15f, rocks(1))
+        builder.createGenerator("Igneous Rock", minerals(50_000), 1.15f, rocks(1))
                 .addUpgradeRequirement("Magma")
 
                 .addUpgrade("Dunite", rocks(1_000), 2)
@@ -138,10 +137,9 @@ public class SetInStone {
 
                 .addUpgrade("Obsidian", rocks(6e16), 35_001)
                 .addGeneratorRequirement("Igneous Rock")
-                .addUpgradeRequirement("Topaz")
-                .generator();
+                .addUpgradeRequirement("Topaz");
 
-        Generator sedimentaryRock = builder.createGenerator("Sedimentary Rock", minerals(1e7), 1.15f, rocks(250))
+        builder.createGenerator("Sedimentary Rock", minerals(1e7), 1.15f, rocks(250))
                 .addUpgradeRequirement("Sand")
 
                 .addUpgrade("Limestone", rocks(1e6), 1.75f)
@@ -168,10 +166,9 @@ public class SetInStone {
 
                 .addUpgrade("Natural Beauty", rocks(2.5e11), 2)
                 .addGeneratorRequirement("Sedimentary Rock")
-                .addUpgradeRequirement("Jade")
-                .generator();
+                .addUpgradeRequirement("Jade");
 
-        Generator metamorphicRock = builder.createGenerator("Metamorphic Rock", minerals(3e8), 1.15f, rocks(100_000))
+        builder.createGenerator("Metamorphic Rock", minerals(3e8), 1.15f, rocks(100_000))
                 .addGeneratorRequirement("Igneous Rock")
                 .addUpgradeRequirement("Rock Cycle")
                 .addGeneratorRequirement("Sedimentary Rock")
@@ -193,10 +190,9 @@ public class SetInStone {
 
                 .addUpgrade("Jade", crystals(1.2e17), 889)
                 .addGeneratorRequirement("Gem")
-                .addUpgradeRequirement("Lab-Grown Diamonds")
-                .generator();
+                .addUpgradeRequirement("Lab-Grown Diamonds");
 
-        Generator crystal = builder.createGenerator("Crystal", minerals(4e11), 1.15f, crystals(1))
+        builder.createGenerator("Crystal", minerals(4e11), 1.15f, crystals(1))
                 .addGeneratorRequirement("Mineral")
                 .addUpgradeRequirement("Fluorite")
 
@@ -229,10 +225,9 @@ public class SetInStone {
 
                 .addUpgrade("Lab-Grown Diamonds", crystals(1.2e15), 31)
                 .addGeneratorRequirement("Crystal")
-                .addUpgradeRequirement("Pyrite")
-                .generator();
+                .addUpgradeRequirement("Pyrite");
 
-        Generator gem = builder.createGenerator("Gem", crystals(3e12), 1.15f, crystals(1e8))
+        builder.createGenerator("Gem", crystals(3e12), 1.15f, crystals(1e8))
                 .addGeneratorRequirement("Crystal")
                 .addUpgradeRequirement("Diamond")
 
@@ -256,8 +251,7 @@ public class SetInStone {
 
                 .addUpgrade("Ruby", crystals(1.5e16), 6)
                 .addGeneratorRequirement("Gem")
-                .addUpgradeRequirement("Lab-Grown Diamonds")
-                .generator();
+                .addUpgradeRequirement("Lab-Grown Diamonds");
 
         builder.resolveRequirements();
 
