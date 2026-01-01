@@ -41,6 +41,15 @@ public class Garden {
         return generators;
     }
 
+    public Generator getGenerator(String name) {
+        for (Generator generator : generators) {
+            if (generator.getName().equals(name)) {
+                return generator;
+            }
+        }
+        throw new NullPointerException("No generator with name " + name + " found.");
+    }
+
     public List<Generator> getUnlockedGenerators(GardenState state) {
         return getUnlocked(generators, state);
     }
