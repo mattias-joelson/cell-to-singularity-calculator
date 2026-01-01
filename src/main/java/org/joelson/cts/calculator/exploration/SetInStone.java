@@ -46,17 +46,17 @@ public class SetInStone {
         return new Amount(CRYSTALS_CURRENCY, amount);
     }
 
-    private void setGeneratorCount(Generator generator, int count) {
+    private void setGeneratorCount(String generatorName, int count) {
+        Generator generator = GARDEN.getGenerator(generatorName);
         STATE.setGeneratorCount(generator, count);
     }
 
-    public void main() {
-
+    public static Garden createGarden(int costMultiplier, int productionMultiplier) {
         for (String currency : CURRENCIES) {
             GARDEN.addCurrency(currency);
         }
 
-        GardenBuilder builder = new GardenBuilder(GARDEN);
+        GardenBuilder builder = new GardenBuilder(GARDEN, costMultiplier, productionMultiplier);
 
         Generator mineral = builder.createGenerator("Mineral", minerals(150), 1.15f, minerals(2))
                 //.addUpgradeRequirement("Earthly Origins")
@@ -263,15 +263,22 @@ public class SetInStone {
                 .generator();
 
         builder.resolveRequirements();
+
+        return GARDEN;
+    }
+
+    void main() {
+
+        createGarden(1, 1);
         STATE.updateGeneratorStates(GARDEN);
 //    STATE.setBoost(4);
 
-        setGeneratorCount(gem, 1);
-        setGeneratorCount(crystal, 1);
-        setGeneratorCount(metamorphicRock, 1);
-        setGeneratorCount(sedimentaryRock, 1);
-        setGeneratorCount(igneousRock, 3);
-        setGeneratorCount(mineral, 75);
+        setGeneratorCount("Gem", 1);
+        setGeneratorCount("Crystal", 1);
+        setGeneratorCount("Metamorphic Rock", 1);
+        setGeneratorCount("Sedimentary Rock", 1);
+        setGeneratorCount("Igneous Rock", 3);
+        setGeneratorCount("Mineral", 75);
 
         String[] boughtUpdates = {
                 "Olivine",
