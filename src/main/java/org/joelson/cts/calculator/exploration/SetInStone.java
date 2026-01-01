@@ -273,66 +273,66 @@ public class SetInStone {
         STATE.updateGeneratorStates(GARDEN);
 //    STATE.setBoost(4);
 
-        setGeneratorCount("Gem", 1);
-        setGeneratorCount("Crystal", 1);
-        setGeneratorCount("Metamorphic Rock", 1);
-        setGeneratorCount("Sedimentary Rock", 1);
-        setGeneratorCount("Igneous Rock", 3);
-        setGeneratorCount("Mineral", 75);
+        setGeneratorCount("Gem", 0);
+        setGeneratorCount("Crystal", 0);
+        setGeneratorCount("Metamorphic Rock", 0);
+        setGeneratorCount("Sedimentary Rock", 0);
+        setGeneratorCount("Igneous Rock", 0);
+        setGeneratorCount("Mineral", 1);
 
         String[] boughtUpdates = {
-                "Olivine",
-                "Quartz",
-                "Feldspars",
-                "Magma",
-                "Tuff", // rocks
-                "Clay",
-                "Rock Cycle",
-                "Sand",
-                "Sandstone", // rocks
-                "Calcite",
-                "Granite", // rocks
-                "Gneiss", // rocks
-                "Fluorite",
-                "Pegmatite", // rocks
-                "Coal", // rocks
+//                "Olivine", // check
+//                "Quartz", // check
+//                "Feldspars", // check
+//                "Magma", // check
+//                "Tuff", // rocks // check
+//                "Clay", // check
+//                "Rock Cycle", // check
+//                "Sand", // check
+//                "Sandstone", // rocks // check
+//                "Calcite", // check
+//                "Granite", // rocks // check
+//                "Gneiss", // rocks // check
+//                "Fluorite", // check
+//                "Pegmatite", // rocks // check
+//                "Coal", // rocks // check
 
-                "Dunite",
-                "Basalt",
-                "Andesite",
-                "Diorite",
-                "Scoria",
-                "Obsidian",
+//                "Dunite", // check
+//                "Basalt", // check
+//                "Andesite", // check
+//                "Diorite", // check
+//                "Scoria", // check
+//                "Obsidian", // check
 
-                "Limestone",
-                "Siltstone",
-                "Coquina",
-                "Shale",
-                "Chalk",
-                "Flint",
-                "Natural Beauty",
+//                "Limestone", // check
+//                "Siltstone", // check
+//                "Coquina", // check
+//                "Shale", // check
+//                "Chalk", // check
+//                "Flint", // check
+//                "Natural Beauty", // check
 
-                "Marble",
-                "Slate",
-                "Schist",
-                "Anthracite",
-                "Jade", // crystal
+//                "Marble", // check
+//                "Slate", // check
+//                "Schist", // check
+//                "Anthracite", // check
+//                "Jade", // crystal // check
 
-                "Amethyst",
-                "Jasper",
-                "Fulgurite", // rocks
-                "Topaz",
-                "Lapis Lazuli", // rocks
-                "Diamond",
-                "Pyrite",
-                "Lab-Grown Diamonds",
+//                "Amethyst", // check
+//                "Jasper", // check
+//                "Fulgurite", // rocks // check
+//                "Topaz", // check
+//                "Lapis Lazuli", // rocks // check
+//                "Diamond", // check
+//                "Pyrite", // check
+//                "Lab-Grown Diamonds", // check
 
-                "Emerald",
-                "Aquamarine",
-                "Opal",
-                "Garnet",
-                "Sapphire",
-                "Ruby",
+//                "Emerald", // check
+//                "Aquamarine", // check
+//                "Opal", // check
+//                "Garnet", // check
+//                "Sapphire", // check
+//                "Ruby", // check
         };
 
         for (String upgradeName : boughtUpdates) {
