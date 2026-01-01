@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Cell to Singularity - Set In Stone</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        table, th, td { border: 1px solid black; }
+    </style>
+</head>
+<body>
+<h1 th:text="${garden.name}"/>
+<h2>Generator Productions</h2>
+<table>
+    <tr>
+        <th>Generator</th>
+        <th>Count</th>
+        <th>Cost of Next</th>
+        <th>Production of Each</th>
+        <th>Total Production</th>
+    </tr>
+    <tr th:each="generatorProduction : ${generatorProductions}">
+        <td th:text="${generatorProduction.name}"/>
+        <td th:text="${generatorProduction.count}"/>
+        <td th:text="${generatorProduction.next}"/>
+        <td th:text="${generatorProduction.each}"/>
+        <td th:text="${generatorProduction.total}"/>
+    </tr>
+</table>
+<h2>Total Production</h2>
+<table>
+    <tr th:each="totalProduction : ${totalProductions}">
+        <td th:text="${totalProduction}"/>
+    </tr>
+</table>
+</body>
+</html>
