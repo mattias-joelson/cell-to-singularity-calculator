@@ -25,14 +25,12 @@ import java.util.Set;
 public class SetInStone {
 
     private static final Garden GARDEN = new Garden("Set in Stone");
-    private static final GardenState STATE = new GardenState();
 
     private static final String MINERALS_CURRENCY = "Minerals";
     private static final String ROCKS_CURRENCY = "Rocks";
     private static final String CRYSTALS_CURRENCY = "Crystals";
 
-    private static final String[] CURRENCIES =
-            { MINERALS_CURRENCY, ROCKS_CURRENCY, CRYSTALS_CURRENCY };
+    private static final String[] CURRENCIES = { MINERALS_CURRENCY, ROCKS_CURRENCY, CRYSTALS_CURRENCY };
 
     private static Amount minerals(double amount) {
         return new Amount(MINERALS_CURRENCY, amount);
@@ -46,9 +44,9 @@ public class SetInStone {
         return new Amount(CRYSTALS_CURRENCY, amount);
     }
 
-    private void setGeneratorCount(String generatorName, int count) {
+    private void setGeneratorCount(GardenState state, String generatorName, int count) {
         Generator generator = GARDEN.getGenerator(generatorName);
-        STATE.setGeneratorCount(generator, count);
+        state.setGeneratorCount(generator, count);
     }
 
     public static Garden createGarden(int costMultiplier, int productionMultiplier) {
@@ -270,15 +268,16 @@ public class SetInStone {
     void main() {
 
         createGarden(1, 1);
-        STATE.updateGeneratorStates(GARDEN);
+        GardenState state = new GardenState();
+        state.updateGeneratorStates(GARDEN);
 //    STATE.setBoost(4);
 
-        setGeneratorCount("Gem", 0);
-        setGeneratorCount("Crystal", 0);
-        setGeneratorCount("Metamorphic Rock", 0);
-        setGeneratorCount("Sedimentary Rock", 0);
-        setGeneratorCount("Igneous Rock", 0);
-        setGeneratorCount("Mineral", 1);
+        setGeneratorCount(state, "Gem", 0);
+        setGeneratorCount(state, "Crystal", 0);
+        setGeneratorCount(state, "Metamorphic Rock", 0);
+        setGeneratorCount(state, "Sedimentary Rock", 0);
+        setGeneratorCount(state, "Igneous Rock", 0);
+        setGeneratorCount(state, "Mineral", 1);
 
         String[] boughtUpdates = {
 //                "Olivine", // check
@@ -336,11 +335,11 @@ public class SetInStone {
         };
 
         for (String upgradeName : boughtUpdates) {
-            STATE.setUpgradeBought(GARDEN.getUpgrade(upgradeName));
+            state.setUpgradeBought(GARDEN.getUpgrade(upgradeName));
         }
-        STATE.updateGeneratorStates(GARDEN);
+        state.updateGeneratorStates(GARDEN);
 
-        GardenState state = STATE.copy();
+        GardenState initialState = state.copy();
         List<String> actions = new ArrayList<>();
         printUnlocked(GARDEN, state, actions);
         candidateApproach(state, actions);
@@ -429,7 +428,7 @@ public class SetInStone {
             if (state.getGeneratorState(generator).count() == 0) {
                 actions.add(String.format(" *** unlocked generator %s: base cost %s, inc %.2f, base production %s",
                         generator.getName(), generator.getBaseCost().asString(), generator.getCompoundingCost(),
-                        generator.getBaseProduction().multiplyBy(STATE.getBoost()).asString()));
+                        generator.getBaseProduction().multiplyBy(state.getBoost()).asString()));
             }
         }
         for (Upgrade upgrade : garden.getUnlockedUpgrades(state)) {
