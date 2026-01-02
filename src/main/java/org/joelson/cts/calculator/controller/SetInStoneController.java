@@ -209,8 +209,7 @@ public class SetInStoneController {
 
     }
 
-    public record UpgradeModel(String name, float efficiency, String cost, boolean isBought,
-            boolean isUnlocked, String id) {
+    public record UpgradeModel(String name, float efficiency, String cost, boolean isBought, boolean isUnlocked) {
 
     }
 
@@ -221,16 +220,14 @@ public class SetInStoneController {
         List<GeneratorModel> generatorModels = new ArrayList<>();
         List<Generator> generators = garden.getGenerators().reversed();
         List<Upgrade> upgrades = garden.getUpgrades();
-        for (int g = 0; g < generators.size(); g += 1) {
-            Generator generator = generators.get(g);
+        for (Generator generator : generators) {
             List<UpgradeModel> upgradeModels = new ArrayList<>();
-            for (int u = 0; u < upgrades.size(); u += 1) {
-                Upgrade upgrade = upgrades.get(u);
+            for (Upgrade upgrade : upgrades) {
                 for (UpgradeEffect effect : upgrade.getEffects()) {
                     if (effect.generator() == generator) {
                         UpgradeModel upgradeModel = new UpgradeModel(upgrade.getName(), effect.efficiency(),
                                 upgrade.getCost().asString(), state.isUpgradeBought(upgrade),
-                                unlockedUpgrades.contains(upgrade.getName()), String.format("gen%d_upg%d", g, u));
+                                unlockedUpgrades.contains(upgrade.getName()));
                         upgradeModels.add(upgradeModel);
                     }
                 }
