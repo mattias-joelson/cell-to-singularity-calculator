@@ -47,7 +47,7 @@ public class Garden {
                 return generator;
             }
         }
-        throw new NullPointerException("No generator with name " + name + " found.");
+        return null;
     }
 
     public List<Generator> getUnlockedGenerators(GardenState state) {
