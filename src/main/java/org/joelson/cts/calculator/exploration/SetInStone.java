@@ -163,8 +163,9 @@ public class SetInStone {
                 .addUpgrade("Flint", rocks(2e15), 41)
                 .addGeneratorRequirement("Sedimentary Rock")
                 .addUpgradeRequirement("Amethyst")
+                .addUpgradeRequirement("Jasper")
 
-                .addUpgrade("Natural Beauty", rocks(2.5e11), 2)
+                .addUpgrade("Natural Beauty", rocks(2.5e21), 2)
                 .addGeneratorRequirement("Sedimentary Rock")
                 .addUpgradeRequirement("Jade");
 
@@ -211,7 +212,7 @@ public class SetInStone {
                 .addGeneratorRequirement("Crystal")
                 .addUpgradeRequirement("Jasper")
 
-                .addUpgrade("Lapis Lazuli", rocks(9e17), 30)
+                .addUpgrade("Lapis Lazuli", rocks(9e17), 31)
                 .addGeneratorRequirement("Metamorphic Rock")
                 .addUpgradeRequirement("Coal")
 
@@ -273,58 +274,58 @@ public class SetInStone {
         setGeneratorCount(garden, state, "Mineral", 1);
 
         String[] boughtUpdates = {
-//                "Olivine", // check
-//                "Quartz", // check
-//                "Feldspars", // check
-//                "Magma", // check
-//                "Tuff", // rocks // check
-//                "Clay", // check
-//                "Rock Cycle", // check
-//                "Sand", // check
-//                "Sandstone", // rocks // check
-//                "Calcite", // check
-//                "Granite", // rocks // check
-//                "Gneiss", // rocks // check
-//                "Fluorite", // check
-//                "Pegmatite", // rocks // check
-//                "Coal", // rocks // check
+//                "Olivine",
+//                "Quartz",
+//                "Feldspars",
+//                "Magma",
+//                "Tuff", // rocks
+//                "Clay",
+//                "Rock Cycle",
+//                "Sand",
+//                "Sandstone", // rocks
+//                "Calcite",
+//                "Granite", // rocks
+//                "Gneiss", // rocks
+//                "Fluorite",
+//                "Pegmatite", // rocks
+//                "Coal", // rocks
 
-//                "Dunite", // check
-//                "Basalt", // check
-//                "Andesite", // check
-//                "Diorite", // check
-//                "Scoria", // check
-//                "Obsidian", // check
+//                "Dunite",
+//                "Basalt",
+//                "Andesite",
+//                "Diorite",
+//                "Scoria",
+//                "Obsidian",
 
-//                "Limestone", // check
-//                "Siltstone", // check
-//                "Coquina", // check
-//                "Shale", // check
-//                "Chalk", // check
-//                "Flint", // check
-//                "Natural Beauty", // check
+//                "Limestone",
+//                "Siltstone",
+//                "Coquina",
+//                "Shale",
+//                "Chalk",
+//                "Flint",
+//                "Natural Beauty",
 
-//                "Marble", // check
-//                "Slate", // check
-//                "Schist", // check
-//                "Anthracite", // check
-//                "Jade", // crystal // check
+//                "Marble",
+//                "Slate",
+//                "Schist",
+//                "Anthracite",
+//                "Jade", // crystal
 
-//                "Amethyst", // check
-//                "Jasper", // check
-//                "Fulgurite", // rocks // check
-//                "Topaz", // check
-//                "Lapis Lazuli", // rocks // check
-//                "Diamond", // check
-//                "Pyrite", // check
-//                "Lab-Grown Diamonds", // check
+//                "Amethyst",
+//                "Jasper",
+//                "Fulgurite", // rocks
+//                "Topaz",
+//                "Lapis Lazuli", // rocks
+//                "Diamond",
+//                "Pyrite",
+//                "Lab-Grown Diamonds",
 
-//                "Emerald", // check
-//                "Aquamarine", // check
-//                "Opal", // check
-//                "Garnet", // check
-//                "Sapphire", // check
-//                "Ruby", // check
+//                "Emerald",
+//                "Aquamarine",
+//                "Opal",
+//                "Garnet",
+//                "Sapphire",
+//                "Ruby",
         };
 
         for (String upgradeName : boughtUpdates) {
