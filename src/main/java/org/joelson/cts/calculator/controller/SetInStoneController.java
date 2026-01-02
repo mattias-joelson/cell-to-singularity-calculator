@@ -112,9 +112,62 @@ public class SetInStoneController {
         return updateModel(model);
     }
 
-    @PostMapping("/setinstone")
+    @PostMapping("/setinstone-generator-update")
+    public String setInStoneGeneratorIncrement(Model model, String target, String value) {
+        Generator generator = validateGenerator(model, target);
+        if (generator != null) {
+            int count = Integer.parseInt(value);
+            state.setGeneratorCount(generator, count);
+        }
+
+        return updateModel(model);
+    }
+
+    @PostMapping("/setinstone-generator-increment")
+    public String setInStoneGeneratorIncrement(Model model, String target) {
+        Generator generator = validateGenerator(model, target);
+        if (generator != null) {
+            GeneratorState generatorState = state.getGeneratorState(generator);
+            int count = generatorState.count() + 1;
+            state.setGeneratorCount(generator, count);
+        }
+
+        return updateModel(model);
+    }
+
+    @PostMapping("/setinstone-generator-decrement")
+    public String setInStoneGeneratorDecrement(Model model, String target) {
+        Generator generator = validateGenerator(model, target);
+        if (generator != null) {
+            GeneratorState generatorState = state.getGeneratorState(generator);
+            int count = Math.max(generatorState.count() - 1, 0);
+            state.setGeneratorCount(generator, count);
+        }
+
+        return updateModel(model);
+    }
+
+    private Generator validateGenerator(Model model, String target) {
+        if (target == null) {
+            model.addAttribute("msg", "Generator name is null.");
+        } else {
+            String name = target.trim();
+            if (name.isEmpty()) {
+                model.addAttribute("msg", "Generator name is empty.");
+            } else {
+                Generator generator = garden.getGenerator(name);
+                if (generator == null) {
+                    model.addAttribute("msg", "There exists no generator \"" + name + "\".");
+                } else {
+                    return generator;
+                }
+            }
+        }
+        return null;
+    }
+
+    @PostMapping("/setinstone-upgrade")
     public String updateSetInStone(Model model, String target, String value) {
-        String msg = "";
         if (target == null) {
             model.addAttribute("msg", "Invalid target null.");
         } else {
@@ -122,21 +175,16 @@ public class SetInStoneController {
             if (name.isEmpty()) {
                 model.addAttribute("msg", "Invalid target \"\".");
             } else {
-                Generator generator = garden.getGenerator(name);
-                if (generator != null) {
-                    int count = Integer.parseInt(value);
-                    state.setGeneratorCount(generator, count);
+                Upgrade upgrade = garden.getUpgrade(name);
+                if (upgrade != null) {
+                    boolean bought = value != null && value.equals(upgrade.getName());
+                    state.setUpgradeBought(upgrade, bought);
                 } else {
-                    Upgrade upgrade = garden.getUpgrade(name);
-                    if (upgrade != null) {
-                        boolean bought = value != null && value.equals(upgrade.getName());
-                        state.setUpgradeBought(upgrade, bought);
-                    } else {
-                        model.addAttribute("msg", "No generator or upgrade names \"" + name + "\".");
-                    }
+                    model.addAttribute("msg", "There exists no upgrade \"" + name + "\".");
                 }
             }
         }
+
         return updateModel(model);
     }
 

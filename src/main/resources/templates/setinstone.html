@@ -36,14 +36,17 @@
 <table>
     <tr th:each="generatorModel : ${generatorModels}">
         <td>
-            <label for="count" th:text="${generatorModel.name}"/>
-            <input id="count" type="number" th:value="${generatorModel.count}"
-                   th:disabled="${!generatorModel.unlocked}"/>
-            <input type="submit" value="Set count" th:disabled="${!generatorModel.unlocked}">
-            <input type="submit" value="+1" th:disabled="${!generatorModel.unlocked}">
-            <input type="submit" value="-1" th:disabled="${!generatorModel.unlocked}">
+            <form action="#" th:action="@{/setinstone-generator-update}" method="post">
+                <input type="hidden" name="target" th:value="${generatorModel.name}">
+                <label for="count" th:text="${generatorModel.name}"/>
+                <input name="value" id="count" type="number" th:value="${generatorModel.count}"
+                       th:disabled="${!generatorModel.unlocked}"/>
+                <input type="submit" value="Set count" th:disabled="${!generatorModel.unlocked}">
+                <input type="submit" th:formaction="@{/setinstone-generator-increment}" value="+1" th:disabled="${!generatorModel.unlocked}">
+                <input type="submit" th:formaction="@{/setinstone-generator-decrement}" value="-1" th:disabled="${!generatorModel.unlocked}">
+            </form>
             <th:block th:each="upgradeModel : ${generatorModel.upgradeModels}">
-                <form action="#" th:action="@{/setinstone}" method="post">
+                <form action="#" th:action="@{/setinstone-upgrade}" method="post">
                     <input type="hidden" name="target" th:value="${upgradeModel.name}">
                     <input type="checkbox" id="upgrade" name="value" th:value="${upgradeModel.name}"
                            th:checked="${upgradeModel.isBought}" th:disabled="${!upgradeModel.unlocked}"
