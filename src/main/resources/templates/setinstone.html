@@ -32,5 +32,27 @@
         <td th:text="${totalProduction}"/>
     </tr>
 </table>
+<h2>Generators</h2>
+<table>
+    <tr th:each="generatorModel : ${generatorModels}">
+        <td>
+            <label for="count" th:text="${generatorModel.name}"/>
+            <input id="count" type="number" th:value="${generatorModel.count}"
+                   th:disabled="${!generatorModel.unlocked}"/>
+            <input type="submit" value="Set count" th:disabled="${!generatorModel.unlocked}">
+            <input type="submit" value="+1" th:disabled="${!generatorModel.unlocked}">
+            <input type="submit" value="-1" th:disabled="${!generatorModel.unlocked}">
+            <th:block th:each="upgradeModel : ${generatorModel.upgradeModels}">
+                <form action="#" th:action="@{/setinstone}" method="post">
+                    <input type="hidden" name="target" th:value="${upgradeModel.name}">
+                    <input type="checkbox" id="upgrade" name="value" th:value="${upgradeModel.name}"
+                           th:checked="${upgradeModel.isBought}" th:disabled="${!upgradeModel.unlocked}"
+                           onchange="this.form.submit()">
+                    <label for="upgrade" th:text="${upgradeModel.name}"/>
+                </form>
+            </th:block>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

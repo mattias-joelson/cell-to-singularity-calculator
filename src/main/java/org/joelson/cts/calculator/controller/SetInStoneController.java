@@ -7,6 +7,9 @@ import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
 import org.joelson.cts.calculator.model.GeneratorState;
 import org.joelson.cts.calculator.model.ImprovementCalculator;
+import org.joelson.cts.calculator.model.Unlockable;
+import org.joelson.cts.calculator.model.Upgrade;
+import org.joelson.cts.calculator.model.UpgradeEffect;
 import org.joelson.cts.calculator.util.DurationToolkit;
 import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Controller;
@@ -15,8 +18,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 public class SetInStoneController {
@@ -93,6 +98,7 @@ public class SetInStoneController {
         for (String upgradeName : boughtUpdates) {
             state.setUpgradeBought(garden.getUpgrade(upgradeName));
         }
+        state.updateGeneratorStates(garden);
     }
 
     private void setGeneratorCount(String generatorName, int count) {
@@ -107,7 +113,30 @@ public class SetInStoneController {
     }
 
     @PostMapping("/setinstone")
-    public String updateSetInStone(Model model) {
+    public String updateSetInStone(Model model, String target, String value) {
+        String msg = "";
+        if (target == null) {
+            model.addAttribute("msg", "Invalid target null.");
+        } else {
+            String name = target.trim();
+            if (name.isEmpty()) {
+                model.addAttribute("msg", "Invalid target \"\".");
+            } else {
+                Generator generator = garden.getGenerator(name);
+                if (generator != null) {
+                    int count = Integer.parseInt(value);
+                    state.setGeneratorCount(generator, count);
+                } else {
+                    Upgrade upgrade = garden.getUpgrade(name);
+                    if (upgrade != null) {
+                        boolean bought = value != null && value.equals(upgrade.getName());
+                        state.setUpgradeBought(upgrade, bought);
+                    } else {
+                        model.addAttribute("msg", "No generator or upgrade names \"" + name + "\".");
+                    }
+                }
+            }
+        }
         return updateModel(model);
     }
 
@@ -121,10 +150,8 @@ public class SetInStoneController {
         model.addAttribute("generatorProductions", generatorProductions);
         List<String> totalProductions = calculateTotalProductions(garden, state);
         model.addAttribute("totalProductions", totalProductions);
-
-        // all generators (unlocked)
-        // all upgrades (unlocked)
-
+        List<GeneratorModel> generatorModels = calculateModels(garden, state);
+        model.addAttribute("generatorModels", generatorModels);
 
         // actions
 
@@ -177,4 +204,59 @@ public class SetInStoneController {
         return productionAmounts;
     }
 
+    public record GeneratorModel(String name, int count, String cost, boolean isUnlocked,
+            UpgradeModel[] upgradeModels) {
+
+    }
+
+    public record UpgradeModel(String name, float efficiency, String cost, boolean isBought,
+            boolean isUnlocked, String id) {
+
+    }
+
+    private List<GeneratorModel> calculateModels(Garden garden, GardenState state) {
+        Set<String> unlockedGenerators = unlockedGenerators(garden, state);
+        Set<String> unlockedUpgrades = unlockedUpgrades(garden, state);
+
+        List<GeneratorModel> generatorModels = new ArrayList<>();
+        List<Generator> generators = garden.getGenerators().reversed();
+        List<Upgrade> upgrades = garden.getUpgrades();
+        for (int g = 0; g < generators.size(); g += 1) {
+            Generator generator = generators.get(g);
+            List<UpgradeModel> upgradeModels = new ArrayList<>();
+            for (int u = 0; u < upgrades.size(); u += 1) {
+                Upgrade upgrade = upgrades.get(u);
+                for (UpgradeEffect effect : upgrade.getEffects()) {
+                    if (effect.generator() == generator) {
+                        UpgradeModel upgradeModel = new UpgradeModel(upgrade.getName(), effect.efficiency(),
+                                upgrade.getCost().asString(), state.isUpgradeBought(upgrade),
+                                unlockedUpgrades.contains(upgrade.getName()), String.format("gen%d_upg%d", g, u));
+                        upgradeModels.add(upgradeModel);
+                    }
+                }
+            }
+            int count = state.getGeneratorState(generator).count();
+            GeneratorModel generatorModel = new GeneratorModel(generator.getName(), count,
+                    generator.getCost(count).asString(), unlockedGenerators.contains(generator.getName()),
+                    upgradeModels.toArray(new UpgradeModel[0]));
+            generatorModels.add(generatorModel);
+        }
+        return generatorModels;
+    }
+
+    private Set<String> unlockedGenerators(Garden garden, GardenState state) {
+        return unlockedNames(garden.getUnlockedGenerators(state));
+    }
+
+    private Set<String> unlockedUpgrades(Garden garden, GardenState state) {
+        return unlockedNames(garden.getUnlockedUpgrades(state));
+    }
+
+    private <T extends Unlockable> Set<String> unlockedNames(List<T> unlockables) {
+        Set<String> names = new HashSet<>(unlockables.size());
+        for (T unlockable : unlockables) {
+            names.add(unlockable.getName());
+        }
+        return names;
+    }
 }
