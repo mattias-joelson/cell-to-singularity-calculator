@@ -113,7 +113,7 @@ public class SetInStoneController {
     }
 
     @PostMapping("/setinstone-generator-update")
-    public String setInStoneGeneratorIncrement(Model model, String target, String value) {
+    public String setInStoneGeneratorUpdate(Model model, String target, String value) {
         Generator generator = validateGenerator(model, target);
         if (generator != null) {
             int count = Integer.parseInt(value);
@@ -201,7 +201,9 @@ public class SetInStoneController {
         List<GeneratorModel> generatorModels = calculateModels(garden, state);
         model.addAttribute("generatorModels", generatorModels);
 
-        // actions
+        List<String> actions = new ArrayList<>();
+        SetInStone.candidateApproach(garden, state.copy(), actions);
+        model.addAttribute("actions", actions.toArray(new String[0]));
 
         return "setinstone";
     }

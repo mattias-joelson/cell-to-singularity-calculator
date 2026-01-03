@@ -341,7 +341,7 @@ public class SetInStone {
         actions.forEach(System.out::println);
     }
 
-    private static void candidateApproach(Garden garden, GardenState state, List<String> actions) {
+    public static void candidateApproach(Garden garden, GardenState state, List<String> actions) {
         boolean possibleUnlock = false;
         for (int i = 0; i < 20 || !possibleUnlock; i += 1) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");

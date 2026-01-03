@@ -9,6 +9,7 @@
 </head>
 <body>
 <h1 th:text="${garden.name}"/>
+<a href="/setinstone">Reset</a>
 <h2>Generator Productions</h2>
 <table>
     <tr>
@@ -57,5 +58,12 @@
         </td>
     </tr>
 </table>
+<h2>Actions</h2>
+<table>
+    <tr th:each="action : ${actions}">
+        <td th:text="${action}"/>
+    </tr>
+</table>
+<p>end</p>
 </body>
 </html>
