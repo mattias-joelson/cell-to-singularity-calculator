@@ -5,65 +5,95 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style>
         table, th, td { border: 1px solid black; }
+
+        .container {
+          display: grid;
+          grid-template-areas:
+            'header header'
+            'main right';
+          background-color: #808080;
+          padding: 5px;
+          gap: 5px;
+        }
+
+        .container div {
+          background-color: #ffffff;
+          color:#000;
+          padding: 10px;
+        }
+
+        .itemStats {grid-area: header;}
+        .itemGenerators {grid-area: main;}
+        .itemActions {grid-area: right;}
     </style>
 </head>
 <body>
-<h1 th:text="${garden.name}"/>
-<a href="/setinstone">Reset</a>
-<h2>Generator Productions</h2>
-<table>
-    <tr>
-        <th>Generator</th>
-        <th>Count</th>
-        <th>Cost of Next</th>
-        <th>Production of Each</th>
-        <th>Total Production</th>
-    </tr>
-    <tr th:each="generatorProduction : ${generatorProductions}">
-        <td th:text="${generatorProduction.name}"/>
-        <td th:text="${generatorProduction.count}"/>
-        <td th:text="${generatorProduction.next}"/>
-        <td th:text="${generatorProduction.each}"/>
-        <td th:text="${generatorProduction.total}"/>
-    </tr>
-</table>
-<h2>Total Production</h2>
-<table>
-    <tr th:each="totalProduction : ${totalProductions}">
-        <td th:text="${totalProduction}"/>
-    </tr>
-</table>
-<h2>Generators</h2>
-<table>
-    <tr th:each="generatorModel : ${generatorModels}">
-        <td>
-            <form action="#" th:action="@{/setinstone-generator-update}" method="post">
-                <input type="hidden" name="target" th:value="${generatorModel.name}">
-                <label for="count" th:text="${generatorModel.name}"/>
-                <input name="value" id="count" type="number" th:value="${generatorModel.count}"
-                       th:disabled="${!generatorModel.unlocked}"/>
-                <input type="submit" value="Set count" th:disabled="${!generatorModel.unlocked}">
-                <input type="submit" th:formaction="@{/setinstone-generator-increment}" value="+1" th:disabled="${!generatorModel.unlocked}">
-                <input type="submit" th:formaction="@{/setinstone-generator-decrement}" value="-1" th:disabled="${!generatorModel.unlocked}">
-            </form>
-            <th:block th:each="upgradeModel : ${generatorModel.upgradeModels}">
-                <form action="#" th:action="@{/setinstone-upgrade}" method="post">
-                    <input type="hidden" name="target" th:value="${upgradeModel.name}">
-                    <input type="checkbox" id="upgrade" name="value" th:value="${upgradeModel.name}"
-                           th:checked="${upgradeModel.isBought}" th:disabled="${!upgradeModel.unlocked}"
-                           onchange="this.form.submit()">
-                    <label for="upgrade" th:text="${upgradeModel.name}"/>
-                </form>
-            </th:block>
-        </td>
-    </tr>
-</table>
-<h2>Actions</h2>
-<table>
-    <tr th:each="action : ${actions}">
-        <td th:text="${action}"/>
-    </tr>
-</table>
-<p>end</p>
+<div class="container">
+    <div class="itemStats">
+        <h1 th:text="${garden.name}"/>
+        <a href="/setinstone">Reset</a>
+        <h2>Generator Productions</h2>
+        <table>
+            <tr>
+                <th>Generator</th>
+                <th>Count</th>
+                <th>Cost of Next</th>
+                <th>Production of Each</th>
+                <th>Total Production</th>
+            </tr>
+            <tr th:each="generatorProduction : ${generatorProductions}">
+                <td th:text="${generatorProduction.name}"/>
+                <td th:text="${generatorProduction.count}"/>
+                <td th:text="${generatorProduction.next}"/>
+                <td th:text="${generatorProduction.each}"/>
+                <td th:text="${generatorProduction.total}"/>
+            </tr>
+        </table>
+        <h2>Total Production</h2>
+        <table>
+            <tr th:each="totalProduction : ${totalProductions}">
+                <td th:text="${totalProduction}"/>
+            </tr>
+        </table>
+    </div>
+    <div class="itemGenerators">
+        <h2>Generators</h2>
+        <table>
+            <tr th:each="generatorModel : ${generatorModels}">
+                <td>
+                    <form action="#" th:action="@{/setinstone-generator-update}" method="post">
+                        <input type="hidden" name="target" th:value="${generatorModel.name}">
+                        <label for="count" th:text="${generatorModel.name}"/>
+                        <input name="value" id="count" type="number" th:value="${generatorModel.count}"
+                               th:disabled="${!generatorModel.unlocked}"/>
+                        <input type="submit" value="Set count" th:disabled="${!generatorModel.unlocked}">
+                        <input type="submit" th:formaction="@{/setinstone-generator-increment}" value="+1"
+                               th:disabled="${!generatorModel.unlocked}">
+                        <input type="submit" th:formaction="@{/setinstone-generator-decrement}" value="-1"
+                               th:disabled="${!generatorModel.unlocked}">
+                    </form>
+                    <th:block th:each="upgradeModel : ${generatorModel.upgradeModels}">
+                        <form action="#" th:action="@{/setinstone-upgrade}" method="post">
+                            <input type="hidden" name="target" th:value="${upgradeModel.name}">
+                            <input type="checkbox" id="upgrade" name="value" th:value="${upgradeModel.name}"
+                                   th:checked="${upgradeModel.isBought}" th:disabled="${!upgradeModel.unlocked}"
+                                   onchange="this.form.submit()">
+                            <label for="upgrade" th:text="${upgradeModel.name}"/>
+                        </form>
+                    </th:block>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="itemActions">
+        <h2>Actions</h2>
+        <table>
+            <tr th:each="action : ${actions}">
+                <td th:text="${action}"/>
+            </tr>
+        </table>
+        <p>end</p>
+    </div>
+</div>
 </body>
 </html>
