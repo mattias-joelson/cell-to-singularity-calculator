@@ -17,6 +17,8 @@ import java.util.Map;
 
 public class GardenBuilder {
 
+    public static final float DEFAULT_COMPOUNDING_COST = 1.15f;
+
     private final Garden garden;
     private final Map<String, List<UnresolvedRequirement>> unresolvedRequirements;
     private final int costMultiplier;
@@ -33,12 +35,20 @@ public class GardenBuilder {
         this(garden, 1, 1);
     }
 
+    public GeneratorBuilder createGenerator(String name, Amount baseCost, Amount baseProduction) {
+        return createGenerator(name, baseCost, DEFAULT_COMPOUNDING_COST, baseProduction);
+    }
+
     public GeneratorBuilder createGenerator(
             String name, Amount baseCost, float compoundingCost, Amount baseProduction) {
         Generator generator = new Generator(name, baseCost.multiplyBy(costMultiplier), compoundingCost,
                 baseProduction.multiplyBy(productionMultiplier));
         garden.addGenerator(generator);
         return new GeneratorBuilder(this, generator);
+    }
+
+    public GeneratorBuilder createGenerator(String name, Amount baseCost, Amount baseProduction, int baseChargeTime) {
+        return createGenerator(name, baseCost, DEFAULT_COMPOUNDING_COST, baseProduction, baseChargeTime);
     }
 
     public GeneratorBuilder createGenerator(
