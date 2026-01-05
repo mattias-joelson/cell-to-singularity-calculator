@@ -198,6 +198,9 @@ public class SetInStoneController {
         model.addAttribute("generatorProductions", generatorProductions);
         List<String> totalProductions = calculateTotalProductions(garden, state);
         model.addAttribute("totalProductions", totalProductions);
+        List<GeneratorCost> generatorCosts = calculateGeneratorCosts(garden, state);
+        model.addAttribute("generatorCosts", generatorCosts);
+
         List<GeneratorModel> generatorModels = calculateModels(garden, state);
         model.addAttribute("generatorModels", generatorModels);
 
@@ -252,6 +255,66 @@ public class SetInStoneController {
             }
         }
         return productionAmounts;
+    }
+
+    public record GeneratorCost(String label, String cost, String ratio, String next) {
+
+    }
+
+    private static List<GeneratorCost> calculateGeneratorCosts(Garden garden, GardenState state) {
+        Generator crystalGenerator = garden.getGenerator("Crystal");
+        GeneratorState crystalGeneratorState = state.getGeneratorState(crystalGenerator);
+        Amount crystalCost = calculateGeneratorCost(crystalGenerator, crystalGeneratorState);
+
+        Generator metamorphicGenerator = garden.getGenerator("Metamorphic Rock");
+        GeneratorState metamorphicGeneratorState = state.getGeneratorState(metamorphicGenerator);
+        Amount metamorphicCost = calculateGeneratorCost(metamorphicGenerator, metamorphicGeneratorState);
+        Amount nextMetamorphic = metamorphicGenerator.getCost(metamorphicGeneratorState.count());
+        Generator sedimentaryGenerator = garden.getGenerator("Sedimentary Rock");
+        GeneratorState sedimentaryGeneratorState = state.getGeneratorState(sedimentaryGenerator);
+        Amount sedimentaryCost = calculateGeneratorCost(sedimentaryGenerator, sedimentaryGeneratorState);
+        Amount nextSedimentary = sedimentaryGenerator.getCost(sedimentaryGeneratorState.count());
+        Generator igneousGenerator = garden.getGenerator("Igneous Rock");
+        GeneratorState igneousGeneratorState = state.getGeneratorState(igneousGenerator);
+        Amount nextIgneous = igneousGenerator.getCost(igneousGeneratorState.count());
+        Amount igneousCost = calculateGeneratorCost(igneousGenerator, igneousGeneratorState);
+        Amount nextRock = new Amount(nextIgneous.currency(),
+                nextIgneous.amount() + nextSedimentary.amount() + nextMetamorphic.amount());
+
+        double rockCost = metamorphicCost.amount() + sedimentaryCost.amount() + igneousCost.amount();
+
+        Generator mineralGenerator = garden.getGenerator("Mineral");
+        GeneratorState mineralGeneratorState = state.getGeneratorState(mineralGenerator);
+        Amount mineralCost = calculateGeneratorCost(mineralGenerator, mineralGeneratorState);
+
+        double totalCost = crystalCost.amount() + rockCost + mineralCost.amount();
+
+        List<GeneratorCost> generatorCosts = new ArrayList<>();
+        generatorCosts.add(createGenaratorCost(crystalGenerator, crystalGeneratorState, crystalCost, totalCost));
+        generatorCosts.add(
+                createGenaratorCost(metamorphicGenerator, metamorphicGeneratorState, metamorphicCost, totalCost));
+        generatorCosts.add(
+                createGenaratorCost(sedimentaryGenerator, sedimentaryGeneratorState, sedimentaryCost, totalCost));
+        generatorCosts.add(createGenaratorCost(igneousGenerator, igneousGeneratorState, igneousCost, totalCost));
+        generatorCosts.add(new GeneratorCost("sum rocks", new Amount(metamorphicCost.currency(), rockCost).asString(),
+                String.format("%.3f %%", rockCost / totalCost), nextRock.asString()));
+        generatorCosts.add(createGenaratorCost(mineralGenerator, mineralGeneratorState, mineralCost, totalCost));
+        return generatorCosts;
+    }
+
+    private static Amount calculateGeneratorCost(Generator generator, GeneratorState generatorState) {
+        double sum = 0;
+        for (int lvl = 0; lvl < generatorState.count(); lvl += 1) {
+            sum += generator.getCost(lvl).amount();
+        }
+        return new Amount(generator.getBaseCost().currency(), sum);
+    }
+
+    private static GeneratorCost createGenaratorCost(
+            Generator generator, GeneratorState generatorState, Amount cost, double totalCost) {
+        return new GeneratorCost(String.format("Crystal (%d)", generatorState.count()), cost.asString(),
+                String.format("%.3f %%", cost.amount() / totalCost),
+                generator.getCost(generatorState.count()).asString());
     }
 
     public record GeneratorModel(String name, int count, String cost, boolean isUnlocked,

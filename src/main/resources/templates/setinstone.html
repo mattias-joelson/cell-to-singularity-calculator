@@ -35,6 +35,21 @@
                 <td th:text="${totalProduction}"/>
             </tr>
         </table>
+        <h2>Generator Costs</h2>
+        <table>
+            <tr>
+                <th>Generator</th>
+                <th>Total Cost</th>
+                <th>Ratio</th>
+                <th>Next Cost</th>
+            </tr>
+            <tr th:each="generatorCost : ${generatorCosts}">
+                <td th:text="${generatorCost.label}"/>
+                <td th:text="${generatorCost.cost}"/>
+                <td th:text="${generatorCost.ratio}"/>
+                <td th:text="${generatorCost.next}"/>
+            </tr>
+        </table>
     </div>
     <div class="itemGenerators">
         <h2>Generators</h2>
