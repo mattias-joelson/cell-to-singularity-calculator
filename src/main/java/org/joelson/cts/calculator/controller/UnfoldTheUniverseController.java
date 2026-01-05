@@ -1,6 +1,5 @@
 package org.joelson.cts.calculator.controller;
 
-import org.joelson.cts.calculator.exploration.SetInStone;
 import org.joelson.cts.calculator.exploration.UnfoldTheUniverse;
 import org.joelson.cts.calculator.model.Amount;
 import org.joelson.cts.calculator.model.Garden;
@@ -220,14 +219,15 @@ public class UnfoldTheUniverseController {
                 generatorProductions.add(new GeneratorProduction(generator.getName(), count,
                         generator.getCost(count).asString(),
                         generator.getBaseProduction().multiplyBy(efficiency).asString(), productionString,
-                        String.format("%.7f", production / (count * generator.getCost(count).amount()))));
+                        String.format("%.7f", (baseProduction * efficiency)
+                                / (cycleTime * generator.getCost(count).amount()))));
             } else {
                 double production = baseProduction * efficiency * count;
                 String productionString = String.format("%s", new Amount(currencyName, production).asString());
                 generatorProductions.add(new GeneratorProduction(generator.getName(), count,
                         generator.getCost(count).asString(),
                         generator.getBaseProduction().multiplyBy(efficiency).asString(), productionString,
-                        String.format("%.7f", production / (count * generator.getCost(count).amount()))));
+                        String.format("%.7f", (baseProduction * efficiency) / generator.getCost(count).amount())));
             }
         }
         return generatorProductions;
