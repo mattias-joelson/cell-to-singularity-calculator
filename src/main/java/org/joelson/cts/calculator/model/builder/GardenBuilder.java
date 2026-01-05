@@ -35,7 +35,10 @@ public class GardenBuilder {
 
     public GeneratorBuilder createGenerator(
             String name, Amount baseCost, float compoundingCost, Amount baseProduction) {
-        return createGenerator(name, baseCost, compoundingCost, baseProduction, Generator.UNTIMED_CHARGE_TIME);
+        Generator generator = new Generator(name, baseCost.multiplyBy(costMultiplier), compoundingCost,
+                baseProduction.multiplyBy(productionMultiplier));
+        garden.addGenerator(generator);
+        return new GeneratorBuilder(this, generator);
     }
 
     public GeneratorBuilder createGenerator(
@@ -81,20 +84,28 @@ public class GardenBuilder {
                 }
                 if (unresolvedRequirement instanceof UnresolvedGeneratorRequirement(Unlockable unlockable,
                         String generatorName, int count)) {
-                    Generator generator = (Generator) unlockableMap.get(generatorName);
-                    if (generator == null) {
+                    Unlockable possibleGenerator = unlockableMap.get(generatorName);
+                    if (possibleGenerator == null) {
                         throw new IllegalStateException(
-                                String.format("No generator \"%s\" exists for \"%s\".", generatorName,
+                                String.format("No unlockable \"%s\" exists for \"%s\".", generatorName,
                                         unlockable.getName()));
+                    }
+                    if (!(possibleGenerator instanceof Generator generator)) {
+                        throw new ClassCastException(String.format("\"%s\": \"%s\" is not a Generator.",
+                                unlockable.getName(), generatorName));
                     }
                     garden.addRequirement(unlockable, new GeneratorRequirement(generator, count));
                 } else if (unresolvedRequirement instanceof UnresolvedUpgradeRequirement(Unlockable unlockable,
                         String upgradeName)) {
-                    Upgrade upgrade = (Upgrade) unlockableMap.get(upgradeName);
-                    if (upgrade == null) {
+                    Unlockable possibleUpgrade = unlockableMap.get(upgradeName);
+                    if (possibleUpgrade == null) {
                         throw new IllegalStateException(
-                                String.format("No upgrade \"%s\" exists for \"%s\".", upgradeName,
+                                String.format("No unlockable \"%s\" exists for \"%s\".", upgradeName,
                                         unlockable.getName()));
+                    }
+                    if (!(possibleUpgrade instanceof Upgrade upgrade)) {
+                        throw new ClassCastException(String.format("\"%s\": \"%s\" is not an Upgrade.",
+                                unlockable.getName(), upgradeName));
                     }
                     garden.addRequirement(unlockable, new UpgradeRequirement(upgrade));
                 } else {

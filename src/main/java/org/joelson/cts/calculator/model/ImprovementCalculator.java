@@ -106,16 +106,22 @@ public class ImprovementCalculator {
             Map<String, Double> totalProduction, Map<CurrencyMapping, List<Improvement>> improvements,
             Improvement best, String description) {
         System.out.printf("Best: %s, (%s)%n", best.getName(), best.getMapping());
-        List<Improvement> candidates = new ArrayList<>();
+        String bestCostCurrency = best.getCost().currency();
+        List<Improvement> sameCandidates = new ArrayList<>();
+        List<Improvement> otherCandidates = new ArrayList<>();
         for (Map.Entry<CurrencyMapping, List<Improvement>> candidateEntry : improvements.entrySet()) {
-            if (!candidateEntry.getKey().to().equals(best.getCost().currency())) {
+            if (!candidateEntry.getKey().to().equals(bestCostCurrency)) {
                 continue;
             }
             for (Improvement candidate : candidateEntry.getValue()) {
                 if (candidate == best) {
                     continue;
                 }
-                candidates.add(candidate);
+                if (candidate.getMapping().from().equals(bestCostCurrency)) {
+                    sameCandidates.add(candidate);
+                } else {
+                    otherCandidates.add(candidate);
+                }
                 System.out.printf("  candidate %s%n", candidate.getName());
             }
         }
@@ -124,7 +130,7 @@ public class ImprovementCalculator {
         double shortestTime = bestTime;
         Improvement bestBefore = null;
         System.out.printf("%s: time %s%n", best.getName(), durationString(bestTime));
-        for (Improvement candidate : candidates) {
+        for (Improvement candidate : sameCandidates) {
             Amount candidateCost = candidate.getCost();
             double candidateTime = candidateCost.amount() / totalProduction.get(candidateCost.currency());
             Amount candidateIncrease = candidate.getIncrease();
@@ -136,6 +142,17 @@ public class ImprovementCalculator {
             if (totalTime < shortestTime) {
                 shortestTime = totalTime;
                 bestBefore = candidate;
+            }
+        }
+        for (Improvement improvement : otherCandidates) {
+            Amount improvementCost = improvement.getCost();
+            double improvementTime = improvementCost.amount() / totalProduction.get(improvementCost.currency());
+            if (improvementTime < bestTime) {
+                double timedProduction = improvementTime * totalProduction.get(bestCostCurrency);
+                double improvedBestTime = improvementTime + (bestCost.amount() - timedProduction)
+                        / (totalProduction.get(bestCostCurrency) + improvement.getIncrease().amount());
+                System.out.printf("Improved time for %s: %s when %s after %s.%n", best.getName(),
+                        durationString(improvedBestTime), improvement.getName(), durationString(improvementTime));
             }
         }
         if (bestBefore != null) {
@@ -171,120 +188,5 @@ public class ImprovementCalculator {
         return description + String.format("%s (%s) -> %s (%s) + %s (%s) = (%s); ",
                 best.getName(), durationString(bestTime), bestBefore.getName(), durationString(bestBeforeTime),
                 best.getName(), durationString(bestImprovedTime), durationString(totalTime));
-    }
-
-    public static void calculateImprovementNew(Garden garden, GardenState state) {
-        Map<String, Double> totalProduction = calculateProduction(garden, state);
-
-        for (String currency : garden.getCurrencies()) {
-            System.out.printf("Optimize for %s:%n", currency);
-
-            List<Improvement> currencyImprovements = new ArrayList<>();
-            List<Improvement> otherImprovements = new ArrayList<>();
-            for (Generator generator : garden.getGenerators().reversed()) {
-                if (generator.getBaseProduction().currency().equals(currency)) {
-                    GeneratorImprovement improvement = GeneratorImprovement.create(generator, state);
-                    if (generator.getBaseCost().currency().equals(currency)) {
-                        currencyImprovements.add(improvement);
-                    } else {
-                        otherImprovements.add(improvement);
-                    }
-                }
-            }
-            for (Upgrade upgrade : garden.getUpgrades()) {
-                if (!state.isUpgradeBought(upgrade)) {
-                    for (UpgradeEffect effect : upgrade.getEffects()) {
-                        if (effect.generator().getBaseProduction().currency().equals(currency)) {
-                            Improvement improvement = UpgradeImprovement.create(upgrade, state);
-                            if (improvement.getCost().currency().equals(currency)) {
-                                currencyImprovements.add(improvement);
-                            } else {
-                                otherImprovements.add(improvement);
-                            }
-                        }
-                    }
-                }
-            }
-            currencyImprovements.sort(Comparator.comparing(Improvement::getRatio));
-            otherImprovements.sort(Comparator.comparing(Improvement::getRatio));
-
-            for (Improvement improvement : currencyImprovements.reversed()) {
-                Amount cost = improvement.getCost();
-                double time = cost.amount() / totalProduction.get(cost.currency());
-                System.out.printf("%s: cost %s, increase %s, ratio %.7f, time %s%n",
-                        improvement.getName(), cost.asString(), improvement.getIncrease().asString(),
-                        improvement.getRatio(), durationString(time));
-            }
-            for (Improvement improvement : otherImprovements.reversed()) {
-                Amount cost = improvement.getCost();
-                double time = cost.amount() / totalProduction.get(cost.currency());
-                System.out.printf("%s: cost %s, increase %s, ratio %.7f, time %s%n",
-                        improvement.getName(), cost.asString(), improvement.getIncrease().asString(),
-                        improvement.getRatio(), durationString(time));
-            }
-
-            Improvement bestImprovement;
-            if (currencyImprovements.isEmpty()) {
-                continue;
-            } else if (currencyImprovements.size() == 1) {
-                bestImprovement = currencyImprovements.getLast();
-                System.out.printf("Only %s to %s improvement is %s.%n", currency, currency,
-                        bestImprovement.getName());
-            } else {
-                bestImprovement = currencyImprovements.getLast();
-                System.out.printf("Multiple candidates, choosing %s%n", bestImprovement.getName());
-
-                Amount bestCost = bestImprovement.getCost();
-                double bestTime = bestCost.amount() / totalProduction.get(bestCost.currency());
-                double shortestTime = bestTime;
-                Improvement otherImprovement = null;
-                System.out.printf("%s: time %s%n", bestImprovement.getName(), durationString(bestTime));
-
-                for (Improvement candidate : currencyImprovements) {
-                    if (candidate == bestImprovement) {
-                        continue;
-                    }
-                    Amount candidateCost = candidate.getCost();
-                    double candidateTime = candidateCost.amount() / totalProduction.get(candidateCost.currency());
-                    Amount candidateIncrease = candidate.getIncrease();
-                    double bestImprovedTime = bestCost.amount() / (totalProduction.get(candidateIncrease.currency())
-                            + candidateIncrease.amount());
-                    double totalTime = candidateTime + bestImprovedTime;
-                    System.out.printf("%s and %s: %s and %s = %s%n", candidate.getName(), bestImprovement.getName(),
-                            durationString(candidateTime), durationString(bestImprovedTime), durationString(totalTime));
-                    if (totalTime < shortestTime) {
-                        shortestTime = totalTime;
-                        otherImprovement = candidate;
-                    }
-                }
-                if (otherImprovement != null) {
-                    System.out.printf("Do %s before %s%n", otherImprovement.getName(), bestImprovement.getName());
-
-                }
-            }
-            double bestTime = timeUntil(bestImprovement, totalProduction);
-            System.out.printf("Time for %s: %s%n", bestImprovement.getName(), durationString(bestTime));
-
-            double timeLeft = bestTime;
-            List<Improvement> addedImprovements = new ArrayList<>();
-            for (Improvement improvement : otherImprovements.reversed()) {
-                double time = timeUntil(improvement, totalProduction);
-                System.out.printf("Time for %s: %s%n", improvement.getName(), durationString(time));
-                if (time < bestTime) {
-                    double timedProduction = time * totalProduction.get(currency);
-                    double improvedBestTime =
-                            time + (bestImprovement.getCost().amount() - timedProduction) / (totalProduction.get(
-                                    currency) + improvement.getIncrease().amount());
-                    System.out.printf("Improved time for %s: %s when %s after %s.%n", bestImprovement.getName(),
-                            durationString(improvedBestTime), improvement.getName(), durationString(time));
-                }
-            }
-
-            System.out.println();
-        }
-    }
-
-    private static double timeUntil(Improvement improvement, Map<String, Double> totalProduction) {
-        return improvement.getCost().amount() / totalProduction.get(improvement.getCost().currency());
     }
 }
