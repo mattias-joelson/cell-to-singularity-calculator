@@ -333,7 +333,6 @@ public class SetInStone {
         }
         state.updateGeneratorStates(garden);
 
-        GardenState initialState = state.copy();
         List<String> actions = new ArrayList<>();
         printUnlocked(garden, state, actions);
         candidateApproach(garden, state, actions);
