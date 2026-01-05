@@ -31,7 +31,7 @@ public class UnfoldTheUniverse {
         state.setGeneratorCount(generator, count);
     }
 
-    public static Garden createGarden(int costMultiplier, int productionMultiplier) {
+    public static Garden createGarden(int costMultiplier, float productionMultiplier) {
         Garden garden = new Garden("Unfold the Universe");
         garden.addCurrency(MIRRORS_CURRENCY);
         GardenBuilder builder = new GardenBuilder(garden, costMultiplier, productionMultiplier);

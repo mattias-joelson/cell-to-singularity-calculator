@@ -22,9 +22,9 @@ public class GardenBuilder {
     private final Garden garden;
     private final Map<String, List<UnresolvedRequirement>> unresolvedRequirements;
     private final int costMultiplier;
-    private final int productionMultiplier;
+    private final float productionMultiplier;
 
-    public GardenBuilder(Garden garden, int costMultiplier, int productionMultiplier) {
+    public GardenBuilder(Garden garden, int costMultiplier, float productionMultiplier) {
         this.garden = garden;
         this.unresolvedRequirements = new HashMap<>();
         this.costMultiplier = costMultiplier;
@@ -54,7 +54,7 @@ public class GardenBuilder {
     public GeneratorBuilder createGenerator(
             String name, Amount baseCost, float compoundingCost, Amount baseProduction, int baseChargeTime) {
         Generator generator = new Generator(name, baseCost.multiplyBy(costMultiplier), compoundingCost, baseProduction,
-                baseChargeTime / (float) productionMultiplier);
+                baseChargeTime / productionMultiplier);
         garden.addGenerator(generator);
         return new GeneratorBuilder(this, generator);
     }
