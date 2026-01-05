@@ -20,6 +20,7 @@
                 <th>Cost of Next</th>
                 <th>Production of Each</th>
                 <th>Total Production</th>
+                <th>Increase</th>
             </tr>
             <tr th:each="generatorProduction : ${generatorProductions}">
                 <td th:text="${generatorProduction.name}"/>
@@ -27,6 +28,7 @@
                 <td th:text="${generatorProduction.next}"/>
                 <td th:text="${generatorProduction.each}"/>
                 <td th:text="${generatorProduction.total}"/>
+                <td th:text="${generatorProduction.increase}"/>
             </tr>
         </table>
         <h2>Total Production</h2>

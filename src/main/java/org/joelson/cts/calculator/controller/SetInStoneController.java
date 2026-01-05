@@ -211,7 +211,7 @@ public class SetInStoneController {
         return "setinstone";
     }
 
-    public record GeneratorProduction(String name, int count, String next, String each, String total) {
+    public record GeneratorProduction(String name, int count, String next, String each, String total, String increase) {
 
     }
 
@@ -234,13 +234,15 @@ public class SetInStoneController {
                         new Amount(currencyName, production).asString());
                 generatorProductions.add(new GeneratorProduction(generator.getName(), count,
                         generator.getCost(count).asString(),
-                        generator.getBaseProduction().multiplyBy(efficiency).asString(), productionString));
+                        generator.getBaseProduction().multiplyBy(efficiency).asString(), productionString,
+                        String.format("%.7f", production / (count * generator.getCost(count).amount()))));
             } else {
                 double production = baseProduction * efficiency * count;
                 String productionString = String.format("%s", new Amount(currencyName, production).asString());
                 generatorProductions.add(new GeneratorProduction(generator.getName(), count,
                         generator.getCost(count).asString(),
-                        generator.getBaseProduction().multiplyBy(efficiency).asString(), productionString));
+                        generator.getBaseProduction().multiplyBy(efficiency).asString(), productionString,
+                        String.format("%.7f", production / (count * generator.getCost(count).amount()))));
             }
         }
         return generatorProductions;
