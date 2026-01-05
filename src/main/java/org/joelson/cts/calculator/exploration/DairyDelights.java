@@ -111,6 +111,4 @@ void main() {
     dairyDelightsState.setGeneratorCount(milkGenerator, 67);
 
     ImprovementCalculator.calculateImprovement(dairyDelights, dairyDelightsState);
-    System.out.println("==========================================");
-    ImprovementCalculator.calculateImprovementNew(dairyDelights, dairyDelightsState);
 }
