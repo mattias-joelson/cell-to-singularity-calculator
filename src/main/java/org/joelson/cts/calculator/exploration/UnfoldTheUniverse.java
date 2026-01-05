@@ -173,6 +173,7 @@ public class UnfoldTheUniverse {
         CurrencyMapping mapping = new CurrencyMapping(MIRRORS_CURRENCY, MIRRORS_CURRENCY);
 
         boolean possibleUnlock = false;
+        printUnlocked(garden, state, actions);
         for (int i = 0; i < 100 && !possibleUnlock; i += 1) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             ImprovementDescription improvementDescription =
@@ -271,7 +272,6 @@ public class UnfoldTheUniverse {
         state.updateGeneratorStates(garden);
 
         List<String> actions = new ArrayList<>();
-        printUnlocked(garden, state, actions);
         singleCurrencyApproach(garden, state, actions);
 
         actions.forEach(System.out::println);
