@@ -150,7 +150,7 @@ public class UnfoldTheUniverse {
                 .addUpgradeRequirement("Sunshield Unfolding")
                 .addUpgradeRequirement("Hexagonal Mirrors")
 
-                .addUpgrade("Secondary Mirrors", mirrors(4e13), 2)
+                .addUpgrade("Secondary Mirrors", mirrors(4e13), 3)
                 .addUpgradeRequirement("Mirrors Unfolding")
 
                 .addUpgrade("Primary Mirrors", mirrors(9e13), 3)
@@ -225,45 +225,45 @@ public class UnfoldTheUniverse {
         setGeneratorCount(garden, state, "Ground Telescope", 1);
 
         String[] boughtUpdates = {
-//                "Space Telescope", // check
-//                "Origins", // check
+//                "Space Telescope",
+//                "Origins",
 
-//                "Repair Mission", // check
-//                "Landmark Discoveries", // check
-//                "Hubble's Successor", // check
-//                "Distance from Earth", // check
-//                "Size Comparison", // check
+//                "Repair Mission",
+//                "Landmark Discoveries",
+//                "Hubble's Successor",
+//                "Distance from Earth",
+//                "Size Comparison",
 
-//                "James E. Webb", // check
-//                "Naming", // check
-//                "Mission Objectives", // check
-//                "Mission Length", // check
-//                "Cleared Name", // check
-//                "International Collaboration", // check
-//                "Budget", // check
-//                "Ground Support", // check
+//                "James E. Webb",
+//                "Naming",
+//                "Mission Objectives",
+//                "Mission Length",
+//                "Cleared Name",
+//                "International Collaboration",
+//                "Budget",
+//                "Ground Support",
 
-//                "Black Holes", // check
-//                "Galactic Birth", // check
-//                "Funding", // check
-//                "Seeking Exoplanets", // check
-//                "Averted Cancellation", // check
-//                "Delayed Launch", // check
+//                "Black Holes",
+//                "Galactic Birth",
+//                "Funding",
+//                "Seeking Exoplanets",
+//                "Averted Cancellation",
+//                "Delayed Launch",
 
-//                "Infrared Visibility", // check
-//                "Micro Shutters", // check
-//                "Dangerous Heat", // check
-//                "Sunshield", // check
-//                "Hexagonal Mirrors", // check
+//                "Infrared Visibility",
+//                "Micro Shutters",
+//                "Dangerous Heat",
+//                "Sunshield",
+//                "Hexagonal Mirrors",
 
-//                "Christmas Launch", // check
-//                "Journey to L2", // check
-//                "Sunshield Unfolding", // check
-//                "Mirrors Unfolding", // check
-//                "Secondary Mirrors", // check
-//                "Primary Mirrors", // check
-//                "Warm-Up Period", // check
-//                "First Images", // check
+//                "Christmas Launch",
+//                "Journey to L2",
+//                "Sunshield Unfolding",
+//                "Mirrors Unfolding",
+//                "Secondary Mirrors",
+//                "Primary Mirrors",
+//                "Warm-Up Period",
+//                "First Images",
         };
 
         for (String upgradeName : boughtUpdates) {
