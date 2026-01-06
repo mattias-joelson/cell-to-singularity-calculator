@@ -29,6 +29,15 @@ public class UnfoldTheUniverseController {
     private final Garden garden = UnfoldTheUniverse.createGarden(1, 1);
     private final GardenState state = new GardenState();
 
+    public Garden getGarden() {
+        initState();
+        return garden;
+    }
+
+    public GardenState getState() {
+        return state;
+    }
+
     private void initState() {
         state.setBoost(4);
         state.updateGeneratorStates(garden);
