@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>Cell to Singularity - Beautiful Complexity</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/setinstone.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="itemStats">
+        <h1 th:text="${garden.name}"/>
+        <a href="/beautifulcomplexity">Reset</a>
+        <h2>Generator Productions</h2>
+        <table>
+            <tr>
+                <th>Generator</th>
+                <th>Count</th>
+                <th>Cost of Next</th>
+                <th>Production of Each</th>
+                <th>Total Production</th>
+                <th>Increase</th>
+            </tr>
+            <tr th:each="generatorProduction : ${generatorProductions}">
+                <td th:text="${generatorProduction.name}"/>
+                <td th:text="${generatorProduction.count}"/>
+                <td th:text="${generatorProduction.next}"/>
+                <td th:text="${generatorProduction.each}"/>
+                <td th:text="${generatorProduction.total}"/>
+                <td th:text="${generatorProduction.increase}"/>
+            </tr>
+        </table>
+        <h2>Total Production</h2>
+        <table>
+            <tr th:each="totalProduction : ${totalProductions}">
+                <td th:text="${totalProduction}"/>
+            </tr>
+        </table>
+        <h2>Generator Costs</h2>
+        <table>
+            <tr>
+                <th>Generator</th>
+                <th>Total Cost</th>
+                <th>Ratio</th>
+                <th>Next Cost</th>
+            </tr>
+            <tr th:each="generatorCost : ${generatorCosts}">
+                <td th:text="${generatorCost.label}"/>
+                <td th:text="${generatorCost.cost}"/>
+                <td th:text="${generatorCost.ratio}"/>
+                <td th:text="${generatorCost.next}"/>
+            </tr>
+        </table>
+    </div>
+    <div class="itemGenerators">
+        <h2>Generators</h2>
+        <table>
+            <tr th:each="generatorModel : ${generatorModels}">
+                <td>
+                    <form action="#" th:action="@{/beautifulcomplexity-generator-update}" method="post">
+                        <input type="hidden" name="target" th:value="${generatorModel.name}">
+                        <label for="count" th:text="${generatorModel.name}"/>
+                        <input name="value" id="count" type="number" th:value="${generatorModel.count}"
+                               th:disabled="${!generatorModel.unlocked}"/>
+                        <input type="submit" value="Set count" th:disabled="${!generatorModel.unlocked}">
+                        <input type="submit" th:formaction="@{/beautifulcomplexity-generator-increment}" value="+1"
+                               th:disabled="${!generatorModel.unlocked}">
+                        <input type="submit" th:formaction="@{/beautifulcomplexity-generator-decrement}" value="-1"
+                               th:disabled="${!generatorModel.unlocked}">
+                    </form>
+                    <th:block th:each="upgradeModel : ${generatorModel.upgradeModels}">
+                        <form action="#" th:action="@{/beautifulcomplexity-upgrade}" method="post">
+                            <input type="hidden" name="target" th:value="${upgradeModel.name}">
+                            <input type="checkbox" id="upgrade" name="value" th:value="${upgradeModel.name}"
+                                   th:checked="${upgradeModel.isBought}" th:disabled="${!upgradeModel.unlocked}"
+                                   onchange="this.form.submit()">
+                            <label for="upgrade" th:text="${upgradeModel.name}"/>
+                        </form>
+                    </th:block>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="itemActions">
+        <h2>Actions</h2>
+        <table>
+            <tr th:each="action : ${actions}">
+                <td th:text="${action}"/>
+            </tr>
+        </table>
+        <p>end</p>
+    </div>
+</div>
+</body>
+</html>
