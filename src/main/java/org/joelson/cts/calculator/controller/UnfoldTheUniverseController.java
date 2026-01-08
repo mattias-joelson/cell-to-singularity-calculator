@@ -39,7 +39,7 @@ public class UnfoldTheUniverseController {
     }
 
     private void initState() {
-        state.setBoost(4);
+//        state.setBoost(4);
         state.updateGeneratorStates(garden);
 
         setGeneratorCount("Launch", 0);
