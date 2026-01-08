@@ -17,12 +17,14 @@ import java.util.Map;
 
 public class GardenBuilder {
 
+    public static final float DEFAULT_COMPOUNDING_COST = 1.15f;
+
     private final Garden garden;
     private final Map<String, List<UnresolvedRequirement>> unresolvedRequirements;
     private final int costMultiplier;
-    private final int productionMultiplier;
+    private final float productionMultiplier;
 
-    public GardenBuilder(Garden garden, int costMultiplier, int productionMultiplier) {
+    public GardenBuilder(Garden garden, int costMultiplier, float productionMultiplier) {
         this.garden = garden;
         this.unresolvedRequirements = new HashMap<>();
         this.costMultiplier = costMultiplier;
@@ -33,6 +35,10 @@ public class GardenBuilder {
         this(garden, 1, 1);
     }
 
+    public GeneratorBuilder createGenerator(String name, Amount baseCost, Amount baseProduction) {
+        return createGenerator(name, baseCost, DEFAULT_COMPOUNDING_COST, baseProduction);
+    }
+
     public GeneratorBuilder createGenerator(
             String name, Amount baseCost, float compoundingCost, Amount baseProduction) {
         Generator generator = new Generator(name, baseCost.multiplyBy(costMultiplier), compoundingCost,
@@ -41,10 +47,14 @@ public class GardenBuilder {
         return new GeneratorBuilder(this, generator);
     }
 
+    public GeneratorBuilder createGenerator(String name, Amount baseCost, Amount baseProduction, int baseChargeTime) {
+        return createGenerator(name, baseCost, DEFAULT_COMPOUNDING_COST, baseProduction, baseChargeTime);
+    }
+
     public GeneratorBuilder createGenerator(
             String name, Amount baseCost, float compoundingCost, Amount baseProduction, int baseChargeTime) {
         Generator generator = new Generator(name, baseCost.multiplyBy(costMultiplier), compoundingCost, baseProduction,
-                baseChargeTime / (float) productionMultiplier);
+                baseChargeTime / productionMultiplier);
         garden.addGenerator(generator);
         return new GeneratorBuilder(this, generator);
     }

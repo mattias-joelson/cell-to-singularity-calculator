@@ -1,6 +1,6 @@
 package org.joelson.cts.calculator.controller;
 
-import org.joelson.cts.calculator.exploration.SetInStone;
+import org.joelson.cts.calculator.exploration.UnfoldTheUniverse;
 import org.joelson.cts.calculator.model.Amount;
 import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.GardenState;
@@ -24,9 +24,9 @@ import java.util.Map;
 import java.util.Set;
 
 @Controller
-public class SetInStoneController {
+public class UnfoldTheUniverseController {
 
-    private final Garden garden = SetInStone.createGarden(1, 1);
+    private final Garden garden = UnfoldTheUniverse.createGarden(1, 1);
     private final GardenState state = new GardenState();
 
     public Garden getGarden() {
@@ -39,69 +39,56 @@ public class SetInStoneController {
     }
 
     private void initState() {
-        state.setBoost(4);
+//        state.setBoost(4);
         state.updateGeneratorStates(garden);
 
-        setGeneratorCount("Gem", 0);
-        setGeneratorCount("Crystal", 0);
-        setGeneratorCount("Metamorphic Rock", 0);
-        setGeneratorCount("Sedimentary Rock", 0);
-        setGeneratorCount("Igneous Rock", 0);
-        setGeneratorCount("Mineral", 1);
+        setGeneratorCount("Launch", 0);
+        setGeneratorCount("Construction", 0);
+        setGeneratorCount("Development", 0);
+        setGeneratorCount("James Webb Telescope", 0);
+        setGeneratorCount("Hubble Telescope", 0);
+        setGeneratorCount("Ground Telescope", 1);
 
         String[] boughtUpdates = {
-//                "Olivine",
-//                "Quartz",
-//                "Feldspars",
-//                "Magma",
-//                "Tuff", // rocks
-//                "Clay",
-//                "Rock Cycle",
-//                "Sand",
-//                "Sandstone", // rocks
-//                "Calcite",
-//                "Granite", // rocks
-//                "Gneiss", // rocks
-//                "Fluorite",
-//                "Pegmatite", // rocks
-//                "Coal", // rocks
+//                "Space Telescope", // check
+//                "Origins", // check
 
-//                "Dunite",
-//                "Basalt",
-//                "Andesite",
-//                "Diorite",
-//                "Scoria",
-//                "Obsidian",
+//                "Repair Mission", // check
+//                "Landmark Discoveries", // check
+//                "Hubble's Successor", // check
+//                "Distance from Earth", // check
+//                "Size Comparison", // check
 
-//                "Limestone",
-//                "Siltstone",
-//                "Coquina",
-//                "Shale",
-//                "Chalk",
-//                "Flint",
-//                "Natural Beauty",
+//                "James E. Webb", // check
+//                "Naming", // check
+//                "Mission Objectives", // check
+//                "Mission Length", // check
+//                "Cleared Name", // check
+//                "International Collaboration", // check
+//                "Budget", // check
+//                "Ground Support", // check
 
-//                "Marble",
-//                "Slate",
-//                "Schist",
-//                "Anthracite",
-//                "Jade", // crystal
+//                "Black Holes", // check
+//                "Galactic Birth", // check
+//                "Funding", // check
+//                "Seeking Exoplanets", // check
+//                "Averted Cancellation", // check
+//                "Delayed Launch", // check
 
-//                "Amethyst",
-//                "Jasper",
-//                "Fulgurite", // rocks
-//                "Topaz",
-//                "Lapis Lazuli", // rocks
-//                "Diamond",
-//                "Pyrite",
-//                "Lab-Grown Diamonds",
+//                "Infrared Visibility", // check
+//                "Micro Shutters", // check
+//                "Dangerous Heat", // check
+//                "Sunshield", // check
+//                "Hexagonal Mirrors", // check
 
-//                "Emerald",
-//                "Aquamarine",
-//                "Opal",
-//                "Garnet",
-//                "Sapphire",
-//                "Ruby",
+//                "Christmas Launch", // check
+//                "Journey to L2", // check
+//                "Sunshield Unfolding", // check
+//                "Mirrors Unfolding", // check
+//                "Secondary Mirrors", // check
+//                "Primary Mirrors", // check
+//                "Warm-Up Period", // check
+//                "First Images", // check
         };
 
         for (String upgradeName : boughtUpdates) {
@@ -115,14 +102,14 @@ public class SetInStoneController {
         state.setGeneratorCount(generator, count);
     }
 
-    @GetMapping("/setinstone")
-    public String setInStone(Model model) {
+    @GetMapping("/unfoldtheuniverse")
+    public String unfoldTheUniverse(Model model) {
         initState();
         return updateModel(model);
     }
 
-    @PostMapping("/setinstone-generator-update")
-    public String setInStoneGeneratorUpdate(Model model, String target, String value) {
+    @PostMapping("/unfoldtheuniverse-generator-update")
+    public String unfoldTheUniverseGeneratorUpdate(Model model, String target, String value) {
         Generator generator = validateGenerator(model, target);
         if (generator != null) {
             int count = Integer.parseInt(value);
@@ -132,8 +119,8 @@ public class SetInStoneController {
         return updateModel(model);
     }
 
-    @PostMapping("/setinstone-generator-increment")
-    public String setInStoneGeneratorIncrement(Model model, String target) {
+    @PostMapping("/unfoldtheuniverse-generator-increment")
+    public String unfoldTheUniverseGeneratorIncrement(Model model, String target) {
         Generator generator = validateGenerator(model, target);
         if (generator != null) {
             GeneratorState generatorState = state.getGeneratorState(generator);
@@ -144,8 +131,8 @@ public class SetInStoneController {
         return updateModel(model);
     }
 
-    @PostMapping("/setinstone-generator-decrement")
-    public String setInStoneGeneratorDecrement(Model model, String target) {
+    @PostMapping("/unfoldtheuniverse-generator-decrement")
+    public String unfoldTheUniverseGeneratorDecrement(Model model, String target) {
         Generator generator = validateGenerator(model, target);
         if (generator != null) {
             GeneratorState generatorState = state.getGeneratorState(generator);
@@ -175,8 +162,8 @@ public class SetInStoneController {
         return null;
     }
 
-    @PostMapping("/setinstone-upgrade")
-    public String updateSetInStone(Model model, String target, String value) {
+    @PostMapping("/unfoldtheuniverse-upgrade")
+    public String updateUnfoldTheUniverse(Model model, String target, String value) {
         if (target == null) {
             model.addAttribute("msg", "Invalid target null.");
         } else {
@@ -206,17 +193,15 @@ public class SetInStoneController {
         model.addAttribute("generatorProductions", generatorProductions);
         List<String> totalProductions = calculateTotalProductions(garden, state);
         model.addAttribute("totalProductions", totalProductions);
-        List<GeneratorCost> generatorCosts = calculateGeneratorCosts(garden, state);
-        model.addAttribute("generatorCosts", generatorCosts);
 
         List<GeneratorModel> generatorModels = calculateModels(garden, state);
         model.addAttribute("generatorModels", generatorModels);
 
         List<String> actions = new ArrayList<>();
-        SetInStone.candidateApproach(garden, state.copy(), actions);
+        UnfoldTheUniverse.singleCurrencyApproach(garden, state.copy(), actions);
         model.addAttribute("actions", actions.toArray(new String[0]));
 
-        return "setinstone";
+        return "unfoldtheuniverse";
     }
 
     public record GeneratorProduction(String name, int count, String next, String each, String total, String increase) {
@@ -243,14 +228,15 @@ public class SetInStoneController {
                 generatorProductions.add(new GeneratorProduction(generator.getName(), count,
                         generator.getCost(count).asString(),
                         generator.getBaseProduction().multiplyBy(efficiency).asString(), productionString,
-                        String.format("%.7f", production / (count * generator.getCost(count).amount()))));
+                        String.format("%.7f", (baseProduction * efficiency)
+                                / (cycleTime * generator.getCost(count).amount()))));
             } else {
                 double production = baseProduction * efficiency * count;
                 String productionString = String.format("%s", new Amount(currencyName, production).asString());
                 generatorProductions.add(new GeneratorProduction(generator.getName(), count,
                         generator.getCost(count).asString(),
                         generator.getBaseProduction().multiplyBy(efficiency).asString(), productionString,
-                        String.format("%.7f", production / (count * generator.getCost(count).amount()))));
+                        String.format("%.7f", (baseProduction * efficiency) / generator.getCost(count).amount())));
             }
         }
         return generatorProductions;
@@ -265,66 +251,6 @@ public class SetInStoneController {
             }
         }
         return productionAmounts;
-    }
-
-    public record GeneratorCost(String label, String cost, String ratio, String next) {
-
-    }
-
-    private static List<GeneratorCost> calculateGeneratorCosts(Garden garden, GardenState state) {
-        Generator crystalGenerator = garden.getGenerator("Crystal");
-        GeneratorState crystalGeneratorState = state.getGeneratorState(crystalGenerator);
-        Amount crystalCost = calculateGeneratorCost(crystalGenerator, crystalGeneratorState);
-
-        Generator metamorphicGenerator = garden.getGenerator("Metamorphic Rock");
-        GeneratorState metamorphicGeneratorState = state.getGeneratorState(metamorphicGenerator);
-        Amount metamorphicCost = calculateGeneratorCost(metamorphicGenerator, metamorphicGeneratorState);
-        Amount nextMetamorphic = metamorphicGenerator.getCost(metamorphicGeneratorState.count());
-        Generator sedimentaryGenerator = garden.getGenerator("Sedimentary Rock");
-        GeneratorState sedimentaryGeneratorState = state.getGeneratorState(sedimentaryGenerator);
-        Amount sedimentaryCost = calculateGeneratorCost(sedimentaryGenerator, sedimentaryGeneratorState);
-        Amount nextSedimentary = sedimentaryGenerator.getCost(sedimentaryGeneratorState.count());
-        Generator igneousGenerator = garden.getGenerator("Igneous Rock");
-        GeneratorState igneousGeneratorState = state.getGeneratorState(igneousGenerator);
-        Amount nextIgneous = igneousGenerator.getCost(igneousGeneratorState.count());
-        Amount igneousCost = calculateGeneratorCost(igneousGenerator, igneousGeneratorState);
-        Amount nextRock = new Amount(nextIgneous.currency(),
-                nextIgneous.amount() + nextSedimentary.amount() + nextMetamorphic.amount());
-
-        double rockCost = metamorphicCost.amount() + sedimentaryCost.amount() + igneousCost.amount();
-
-        Generator mineralGenerator = garden.getGenerator("Mineral");
-        GeneratorState mineralGeneratorState = state.getGeneratorState(mineralGenerator);
-        Amount mineralCost = calculateGeneratorCost(mineralGenerator, mineralGeneratorState);
-
-        double totalCost = crystalCost.amount() + rockCost + mineralCost.amount();
-
-        List<GeneratorCost> generatorCosts = new ArrayList<>();
-        generatorCosts.add(createGeneratorCost(crystalGenerator, crystalGeneratorState, crystalCost, totalCost));
-        generatorCosts.add(
-                createGeneratorCost(metamorphicGenerator, metamorphicGeneratorState, metamorphicCost, totalCost));
-        generatorCosts.add(
-                createGeneratorCost(sedimentaryGenerator, sedimentaryGeneratorState, sedimentaryCost, totalCost));
-        generatorCosts.add(createGeneratorCost(igneousGenerator, igneousGeneratorState, igneousCost, totalCost));
-        generatorCosts.add(new GeneratorCost("sum rocks", new Amount(metamorphicCost.currency(), rockCost).asString(),
-                String.format("%.3f %%", rockCost / totalCost), nextRock.asString()));
-        generatorCosts.add(createGeneratorCost(mineralGenerator, mineralGeneratorState, mineralCost, totalCost));
-        return generatorCosts;
-    }
-
-    private static Amount calculateGeneratorCost(Generator generator, GeneratorState generatorState) {
-        double sum = 0;
-        for (int lvl = 0; lvl < generatorState.count(); lvl += 1) {
-            sum += generator.getCost(lvl).amount();
-        }
-        return new Amount(generator.getBaseCost().currency(), sum);
-    }
-
-    private static GeneratorCost createGeneratorCost(
-            Generator generator, GeneratorState generatorState, Amount cost, double totalCost) {
-        return new GeneratorCost(String.format("Crystal (%d)", generatorState.count()), cost.asString(),
-                String.format("%.3f %%", cost.amount() / totalCost),
-                generator.getCost(generatorState.count()).asString());
     }
 
     public record GeneratorModel(String name, int count, String cost, boolean isUnlocked,
