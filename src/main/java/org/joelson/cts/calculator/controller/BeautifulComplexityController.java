@@ -222,8 +222,8 @@ public class BeautifulComplexityController {
         model.addAttribute("generatorProductions", generatorProductions);
         List<String> totalProductions = calculateTotalProductions(garden, state);
         model.addAttribute("totalProductions", totalProductions);
-//        List<GeneratorCost> generatorCosts = calculateGeneratorCosts(garden, state);
-//        model.addAttribute("generatorCosts", generatorCosts);
+        List<GeneratorCost> generatorCosts = calculateGeneratorCosts(garden, state);
+        model.addAttribute("generatorCosts", generatorCosts);
 
         List<GeneratorModel> generatorModels = calculateModels(garden, state);
         model.addAttribute("generatorModels", generatorModels);
@@ -288,44 +288,42 @@ public class BeautifulComplexityController {
     }
 
     private static List<GeneratorCost> calculateGeneratorCosts(Garden garden, GardenState state) {
-        Generator crystalGenerator = garden.getGenerator("Crystal");
-        GeneratorState crystalGeneratorState = state.getGeneratorState(crystalGenerator);
-        Amount crystalCost = calculateGeneratorCost(crystalGenerator, crystalGeneratorState);
+        Amount buildingCost = calculateGeneratorCost(garden, state, "Building Blocks");
+        Amount arithmeticCost = calculateGeneratorCost(garden, state, "Arithmetic");
+        Amount algebraCost = calculateGeneratorCost(garden, state, "Algebra");
+        Amount appliedCost = calculateGeneratorCost(garden, state, "Applied Math");
+        Amount geometryCost = calculateGeneratorCost(garden, state, "Geometry");
 
-        Generator metamorphicGenerator = garden.getGenerator("Metamorphic Rock");
-        GeneratorState metamorphicGeneratorState = state.getGeneratorState(metamorphicGenerator);
-        Amount metamorphicCost = calculateGeneratorCost(metamorphicGenerator, metamorphicGeneratorState);
-        Amount nextMetamorphic = metamorphicGenerator.getCost(metamorphicGeneratorState.count());
-        Generator sedimentaryGenerator = garden.getGenerator("Sedimentary Rock");
-        GeneratorState sedimentaryGeneratorState = state.getGeneratorState(sedimentaryGenerator);
-        Amount sedimentaryCost = calculateGeneratorCost(sedimentaryGenerator, sedimentaryGeneratorState);
-        Amount nextSedimentary = sedimentaryGenerator.getCost(sedimentaryGeneratorState.count());
-        Generator igneousGenerator = garden.getGenerator("Igneous Rock");
-        GeneratorState igneousGeneratorState = state.getGeneratorState(igneousGenerator);
-        Amount nextIgneous = igneousGenerator.getCost(igneousGeneratorState.count());
-        Amount igneousCost = calculateGeneratorCost(igneousGenerator, igneousGeneratorState);
-        Amount nextRock = new Amount(nextIgneous.currency(),
-                nextIgneous.amount() + nextSedimentary.amount() + nextMetamorphic.amount());
+        Amount realCost = buildingCost.plus(arithmeticCost).plus(algebraCost).plus(appliedCost).plus(geometryCost);
 
-        double rockCost = metamorphicCost.amount() + sedimentaryCost.amount() + igneousCost.amount();
+        Amount marvelsCost = calculateGeneratorCost(garden, state, "Marvels and Mysteries");
 
-        Generator mineralGenerator = garden.getGenerator("Mineral");
-        GeneratorState mineralGeneratorState = state.getGeneratorState(mineralGenerator);
-        Amount mineralCost = calculateGeneratorCost(mineralGenerator, mineralGeneratorState);
+        Amount totalRealCost = realCost.plus(marvelsCost);
 
-        double totalCost = crystalCost.amount() + rockCost + mineralCost.amount();
+        Amount calculusCost = calculateGeneratorCost(garden, state, "Calculus");
+        Amount discreteCost = calculateGeneratorCost(garden, state, "Discrete Math");
+        Amount totalImaginaryCost = calculusCost.plus(discreteCost);
 
         List<GeneratorCost> generatorCosts = new ArrayList<>();
-        generatorCosts.add(createGeneratorCost(crystalGenerator, crystalGeneratorState, crystalCost, totalCost));
-        generatorCosts.add(
-                createGeneratorCost(metamorphicGenerator, metamorphicGeneratorState, metamorphicCost, totalCost));
-        generatorCosts.add(
-                createGeneratorCost(sedimentaryGenerator, sedimentaryGeneratorState, sedimentaryCost, totalCost));
-        generatorCosts.add(createGeneratorCost(igneousGenerator, igneousGeneratorState, igneousCost, totalCost));
-        generatorCosts.add(new GeneratorCost("sum rocks", new Amount(metamorphicCost.currency(), rockCost).asString(),
-                String.format("%.3f %%", rockCost / totalCost), nextRock.asString()));
-        generatorCosts.add(createGeneratorCost(mineralGenerator, mineralGeneratorState, mineralCost, totalCost));
+        generatorCosts.add(createGeneratorCost(garden, state, "Discrete Math", discreteCost, totalImaginaryCost));
+        generatorCosts.add(createGeneratorCost(garden, state, "Calculus", calculusCost, totalImaginaryCost));
+        generatorCosts.add(new GeneratorCost("", "", "", ""));
+        generatorCosts.add(createGeneratorCost(garden, state, "Marvels and Mysteries", marvelsCost, totalRealCost));
+        generatorCosts.add(new GeneratorCost("sum real", realCost.asString(),
+                String.format("%.3f %%", 100 * realCost.amount() / totalRealCost.amount()), "<needed?>"));
+        generatorCosts.add(createGeneratorCost(garden, state, "Geometry", geometryCost, totalRealCost));
+        generatorCosts.add(createGeneratorCost(garden, state, "Applied Math", appliedCost, totalRealCost));
+        generatorCosts.add(createGeneratorCost(garden, state, "Algebra", algebraCost, totalRealCost));
+        generatorCosts.add(createGeneratorCost(garden, state, "Arithmetic", arithmeticCost, totalRealCost));
+        generatorCosts.add(createGeneratorCost(garden, state, "Building Blocks", buildingCost, totalRealCost));
+
         return generatorCosts;
+    }
+
+    private static Amount calculateGeneratorCost(Garden garden, GardenState state, String generatorName) {
+        Generator generator = garden.getGenerator(generatorName);
+        GeneratorState generatorState = state.getGeneratorState(generator);
+        return calculateGeneratorCost(generator, generatorState);
     }
 
     private static Amount calculateGeneratorCost(Generator generator, GeneratorState generatorState) {
@@ -337,9 +335,15 @@ public class BeautifulComplexityController {
     }
 
     private static GeneratorCost createGeneratorCost(
-            Generator generator, GeneratorState generatorState, Amount cost, double totalCost) {
-        return new GeneratorCost(String.format("Crystal (%d)", generatorState.count()), cost.asString(),
-                String.format("%.3f %%", cost.amount() / totalCost),
+            Garden garden, GardenState state, String generatorName, Amount cost, Amount totalCost) {
+        Generator generator = garden.getGenerator(generatorName);
+        return createGeneratorCost(generator, state.getGeneratorState(generator), cost, totalCost);
+    }
+
+    private static GeneratorCost createGeneratorCost(
+            Generator generator, GeneratorState generatorState, Amount cost, Amount totalCost) {
+        return new GeneratorCost(String.format("%s by %s (%d)", generator.getBaseCost().currency(), generator.getName(), generatorState.count()),
+                cost.asString(), String.format("%.3f %%", 100 * cost.amount() / totalCost.amount()),
                 generator.getCost(generatorState.count()).asString());
     }
 
