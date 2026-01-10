@@ -77,7 +77,7 @@ public class BeautifulComplexity {
                 .addUpgradeRequirement("Rationals")
                 .addUpgradeRequirement("Complex Numbers")
 
-                .addUpgrade("Proof by Contradiction", imaginary(2e12), 2.5e6f)
+                .addUpgrade("Proof by Contradiction", imaginary(2e12), 2_500_001)
                 .addUpgradeRequirement("Primes")
 
                 .addUpgrade("Proof by Induction", real(8e26), 501)
@@ -96,13 +96,13 @@ public class BeautifulComplexity {
                 .addUpgrade("Fibonacci Sequence", real(40_000), 2.12358f)
                 .addUpgradeRequirement("Addition")
 
-                .addUpgrade("Multiplication", real(1.5e7), 201)
+                .addUpgrade("Multiplication", real(1.5e7), 21)
                 .addUpgradeRequirement("Addition")
 
                 .addUpgrade("Factorials", real(1.5e8), 2)
                 .addUpgradeRequirement("Multiplication")
 
-                .addUpgrade("Exponentiation", real(8e9), 251)
+                .addUpgrade("Exponentiation", real(8e9), 26)
                 .addUpgradeRequirement("Multiplication")
                 .addUpgradeRequirement("Equations")
 
@@ -173,7 +173,7 @@ public class BeautifulComplexity {
                 .addUpgrade("Cryptography", real(5e22), 201)
                 .addUpgradeRequirement("Primes")
 
-                .addUpgrade("Arrow's Impossibility", real(1e29), 5e5f)
+                .addUpgrade("Arrow's Impossibility", real(1e29), 500_001)
                 .addGeneratorRequirement("Discrete Math")
                 .addUpgradeRequirement("Proof by Induction");
 
@@ -201,7 +201,7 @@ public class BeautifulComplexity {
                 .addGeneratorRequirement("Geometry")
                 .addUpgradeRequirement("Irrationals")
 
-                .addUpgrade("Non-Euclidean Geometry", real(8e25), 2e6f)
+                .addUpgrade("Non-Euclidean Geometry", real(8e25), 2_000_001)
                 .addGeneratorRequirement("Geometry")
                 .addUpgradeRequirement("Countable Infinity")
 
@@ -249,7 +249,7 @@ public class BeautifulComplexity {
                 .addUpgrade("Derivatives", imaginary(2e9), 2)
                 .addUpgradeRequirement("Limits")
 
-                .addUpgrade("e", imaginary(6e9), 2719.28f)
+                .addUpgrade("e", imaginary(6e9), 3.71828f)
                 .addUpgradeRequirement("Irrationals")
                 .addUpgradeRequirement("Limits")
 
@@ -275,7 +275,7 @@ public class BeautifulComplexity {
                 .addUpgrade("Number Theory", real(2e21), 16)
                 .addGeneratorRequirement("Discrete Math")
 
-                .addUpgrade("Primes", imaginary(5e11), 2358.11f)
+                .addUpgrade("Primes", imaginary(5e11), 3.35711f)
                 .addUpgradeRequirement("Number Theory")
 
                 .addUpgrade("Probability", real(3e23), 13)
@@ -308,72 +308,72 @@ public class BeautifulComplexity {
         setGeneratorCount(garden, state, "Building Blocks", 1);
 
         String[] boughtUpdates = {
-//                "Zero", // check
-//                "Negatives", // check
-//                "Integers", // check
-//                "Rationals", // check
-//                "Proofs", // check
-//                "Complex Numbers", // check
-//                "Irrationals", // check
-//                "Proof by Contradiction", // imaginary // check
-//                "Proof by Induction", // check
-//                "The Most Beautiful Equation", // imaginary // check
+//                "Zero",
+//                "Negatives",
+//                "Integers",
+//                "Rationals",
+//                "Proofs",
+//                "Complex Numbers",
+//                "Irrationals",
+//                "Proof by Contradiction", // imaginary
+//                "Proof by Induction",
+//                "The Most Beautiful Equation", // imaginary
 
-//                "Addition", // check
-//                "Fibonacci Sequence", // check
-//                "Multiplication", // check
-//                "Factorials", // check
-//                "Exponentiation", // check
-//                "Tetration", // check
+//                "Addition",
+//                "Fibonacci Sequence",
+//                "Multiplication",
+//                "Factorials",
+//                "Exponentiation",
+//                "Tetration",
 
-//                "Equations", // check
-//                "Variables", // check
-//                "Quadratic Formula", // check
-//                "Preserving Equality", // check
-//                "Proof that 0.999...=1", // check
-//                "Pascal's Triangle", // check
-//                "i", // check
-//                "Linear Algebra", // imaginary // check
+//                "Equations",
+//                "Variables",
+//                "Quadratic Formula",
+//                "Preserving Equality",
+//                "Proof that 0.999...=1",
+//                "Pascal's Triangle",
+//                "i",
+//                "Linear Algebra", // imaginary
 
-//                "Compounding Interest", // check
-//                "Math in Cells", // check
-//                "Voronoi Pattern", // check
-//                "Predator-Prey Model", // check
-//                "Integrals", // check
-//                "Statistics", // check
-//                "Normal Distribution", // check
-//                "Cryptography", // check
-//                "Arrow's Impossibility", // check
+//                "Compounding Interest",
+//                "Math in Cells",
+//                "Voronoi Pattern",
+//                "Predator-Prey Model",
+//                "Integrals",
+//                "Statistics",
+//                "Normal Distribution",
+//                "Cryptography",
+//                "Arrow's Impossibility",
 
-//                "Area", // check
-//                "Pythagorean Theorem", // check
-//                "Trigonometry", // check
-//                "Trigonometric Functions", // check
-//                "Fractals", // check
-//                "Pi", // check
-//                "Non-Euclidean Geometry", // check
-//                "Mobius Strip", // check
+//                "Area",
+//                "Pythagorean Theorem",
+//                "Trigonometry",
+//                "Trigonometric Functions",
+//                "Fractals",
+//                "Pi",
+//                "Non-Euclidean Geometry",
+//                "Mobius Strip",
 
-//                "Four-Color Theorem", // imaginary // check
-//                "Irrationalᴵʳʳᵃᵗᶦᵒⁿᵃˡ", // check
-//                "Fermat's Last Theorem", // check
-//                "Birthday Paradox", // check
-//                "Twin Prime Conjecture", // imaginary // check
-//                "Goldbach's Conjecture", // check
-//                "Gödel's Incompleteness", // imaginary // check
+//                "Four-Color Theorem", // imaginary
+//                "Irrationalᴵʳʳᵃᵗᶦᵒⁿᵃˡ",
+//                "Fermat's Last Theorem",
+//                "Birthday Paradox",
+//                "Twin Prime Conjecture", // imaginary
+//                "Goldbach's Conjecture",
+//                "Gödel's Incompleteness", // imaginary
 
-//                "Limits", // check
-//                "Derivatives", // check
-//                "e", // check
-//                "Infinity", // real // check
-//                "Countable Infinity", // check
-//                "Uncountable Infinity", // real // check
-//                "Complex Plane", // check
+//                "Limits",
+//                "Derivatives",
+//                "e",
+//                "Infinity", // real
+//                "Countable Infinity",
+//                "Uncountable Infinity", // real
+//                "Complex Plane",
 
-//                "Number Theory", // real // check
-//                "Primes", // check
-//                "Probability", // real // check
-//                "Game Theory", // check
+//                "Number Theory", // real
+//                "Primes",
+//                "Probability", // real
+//                "Game Theory",
         };
 
         for (String upgradeName : boughtUpdates) {
