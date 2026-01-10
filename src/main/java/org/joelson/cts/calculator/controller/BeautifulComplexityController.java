@@ -52,72 +52,72 @@ public class BeautifulComplexityController {
         setGeneratorCount("Building Blocks", 1);
 
         String[] boughtUpdates = {
-//                "Zero", // check
-//                "Negatives", // check
-//                "Integers", // check
-//                "Rationals", // check
-//                "Proofs", // check
-//                "Complex Numbers", // check
-//                "Irrationals", // check
-//                "Proof by Contradiction", // imaginary // check
-//                "Proof by Induction", // check
-//                "The Most Beautiful Equation", // imaginary // check
+//                "Zero",
+//                "Negatives",
+//                "Integers",
+//                "Rationals",
+//                "Proofs",
+//                "Complex Numbers",
+//                "Irrationals",
+//                "Proof by Contradiction", // imaginary
+//                "Proof by Induction",
+//                "The Most Beautiful Equation", // imaginary
 
-//                "Addition", // check
-//                "Fibonacci Sequence", // check
-//                "Multiplication", // check
-//                "Factorials", // check
-//                "Exponentiation", // check
-//                "Tetration", // check
+//                "Addition",
+//                "Fibonacci Sequence",
+//                "Multiplication",
+//                "Factorials",
+//                "Exponentiation",
+//                "Tetration",
 
-//                "Equations", // check
-//                "Variables", // check
-//                "Quadratic Formula", // check
-//                "Preserving Equality", // check
-//                "Proof that 0.999...=1", // check
-//                "Pascal's Triangle", // check
-//                "i", // check
-//                "Linear Algebra", // imaginary // check
+//                "Equations",
+//                "Variables",
+//                "Quadratic Formula",
+//                "Preserving Equality",
+//                "Proof that 0.999...=1",
+//                "Pascal's Triangle",
+//                "i",
+//                "Linear Algebra", // imaginary
 
-//                "Compounding Interest", // check
-//                "Math in Cells", // check
-//                "Voronoi Pattern", // check
-//                "Predator-Prey Model", // check
-//                "Integrals", // check
-//                "Statistics", // check
-//                "Normal Distribution", // check
-//                "Cryptography", // check
-//                "Arrow's Impossibility", // check
+//                "Compounding Interest",
+//                "Math in Cells",
+//                "Voronoi Pattern",
+//                "Predator-Prey Model",
+//                "Integrals",
+//                "Statistics",
+//                "Normal Distribution",
+//                "Cryptography",
+//                "Arrow's Impossibility",
 
-//                "Area", // check
-//                "Pythagorean Theorem", // check
-//                "Trigonometry", // check
-//                "Trigonometric Functions", // check
-//                "Fractals", // check
-//                "Pi", // check
-//                "Non-Euclidean Geometry", // check
-//                "Mobius Strip", // check
+//                "Area",
+//                "Pythagorean Theorem",
+//                "Trigonometry",
+//                "Trigonometric Functions",
+//                "Fractals",
+//                "Pi",
+//                "Non-Euclidean Geometry",
+//                "Mobius Strip",
 
-//                "Four-Color Theorem", // imaginary // check
-//                "Irrationalᴵʳʳᵃᵗᶦᵒⁿᵃˡ", // check
-//                "Fermat's Last Theorem", // check
-//                "Birthday Paradox", // check
-//                "Twin Prime Conjecture", // imaginary // check
-//                "Goldbach's Conjecture", // check
-//                "Gödel's Incompleteness", // imaginary // check
+//                "Four-Color Theorem",
+//                "Irrationalᴵʳʳᵃᵗᶦᵒⁿᵃˡ",
+//                "Fermat's Last Theorem",
+//                "Birthday Paradox",
+//                "Twin Prime Conjecture", // imaginary
+//                "Goldbach's Conjecture",
+//                "Gödel's Incompleteness", // imaginary
 
-//                "Limits", // check
-//                "Derivatives", // check
-//                "e", // check
-//                "Infinity", // real // check
-//                "Countable Infinity", // check
-//                "Uncountable Infinity", // real // check
-//                "Complex Plane", // check
+//                "Limits",
+//                "Derivatives",
+//                "e",
+//                "Infinity", // real
+//                "Countable Infinity",
+//                "Uncountable Infinity", // real
+//                "Complex Plane",
 
-//                "Number Theory", // real // check
-//                "Primes", // check
-//                "Probability", // real // check
-//                "Game Theory", // check
+//                "Number Theory", // real
+//                "Primes",
+//                "Probability", // real
+//                "Game Theory",
         };
 
         for (String upgradeName : boughtUpdates) {
