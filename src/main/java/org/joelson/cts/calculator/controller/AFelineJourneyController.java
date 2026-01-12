@@ -6,10 +6,12 @@ import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
 import org.joelson.cts.calculator.model.GeneratorState;
+import org.joelson.cts.calculator.model.Improvement;
 import org.joelson.cts.calculator.model.ImprovementCalculator;
 import org.joelson.cts.calculator.model.Unlockable;
 import org.joelson.cts.calculator.model.Upgrade;
 import org.joelson.cts.calculator.model.UpgradeEffect;
+import org.joelson.cts.calculator.model.UpgradeImprovement;
 import org.joelson.cts.calculator.util.DurationToolkit;
 import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Controller;
@@ -280,7 +282,7 @@ public class AFelineJourneyController {
 
     }
 
-    public record UpgradeModel(String name, float efficiency, String cost, boolean isBought, boolean isUnlocked) {
+    public record UpgradeModel(String name, String label, float efficiency, boolean isBought, boolean isUnlocked) {
 
     }
 
@@ -294,11 +296,20 @@ public class AFelineJourneyController {
         for (Generator generator : generators) {
             List<UpgradeModel> upgradeModels = new ArrayList<>();
             for (Upgrade upgrade : upgrades) {
+                boolean buyable = unlockedUpgrades.contains(upgrade.getName()) && !state.isUpgradeBought(upgrade);
                 for (UpgradeEffect effect : upgrade.getEffects()) {
                     if (effect.generator() == generator) {
-                        UpgradeModel upgradeModel = new UpgradeModel(upgrade.getName(), effect.efficiency(),
-                                upgrade.getCost().asString(), state.isUpgradeBought(upgrade),
-                                unlockedUpgrades.contains(upgrade.getName()));
+                        String label;
+                        if (buyable) {
+                            Improvement improvement = UpgradeImprovement.create(upgrade, state);
+                            label = String.format("%s: %.2f more efficient, cost %s, yields +%s, increase %.7f",
+                                    upgrade.getName(), effect.efficiency(), improvement.getCost().asString(),
+                                    improvement.getIncrease().asString(), improvement.getRatio());
+                        } else {
+                            label = upgrade.getName();
+                        }
+                        UpgradeModel upgradeModel = new UpgradeModel(upgrade.getName(), label, effect.efficiency(),
+                                state.isUpgradeBought(upgrade), unlockedUpgrades.contains(upgrade.getName()));
                         upgradeModels.add(upgradeModel);
                     }
                 }
