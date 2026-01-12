@@ -71,7 +71,7 @@ public class AFelineJourney {
                 .addUpgrade("Whiskers", paws(2.43e26), 501)
                 .addUpgradeRequirement("Obligate Carnivores");
 
-        builder.createGenerator("Panthera", paws(30000), 1.15f, paws(200))
+        builder.createGenerator("Panthera", paws(30000), paws(200))
                 .addUpgradeRequirement("Digitigrade")
 
                 .addUpgrade("Clouded Leopard", paws(80_000), 2)
@@ -95,7 +95,7 @@ public class AFelineJourney {
                 .addUpgrade("Jaguar", paws(9e19), 1e7f + 1)
                 .addUpgradeRequirement("Cougar");
 
-        builder.createGenerator("Bay Cat", paws(3e7), 1.15f, paws(40_000))
+        builder.createGenerator("Bay Cat", paws(3e7), paws(40_000))
                 .addUpgradeRequirement("Snow Leopard")
 
                 .addUpgrade("Bornean Bay Cat", paws(1e8), 1.5f)
@@ -107,7 +107,7 @@ public class AFelineJourney {
                 .addUpgrade("Marbled Cat", paws(9e8), 1.75f)
                 .addUpgradeRequirement("Asian Golden Cat");
 
-        builder.createGenerator("Caracal", paws(3e10), 1.15f, paws(1e7))
+        builder.createGenerator("Caracal", paws(3e10), paws(1e7))
                 .addUpgradeRequirement("Marbled Cat")
 
                 .addUpgrade("African Caracal", paws(9e10), 1.75f)
@@ -116,7 +116,7 @@ public class AFelineJourney {
                 .addUpgrade("Serval", paws(2.7e11), 2)
                 .addUpgradeRequirement("African Caracal");
 
-        builder.createGenerator("Ocelot", paws(1e13), 1.15f, paws(2.5e9))
+        builder.createGenerator("Ocelot", paws(1e13), paws(2.5e9))
                 .addUpgradeRequirement("Serval")
 
                 .addUpgrade("Ocelots", paws(7e13), 2.25f)
@@ -134,7 +134,7 @@ public class AFelineJourney {
                 .addUpgrade("Margay", paws(4e15), 2)
                 .addUpgradeRequirement("Kodkod");
 
-        builder.createGenerator("Lynx", paws(1e16), 1.15f, paws(8e11))
+        builder.createGenerator("Lynx", paws(1e16), paws(8e11))
                 .addUpgradeRequirement("Geoffroy's Cat")
 
                 .addUpgrade("Eurasian Lynx", paws(5e16), 3)
@@ -146,7 +146,7 @@ public class AFelineJourney {
                 .addUpgrade("Bobcat", paws(3e17), 2.5f)
                 .addUpgradeRequirement("Eurasian Lynx");
 
-        builder.createGenerator("Puma", paws(1e18), 1.15f, paws(1.5e14))
+        builder.createGenerator("Puma", paws(1e18), paws(1.5e14))
                 .addUpgradeRequirement("Iberian Lynx")
 
                 .addUpgrade("Cougar", paws(9e18), 2.75f)
@@ -155,7 +155,7 @@ public class AFelineJourney {
                 .addUpgrade("Cheetah", paws(3e19), 2)
                 .addGeneratorRequirement("Puma");
 
-        builder.createGenerator("Leopard Cat", paws(5e20), 1.15f, paws(4e16))
+        builder.createGenerator("Leopard Cat", paws(5e20), paws(4e16))
                 .addUpgradeRequirement("Cheetah")
 
                 .addUpgrade("Leopard Cats", paws(1e21), 2.25f)
@@ -177,7 +177,7 @@ public class AFelineJourney {
                 .addGeneratorRequirement("Leopard Cat")
                 .addUpgradeRequirement("Jungle Cat");
 
-        builder.createGenerator("Felis", paws(5e23), 1.15f, paws(2e19))
+        builder.createGenerator("Felis", paws(5e23), paws(2e19))
                 .addUpgradeRequirement("Flat-Headed Cat")
 
                 .addUpgrade("Jungle Cat", paws(1e24), 3.5f)
@@ -192,7 +192,7 @@ public class AFelineJourney {
                 .addUpgrade("African Wildcat", paws(8.1e25), 3.5f)
                 .addUpgradeRequirement("Sand Cat");
 
-        builder.createGenerator("House Cats", paws(3e26), 1.15f, paws(5e21))
+        builder.createGenerator("House Cats", paws(3e26), paws(5e21))
                 .addUpgradeRequirement("Pallas' Cat")
                 .addUpgradeRequirement("African Wildcat")
 
