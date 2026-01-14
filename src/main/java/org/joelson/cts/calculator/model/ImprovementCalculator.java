@@ -127,10 +127,9 @@ public class ImprovementCalculator {
         }
         Amount bestCost = best.getCost();
         double bestTime = bestCost.amount() / totalProduction.get(bestCost.currency());
-        double shortestTime = bestTime;
         Improvement bestBefore = null;
         System.out.printf("%s: time %s%n", best.getName(), durationString(bestTime));
-        for (Improvement candidate : sameCandidates) {
+        for (Improvement candidate : sameCandidates.reversed()) {
             Amount candidateCost = candidate.getCost();
             double candidateTime = candidateCost.amount() / totalProduction.get(candidateCost.currency());
             Amount candidateIncrease = candidate.getIncrease();
@@ -139,9 +138,9 @@ public class ImprovementCalculator {
             double totalTime = candidateTime + bestImprovedTime;
             System.out.printf("%s and %s: %s and %s = %s%n", candidate.getName(), best.getName(),
                     durationString(candidateTime), durationString(bestImprovedTime), durationString(totalTime));
-            if (totalTime < shortestTime) {
-                shortestTime = totalTime;
+            if (totalTime < bestTime) {
                 bestBefore = candidate;
+                break;
             }
         }
         for (Improvement improvement : otherCandidates) {
