@@ -65,7 +65,7 @@ public class GardenBuilder {
     }
 
     UpgradeBuilder addGeneratorUpgrade(
-            Generator generator, String name, Amount cost, float efficiency, int speed) {
+            Generator generator, String name, Amount cost, float efficiency, float speed) {
         Upgrade upgrade = new Upgrade(name, cost.multiplyBy(costMultiplier));
         upgrade.addEffect(new UpgradeEffect(generator, efficiency, speed));
         garden.addUpgrade(upgrade);
