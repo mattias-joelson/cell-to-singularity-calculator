@@ -220,15 +220,13 @@ public class AFelineJourney {
         GardenState state = gardenState.copy();
         CurrencyMapping mapping = new CurrencyMapping(CURRENCY, CURRENCY);
 
-        boolean possibleUnlock = false;
         printUnlocked(garden, state, actions);
-        for (int i = 0; i < 100 && !possibleUnlock; i += 1) {
+        for (int i = 0; i < 100; i += 1) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             ImprovementDescription improvementDescription =
                     ImprovementCalculator.calculateImprovement(garden, state).get(mapping);
             System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
             System.out.println();
-            possibleUnlock = false;
             Improvement improvement = improvementDescription.improvement();
             if (improvement instanceof GeneratorImprovement(Generator generator, GeneratorState generatorState)) {
                 int count = generatorState.count();
@@ -236,10 +234,10 @@ public class AFelineJourney {
                         i + 1, generator.getName(), count, count + 1, improvementDescription.description()));
                 state.setGeneratorCount(generator, count + 1);
                 if (count == 0) {
-                    if (i >= 20) {
-                        possibleUnlock = true;
-                    }
                     printUnlocked(garden, state, actions);
+                    if (i >= 20) {
+                        break;
+                    }
                 }
             } else if (improvement instanceof UpgradeImprovement upgradeImprovement) {
                 Upgrade upgrade = upgradeImprovement.upgrade();
@@ -250,7 +248,7 @@ public class AFelineJourney {
                 state.updateGeneratorStates(garden);
                 printUnlocked(garden, state, actions);
                 if (i >= 20) {
-                    possibleUnlock = true;
+                    break;
                 }
             } else {
                 throw new NullPointerException();
