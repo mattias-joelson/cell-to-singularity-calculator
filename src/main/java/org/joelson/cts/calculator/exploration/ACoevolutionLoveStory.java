@@ -311,7 +311,7 @@ private static void printUnlocked(Garden garden, GardenState state, List<String>
     for (Upgrade upgrade : garden.getUnlockedUpgrades(state)) {
         if (!state.isUpgradeBought(upgrade)) {
             for (UpgradeEffect effect : upgrade.getEffects()) {
-                actions.add(String.format(" *** unlocked upgrade %s: %s efficiency %.2f, speed %,d, cost %s",
+                actions.add(String.format(" *** unlocked upgrade %s: %s efficiency %.2f, speed %.2f, cost %s",
                         upgrade.getName(), effect.generator().getName(), effect.efficiency(), effect.speed(),
                         upgrade.getCost().asString()));
             }

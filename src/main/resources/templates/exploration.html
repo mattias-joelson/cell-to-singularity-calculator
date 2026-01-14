@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
-    <title>Cell to Singularity - Set In Stone</title>
+    <title th:text="|Cell to Singularity - ${production.name}|"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="/css/setinstone.css">
 </head>
@@ -39,6 +39,20 @@
                 <td th:text="${generatorProduction.each}"/>
                 <td th:text="${generatorProduction.total}"/>
                 <td th:text="${generatorProduction.ratio}"/>
+            </tr>
+        </table>
+    </div>
+    <div class="itemGenerators">
+        <h2>Generators</h2>
+        <table>
+            <tr th:each="generatorProduction : ${production.generatorProductions}">
+                <td>
+                    Hi
+                    <form>
+                        <label for="count" th:text="${generatorProduction.name}"/>
+                        <input type=number name="value" id="count">
+                    </form>
+                </td>
             </tr>
         </table>
     </div>

@@ -28,7 +28,7 @@ import java.util.Set;
 @Controller
 public class AFelineJourneyController {
 
-    private final Garden garden = AFelineJourney.createGarden(1, 1);
+    private final Garden garden = AFelineJourney.createGarden(4, 2 * 1.3f);
     private final GardenState state = new GardenState();
 
     public Garden getGarden() {
@@ -49,39 +49,39 @@ public class AFelineJourneyController {
         setGeneratorCount("Leopard Cat", 0);
         setGeneratorCount("Puma", 0);
         setGeneratorCount("Lynx", 0);
-        setGeneratorCount("Ocelot", 0);
-        setGeneratorCount("Caracal", 0);
-        setGeneratorCount("Bay Cat", 0);
-        setGeneratorCount("Panthera", 0);
-        setGeneratorCount("Felidae", 1);
+        setGeneratorCount("Ocelot", 4);
+        setGeneratorCount("Caracal", 15);
+        setGeneratorCount("Bay Cat", 28);
+        setGeneratorCount("Panthera", 104);
+        setGeneratorCount("Felidae", 205);
 
         String[] boughtUpdates = {
-//                "Pantherinae",
-//                "Felinae",
-//                "Digitigrade",
-//                "Claws",
-//                "Acute Senses",
-//                "Flexibility",
+                "Pantherinae",
+                "Felinae",
+                "Digitigrade",
+                "Claws",
+                "Acute Senses",
+                "Flexibility",
 //                "Patterned Coats",
 //                "Rough Tongue",
 //                "Short Skull",
 //                "Obligate Carnivores",
 //                "Whiskers",
 
-//                "Clouded Leopard",
-//                "Tiger",
-//                "Leopard",
-//                "Snow Leopard",
-//                "Sunda Clouded Leopard",
-//                "Lion",
+                "Clouded Leopard",
+                "Tiger",
+                "Leopard",
+                "Snow Leopard",
+                "Sunda Clouded Leopard",
+                "Lion",
 //                "Jaguar",
 
-//                "Bornean Bay Cat",
-//                "Asian Golden Cat",
-//                "Marbled Cat",
+                "Bornean Bay Cat",
+                "Asian Golden Cat",
+                "Marbled Cat",
 
-//                "African Caracal",
-//                "Serval",
+                "African Caracal",
+                "Serval",
 
 //                "Ocelots",
 //                "Kodkod",
@@ -187,7 +187,7 @@ public class AFelineJourneyController {
     }
 
     @PostMapping("/felinejourney-upgrade")
-    public String updateUnfoldTheUniverse(Model model, String target, String value) {
+    public String felineJourneyUpgrade(Model model, String target, String value) {
         if (target == null) {
             model.addAttribute("msg", "Invalid target null.");
         } else {
