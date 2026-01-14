@@ -42,20 +42,6 @@
             </tr>
         </table>
     </div>
-    <div class="itemGenerators">
-        <h2>Generators</h2>
-        <table>
-            <tr th:each="generatorProduction : ${production.generatorProductions}">
-                <td>
-                    Hi
-                    <form>
-                        <label for="count" th:text="${generatorProduction.name}"/>
-                        <input type=number name="value" id="count">
-                    </form>
-                </td>
-            </tr>
-        </table>
-    </div>
 </div>
 </body>
 </html>

@@ -49,39 +49,39 @@ public class AFelineJourneyController {
         setGeneratorCount("Leopard Cat", 0);
         setGeneratorCount("Puma", 0);
         setGeneratorCount("Lynx", 0);
-        setGeneratorCount("Ocelot", 4);
-        setGeneratorCount("Caracal", 15);
-        setGeneratorCount("Bay Cat", 28);
-        setGeneratorCount("Panthera", 104);
-        setGeneratorCount("Felidae", 205);
+        setGeneratorCount("Ocelot", 0);
+        setGeneratorCount("Caracal", 0);
+        setGeneratorCount("Bay Cat", 0);
+        setGeneratorCount("Panthera", 0);
+        setGeneratorCount("Felidae", 1);
 
         String[] boughtUpdates = {
-                "Pantherinae",
-                "Felinae",
-                "Digitigrade",
-                "Claws",
-                "Acute Senses",
-                "Flexibility",
+//                "Pantherinae",
+//                "Felinae",
+//                "Digitigrade",
+//                "Claws",
+//                "Acute Senses",
+//                "Flexibility",
 //                "Patterned Coats",
 //                "Rough Tongue",
 //                "Short Skull",
 //                "Obligate Carnivores",
 //                "Whiskers",
 
-                "Clouded Leopard",
-                "Tiger",
-                "Leopard",
-                "Snow Leopard",
-                "Sunda Clouded Leopard",
-                "Lion",
+//                "Clouded Leopard",
+//                "Tiger",
+//                "Leopard",
+//                "Snow Leopard",
+//                "Sunda Clouded Leopard",
+//                "Lion",
 //                "Jaguar",
 
-                "Bornean Bay Cat",
-                "Asian Golden Cat",
-                "Marbled Cat",
+//                "Bornean Bay Cat",
+//                "Asian Golden Cat",
+//                "Marbled Cat",
 
-                "African Caracal",
-                "Serval",
+//                "African Caracal",
+//                "Serval",
 
 //                "Ocelots",
 //                "Kodkod",
