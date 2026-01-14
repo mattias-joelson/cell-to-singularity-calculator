@@ -28,7 +28,7 @@ import java.util.Set;
 @Controller
 public class AFelineJourneyController {
 
-    private final Garden garden = AFelineJourney.createGarden(4, 2 * 1.3f);
+    private final Garden garden = AFelineJourney.createGarden(1, 1);
     private final GardenState state = new GardenState();
 
     public Garden getGarden() {
