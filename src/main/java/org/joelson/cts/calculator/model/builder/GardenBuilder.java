@@ -66,6 +66,15 @@ public class GardenBuilder {
 
     UpgradeBuilder addGeneratorUpgrade(
             Generator generator, String name, Amount cost, float efficiency, float speed) {
+        return addGeneratorUpgrade(generator, name, cost, efficiency, speed, false);
+    }
+
+    UpgradeBuilder addGeneratorAutomationUpgrade(Generator generator, String name, Amount cost) {
+        return addGeneratorUpgrade(generator, name, cost, 1, 1, true);
+    }
+
+    UpgradeBuilder addGeneratorUpgrade(
+            Generator generator, String name, Amount cost, float efficiency, float speed, boolean automated) {
         Upgrade upgrade = new Upgrade(name, cost.multiplyBy(costMultiplier));
         upgrade.addEffect(new UpgradeEffect(generator, efficiency, speed));
         garden.addUpgrade(upgrade);

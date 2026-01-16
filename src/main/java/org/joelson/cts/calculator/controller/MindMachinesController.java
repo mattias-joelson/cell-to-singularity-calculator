@@ -344,16 +344,31 @@ public class MindMachinesController {
     }
 
     private static @NonNull String createEffectString(Generator generator, UpgradeEffect effect) {
-        if (generator.isTimed() && effect.speed() != 1) {
-            if (effect.efficiency() == 1) {
-                return speedEffectString(effect.speed());
-            } else {
-                return String.format("%s, %s", efficiencyEffectString(effect.efficiency()),
-                        speedEffectString(effect.speed()));
-            }
+        if (generator.isTimed()) {
+            return createTimedEffectString(generator, effect);
         } else {
             return efficiencyEffectString(effect.efficiency());
         }
+    }
+
+    private static String createTimedEffectString(Generator generator, UpgradeEffect effect) {
+        StringBuilder effectStringBuilder = new StringBuilder();
+        if (effect.efficiency() != 1) {
+            effectStringBuilder.append(efficiencyEffectString(effect.efficiency()));
+        }
+        if (effect.speed() != 1) {
+            if (!effectStringBuilder.isEmpty()) {
+                effectStringBuilder.append(", ");
+            }
+            effectStringBuilder.append(speedEffectString(effect.speed()));
+        }
+        if (effect.automated()) {
+            if (!effectStringBuilder.isEmpty()) {
+                effectStringBuilder.append(", ");
+            }
+            effectStringBuilder.append("automated");
+        }
+        return effectStringBuilder.toString();
     }
 
     private static String efficiencyEffectString(float efficiency) {

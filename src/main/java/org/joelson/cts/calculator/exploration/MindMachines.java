@@ -263,6 +263,7 @@ public class MindMachines {
         garden.getUpgrade("GPTs").addEffect(new UpgradeEffect(aiGenerator, 1, 10));
         garden.getUpgrade("Deep Learning").addEffect(new UpgradeEffect(aiGenerator, 1, 10));
         garden.getUpgrade("AI Evolved").addEffect(new UpgradeEffect(aiGenerator, 51));
+        garden.getUpgrade("Personal Assistants").addEffect(new UpgradeEffect(aiGenerator, true));
         garden.getUpgrade("Customer Service").addEffect(new UpgradeEffect(aiGenerator, 1, 2));
         garden.getUpgrade("Therapists").addEffect(new UpgradeEffect(aiGenerator, 1, 2));
         garden.getUpgrade("Translators and Interpreters").addEffect(new UpgradeEffect(aiGenerator, 1, 2));

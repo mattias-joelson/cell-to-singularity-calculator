@@ -27,4 +27,8 @@ public record UpgradeBuilder(GardenBuilder gardenBuilder, Generator generator, U
     public UpgradeBuilder addUpgrade(String name, Amount cost, float efficiency, float speed) {
         return gardenBuilder.addGeneratorUpgrade(generator, name, cost, efficiency, speed);
     }
+
+    public UpgradeBuilder addAutomatedUpgrade(String name, Amount cost) {
+        return gardenBuilder.addGeneratorAutomationUpgrade(generator, name, cost);
+    }
 }
