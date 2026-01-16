@@ -52,7 +52,7 @@ public class CalculatorService {
         lifeAfterApocalypse.addGardenWithState(new GardenWithState(extinction, extinctionState));
         Generator luca = new Generator("L.U.C.A.", new Amount(laaCurrency, 40), 1.05f, new Amount(laaCurrency, 1));
         extinction.addGenerator(luca);
-        extinctionState.setGeneratorState(luca, new GeneratorState(753, 1));
+        extinctionState.setGeneratorState(luca, GeneratorState.withEfficiency(753, 1));
 
         createUpgrade(extinction, extinctionState, luca, "Trilobites", 500, 1.5f);
         createUpgrade(extinction, extinctionState, luca, "Cambrian Explosion", 50, 1.5f);
@@ -88,7 +88,7 @@ public class CalculatorService {
         Generator dinosaurs = new Generator("Reign of Dinosaurs", new Amount(laaCurrency, 8e12), 1.12f,
                 new Amount(laaCurrency, 5e9));
         extinction.addGenerator(dinosaurs);
-        extinctionState.setGeneratorState(dinosaurs, new GeneratorState(103, 1));
+        extinctionState.setGeneratorState(dinosaurs, GeneratorState.withEfficiency(103, 1));
         Upgrade deccanDeathTraps = new Upgrade("Deccan Death Traps", new Amount(laaCurrency, 3.75e14));
         deccanDeathTraps.addEffect(new UpgradeEffect(dinosaurs, 6));
         extinction.addUpgrade(deccanDeathTraps);

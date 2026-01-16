@@ -29,7 +29,7 @@ public class GardenState {
 
     public void setGeneratorCount(Generator generator, int count) {
         GeneratorState state = generatorStates.computeIfPresent(generator.getName(),
-                (_, s) -> new GeneratorState(count, s.efficiency(), s.speed()));
+                (_, s) -> new GeneratorState(count, s.efficiency(), s.speed(), s.automated()));
         if (state == null) {
             throw new NullPointerException("No generator " + generator.getName() + " present.");
         }
@@ -44,7 +44,7 @@ public class GardenState {
             if (generator.isTimed()) {
                 return new GeneratorState(state.count(), state.efficiency(), state.speed() * boost, state.automated());
             } else {
-                return new GeneratorState(state.count(), state.efficiency() * boost);
+                return GeneratorState.withEfficiency(state.count(), state.efficiency() * boost);
             }
         }
         return state;
