@@ -345,13 +345,13 @@ public class MindMachinesController {
 
     private static @NonNull String createEffectString(Generator generator, UpgradeEffect effect) {
         if (generator.isTimed()) {
-            return createTimedEffectString(generator, effect);
+            return createTimedEffectString(effect);
         } else {
             return efficiencyEffectString(effect.efficiency());
         }
     }
 
-    private static String createTimedEffectString(Generator generator, UpgradeEffect effect) {
+    private static String createTimedEffectString(UpgradeEffect effect) {
         StringBuilder effectStringBuilder = new StringBuilder();
         if (effect.efficiency() != 1) {
             effectStringBuilder.append(efficiencyEffectString(effect.efficiency()));
