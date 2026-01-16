@@ -250,7 +250,6 @@ public class MindMachinesController {
                 double productionPerCycle = baseProduction * efficiency * count;
                 float speed = generatorState.speed();
                 float cycleTime = generator.getBaseChargeTime() / speed;
-                double production = productionPerCycle / cycleTime;
                 String productionPerCycleString;
                 if (cycleTime > 60) {
                     productionPerCycleString = String.format("%s in %s s",
@@ -260,7 +259,8 @@ public class MindMachinesController {
                     productionPerCycleString = String.format("%s in %.3f s",
                             new Amount(currencyName, productionPerCycle).asString(), cycleTime);
                 }
-                String productionString = String.format("%s", new Amount(currencyName, production).asString());
+                double production = (generatorState.automated()) ? productionPerCycle / cycleTime : 0;
+                String productionString = (production != 0) ? String.format("%s", new Amount(currencyName, production).asString()) : "";
                 String increaseString = String.format("%.7f",
                         (baseProduction * efficiency) / (cycleTime * generator.getCost(count).amount()));
                 generatorProductions.add(
