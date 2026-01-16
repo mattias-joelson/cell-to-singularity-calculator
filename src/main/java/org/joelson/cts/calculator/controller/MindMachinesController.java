@@ -346,13 +346,38 @@ public class MindMachinesController {
     private static @NonNull String createEffectString(Generator generator, UpgradeEffect effect) {
         if (generator.isTimed() && effect.speed() != 1) {
             if (effect.efficiency() == 1) {
-                return String.format("x %.2f faster", effect.speed());
+                return speedEffectString(effect.speed());
             } else {
-                return String.format("%.2f more efficient, x %.2f faster", effect.efficiency(),
-                        effect.speed());
+                return String.format("%s, %s", efficiencyEffectString(effect.efficiency()),
+                        speedEffectString(effect.speed()));
             }
         } else {
-            return String.format("%.2f more efficient", effect.efficiency());
+            return efficiencyEffectString(effect.efficiency());
+        }
+    }
+
+    private static String efficiencyEffectString(float efficiency) {
+        if (efficiency == Math.round(efficiency)) {
+            return String.format("%.0f more efficient", efficiency);
+        } else {
+            return String.format("%.2f more efficient", efficiency);
+        }
+    }
+
+    private static String speedEffectString(float speed) {
+        if (speed > 1) {
+            if (speed == Math.round(speed)) {
+                return String.format("x%.0f speed", speed);
+            } else {
+                return String.format("x%.2f speed", speed);
+            }
+        } else {
+            float speedPercent = (1 - speed) * 100;
+            if (speedPercent == Math.round(speedPercent)) {
+                return String.format("%.0f%% slower", speedPercent);
+            } else {
+                return String.format("%.2f%% slower", speedPercent);
+            }
         }
     }
 
