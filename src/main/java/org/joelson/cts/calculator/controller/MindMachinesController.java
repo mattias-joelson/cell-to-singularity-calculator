@@ -44,80 +44,80 @@ public class MindMachinesController {
 //        state.setBoost(4);
         state.updateGeneratorStates(garden);
 
+        setGeneratorCount("Artificial Intelligence", 1);
         setGeneratorCount("Evils and Perils", 0);
         setGeneratorCount("AI Tools", 0);
         setGeneratorCount("Generative AI", 0);
         setGeneratorCount("Analytic AI", 0);
         setGeneratorCount("Mechanical Brain", 1);
-        setGeneratorCount("Artificial Intelligence", 1);
 
         String[] boughtUpdates = {
-//                "Future AI", // check
-//                "Quantum Computing", // check
-//                "Biocomputers", // check
-//                "Uploaded Mind", // check
-//                "Philosophical Zombies", // check
-//                "Morality AI", // check
-//                "Sentience", // check
-//                "Artificial General Intelligence", // check
+//                "Future AI",
+//                "Quantum Computing",
+//                "Biocomputers",
+//                "Uploaded Mind",
+//                "Philosophical Zombies",
+//                "Morality AI",
+//                "Sentience",
+//                "Artificial General Intelligence",
 
-//                "Analytic Engine", // check
-//                "Binary Code", // check
-//                "Logic Switches", // check
-//                "Input, Output", // check
-//                "Algorithms", // check
-//                "Learning Loops", // check + AI
-//                "Love Letters", // check
-//                "Imitation Game", // check
-//                "ELIZA Therapy Bot", // check
-//                "Stochastic Parrot", // check + AI
+//                "Analytic Engine",
+//                "Binary Code",
+//                "Logic Switches",
+//                "Input, Output",
+//                "Algorithms",
+//                "Learning Loops",
+//                "Love Letters",
+//                "Imitation Game",
+//                "ELIZA Therapy Bot",
+//                "Stochastic Parrot",
 
-//                "Turochamp", // check
-//                "Logical Thinking", // check
-//                "Data Processing", // check
-//                "Brute Force", // check + AI
-//                "Heuristics", // check
-//                "Fuzzy Logic", // check
-//                "Games, Mastered", // check + AI
-//                "Expert Systems", // check + AI
-//                "Context", // check + AI
-//                "Black Box", // check + AI
+//                "Turochamp",
+//                "Logical Thinking",
+//                "Data Processing",
+//                "Brute Force",
+//                "Heuristics",
+//                "Fuzzy Logic",
+//                "Games, Mastered",
+//                "Expert Systems",
+//                "Context",
+//                "Black Box",
 
-//                "Electric Brain", // check
-//                "Neural Network", // check
-//                "Machine Learning", // check
-//                "Training Sets", // check
-//                "Big Data", // check
-//                "Large Language Models", // check
-//                "GPTs", // check + AI
-//                "Deep Learning", // check + AI
-//                "Natural Language", // check
-//                "Hallucinations", // check
-//                "AI Evolved", // check + AI
+//                "Electric Brain",
+//                "Neural Network",
+//                "Machine Learning",
+//                "Training Sets",
+//                "Big Data",
+//                "Large Language Models",
+//                "GPTs",
+//                "Deep Learning",
+//                "Natural Language",
+//                "Hallucinations",
+//                "AI Evolved",
 
-//                "Personal Assistants", // check + AI
-//                "Customer Service", // check + AI
-//                "Therapists", // check + AI
-//                "Translators and Interpreters", // check + AI
-//                "AI Avatars", // check + AI
-//                "Self-Driving Vehicles", // check + AI
-//                "AI Drones and Carts", // check + AI
-//                "Space Explorers", // check + AI
-//                "Statistical Forecasting", // check + AI
-//                "Smarter Systems", // check + AI
-//                "Scientific Discoveries", // check + AI
-//                "Mind Reading", // check + AI
+//                "Personal Assistants",
+//                "Customer Service",
+//                "Therapists",
+//                "Translators and Interpreters",
+//                "AI Avatars",
+//                "Self-Driving Vehicles",
+//                "AI Drones and Carts",
+//                "Space Explorers",
+//                "Statistical Forecasting",
+//                "Smarter Systems",
+//                "Scientific Discoveries",
+//                "Mind Reading",
 
-//                "Bad Actors", // check + AI
-//                "Gullibility", // check + AI
-//                "Human Bias", // check + AI
-//                "Resistance", // check + AI
-//                "Weak Laws", // check + AI
-//                "AI Workforce", // check + AI
-//                "Cyberattacks and Warfare", // check + AI
-//                "Machine Unlearning", // check + AI
-//                "Red Teaming", // check + AI
-//                "Tough Decisions", // check + AI
+//                "Bad Actors",
+//                "Gullibility",
+//                "Human Bias",
+//                "Resistance",
+//                "Weak Laws",
+//                "AI Workforce",
+//                "Cyberattacks and Warfare",
+//                "Machine Unlearning",
+//                "Red Teaming",
+//                "Tough Decisions",
         };
 
         for (String upgradeName : boughtUpdates) {
