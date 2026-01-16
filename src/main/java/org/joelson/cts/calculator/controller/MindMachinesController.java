@@ -259,10 +259,15 @@ public class MindMachinesController {
                     productionPerCycleString = String.format("%s in %.3f s",
                             new Amount(currencyName, productionPerCycle).asString(), cycleTime);
                 }
-                double production = (generatorState.automated()) ? productionPerCycle / cycleTime : 0;
-                String productionString = (production != 0) ? String.format("%s", new Amount(currencyName, production).asString()) : "";
-                String increaseString = String.format("%.7f",
-                        (baseProduction * efficiency) / (cycleTime * generator.getCost(count).amount()));
+                double production = productionPerCycle / cycleTime;
+                String productionString = String.format("%s", new Amount(currencyName, production).asString());
+                String increaseString;
+                if (generatorState.automated()) {
+                    increaseString = String.format("%.7f",(baseProduction * efficiency) / (cycleTime * generator.getCost(count).amount()));
+                } else {
+                    productionString = String.format("(%s)", productionString);
+                    increaseString = "0.0000000";
+                }
                 generatorProductions.add(
                         new GeneratorProduction(generator.getName(), count, generator.getCost(count).asString(),
                                 generator.getBaseProduction().multiplyBy(efficiency).asString(),
