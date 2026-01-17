@@ -51,203 +51,203 @@ public class MindMachines {
                 .addSpeedUpgrade("Uploaded Mind", amount(7e20), 2.5f)
                 .addUpgradeRequirement("Biocomputers")
 
-                .addUpgrade("Philosophical Zombies", amount(1.5e21), 3)
+                .addEfficiencyUpgrade("Philosophical Zombies", amount(1.5e21), 3)
                 .addUpgradeRequirement("Future AI")
                 .addUpgradeRequirement("Uploaded Mind")
 
-                .addUpgrade("Morality AI", amount(4e21), 3)
+                .addEfficiencyUpgrade("Morality AI", amount(4e21), 3)
                 .addUpgradeRequirement("Future AI")
                 .addUpgradeRequirement("Philosophical Zombies")
 
-                .addUpgrade("Sentience", amount(1e22), 5)
+                .addEfficiencyUpgrade("Sentience", amount(1e22), 5)
                 .addUpgradeRequirement("Future AI")
                 .addUpgradeRequirement("Morality AI")
 
-                .addUpgrade("Artificial General Intelligence", amount(1.5e22), 101)
+                .addEfficiencyUpgrade("Artificial General Intelligence", amount(1.5e22), 101)
                 .addUpgradeRequirement("Sentience");
 
         builder.createGenerator("Mechanical Brain", amount(500), 1.25f, amount(5))
 //                .addUpgradeRequirement("Mechanical Turk")
 
-                .addUpgrade("Analytic Engine", amount(1_500), 1.5f)
+                .addEfficiencyUpgrade("Analytic Engine", amount(1_500), 1.5f)
                 .addGeneratorRequirement("Mechanical Brain")
 
-                .addUpgrade("Binary Code", amount(3_000), 1.5f)
+                .addEfficiencyUpgrade("Binary Code", amount(3_000), 1.5f)
                 .addUpgradeRequirement("Analytic Engine")
 
-                .addUpgrade("Logic Switches", amount(10_000), 1.5f)
+                .addEfficiencyUpgrade("Logic Switches", amount(10_000), 1.5f)
                 .addUpgradeRequirement("Binary Code")
 
-                .addUpgrade("Input, Output", amount(60_000), 1.75f)
+                .addEfficiencyUpgrade("Input, Output", amount(60_000), 1.75f)
                 .addGeneratorRequirement("Mechanical Brain")
 
-                .addUpgrade("Algorithms", amount(150_000), 1.5f)
+                .addEfficiencyUpgrade("Algorithms", amount(150_000), 1.5f)
                 .addUpgradeRequirement("Input, Output")
 
-                .addUpgrade("Learning Loops", amount(500_000), 1.5f)
+                .addEfficiencyUpgrade("Learning Loops", amount(500_000), 1.5f)
                 .addUpgradeRequirement("Algorithms")
 
-                .addUpgrade("Love Letters", amount(1.25e6), 1.75f)
+                .addEfficiencyUpgrade("Love Letters", amount(1.25e6), 1.75f)
                 .addUpgradeRequirement("Learning Loops")
 
-                .addUpgrade("Imitation Game", amount(1e7), 4)
+                .addEfficiencyUpgrade("Imitation Game", amount(1e7), 4)
                 .addGeneratorRequirement("Mechanical Brain")
                 .addGeneratorRequirement("Generative AI")
 
-                .addUpgrade("ELIZA Therapy Bot", amount(4e9), 10)
+                .addEfficiencyUpgrade("ELIZA Therapy Bot", amount(4e9), 10)
                 .addUpgradeRequirement("Imitation Game")
 
-                .addUpgrade("Stochastic Parrot", amount(9e9), 8)
+                .addEfficiencyUpgrade("Stochastic Parrot", amount(9e9), 8)
                 .addUpgradeRequirement("ELIZA Therapy Bot");
 
 
         builder.createGenerator("Analytic AI", amount(3e6), amount(1_300))
                 .addUpgradeRequirement("Love Letters")
 
-                .addUpgrade("Turochamp", amount(3e7), 1.5f)
+                .addEfficiencyUpgrade("Turochamp", amount(3e7), 1.5f)
                 .addGeneratorRequirement("Analytic AI")
 
-                .addUpgrade("Logical Thinking", amount(5e7), 2)
+                .addEfficiencyUpgrade("Logical Thinking", amount(5e7), 2)
                 .addGeneratorRequirement("Analytic AI")
 
-                .addUpgrade("Data Processing", amount(1.75e8), 2)
+                .addEfficiencyUpgrade("Data Processing", amount(1.75e8), 2)
                 .addGeneratorRequirement("Analytic AI")
                 .addUpgradeRequirement("Turochamp")
 
-                .addUpgrade("Brute Force", amount(4e8), 1.5f)
+                .addEfficiencyUpgrade("Brute Force", amount(4e8), 1.5f)
                 .addUpgradeRequirement("Logical Thinking")
 
-                .addUpgrade("Heuristics", amount(1e9), 1.75f)
+                .addEfficiencyUpgrade("Heuristics", amount(1e9), 1.75f)
                 .addUpgradeRequirement("Brute Force")
 
-                .addUpgrade("Fuzzy Logic", amount(2.5e9), 1.5f)
+                .addEfficiencyUpgrade("Fuzzy Logic", amount(2.5e9), 1.5f)
                 .addUpgradeRequirement("Heuristics")
 
-                .addUpgrade("Games, Mastered", amount(1.5e10), 1.5f)
+                .addEfficiencyUpgrade("Games, Mastered", amount(1.5e10), 1.5f)
                 .addUpgradeRequirement("Turochamp")
                 .addUpgradeRequirement("ELIZA Therapy Bot")
 
-                .addUpgrade("Expert Systems", amount(2e10), 1.5f)
+                .addEfficiencyUpgrade("Expert Systems", amount(2e10), 1.5f)
                 .addUpgradeRequirement("Games, Mastered")
 
-                .addUpgrade("Context", amount(5e10), 1.5f)
+                .addEfficiencyUpgrade("Context", amount(5e10), 1.5f)
                 .addUpgradeRequirement("Data Processing")
 
-                .addUpgrade("Black Box", amount(7e10), 1.5f)
+                .addEfficiencyUpgrade("Black Box", amount(7e10), 1.5f)
                 .addUpgradeRequirement("Context");
 
         builder.createGenerator("Generative AI", amount(6e6), amount(1_330))
                 .addGeneratorRequirement("Analytic AI")
 
-                .addUpgrade("Electric Brain", amount(2e7), 1.5f)
+                .addEfficiencyUpgrade("Electric Brain", amount(2e7), 1.5f)
                 .addGeneratorRequirement("Generative AI")
                 .addUpgradeRequirement("Imitation Game")
 
-                .addUpgrade("Neural Network", amount(1e11), 15)
+                .addEfficiencyUpgrade("Neural Network", amount(1e11), 15)
                 .addUpgradeRequirement("Electric Brain")
                 .addUpgradeRequirement("Stochastic Parrot")
 
-                .addUpgrade("Machine Learning", amount(1.25e11), 10)
+                .addEfficiencyUpgrade("Machine Learning", amount(1.25e11), 10)
                 .addGeneratorRequirement("Generative AI")
                 .addUpgradeRequirement("Stochastic Parrot")
 
-                .addUpgrade("Training Sets", amount(2e11), 3)
+                .addEfficiencyUpgrade("Training Sets", amount(2e11), 3)
                 .addGeneratorRequirement("Generative AI")
                 .addUpgradeRequirement("Stochastic Parrot")
 
-                .addUpgrade("Big Data", amount(5e11), 2)
+                .addEfficiencyUpgrade("Big Data", amount(5e11), 2)
                 .addUpgradeRequirement("Neural Network")
 
-                .addUpgrade("Large Language Models", amount(9e11), 3)
+                .addEfficiencyUpgrade("Large Language Models", amount(9e11), 3)
                 .addUpgradeRequirement("Training Sets")
 
-                .addUpgrade("GPTs", amount(1.5e12), 2)
+                .addEfficiencyUpgrade("GPTs", amount(1.5e12), 2)
                 .addUpgradeRequirement("Large Language Models")
 
-                .addUpgrade("Deep Learning", amount(3e12), 2)
+                .addEfficiencyUpgrade("Deep Learning", amount(3e12), 2)
                 .addUpgradeRequirement("Machine Learning")
 
-                .addUpgrade("Natural Language", amount(9e12), 2)
+                .addEfficiencyUpgrade("Natural Language", amount(9e12), 2)
                 .addUpgradeRequirement("GPTs")
 
-                .addUpgrade("Hallucinations", amount(1.5e13), 2)
+                .addEfficiencyUpgrade("Hallucinations", amount(1.5e13), 2)
                 .addUpgradeRequirement("Natural Language")
 
-                .addUpgrade("AI Evolved", amount(4e13), 3.5f)
+                .addEfficiencyUpgrade("AI Evolved", amount(4e13), 3.5f)
                 .addUpgradeRequirement("Deep Learning");
 
         builder.createGenerator("AI Tools", amount(9e13), amount(4e9))
                 .addUpgradeRequirement("AI Evolved")
 
-                .addUpgrade("Personal Assistants", amount(3e14), 2)
+                .addEfficiencyUpgrade("Personal Assistants", amount(3e14), 2)
                 .addGeneratorRequirement("AI Tools")
 
-                .addUpgrade("Customer Service", amount(6e14), 3)
+                .addEfficiencyUpgrade("Customer Service", amount(6e14), 3)
                 .addUpgradeRequirement("Personal Assistants")
 
-                .addUpgrade("Therapists", amount(9e14), 2)
+                .addEfficiencyUpgrade("Therapists", amount(9e14), 2)
                 .addUpgradeRequirement("Customer Service")
 
-                .addUpgrade("Translators and Interpreters", amount(3e15), 2)
+                .addEfficiencyUpgrade("Translators and Interpreters", amount(3e15), 2)
                 .addUpgradeRequirement("Therapists")
 
-                .addUpgrade("AI Avatars", amount(6e15), 3)
+                .addEfficiencyUpgrade("AI Avatars", amount(6e15), 3)
                 .addUpgradeRequirement("Translators and Interpreters")
 
-                .addUpgrade("Self-Driving Vehicles", amount(1.25e17), 2)
+                .addEfficiencyUpgrade("Self-Driving Vehicles", amount(1.25e17), 2)
                 .addGeneratorRequirement("AI Tools")
 
-                .addUpgrade("AI Drones and Carts", amount(2e17), 3)
+                .addEfficiencyUpgrade("AI Drones and Carts", amount(2e17), 3)
                 .addUpgradeRequirement("Self-Driving Vehicles")
 
-                .addUpgrade("Space Explorers", amount(6e17), 2)
+                .addEfficiencyUpgrade("Space Explorers", amount(6e17), 2)
                 .addUpgradeRequirement("AI Drones and Carts")
 
-                .addUpgrade("Statistical Forecasting", amount(3e18), 2)
+                .addEfficiencyUpgrade("Statistical Forecasting", amount(3e18), 2)
                 .addGeneratorRequirement("AI Tools")
                 .addUpgradeRequirement("AI Avatars")
 
-                .addUpgrade("Smarter Systems", amount(6e18), 3)
+                .addEfficiencyUpgrade("Smarter Systems", amount(6e18), 3)
                 .addUpgradeRequirement("Statistical Forecasting")
 
-                .addUpgrade("Scientific Discoveries", amount(1e19), 2)
+                .addEfficiencyUpgrade("Scientific Discoveries", amount(1e19), 2)
                 .addUpgradeRequirement("Smarter Systems")
 
-                .addUpgrade("Mind Reading", amount(1.75e19), 3)
+                .addEfficiencyUpgrade("Mind Reading", amount(1.75e19), 3)
                 .addUpgradeRequirement("Scientific Discoveries");
 
         builder.createGenerator("Evils and Perils", amount(1.5e13), amount(1e10))
                 .addGeneratorRequirement("AI Tools")
 
-                .addUpgrade("Bad Actors", amount(1e16), 2)
+                .addEfficiencyUpgrade("Bad Actors", amount(1e16), 2)
                 .addGeneratorRequirement("Evils and Perils")
 
-                .addUpgrade("Gullibility", amount(2e16), 2)
+                .addEfficiencyUpgrade("Gullibility", amount(2e16), 2)
                 .addUpgradeRequirement("Bad Actors")
 
-                .addUpgrade("Human Bias", amount(6e16), 3)
+                .addEfficiencyUpgrade("Human Bias", amount(6e16), 3)
                 .addUpgradeRequirement("Gullibility")
 
-                .addUpgrade("Resistance", amount(9e16), 2)
+                .addEfficiencyUpgrade("Resistance", amount(9e16), 2)
                 .addUpgradeRequirement("Human Bias")
 
-                .addUpgrade("Weak Laws", amount(9e17), 3)
+                .addEfficiencyUpgrade("Weak Laws", amount(9e17), 3)
                 .addGeneratorRequirement("Evils and Perils")
 
-                .addUpgrade("AI Workforce", amount(1e18), 2)
+                .addEfficiencyUpgrade("AI Workforce", amount(1e18), 2)
                 .addUpgradeRequirement("Weak Laws")
 
-                .addUpgrade("Cyberattacks and Warfare", amount(2e18), 2)
+                .addEfficiencyUpgrade("Cyberattacks and Warfare", amount(2e18), 2)
                 .addUpgradeRequirement("AI Workforce")
 
-                .addUpgrade("Machine Unlearning", amount(4e19), 2)
+                .addEfficiencyUpgrade("Machine Unlearning", amount(4e19), 2)
                 .addGeneratorRequirement("Evils and Perils")
                 .addUpgradeRequirement("Resistance")
 
-                .addUpgrade("Red Teaming", amount(8e19), 3)
+                .addEfficiencyUpgrade("Red Teaming", amount(8e19), 3)
                 .addUpgradeRequirement("Machine Unlearning")
 
-                .addUpgrade("Tough Decisions", amount(1e20), 3)
+                .addEfficiencyUpgrade("Tough Decisions", amount(1e20), 3)
                 .addUpgradeRequirement("Red Teaming");
 
         builder.resolveRequirements();

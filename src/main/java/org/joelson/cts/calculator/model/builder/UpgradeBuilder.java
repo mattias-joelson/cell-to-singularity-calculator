@@ -20,7 +20,7 @@ public record UpgradeBuilder(GardenBuilder gardenBuilder, Generator generator, U
         return this;
     }
 
-    public UpgradeBuilder addUpgrade(String name, Amount cost, float efficiency) {
+    public UpgradeBuilder addEfficiencyUpgrade(String name, Amount cost, float efficiency) {
         return gardenBuilder.addEfficiencyUpgrade(generator, name, cost, efficiency);
     }
 

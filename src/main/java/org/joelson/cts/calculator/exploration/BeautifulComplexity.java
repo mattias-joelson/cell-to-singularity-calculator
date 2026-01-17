@@ -53,92 +53,92 @@ public class BeautifulComplexity {
         builder.createGenerator("Building Blocks", real(200), real(1))
 //                .addUpgradeRequirement("Numbers")
 
-                .addUpgrade("Zero", real(750), 2)
+                .addEfficiencyUpgrade("Zero", real(750), 2)
                 .addGeneratorRequirement("Building Blocks")
 
-                .addUpgrade("Negatives", real(500_000), 81)
+                .addEfficiencyUpgrade("Negatives", real(500_000), 81)
                 .addUpgradeRequirement("Addition")
 
-                .addUpgrade("Integers", real(5e6), 3)
+                .addEfficiencyUpgrade("Integers", real(5e6), 3)
 //                .addUpgradeRequirement("Numbers")
                 .addUpgradeRequirement("Negatives")
 
-                .addUpgrade("Rationals", real(6e7), 3)
+                .addEfficiencyUpgrade("Rationals", real(6e7), 3)
                 .addUpgradeRequirement("Integers")
 
-                .addUpgrade("Proofs", real(2e12), 5001)
+                .addEfficiencyUpgrade("Proofs", real(2e12), 5001)
                 .addGeneratorRequirement("Building Blocks")
                 .addUpgradeRequirement("Quadratic Formula")
 
-                .addUpgrade("Complex Numbers", real(1e17), 10_001)
+                .addEfficiencyUpgrade("Complex Numbers", real(1e17), 10_001)
                 .addUpgradeRequirement("i")
 
-                .addUpgrade("Irrationals", real(8e17), 6)
+                .addEfficiencyUpgrade("Irrationals", real(8e17), 6)
                 .addUpgradeRequirement("Rationals")
                 .addUpgradeRequirement("Complex Numbers")
 
-                .addUpgrade("Proof by Contradiction", imaginary(2e12), 2_500_001)
+                .addEfficiencyUpgrade("Proof by Contradiction", imaginary(2e12), 2_500_001)
                 .addUpgradeRequirement("Primes")
 
-                .addUpgrade("Proof by Induction", real(8e26), 501)
+                .addEfficiencyUpgrade("Proof by Induction", real(8e26), 501)
                 .addGeneratorRequirement("Discrete Math")
                 .addUpgradeRequirement("Linear Algebra")
 
-                .addUpgrade("The Most Beautiful Equation", imaginary(1e19), 2)
+                .addEfficiencyUpgrade("The Most Beautiful Equation", imaginary(1e19), 2)
                 .addUpgradeRequirement("Complex Plane");
 
         builder.createGenerator("Arithmetic", real(1_500), real(5))
                 .addGeneratorRequirement("Building Blocks")
 
-                .addUpgrade("Addition", real(8_000), 5)
+                .addEfficiencyUpgrade("Addition", real(8_000), 5)
                 .addGeneratorRequirement("Arithmetic")
 
-                .addUpgrade("Fibonacci Sequence", real(40_000), 2.12358f)
+                .addEfficiencyUpgrade("Fibonacci Sequence", real(40_000), 2.12358f)
                 .addUpgradeRequirement("Addition")
 
-                .addUpgrade("Multiplication", real(1.5e7), 21)
+                .addEfficiencyUpgrade("Multiplication", real(1.5e7), 21)
                 .addUpgradeRequirement("Addition")
 
-                .addUpgrade("Factorials", real(1.5e8), 2)
+                .addEfficiencyUpgrade("Factorials", real(1.5e8), 2)
                 .addUpgradeRequirement("Multiplication")
 
-                .addUpgrade("Exponentiation", real(8e9), 26)
+                .addEfficiencyUpgrade("Exponentiation", real(8e9), 26)
                 .addUpgradeRequirement("Multiplication")
                 .addUpgradeRequirement("Equations")
 
-                .addUpgrade("Tetration", real(5e29), 4e19f)
+                .addEfficiencyUpgrade("Tetration", real(5e29), 4e19f)
                 .addUpgradeRequirement("Exponentiation")
                 .addUpgradeRequirement("Game Theory");
 
         builder.createGenerator("Algebra", real(1e8), real(20_000))
                 .addUpgradeRequirement("Multiplication")
 
-                .addUpgrade("Equations", real(2e9), 4)
+                .addEfficiencyUpgrade("Equations", real(2e9), 4)
                 .addGeneratorRequirement("Algebra")
 
-                .addUpgrade("Variables", real(3e9), 7)
+                .addEfficiencyUpgrade("Variables", real(3e9), 7)
                 .addUpgradeRequirement("Equations")
 
-                .addUpgrade("Quadratic Formula", real(2e11), 5)
+                .addEfficiencyUpgrade("Quadratic Formula", real(2e11), 5)
                 .addUpgradeRequirement("Equations")
                 .addUpgradeRequirement("Exponentiation")
 
-                .addUpgrade("Preserving Equality", real(6e12), 11)
+                .addEfficiencyUpgrade("Preserving Equality", real(6e12), 11)
                 .addUpgradeRequirement("Equations")
                 .addUpgradeRequirement("Proofs")
 
-                .addUpgrade("Proof that 0.999...=1", real(1e13), 1.999f)
+                .addEfficiencyUpgrade("Proof that 0.999...=1", real(1e13), 1.999f)
                 .addUpgradeRequirement("Preserving Equality")
 
-                .addUpgrade("Pascal's Triangle", real(3e13), 2)
+                .addEfficiencyUpgrade("Pascal's Triangle", real(3e13), 2)
                 .addGeneratorRequirement("Algebra")
                 .addUpgradeRequirement("Preserving Equality")
 
-                .addUpgrade("i", real(2e16), 501)
+                .addEfficiencyUpgrade("i", real(2e16), 501)
                 .addUpgradeRequirement("Rationals")
                 .addUpgradeRequirement("Trigonometric Functions")
 
-                .addUpgrade("Linear Algebra", imaginary(1e15), 3e8f)
+                .addEfficiencyUpgrade("Linear Algebra", imaginary(1e15), 3e8f)
                 .addUpgradeRequirement("Equations")
                 .addGeneratorRequirement("Discrete Math")
                 .addUpgradeRequirement("Infinity");
@@ -146,125 +146,125 @@ public class BeautifulComplexity {
         builder.createGenerator("Applied Math", real(5e9), real(2e6))
                 .addUpgradeRequirement("Exponentiation")
 
-                .addUpgrade("Compounding Interest", real(2.5e10), 2)
+                .addEfficiencyUpgrade("Compounding Interest", real(2.5e10), 2)
                 .addUpgradeRequirement("Equations")
 
-                .addUpgrade("Math in Cells", real(8e11), 4)
+                .addEfficiencyUpgrade("Math in Cells", real(8e11), 4)
                 .addUpgradeRequirement("Equations")
                 .addUpgradeRequirement("Exponentiation")
 
-                .addUpgrade("Voronoi Pattern", real(1.5e17), 75_001)
+                .addEfficiencyUpgrade("Voronoi Pattern", real(1.5e17), 75_001)
                 .addUpgradeRequirement("Four-Color Theorem")
 
-                .addUpgrade("Predator-Prey Model", real(5e19), 101)
+                .addEfficiencyUpgrade("Predator-Prey Model", real(5e19), 101)
                 .addUpgradeRequirement("Derivatives")
 
-                .addUpgrade("Integrals", real(1e20), 3.5f)
+                .addEfficiencyUpgrade("Integrals", real(1e20), 3.5f)
                 .addUpgradeRequirement("Derivatives")
 
-                .addUpgrade("Statistics", real(5e20), 2)
+                .addEfficiencyUpgrade("Statistics", real(5e20), 2)
                 .addGeneratorRequirement("Applied Math")
                 .addUpgradeRequirement("Compounding Interest")
                 .addUpgradeRequirement("Predator-Prey Model")
 
-                .addUpgrade("Normal Distribution", real(1e21), 2)
+                .addEfficiencyUpgrade("Normal Distribution", real(1e21), 2)
                 .addUpgradeRequirement("Statistics")
 
-                .addUpgrade("Cryptography", real(5e22), 201)
+                .addEfficiencyUpgrade("Cryptography", real(5e22), 201)
                 .addUpgradeRequirement("Primes")
 
-                .addUpgrade("Arrow's Impossibility", real(1e29), 500_001)
+                .addEfficiencyUpgrade("Arrow's Impossibility", real(1e29), 500_001)
                 .addGeneratorRequirement("Discrete Math")
                 .addUpgradeRequirement("Proof by Induction");
 
         builder.createGenerator("Geometry", real(5e12), real(2e9))
                 .addUpgradeRequirement("Pascal's Triangle")
 
-                .addUpgrade("Area", real(1e14), 2)
+                .addEfficiencyUpgrade("Area", real(1e14), 2)
                 .addGeneratorRequirement("Geometry")
 
-                .addUpgrade("Pythagorean Theorem", real(2.5e14), 4.45f)
+                .addEfficiencyUpgrade("Pythagorean Theorem", real(2.5e14), 4.45f)
                 .addGeneratorRequirement("Geometry")
 
-                .addUpgrade("Trigonometry", real(7.5e14), 2)
+                .addEfficiencyUpgrade("Trigonometry", real(7.5e14), 2)
                 .addGeneratorRequirement("Geometry")
 
-                .addUpgrade("Trigonometric Functions", real(2e15), 2)
+                .addEfficiencyUpgrade("Trigonometric Functions", real(2e15), 2)
                 .addUpgradeRequirement("Trigonometry")
 
-                .addUpgrade("Fractals", real(7e15), 2)
+                .addEfficiencyUpgrade("Fractals", real(7e15), 2)
                 .addUpgradeRequirement("Pascal's Triangle")
                 .addGeneratorRequirement("Geometry")
                 .addUpgradeRequirement("Trigonometry")
 
-                .addUpgrade("Pi", real(2e18), 315.159f)
+                .addEfficiencyUpgrade("Pi", real(2e18), 315.159f)
                 .addGeneratorRequirement("Geometry")
                 .addUpgradeRequirement("Irrationals")
 
-                .addUpgrade("Non-Euclidean Geometry", real(8e25), 2_000_001)
+                .addEfficiencyUpgrade("Non-Euclidean Geometry", real(8e25), 2_000_001)
                 .addGeneratorRequirement("Geometry")
                 .addUpgradeRequirement("Countable Infinity")
 
-                .addUpgrade("Mobius Strip", real(2.5e26), 5)
+                .addEfficiencyUpgrade("Mobius Strip", real(2.5e26), 5)
                 .addGeneratorRequirement("Geometry")
                 .addUpgradeRequirement("Linear Algebra");
 
         builder.createGenerator("Marvels and Mysteries", real(1e16), imaginary(1))
                 .addUpgradeRequirement("Complex Numbers")
 
-                .addUpgrade("Four-Color Theorem", imaginary(1_000), 5)
+                .addEfficiencyUpgrade("Four-Color Theorem", imaginary(1_000), 5)
                 .addGeneratorRequirement("Geometry")
                 .addGeneratorRequirement("Marvels and Mysteries")
 
-                .addUpgrade("Irrationalᴵʳʳᵃᵗᶦᵒⁿᵃˡ", real(1e18), 501)
+                .addEfficiencyUpgrade("Irrationalᴵʳʳᵃᵗᶦᵒⁿᵃˡ", real(1e18), 501)
                 .addUpgradeRequirement("Rationals")
                 .addUpgradeRequirement("Irrationals")
 
-                .addUpgrade("Fermat's Last Theorem", real(8e21), 501)
+                .addEfficiencyUpgrade("Fermat's Last Theorem", real(8e21), 501)
                 .addUpgradeRequirement("Pythagorean Theorem")
                 .addUpgradeRequirement("Number Theory")
 
-                .addUpgrade("Birthday Paradox", real(8e23), 3.3f)
+                .addEfficiencyUpgrade("Birthday Paradox", real(8e23), 3.3f)
                 .addUpgradeRequirement("Probability")
 
-                .addUpgrade("Twin Prime Conjecture", imaginary(5e13), 358)
+                .addEfficiencyUpgrade("Twin Prime Conjecture", imaginary(5e13), 358)
                 .addUpgradeRequirement("Primes")
                 .addUpgradeRequirement("Infinity")
 
-                .addUpgrade("Goldbach's Conjecture", real(8e30), 151)
+                .addEfficiencyUpgrade("Goldbach's Conjecture", real(8e30), 151)
                 .addUpgradeRequirement("Number Theory")
                 .addUpgradeRequirement("Primes")
                 .addUpgradeRequirement("Arrow's Impossibility")
 
-                .addUpgrade("Gödel's Incompleteness", imaginary(5e17), 4)
+                .addEfficiencyUpgrade("Gödel's Incompleteness", imaginary(5e17), 4)
                 .addUpgradeRequirement("Goldbach's Conjecture");
 
         builder.createGenerator("Calculus", imaginary(1e7), imaginary(2_000))
                 .addUpgradeRequirement("i")
                 .addUpgradeRequirement("Irrationals")
 
-                .addUpgrade("Limits", imaginary(3e8), 16)
+                .addEfficiencyUpgrade("Limits", imaginary(3e8), 16)
                 .addGeneratorRequirement("Calculus")
 
-                .addUpgrade("Derivatives", imaginary(2e9), 2)
+                .addEfficiencyUpgrade("Derivatives", imaginary(2e9), 2)
                 .addUpgradeRequirement("Limits")
 
-                .addUpgrade("e", imaginary(6e9), 3.71828f)
+                .addEfficiencyUpgrade("e", imaginary(6e9), 3.71828f)
                 .addUpgradeRequirement("Irrationals")
                 .addUpgradeRequirement("Limits")
 
-                .addUpgrade("Infinity", real(8e24), 101)
+                .addEfficiencyUpgrade("Infinity", real(8e24), 101)
                 .addGeneratorRequirement("Calculus")
                 .addUpgradeRequirement("Probability")
 
-                .addUpgrade("Countable Infinity", imaginary(1.5e13), 5)
+                .addEfficiencyUpgrade("Countable Infinity", imaginary(1.5e13), 5)
                 .addUpgradeRequirement("Infinity")
 
-                .addUpgrade("Uncountable Infinity", real(3e27), 101)
+                .addEfficiencyUpgrade("Uncountable Infinity", real(3e27), 101)
                 .addUpgradeRequirement("Countable Infinity")
                 .addUpgradeRequirement("Mobius Strip")
 
-                .addUpgrade("Complex Plane", imaginary(1.5e18), 1501)
+                .addEfficiencyUpgrade("Complex Plane", imaginary(1.5e18), 1501)
                 .addUpgradeRequirement("Trigonometric Functions")
                 .addUpgradeRequirement("Goldbach's Conjecture");
 
@@ -272,17 +272,17 @@ public class BeautifulComplexity {
                 .addUpgradeRequirement("Variables")
                 .addUpgradeRequirement("Statistics")
 
-                .addUpgrade("Number Theory", real(2e21), 16)
+                .addEfficiencyUpgrade("Number Theory", real(2e21), 16)
                 .addGeneratorRequirement("Discrete Math")
 
-                .addUpgrade("Primes", imaginary(5e11), 3.35711f)
+                .addEfficiencyUpgrade("Primes", imaginary(5e11), 3.35711f)
                 .addUpgradeRequirement("Number Theory")
 
-                .addUpgrade("Probability", real(3e23), 13)
+                .addEfficiencyUpgrade("Probability", real(3e23), 13)
                 .addGeneratorRequirement("Discrete Math")
                 .addUpgradeRequirement("Primes")
 
-                .addUpgrade("Game Theory", imaginary(2e16), 3_001)
+                .addEfficiencyUpgrade("Game Theory", imaginary(2e16), 3_001)
                 .addGeneratorRequirement("Discrete Math")
                 .addUpgradeRequirement("Proof by Induction");
 
