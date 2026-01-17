@@ -38,17 +38,17 @@ public class MindMachines {
 
         builder.createGenerator("Artificial Intelligence", amount(10), 2, amount(1e8), 100 * 24 * 3600)
 
-                .addUpgrade("Future AI", amount(1.5e20), 1, 50)
+                .addSpeedUpgrade("Future AI", amount(1.5e20), 50)
                 .addUpgradeRequirement("Mind Reading")
                 .addUpgradeRequirement("Tough Decisions")
 
-                .addUpgrade("Quantum Computing", amount(2e20), 1, 2)
+                .addSpeedUpgrade("Quantum Computing", amount(2e20), 2)
                 .addUpgradeRequirement("Future AI")
 
-                .addUpgrade("Biocomputers", amount(3.5e20), 1, 2.5f)
+                .addSpeedUpgrade("Biocomputers", amount(3.5e20), 2.5f)
                 .addUpgradeRequirement("Quantum Computing")
 
-                .addUpgrade("Uploaded Mind", amount(7e20), 1, 2.5f)
+                .addSpeedUpgrade("Uploaded Mind", amount(7e20), 2.5f)
                 .addUpgradeRequirement("Biocomputers")
 
                 .addUpgrade("Philosophical Zombies", amount(1.5e21), 3)

@@ -61,24 +61,24 @@ public class GardenBuilder {
         return new GeneratorBuilder(this, generator);
     }
 
-    UpgradeBuilder addGeneratorUpgrade(
+    UpgradeBuilder addEfficiencyUpgrade(
             Generator generator, String name, Amount cost, float efficiency) {
-        return addGeneratorUpgrade(generator, name, cost, efficiency, 1);
+        return addUpgrade(generator, name, cost, efficiency, 1, false);
     }
 
-    UpgradeBuilder addGeneratorUpgrade(
-            Generator generator, String name, Amount cost, float efficiency, float speed) {
-        return addGeneratorUpgrade(generator, name, cost, efficiency, speed, false);
+    UpgradeBuilder addSpeedUpgrade(
+            Generator generator, String name, Amount cost, float speed) {
+        return addUpgrade(generator, name, cost, 1, speed, false);
     }
 
-    UpgradeBuilder addGeneratorAutomationUpgrade(Generator generator, String name, Amount cost) {
-        return addGeneratorUpgrade(generator, name, cost, 1, 1, true);
+    UpgradeBuilder addAutomatedUpgrade(Generator generator, String name, Amount cost) {
+        return addUpgrade(generator, name, cost, 1, 1, true);
     }
 
-    UpgradeBuilder addGeneratorUpgrade(
+    UpgradeBuilder addUpgrade(
             Generator generator, String name, Amount cost, float efficiency, float speed, boolean automated) {
         Upgrade upgrade = new Upgrade(name, cost.multiplyBy(costMultiplier));
-        upgrade.addEffect(new UpgradeEffect(generator, efficiency, speed));
+        upgrade.addEffect(new UpgradeEffect(generator, efficiency, speed, automated));
         garden.addUpgrade(upgrade);
         return new UpgradeBuilder(this, generator, upgrade);
     }

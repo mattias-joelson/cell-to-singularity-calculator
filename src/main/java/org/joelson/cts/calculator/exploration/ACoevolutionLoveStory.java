@@ -127,7 +127,7 @@ void main() {
             .addUpgrade("The Vegetarian Wasp", pollen(3e8), 5)
             .addUpgradeRequirement("Flight")
 
-            .addUpgrade("Solitary Nests", pollen(3e9), 1, 10)
+            .addSpeedUpgrade("Solitary Nests", pollen(3e9), 10)
             .addGeneratorRequirement("Primitive Bees", 1)
 
             .addUpgrade("UV Vision", pollen(8e14), 100_001)
@@ -153,10 +153,10 @@ void main() {
             .addUpgrade("The Competition", pollen(7e9), 1)
             .addGeneratorRequirement("Primitive Bees", 1)
 
-            .addUpgrade("Birds Not Bees", pollen(3e10), 1, 2)
+            .addSpeedUpgrade("Birds Not Bees", pollen(3e10), 2)
             .addUpgradeRequirement("The Competition")
 
-            .addUpgrade("Bumblebee Exclusive", pollen(5e13), 1, 150)
+            .addSpeedUpgrade("Bumblebee Exclusive", pollen(5e13), 150)
             .addUpgradeRequirement("Birds Not Bees") // ???
             .addUpgradeRequirement("Snappy Snapdragons") // ???
             .generator();
@@ -168,23 +168,23 @@ void main() {
             .addUpgrade("Very Hairy Body", pollen(3e16), 3)
             .addGeneratorRequirement("Food Banking", 1)
 
-            .addUpgrade("Pollen Brushes", pollen(5e16), 1, 2)
+            .addSpeedUpgrade("Pollen Brushes", pollen(5e16), 2)
             .addUpgradeRequirement("Very Hairy Body")
 
             .addUpgrade("Bristled Baskets", pollen(2e17), 6)
             .addUpgradeRequirement("Pollen Brushes")
 
-            .addUpgrade("Buzz Pollination", pollen(7e17), 1, 6)
+            .addSpeedUpgrade("Buzz Pollination", pollen(7e17), 6)
             .addGeneratorRequirement("Food Banking", 1)
 
             .addUpgrade("Mechanical Mouthparts", pollen(1.4e21), 11)
             .addGeneratorRequirement("Food Banking", 1) // ???
             .addUpgradeRequirement("Nectar Safeguards") // ???
 
-            .addUpgrade("Bandit Bees", pollen(2.5e21), 1, 20)
+            .addSpeedUpgrade("Bandit Bees", pollen(2.5e21), 20)
             .addUpgradeRequirement("Mechanical Mouthparts")
 
-            .addUpgrade("All-Purpose Oils", pollen(2.5e23), 1, 4)
+            .addSpeedUpgrade("All-Purpose Oils", pollen(2.5e23), 4)
             .addUpgradeRequirement("Floral Oils")
 
             .addUpgrade("Orchid Bees", pollen(5e23), 9)
@@ -194,32 +194,32 @@ void main() {
     Generator hiveLife = builder.createGenerator("The Hive Life", pollen(8e25), 1.15f, pollen(3.6e26), 3_600)
             .addGeneratorRequirement("Food Banking", 1)
 
-            .addUpgrade("Baby Bees", pollen(8e25), 1, 2)
+            .addSpeedUpgrade("Baby Bees", pollen(8e25), 2)
             .addGeneratorRequirement("The Hive Life", 1)
 
-            .addUpgrade("Old Foragers", pollen(3.5e26), 1, 5)
+            .addSpeedUpgrade("Old Foragers", pollen(3.5e26), 5)
             .addUpgradeRequirement("Baby Bees")
 
-            .addUpgrade("Waggle Dance", pollen(2e27), 11, 2)
+            .addEfficiencySpeedUpgrade("Waggle Dance", pollen(2e27), 11, 2)
             .addUpgradeRequirement("Old Foragers")
             .generator();
 
     Generator human = builder.createGenerator("Human", pollen(2.8e31), 1.15f, pollen(2.88e32), 7_200)
             .addUpgradeRequirement("A New Suitor")
 
-            .addUpgrade("The Crops We Crave", pollen(8e31), 1, 2)
+            .addSpeedUpgrade("The Crops We Crave", pollen(8e31), 2)
             .addGeneratorRequirement("Human", 1)
 
-            .addUpgrade("Our Favorite Bee", pollen(4e32), 1, 10)
+            .addSpeedUpgrade("Our Favorite Bee", pollen(4e32), 10)
             .addUpgradeRequirement("The Crops We Crave")
 
-            .addUpgrade("Africanized Bees", pollen(7e33), 1, 10)
+            .addSpeedUpgrade("Africanized Bees", pollen(7e33), 10)
             .addUpgradeRequirement("Our Favorite Bee")
 
             .addUpgrade("Wild Decline", pollen(1e35), 11)
             .addGeneratorRequirement("Human", 1)
 
-            .addUpgrade("Habitat Destruction", pollen(3e36), 1, 3)
+            .addSpeedUpgrade("Habitat Destruction", pollen(3e36), 3)
             .addUpgradeRequirement("Wild Decline")
 
             .addUpgrade("Varroa Destructor", pollen(4e37), 3)
