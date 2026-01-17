@@ -15,3 +15,5 @@
 - Fast-forward actions
 
 - Reset does not work...
+
+- Mind Machines: Big Data and Large Language Models is faster than LLM followed by BD?
