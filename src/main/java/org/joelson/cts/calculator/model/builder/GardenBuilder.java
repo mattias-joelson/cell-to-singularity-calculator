@@ -22,17 +22,19 @@ public class GardenBuilder {
     private final Garden garden;
     private final Map<String, List<UnresolvedRequirement>> unresolvedRequirements;
     private final int costMultiplier;
-    private final float productionMultiplier;
+    private final int productionMultiplier;
+    private final float badgeMultiplier;
 
-    public GardenBuilder(Garden garden, int costMultiplier, float productionMultiplier) {
+    public GardenBuilder(Garden garden, int costMultiplier, int productionMultiplier, float badgeBonus) {
         this.garden = garden;
         this.unresolvedRequirements = new HashMap<>();
         this.costMultiplier = costMultiplier;
         this.productionMultiplier = productionMultiplier;
+        this.badgeMultiplier = 1f + badgeBonus;
     }
 
     public GardenBuilder(Garden garden) {
-        this(garden, 1, 1);
+        this(garden, 1, 1, 0);
     }
 
     public GeneratorBuilder createGenerator(String name, Amount baseCost, Amount baseProduction) {
@@ -42,7 +44,7 @@ public class GardenBuilder {
     public GeneratorBuilder createGenerator(
             String name, Amount baseCost, float compoundingCost, Amount baseProduction) {
         Generator generator = new Generator(name, baseCost.multiplyBy(costMultiplier), compoundingCost,
-                baseProduction.multiplyBy(productionMultiplier));
+                baseProduction.multiplyBy(productionMultiplier).multiplyBy(badgeMultiplier));
         garden.addGenerator(generator);
         return new GeneratorBuilder(this, generator);
     }
@@ -54,7 +56,7 @@ public class GardenBuilder {
     public GeneratorBuilder createGenerator(
             String name, Amount baseCost, float compoundingCost, Amount baseProduction, int baseChargeTime) {
         Generator generator = new Generator(name, baseCost.multiplyBy(costMultiplier), compoundingCost,
-                baseProduction.multiplyBy(productionMultiplier), baseChargeTime);
+                baseProduction.multiplyBy(badgeMultiplier), baseChargeTime); // does not production multiplier apply? must it be boosted?
         garden.addGenerator(generator);
         return new GeneratorBuilder(this, generator);
     }

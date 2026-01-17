@@ -26,7 +26,7 @@ import java.util.Set;
 @Controller
 public class SetInStoneController {
 
-    private final Garden garden = SetInStone.createGarden(1, 1);
+    private final Garden garden = SetInStone.createGarden(1, 1, 0);
     private final GardenState state = new GardenState();
 
     public Garden getGarden() {

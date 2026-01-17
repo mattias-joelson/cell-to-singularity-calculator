@@ -47,13 +47,13 @@ public class SetInStone {
         state.setGeneratorCount(generator, count);
     }
 
-    public static Garden createGarden(int costMultiplier, int productionMultiplier) {
+    public static Garden createGarden(int costMultiplier, int productionMultiplier, float badgeBonus) {
         Garden garden = new Garden("Set in Stone");
         for (String currency : CURRENCIES) {
             garden.addCurrency(currency);
         }
 
-        GardenBuilder builder = new GardenBuilder(garden, costMultiplier, productionMultiplier);
+        GardenBuilder builder = new GardenBuilder(garden, costMultiplier, productionMultiplier, badgeBonus);
 
         builder.createGenerator("Mineral", minerals(150), 1.15f, minerals(2))
                 //.addUpgradeRequirement("Earthly Origins")
@@ -261,7 +261,7 @@ public class SetInStone {
 
     void main() {
 
-        Garden garden = createGarden(1, 1);
+        Garden garden = createGarden(1, 1, 0);
         GardenState state = new GardenState();
         state.updateGeneratorStates(garden);
 //        state.setBoost(4);

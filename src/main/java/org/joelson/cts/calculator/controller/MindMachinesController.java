@@ -28,7 +28,7 @@ import java.util.Set;
 @Controller
 public class MindMachinesController {
 
-    private final Garden garden = MindMachines.createGarden(1, 1);
+    private final Garden garden = MindMachines.createGarden(1, 1, 0);
     private final GardenState state = new GardenState();
 
     public Garden getGarden() {

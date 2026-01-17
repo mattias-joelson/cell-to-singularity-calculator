@@ -31,10 +31,10 @@ public class AFelineJourney {
         state.setGeneratorCount(generator, count);
     }
 
-    public static Garden createGarden(int costMultiplier, float productionMultiplier) {
+    public static Garden createGarden(int costMultiplier, int productionMultiplier, float badgeBonus) {
         Garden garden = new Garden("A Feline Journey");
         garden.addCurrency(CURRENCY);
-        GardenBuilder builder = new GardenBuilder(garden, costMultiplier, productionMultiplier);
+        GardenBuilder builder = new GardenBuilder(garden, costMultiplier, productionMultiplier, badgeBonus);
 
         builder.createGenerator("Felidae", paws(30), 1.11f, paws(1))
 
@@ -257,7 +257,7 @@ public class AFelineJourney {
     }
 
     void main() {
-        Garden garden = createGarden(1, 1);
+        Garden garden = createGarden(1, 1, 0);
         GardenState state = new GardenState();
         state.updateGeneratorStates(garden);
 //        state.setBoost(4);
