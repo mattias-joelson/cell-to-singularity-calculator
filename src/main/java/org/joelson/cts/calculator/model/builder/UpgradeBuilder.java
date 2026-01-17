@@ -28,6 +28,10 @@ public record UpgradeBuilder(GardenBuilder gardenBuilder, Generator generator, U
         return gardenBuilder.addUpgrade(generator, name, cost, efficiency, speed, false);
     }
 
+    public UpgradeBuilder addEfficiencyAutomatedUpgrade(String name, Amount cost, float efficiency) {
+        return gardenBuilder.addUpgrade(generator, name, cost, efficiency, 1, true);
+    }
+
     public UpgradeBuilder addSpeedUpgrade(String name, Amount cost, float speed) {
         return gardenBuilder.addSpeedUpgrade(generator, name, cost, speed);
     }

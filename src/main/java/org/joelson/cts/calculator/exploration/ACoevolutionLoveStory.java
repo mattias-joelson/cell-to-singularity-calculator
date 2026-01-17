@@ -121,7 +121,7 @@ void main() {
             .addEfficiencyUpgrade("Flight", pollen(6_000), 2)
             .addUpgradeRequirement("Wasteful Wind")
 
-            .addEfficiencyUpgrade("The Hungry Beetle", pollen(7e6), 21)
+            .addEfficiencyAutomatedUpgrade("The Hungry Beetle", pollen(7e6), 21)
             .addUpgradeRequirement("Flight")
 
             .addEfficiencyUpgrade("The Vegetarian Wasp", pollen(3e8), 5)
@@ -150,7 +150,7 @@ void main() {
             .addEfficiencyUpgrade("Johnston's Organ", pollen(5e9), 4)
             .addGeneratorRequirement("Primitive Bees", 1)
 
-            .addEfficiencyUpgrade("The Competition", pollen(7e9), 1)
+            .addAutomatedUpgrade("The Competition", pollen(7e9))
             .addGeneratorRequirement("Primitive Bees", 1)
 
             .addSpeedUpgrade("Birds Not Bees", pollen(3e10), 2)
@@ -165,7 +165,7 @@ void main() {
             .addGeneratorRequirement("Primitive Bees", 1)
             .addUpgradeRequirement("UV Vision")
 
-            .addEfficiencyUpgrade("Very Hairy Body", pollen(3e16), 3)
+            .addEfficiencyAutomatedUpgrade("Very Hairy Body", pollen(3e16), 3)
             .addGeneratorRequirement("Food Banking", 1)
 
             .addSpeedUpgrade("Pollen Brushes", pollen(5e16), 2)
@@ -194,7 +194,7 @@ void main() {
     Generator hiveLife = builder.createGenerator("The Hive Life", pollen(8e25), 1.15f, pollen(3.6e26), 3_600)
             .addGeneratorRequirement("Food Banking", 1)
 
-            .addSpeedUpgrade("Baby Bees", pollen(8e25), 2)
+            .addSpeedAutomatedUpgrade("Baby Bees", pollen(8e25), 2)
             .addGeneratorRequirement("The Hive Life", 1)
 
             .addSpeedUpgrade("Old Foragers", pollen(3.5e26), 5)
@@ -207,7 +207,7 @@ void main() {
     Generator human = builder.createGenerator("Human", pollen(2.8e31), 1.15f, pollen(2.88e32), 7_200)
             .addUpgradeRequirement("A New Suitor")
 
-            .addSpeedUpgrade("The Crops We Crave", pollen(8e31), 2)
+            .addSpeedAutomatedUpgrade("The Crops We Crave", pollen(8e31), 2)
             .addGeneratorRequirement("Human", 1)
 
             .addSpeedUpgrade("Our Favorite Bee", pollen(4e32), 10)
