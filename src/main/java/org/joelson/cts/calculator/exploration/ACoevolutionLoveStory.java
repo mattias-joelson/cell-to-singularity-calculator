@@ -142,7 +142,7 @@ void main() {
 
             .generator();
 
-    GARDEN.getUpgrade("A New Suitor").addEffect(new UpgradeEffect(bees, 16));
+    GARDEN.getUpgrade("A New Suitor").addEffect(UpgradeEffect.withEfficiency(bees, 16));
 
     Generator primitiveBees = builder.createGenerator("Primitive Bees", pollen(4e8), 1.15f, pollen(1.5e8), 500)
             .addUpgradeRequirement("The Vegetarian Wasp")

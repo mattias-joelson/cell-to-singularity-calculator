@@ -33,7 +33,7 @@ private static Upgrade createUpgrade(
         Garden garden, GardenState state, Generator generator, String name, Amount cost, float efficiency,
         boolean bought) {
     Upgrade upgrade = new Upgrade(name, cost);
-    upgrade.addEffect(new UpgradeEffect(generator, efficiency));
+    upgrade.addEffect(UpgradeEffect.withEfficiency(generator, efficiency));
     garden.addUpgrade(upgrade);
     state.setUpgradeBought(upgrade, bought);
     return upgrade;
@@ -100,7 +100,7 @@ void main() {
     createUpgrade(goodVibrations, state, instruments, "Lyre, Lyre", songs(3e9), 3.5f); // String
     createUpgrade(goodVibrations, state, instruments, "Hurricane Hymn No. 6", songs(7e9), 6); // melody, lyre, clay tablets
     Upgrade whatsNext = new Upgrade("What's Next?", notes(8e14));
-    whatsNext.addEffect(new UpgradeEffect(instruments, 2.5f));
+    whatsNext.addEffect(UpgradeEffect.withEfficiency(instruments, 2.5f));
     state.setUpgradeBought(whatsNext);
     goodVibrations.addUpgrade(whatsNext);
 
