@@ -5,6 +5,7 @@ import org.joelson.cts.calculator.model.Amount;
 import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
+import org.joelson.cts.calculator.model.GeneratorImprovement;
 import org.joelson.cts.calculator.model.GeneratorState;
 import org.joelson.cts.calculator.model.Improvement;
 import org.joelson.cts.calculator.model.ImprovementCalculator;
@@ -246,42 +247,36 @@ public class MindMachinesController {
             String currencyName = generator.getBaseProduction().currency();
             double baseProduction = generator.getBaseProduction().amount();
             float efficiency = generatorState.efficiency();
+            String totalPerCycleString;
+            String productionString;
+            GeneratorImprovement improvement = new GeneratorImprovement(generator, generatorState);
+            String increaseString = String.format("%.7f", improvement.getRatio());
             if (generator.isTimed()) {
                 double productionPerCycle = baseProduction * efficiency * count;
                 float speed = generatorState.speed();
                 float cycleTime = generator.getBaseChargeTime() / speed;
                 String productionPerCycleString;
                 if (cycleTime > 60) {
-                    productionPerCycleString = String.format("%s in %s s",
+                    totalPerCycleString = String.format("%s in %s s",
                             new Amount(currencyName, productionPerCycle).asString(),
                             DurationToolkit.durationString(cycleTime));
                 } else {
-                    productionPerCycleString = String.format("%s in %.3f s",
+                    totalPerCycleString = String.format("%s in %.3f s",
                             new Amount(currencyName, productionPerCycle).asString(), cycleTime);
                 }
                 double production = productionPerCycle / cycleTime;
-                String productionString = String.format("%s", new Amount(currencyName, production).asString());
-                String increaseString;
-                if (generatorState.automated()) {
-                    increaseString = String.format("%.7f",(baseProduction * efficiency) / (cycleTime * generator.getCost(count).amount()));
-                } else {
-                    productionString = String.format("(%s)", productionString);
-                    increaseString = "0.0000000";
-                }
-                generatorProductions.add(
-                        new GeneratorProduction(generator.getName(), count, generator.getCost(count).asString(),
-                                generator.getBaseProduction().multiplyBy(efficiency).asString(),
-                                productionPerCycleString, productionString, increaseString));
+                String productionFormatString = (generatorState.automated()) ? "%s" : "(%s)";
+                productionString = String.format(productionFormatString,
+                        new Amount(currencyName, production).asString());
             } else {
+                totalPerCycleString = "";
                 double production = baseProduction * efficiency * count;
-                String productionString = String.format("%s", new Amount(currencyName, production).asString());
-                String increaseString = String.format("%.7f",
-                        (baseProduction * efficiency) / generator.getCost(count).amount());
-                generatorProductions.add(
-                        new GeneratorProduction(generator.getName(), count, generator.getCost(count).asString(),
-                                generator.getBaseProduction().multiplyBy(efficiency).asString(),
-                                "", productionString, increaseString));
+                productionString = String.format("%s", new Amount(currencyName, production).asString());
             }
+            generatorProductions.add(
+                    new GeneratorProduction(generator.getName(), count, generator.getCost(count).asString(),
+                            generator.getBaseProduction().multiplyBy(efficiency).asString(),
+                            totalPerCycleString, productionString, increaseString));
         }
         return generatorProductions;
     }
