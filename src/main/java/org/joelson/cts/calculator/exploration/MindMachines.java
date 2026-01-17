@@ -252,39 +252,39 @@ public class MindMachines {
 
         builder.resolveRequirements();
 
-        Generator aiGenerator = garden.getGenerator("Artificial Intelligence");
-        garden.getUpgrade("Learning Loops").addEffect(new UpgradeEffect(aiGenerator, 1, 4));
-        garden.getUpgrade("Brute Force").addEffect(new UpgradeEffect(aiGenerator, 1, 0.5f));
-        garden.getUpgrade("Stochastic Parrot").addEffect(new UpgradeEffect(aiGenerator, 1, 0.75f));
-        garden.getUpgrade("Games, Mastered").addEffect(new UpgradeEffect(aiGenerator, 1, 9));
-        garden.getUpgrade("Expert Systems").addEffect(new UpgradeEffect(aiGenerator, 51));
-        garden.getUpgrade("Context").addEffect(new UpgradeEffect(aiGenerator, 1, 0.75f));
-        garden.getUpgrade("Black Box").addEffect(new UpgradeEffect(aiGenerator, 1, 0.75f));
-        garden.getUpgrade("GPTs").addEffect(new UpgradeEffect(aiGenerator, 1, 10));
-        garden.getUpgrade("Deep Learning").addEffect(new UpgradeEffect(aiGenerator, 1, 10));
-        garden.getUpgrade("AI Evolved").addEffect(new UpgradeEffect(aiGenerator, 51));
-        garden.getUpgrade("Personal Assistants").addEffect(new UpgradeEffect(aiGenerator, true));
-        garden.getUpgrade("Customer Service").addEffect(new UpgradeEffect(aiGenerator, 2));
-        garden.getUpgrade("Therapists").addEffect(new UpgradeEffect(aiGenerator, 1, 2));
-        garden.getUpgrade("Translators and Interpreters").addEffect(new UpgradeEffect(aiGenerator, 2));
-        garden.getUpgrade("AI Avatars").addEffect(new UpgradeEffect(aiGenerator, 2));
-        garden.getUpgrade("Bad Actors").addEffect(new UpgradeEffect(aiGenerator, 1, 0.75f));
-        garden.getUpgrade("Gullibility").addEffect(new UpgradeEffect(aiGenerator, 1, 0.75f));
-        garden.getUpgrade("Human Bias").addEffect(new UpgradeEffect(aiGenerator, 1, 0.75f));
-        garden.getUpgrade("Resistance").addEffect(new UpgradeEffect(aiGenerator, 1, 0.75f));
-        garden.getUpgrade("Self-Driving Vehicles").addEffect(new UpgradeEffect(aiGenerator, 1, 2));
-        garden.getUpgrade("AI Drones and Carts").addEffect(new UpgradeEffect(aiGenerator, 1, 2));
-        garden.getUpgrade("Space Explorers").addEffect(new UpgradeEffect(aiGenerator, 1, 5));
-        garden.getUpgrade("Weak Laws").addEffect(new UpgradeEffect(aiGenerator, 1, 0.5f));
-        garden.getUpgrade("AI Workforce").addEffect(new UpgradeEffect(aiGenerator, 1, 0.5f));
-        garden.getUpgrade("Cyberattacks and Warfare").addEffect(new UpgradeEffect(aiGenerator, 1, 0.5f));
-        garden.getUpgrade("Statistical Forecasting").addEffect(new UpgradeEffect(aiGenerator, 1, 10));
-        garden.getUpgrade("Smarter Systems").addEffect(new UpgradeEffect(aiGenerator, 6));
-        garden.getUpgrade("Scientific Discoveries").addEffect(new UpgradeEffect(aiGenerator, 1, 11));
-        garden.getUpgrade("Mind Reading").addEffect(new UpgradeEffect(aiGenerator, 1, 10));
-        garden.getUpgrade("Machine Unlearning").addEffect(new UpgradeEffect(aiGenerator, 1, 0.75f));
-        garden.getUpgrade("Red Teaming").addEffect(new UpgradeEffect(aiGenerator, 1, 0.75f));
-        garden.getUpgrade("Tough Decisions").addEffect(new UpgradeEffect(aiGenerator, 1, 2));
+        builder.with("Artificial Intelligence")
+                .addSpeedEffect("Learning Loops", 4)
+                .addSpeedEffect("Brute Force", 0.5f)
+                .addSpeedEffect("Stochastic Parrot", 0.75f)
+                .addSpeedEffect("Games, Mastered", 9)
+                .addEfficiencyEffect("Expert Systems", 51)
+                .addSpeedEffect("Context", 0.75f)
+                .addSpeedEffect("Black Box", 0.75f)
+                .addSpeedEffect("GPTs", 10)
+                .addSpeedEffect("Deep Learning", 10)
+                .addEfficiencyEffect("AI Evolved", 51)
+                .addAutomatedEffect("Personal Assistants")
+                .addEfficiencyEffect("Customer Service", 2)
+                .addSpeedEffect("Therapists", 2)
+                .addEfficiencyEffect("Translators and Interpreters", 2)
+                .addEfficiencyEffect("AI Avatars", 2)
+                .addSpeedEffect("Bad Actors", 0.75f)
+                .addSpeedEffect("Gullibility", 0.75f)
+                .addSpeedEffect("Human Bias", 0.75f)
+                .addSpeedEffect("Resistance", 0.75f)
+                .addSpeedEffect("Self-Driving Vehicles", 2)
+                .addSpeedEffect("AI Drones and Carts", 2)
+                .addSpeedEffect("Space Explorers", 5)
+                .addSpeedEffect("Weak Laws", 0.5f)
+                .addSpeedEffect("AI Workforce", 0.5f)
+                .addSpeedEffect("Cyberattacks and Warfare", 0.5f)
+                .addSpeedEffect("Statistical Forecasting", 10)
+                .addEfficiencyEffect("Smarter Systems", 6)
+                .addSpeedEffect("Scientific Discoveries", 11)
+                .addSpeedEffect("Mind Reading", 10)
+                .addSpeedEffect("Machine Unlearning", 0.75f)
+                .addSpeedEffect("Red Teaming", 0.75f)
+                .addSpeedEffect("Tough Decisions", 2);
 
         return garden;
     }

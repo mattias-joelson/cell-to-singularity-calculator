@@ -61,6 +61,14 @@ public class GardenBuilder {
         return new GeneratorBuilder(this, generator);
     }
 
+    public UpgradeEffectBuilder with(String generatorName) {
+        Generator generator = garden.getGenerator(generatorName);
+        if (generator == null) {
+            throw new IllegalStateException("No generator with name " + generatorName + " found.");
+        }
+        return new UpgradeEffectBuilder(garden, generator);
+    }
+
     UpgradeBuilder addEfficiencyUpgrade(
             Generator generator, String name, Amount cost, float efficiency) {
         return addUpgrade(generator, name, cost, efficiency, 1, false);
