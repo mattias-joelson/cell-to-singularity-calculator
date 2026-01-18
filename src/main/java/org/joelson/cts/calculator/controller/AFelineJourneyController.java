@@ -13,7 +13,6 @@ import org.joelson.cts.calculator.model.Upgrade;
 import org.joelson.cts.calculator.model.UpgradeEffect;
 import org.joelson.cts.calculator.model.UpgradeImprovement;
 import org.joelson.cts.calculator.util.DurationToolkit;
-import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -208,7 +207,7 @@ public class AFelineJourneyController {
         return updateModel(model);
     }
 
-    private @NonNull String updateModel(Model model) {
+    private String updateModel(Model model) {
         state.updateGeneratorStates(garden);
 
         model.addAttribute("garden", garden);
