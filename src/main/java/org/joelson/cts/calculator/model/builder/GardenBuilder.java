@@ -66,6 +66,10 @@ public class GardenBuilder {
         if (generator == null) {
             throw new IllegalStateException("No generator with name " + generatorName + " found.");
         }
+        return with(generator);
+    }
+
+    UpgradeEffectBuilder with(Generator generator) {
         return new UpgradeEffectBuilder(garden, generator);
     }
 
