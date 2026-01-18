@@ -5,15 +5,7 @@ import org.joelson.cts.calculator.model.Generator;
 import org.joelson.cts.calculator.model.Upgrade;
 import org.joelson.cts.calculator.model.UpgradeEffect;
 
-public class UpgradeEffectBuilder {
-
-    private final Garden garden;
-    private final Generator generator;
-
-    public UpgradeEffectBuilder(Garden garden, Generator generator) {
-        this.garden = garden;
-        this.generator = generator;
-    }
+public record UpgradeEffectBuilder(Garden garden, Generator generator) {
 
     public UpgradeEffectBuilder addEfficiencyEffect(String upgradeName, float efficiency) {
         return addEffect(upgradeName, efficiency, 1, false);
