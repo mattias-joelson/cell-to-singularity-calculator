@@ -29,7 +29,7 @@ public class GardenState {
 
     public void setGeneratorCount(Generator generator, int count) {
         GeneratorState state = generatorStates.computeIfPresent(generator.getName(),
-                (_, s) -> new GeneratorState(count, s.efficiency(), s.speed()));
+                (_, s) -> new GeneratorState(count, s.efficiency(), s.speed(), s.automated()));
         if (state == null) {
             throw new NullPointerException("No generator " + generator.getName() + " present.");
         }
@@ -42,9 +42,9 @@ public class GardenState {
         }
         if (boost > 1) {
             if (generator.isTimed()) {
-                return new GeneratorState(state.count(), state.efficiency(), state.speed() * boost);
+                return new GeneratorState(state.count(), state.efficiency(), state.speed() * boost, state.automated());
             } else {
-                return new GeneratorState(state.count(), state.efficiency() * boost);
+                return GeneratorState.withEfficiency(state.count(), state.efficiency() * boost);
             }
         }
         return state;
@@ -77,7 +77,7 @@ public class GardenState {
     public void updateGeneratorStates(Garden garden) {
         Map<String, GeneratorState> generatorStates = new HashMap<>(garden.getGenerators().size());
         for (Generator generator : garden.getGenerators()) {
-            GeneratorState generatorState = new GeneratorState(0, 1, generator.isTimed() ? 1 : 0);
+            GeneratorState generatorState = new GeneratorState(0, 1, generator.isTimed() ? 1 : 0, false);
             generatorStates.put(generator.getName(), generatorState);
         }
         for (Upgrade upgrade : garden.getUpgrades()) {
@@ -86,7 +86,7 @@ public class GardenState {
                     String generatorName = effect.generator().getName();
                     GeneratorState previous = generatorStates.get(generatorName);
                     GeneratorState updated = new GeneratorState(0, previous.efficiency() * effect.efficiency(),
-                            previous.speed() * effect.speed());
+                            previous.speed() * effect.speed(), previous.automated() | effect.automated());
                     generatorStates.put(generatorName, updated);
                 }
             }
@@ -95,7 +95,7 @@ public class GardenState {
             GeneratorState generatorState = getGeneratorState(generator);
             GeneratorState updated = generatorStates.get(generator.getName());
             setGeneratorState(generator, new GeneratorState(generatorState.count(), updated.efficiency(),
-                    updated.speed()));
+                    updated.speed(), updated.automated()));
         }
     }
 

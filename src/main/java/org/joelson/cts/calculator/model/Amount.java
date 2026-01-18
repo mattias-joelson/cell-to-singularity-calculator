@@ -20,7 +20,7 @@ public record Amount(String currency, double amount) {
     }
 
     public String asString() {
-        return (amount < 1_000_000) ?
+        return (amount > -1_000_000_000 && amount < 1_000_000) ?
                 String.format("%,.0f %s", amount, currency) : String.format("%.2e %s", amount, currency);
     }
 

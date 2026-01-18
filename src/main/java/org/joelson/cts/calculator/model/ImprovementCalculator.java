@@ -29,7 +29,7 @@ public class ImprovementCalculator {
                 double productionPerCycle = baseProduction * efficiency * count;
                 float speed = generatorState.speed();
                 float cycleTime = generator.getBaseChargeTime() / speed;
-                production = productionPerCycle / cycleTime;
+                production = (!generator.isTimed() || generatorState.automated()) ? productionPerCycle / cycleTime : 0;
                 System.out.printf("Generator %s: count %d (next %s), base %s, each %s, total per cycle %s in %s"
                                 + ", total per second %s%n",
                         generator.getName(), count, generator.getCost(count).asString(),

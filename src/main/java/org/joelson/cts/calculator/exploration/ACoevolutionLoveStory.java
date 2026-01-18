@@ -31,23 +31,23 @@ void main() {
 
     Generator flowers = builder.createGenerator("Flowers", pollen(40), 1.1f, pollen(1))
 
-            .addUpgrade("Naked Seeds", pollen(1_000), 4)
+            .addEfficiencyUpgrade("Naked Seeds", pollen(1_000), 4)
             .addGeneratorRequirement("Flowers", 1)
             .addGeneratorRequirement("Bees", 1)
 
-            .addUpgrade("Bloom Boom", pollen(8e7), 501)
+            .addEfficiencyUpgrade("Bloom Boom", pollen(8e7), 501)
             .addUpgradeRequirement("The Showy Magnolia")
 
-            .addUpgrade("Size and Structure", pollen(1e16), 5_500_001)
+            .addEfficiencyUpgrade("Size and Structure", pollen(1e16), 5_500_001)
             .addGeneratorRequirement("The Art of Attraction", 1)
 
-            .addUpgrade("Pollen Tag", pollen(3e24), 1_000_000_001)
+            .addEfficiencyUpgrade("Pollen Tag", pollen(3e24), 1_000_000_001)
             .addUpgradeRequirement("Orchid Flowers")
 
-            .addUpgrade("Pollination Pinnacle", pollen(1e30), 10_001)
+            .addEfficiencyUpgrade("Pollination Pinnacle", pollen(1e30), 10_001)
             .addUpgradeRequirement("Floral Oils")
 
-            .addUpgrade("A New Suitor", pollen(8e30), 26)
+            .addEfficiencyUpgrade("A New Suitor", pollen(8e30), 26)
             .addUpgradeRequirement("Pollination Pinnacle")
             .addUpgradeRequirement("Apex of Evolution")
             .generator();
@@ -55,16 +55,16 @@ void main() {
     Generator primitiveFlowers = builder.createGenerator("Primitive Flowers", pollen(10_000), 1.1f, pollen(150))
             .addUpgradeRequirement("Wasteful Wind")
 
-            .addUpgrade("Self-Marriage", pollen(50_000), 2)
+            .addEfficiencyUpgrade("Self-Marriage", pollen(50_000), 2)
             .addGeneratorRequirement("Primitive Flowers", 1)
 
-            .addUpgrade("Self-Control", pollen(400_000), 1.5f)
+            .addEfficiencyUpgrade("Self-Control", pollen(400_000), 1.5f)
             .addUpgradeRequirement("Self-Marriage")
 
-            .addUpgrade("Stranger Marriage", pollen(900_000), 2)
+            .addEfficiencyUpgrade("Stranger Marriage", pollen(900_000), 2)
             .addUpgradeRequirement("Self-Control")
 
-            .addUpgrade("The Showy Magnolia", pollen(3e7), 2)
+            .addEfficiencyUpgrade("The Showy Magnolia", pollen(3e7), 2)
             .addUpgradeRequirement("Stranger Marriage")
             .generator();
 
@@ -72,19 +72,19 @@ void main() {
             .addGeneratorRequirement("Primitive Flowers", 1)
             .addGeneratorRequirement("Primitive Bees", 1)
 
-            .addUpgrade("Come One or All?", pollen(3e11), 3)
+            .addEfficiencyUpgrade("Come One or All?", pollen(3e11), 3)
             .addGeneratorRequirement("The Art of Attraction", 1)
 
-            .addUpgrade("Dandelion Welcome Mat", pollen(7e11), 3)
+            .addEfficiencyUpgrade("Dandelion Welcome Mat", pollen(7e11), 3)
             .addUpgradeRequirement("Come One or All?")
 
-            .addUpgrade("Snappy Snapdragons", pollen(4e12), 6)
+            .addEfficiencyUpgrade("Snappy Snapdragons", pollen(4e12), 6)
             .addUpgradeRequirement("Come One or All?")
 
-            .addUpgrade("Early Willows", pollen(2e14), 5)
+            .addEfficiencyUpgrade("Early Willows", pollen(2e14), 5)
             .addUpgradeRequirement("Come One or All?")
 
-            .addUpgrade("Color and Pattern", pollen(6e15), 11)
+            .addEfficiencyUpgrade("Color and Pattern", pollen(6e15), 11)
             .addGeneratorRequirement("The Art of Attraction", 1)
             .generator();
 
@@ -93,70 +93,70 @@ void main() {
             .addGeneratorRequirement("The Art of Attraction", 1)
             .addGeneratorRequirement("Food Banking", 1)
 
-            .addUpgrade("Nectar Bribes", pollen(3e19), 3)
+            .addEfficiencyUpgrade("Nectar Bribes", pollen(3e19), 3)
             .addGeneratorRequirement("Bribery and Deception", 1)
 
-            .addUpgrade("Nectar Safeguards", pollen(2.5e20), 4)
+            .addEfficiencyUpgrade("Nectar Safeguards", pollen(2.5e20), 4)
             .addUpgradeRequirement("Nectar Bribes")
 
-            .addUpgrade("Kidnappers!", pollen(1.25e22), 6)
+            .addEfficiencyUpgrade("Kidnappers!", pollen(1.25e22), 6)
             .addUpgradeRequirement("Nectar Bribes")
 
-            .addUpgrade("Murderers!", pollen(2.5e22), 6)
+            .addEfficiencyUpgrade("Murderers!", pollen(2.5e22), 6)
             .addUpgradeRequirement("Kidnappers!")
 
-            .addUpgrade("Floral Oils", pollen(8e22), 3)
+            .addEfficiencyUpgrade("Floral Oils", pollen(8e22), 3)
             .addGeneratorRequirement("Bribery and Deception", 1)
 
-            .addUpgrade("Orchid Flowers", pollen(8e23), 5)
+            .addEfficiencyUpgrade("Orchid Flowers", pollen(8e23), 5)
             .addUpgradeRequirement("Floral Oils") // Orchid Bees?
             .generator();
 
     Generator bees = builder.createGenerator("Bees", pollen(500), 1.15f, pollen(450), 45)
             .addGeneratorRequirement("Flowers", 1)
 
-            .addUpgrade("Wasteful Wind", pollen(4_000), 3)
+            .addEfficiencyUpgrade("Wasteful Wind", pollen(4_000), 3)
             .addUpgradeRequirement("Naked Seeds")
 
-            .addUpgrade("Flight", pollen(6_000), 2)
+            .addEfficiencyUpgrade("Flight", pollen(6_000), 2)
             .addUpgradeRequirement("Wasteful Wind")
 
-            .addUpgrade("The Hungry Beetle", pollen(7e6), 21)
+            .addEfficiencyAutomatedUpgrade("The Hungry Beetle", pollen(7e6), 21)
             .addUpgradeRequirement("Flight")
 
-            .addUpgrade("The Vegetarian Wasp", pollen(3e8), 5)
+            .addEfficiencyUpgrade("The Vegetarian Wasp", pollen(3e8), 5)
             .addUpgradeRequirement("Flight")
 
-            .addUpgrade("Solitary Nests", pollen(3e9), 1, 10)
+            .addSpeedUpgrade("Solitary Nests", pollen(3e9), 10)
             .addGeneratorRequirement("Primitive Bees", 1)
 
-            .addUpgrade("UV Vision", pollen(8e14), 100_001)
+            .addEfficiencyUpgrade("UV Vision", pollen(8e14), 100_001)
             .addGeneratorRequirement("Primitive Bees", 1)
 
-            .addUpgrade("Happy Ending", pollen(6e24), 10_000_000_001f)
+            .addEfficiencyUpgrade("Happy Ending", pollen(6e24), 10_000_000_001f)
             .addUpgradeRequirement("Pollen Tag")//.addUpgradeRequirement("Orchid Bees")
 
-            .addUpgrade("Apex of Evolution", pollen(7e28), 10_001)
+            .addEfficiencyUpgrade("Apex of Evolution", pollen(7e28), 10_001)
             .addGeneratorRequirement("The Hive Life", 1)
             .addUpgradeRequirement("Waggle Dance")
 
             .generator();
 
-    GARDEN.getUpgrade("A New Suitor").addEffect(new UpgradeEffect(bees, 16));
+    GARDEN.getUpgrade("A New Suitor").addEffect(UpgradeEffect.withEfficiency(bees, 16));
 
     Generator primitiveBees = builder.createGenerator("Primitive Bees", pollen(4e8), 1.15f, pollen(1.5e8), 500)
             .addUpgradeRequirement("The Vegetarian Wasp")
 
-            .addUpgrade("Johnston's Organ", pollen(5e9), 4)
+            .addEfficiencyUpgrade("Johnston's Organ", pollen(5e9), 4)
             .addGeneratorRequirement("Primitive Bees", 1)
 
-            .addUpgrade("The Competition", pollen(7e9), 1)
+            .addAutomatedUpgrade("The Competition", pollen(7e9))
             .addGeneratorRequirement("Primitive Bees", 1)
 
-            .addUpgrade("Birds Not Bees", pollen(3e10), 1, 2)
+            .addSpeedUpgrade("Birds Not Bees", pollen(3e10), 2)
             .addUpgradeRequirement("The Competition")
 
-            .addUpgrade("Bumblebee Exclusive", pollen(5e13), 1, 150)
+            .addSpeedUpgrade("Bumblebee Exclusive", pollen(5e13), 150)
             .addUpgradeRequirement("Birds Not Bees") // ???
             .addUpgradeRequirement("Snappy Snapdragons") // ???
             .generator();
@@ -165,70 +165,70 @@ void main() {
             .addGeneratorRequirement("Primitive Bees", 1)
             .addUpgradeRequirement("UV Vision")
 
-            .addUpgrade("Very Hairy Body", pollen(3e16), 3)
+            .addEfficiencyAutomatedUpgrade("Very Hairy Body", pollen(3e16), 3)
             .addGeneratorRequirement("Food Banking", 1)
 
-            .addUpgrade("Pollen Brushes", pollen(5e16), 1, 2)
+            .addSpeedUpgrade("Pollen Brushes", pollen(5e16), 2)
             .addUpgradeRequirement("Very Hairy Body")
 
-            .addUpgrade("Bristled Baskets", pollen(2e17), 6)
+            .addEfficiencyUpgrade("Bristled Baskets", pollen(2e17), 6)
             .addUpgradeRequirement("Pollen Brushes")
 
-            .addUpgrade("Buzz Pollination", pollen(7e17), 1, 6)
+            .addSpeedUpgrade("Buzz Pollination", pollen(7e17), 6)
             .addGeneratorRequirement("Food Banking", 1)
 
-            .addUpgrade("Mechanical Mouthparts", pollen(1.4e21), 11)
+            .addEfficiencyUpgrade("Mechanical Mouthparts", pollen(1.4e21), 11)
             .addGeneratorRequirement("Food Banking", 1) // ???
             .addUpgradeRequirement("Nectar Safeguards") // ???
 
-            .addUpgrade("Bandit Bees", pollen(2.5e21), 1, 20)
+            .addSpeedUpgrade("Bandit Bees", pollen(2.5e21), 20)
             .addUpgradeRequirement("Mechanical Mouthparts")
 
-            .addUpgrade("All-Purpose Oils", pollen(2.5e23), 1, 4)
+            .addSpeedUpgrade("All-Purpose Oils", pollen(2.5e23), 4)
             .addUpgradeRequirement("Floral Oils")
 
-            .addUpgrade("Orchid Bees", pollen(5e23), 9)
+            .addEfficiencyUpgrade("Orchid Bees", pollen(5e23), 9)
             .addUpgradeRequirement("Solitary Nests")
             .generator();
 
     Generator hiveLife = builder.createGenerator("The Hive Life", pollen(8e25), 1.15f, pollen(3.6e26), 3_600)
             .addGeneratorRequirement("Food Banking", 1)
 
-            .addUpgrade("Baby Bees", pollen(8e25), 1, 2)
+            .addSpeedAutomatedUpgrade("Baby Bees", pollen(8e25), 2)
             .addGeneratorRequirement("The Hive Life", 1)
 
-            .addUpgrade("Old Foragers", pollen(3.5e26), 1, 5)
+            .addSpeedUpgrade("Old Foragers", pollen(3.5e26), 5)
             .addUpgradeRequirement("Baby Bees")
 
-            .addUpgrade("Waggle Dance", pollen(2e27), 11, 2)
+            .addEfficiencySpeedUpgrade("Waggle Dance", pollen(2e27), 11, 2)
             .addUpgradeRequirement("Old Foragers")
             .generator();
 
     Generator human = builder.createGenerator("Human", pollen(2.8e31), 1.15f, pollen(2.88e32), 7_200)
             .addUpgradeRequirement("A New Suitor")
 
-            .addUpgrade("The Crops We Crave", pollen(8e31), 1, 2)
+            .addSpeedAutomatedUpgrade("The Crops We Crave", pollen(8e31), 2)
             .addGeneratorRequirement("Human", 1)
 
-            .addUpgrade("Our Favorite Bee", pollen(4e32), 1, 10)
+            .addSpeedUpgrade("Our Favorite Bee", pollen(4e32), 10)
             .addUpgradeRequirement("The Crops We Crave")
 
-            .addUpgrade("Africanized Bees", pollen(7e33), 1, 10)
+            .addSpeedUpgrade("Africanized Bees", pollen(7e33), 10)
             .addUpgradeRequirement("Our Favorite Bee")
 
-            .addUpgrade("Wild Decline", pollen(1e35), 11)
+            .addEfficiencyUpgrade("Wild Decline", pollen(1e35), 11)
             .addGeneratorRequirement("Human", 1)
 
-            .addUpgrade("Habitat Destruction", pollen(3e36), 1, 3)
+            .addSpeedUpgrade("Habitat Destruction", pollen(3e36), 3)
             .addUpgradeRequirement("Wild Decline")
 
-            .addUpgrade("Varroa Destructor", pollen(4e37), 3)
+            .addEfficiencyUpgrade("Varroa Destructor", pollen(4e37), 3)
             .addGeneratorRequirement("Human", 1)
 
-            .addUpgrade("Colony Collapse Disorder", pollen(5e38), 6)
+            .addEfficiencyUpgrade("Colony Collapse Disorder", pollen(5e38), 6)
             .addUpgradeRequirement("Varroa Destructor")
 
-            .addUpgrade("Till Death Do Us Part?", pollen(2e39), 6)
+            .addEfficiencyUpgrade("Till Death Do Us Part?", pollen(2e39), 6)
             .addUpgradeRequirement("Africanized Bees")
             .addUpgradeRequirement("Habitat Destruction")
             .addUpgradeRequirement("Colony Collapse Disorder")
@@ -311,7 +311,7 @@ private static void printUnlocked(Garden garden, GardenState state, List<String>
     for (Upgrade upgrade : garden.getUnlockedUpgrades(state)) {
         if (!state.isUpgradeBought(upgrade)) {
             for (UpgradeEffect effect : upgrade.getEffects()) {
-                actions.add(String.format(" *** unlocked upgrade %s: %s efficiency %.2f, speed %,d, cost %s",
+                actions.add(String.format(" *** unlocked upgrade %s: %s efficiency %.2f, speed %.2f, cost %s",
                         upgrade.getName(), effect.generator().getName(), effect.efficiency(), effect.speed(),
                         upgrade.getCost().asString()));
             }

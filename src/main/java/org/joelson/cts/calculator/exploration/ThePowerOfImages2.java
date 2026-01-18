@@ -150,7 +150,7 @@ void main() {
 private static Upgrade createUpgrade(
         Garden garden, GardenState state, Generator generator, String name, double cost, float efficiency) {
     Upgrade upgrade = new Upgrade(name, amount(cost));
-    upgrade.addEffect(new UpgradeEffect(generator, efficiency));
+    upgrade.addEffect(UpgradeEffect.withEfficiency(generator, efficiency));
     garden.addUpgrade(upgrade);
     state.setUpgradeBought(upgrade);
     return upgrade;

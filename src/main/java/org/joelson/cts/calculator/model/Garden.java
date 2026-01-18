@@ -34,6 +34,7 @@ public class Garden {
     }
 
     public void addGenerator(Generator generator) {
+        checkExistingNames(generator.getName());
         generators.add(generator);
     }
 
@@ -55,6 +56,7 @@ public class Garden {
     }
 
     public void addUpgrade(Upgrade upgrade) {
+        checkExistingNames(upgrade.getName());
         upgrades.add(upgrade);
     }
 
@@ -98,5 +100,18 @@ public class Garden {
             }
         }
         return unlocked;
+    }
+
+    private void checkExistingNames(String name) {
+        for (Generator generator : generators) {
+            if (generator.getName().equals(name)) {
+                throw new IllegalStateException("There already exists a generator named " + name + ".");
+            }
+        }
+        for (Upgrade upgrade : upgrades) {
+            if (upgrade.getName().equals(name)) {
+                throw new IllegalStateException("There already exists an upgrade named " + name + ".");
+            }
+        }
     }
 }

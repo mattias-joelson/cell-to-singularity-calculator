@@ -47,125 +47,125 @@ public class SetInStone {
         state.setGeneratorCount(generator, count);
     }
 
-    public static Garden createGarden(int costMultiplier, int productionMultiplier) {
+    public static Garden createGarden(int costMultiplier, int productionMultiplier, float badgeBonus) {
         Garden garden = new Garden("Set in Stone");
         for (String currency : CURRENCIES) {
             garden.addCurrency(currency);
         }
 
-        GardenBuilder builder = new GardenBuilder(garden, costMultiplier, productionMultiplier);
+        GardenBuilder builder = new GardenBuilder(garden, costMultiplier, productionMultiplier, badgeBonus);
 
         builder.createGenerator("Mineral", minerals(150), 1.15f, minerals(2))
                 //.addUpgradeRequirement("Earthly Origins")
 
-                .addUpgrade("Olivine", minerals(400), 1.5f)
+                .addEfficiencyUpgrade("Olivine", minerals(400), 1.5f)
                 .addGeneratorRequirement("Mineral")
 
-                .addUpgrade("Quartz", minerals(2_500), 1.75f)
+                .addEfficiencyUpgrade("Quartz", minerals(2_500), 1.75f)
                 .addGeneratorRequirement("Mineral")
 
-                .addUpgrade("Feldspars", minerals(7_800), 1.5f)
+                .addEfficiencyUpgrade("Feldspars", minerals(7_800), 1.5f)
                 .addGeneratorRequirement("Mineral")
                 .addUpgradeRequirement("Quartz")
 
-                .addUpgrade("Magma", minerals(32_000), 2)
+                .addEfficiencyUpgrade("Magma", minerals(32_000), 2)
                 .addUpgradeRequirement("Quartz")
 
-                .addUpgrade("Tuff", rocks(18_000), 2.25f)
+                .addEfficiencyUpgrade("Tuff", rocks(18_000), 2.25f)
                 .addGeneratorRequirement("Igneous Rock")
                 .addUpgradeRequirement("Basalt")
 
-                .addUpgrade("Clay", minerals(900_000), 1.75f)
+                .addEfficiencyUpgrade("Clay", minerals(900_000), 1.75f)
                 .addGeneratorRequirement("Mineral")
                 .addUpgradeRequirement("Basalt")
 
-                .addUpgrade("Rock Cycle", minerals(1.7e6), 1.75f)
+                .addEfficiencyUpgrade("Rock Cycle", minerals(1.7e6), 1.75f)
                 .addGeneratorRequirement("Mineral")
                 .addUpgradeRequirement("Basalt")
 
-                .addUpgrade("Sand", minerals(4.5e6), 2.5f)
+                .addEfficiencyUpgrade("Sand", minerals(4.5e6), 2.5f)
                 .addUpgradeRequirement("Rock Cycle")
 
-                .addUpgrade("Sandstone", rocks(2.5e8), 2.25f)
+                .addEfficiencyUpgrade("Sandstone", rocks(2.5e8), 2.25f)
                 .addGeneratorRequirement("Sedimentary Rock")
                 .addUpgradeRequirement("Andesite")
 
-                .addUpgrade("Calcite", minerals(3e8), 3.5f)
+                .addEfficiencyUpgrade("Calcite", minerals(3e8), 3.5f)
                 .addGeneratorRequirement("Mineral")
                 .addUpgradeRequirement("Andesite")
 
-                .addUpgrade("Granite", rocks(1e11), 6)
+                .addEfficiencyUpgrade("Granite", rocks(1e11), 6)
                 .addGeneratorRequirement("Igneous Rock")
                 .addUpgradeRequirement("Scoria")
 
-                .addUpgrade("Gneiss", rocks(9e12), 6)
+                .addEfficiencyUpgrade("Gneiss", rocks(9e12), 6)
                 .addGeneratorRequirement("Metamorphic Rock")
                 .addUpgradeRequirement("Shale")
 
-                .addUpgrade("Fluorite", minerals(7e10), 11)
+                .addEfficiencyUpgrade("Fluorite", minerals(7e10), 11)
                 .addGeneratorRequirement("Mineral")
                 .addUpgradeRequirement("Shale")
 
-                .addUpgrade("Pegmatite", rocks(5e14), 101)
+                .addEfficiencyUpgrade("Pegmatite", rocks(5e14), 101)
                 .addGeneratorRequirement("Igneous Rock")
                 .addUpgradeRequirement("Amethyst")
 
-                .addUpgrade("Coal", rocks(9e16), 101)
+                .addEfficiencyUpgrade("Coal", rocks(9e16), 101)
                 .addGeneratorRequirement("Sedimentary Rock")
                 .addUpgradeRequirement("Topaz");
 
         builder.createGenerator("Igneous Rock", minerals(50_000), 1.15f, rocks(1))
                 .addUpgradeRequirement("Magma")
 
-                .addUpgrade("Dunite", rocks(1_000), 2)
+                .addEfficiencyUpgrade("Dunite", rocks(1_000), 2)
                 .addGeneratorRequirement("Igneous Rock")
 
-                .addUpgrade("Basalt", rocks(5_000), 2)
+                .addEfficiencyUpgrade("Basalt", rocks(5_000), 2)
                 .addGeneratorRequirement("Igneous Rock")
 
-                .addUpgrade("Andesite", rocks(3e7), 31)
+                .addEfficiencyUpgrade("Andesite", rocks(3e7), 31)
                 .addGeneratorRequirement("Igneous Rock")
                 .addGeneratorRequirement("Sedimentary Rock")
 
-                .addUpgrade("Diorite", rocks(3e7), 31)
+                .addEfficiencyUpgrade("Diorite", rocks(3e7), 31)
                 .addGeneratorRequirement("Igneous Rock")
                 .addUpgradeRequirement("Andesite")
 
-                .addUpgrade("Scoria", rocks(1e10), 301)
+                .addEfficiencyUpgrade("Scoria", rocks(1e10), 301)
                 .addGeneratorRequirement("Igneous Rock")
                 .addGeneratorRequirement("Metamorphic Rock")
 
-                .addUpgrade("Obsidian", rocks(6e16), 35_001)
+                .addEfficiencyUpgrade("Obsidian", rocks(6e16), 35_001)
                 .addGeneratorRequirement("Igneous Rock")
                 .addUpgradeRequirement("Topaz");
 
         builder.createGenerator("Sedimentary Rock", minerals(1e7), 1.15f, rocks(250))
                 .addUpgradeRequirement("Sand")
 
-                .addUpgrade("Limestone", rocks(1e6), 1.75f)
+                .addEfficiencyUpgrade("Limestone", rocks(1e6), 1.75f)
                 .addGeneratorRequirement("Sedimentary Rock")
 
-                .addUpgrade("Siltstone", rocks(6e6), 2)
+                .addEfficiencyUpgrade("Siltstone", rocks(6e6), 2)
                 .addGeneratorRequirement("Sedimentary Rock")
 
-                .addUpgrade("Coquina", rocks(3e11), 101)
-                .addGeneratorRequirement("Sedimentary Rock")
-                .addUpgradeRequirement("Scoria")
-
-                .addUpgrade("Shale", rocks(9.5e11), 201)
+                .addEfficiencyUpgrade("Coquina", rocks(3e11), 101)
                 .addGeneratorRequirement("Sedimentary Rock")
                 .addUpgradeRequirement("Scoria")
 
-                .addUpgrade("Chalk", rocks(1e14), 41)
+                .addEfficiencyUpgrade("Shale", rocks(9.5e11), 201)
+                .addGeneratorRequirement("Sedimentary Rock")
+                .addUpgradeRequirement("Scoria")
+
+                .addEfficiencyUpgrade("Chalk", rocks(1e14), 41)
                 .addGeneratorRequirement("Sedimentary Rock")
                 .addUpgradeRequirement("Amethyst")
 
-                .addUpgrade("Flint", rocks(2e15), 41)
+                .addEfficiencyUpgrade("Flint", rocks(2e15), 41)
                 .addGeneratorRequirement("Sedimentary Rock")
                 .addUpgradeRequirement("Amethyst")
                 .addUpgradeRequirement("Jasper")
 
-                .addUpgrade("Natural Beauty", rocks(2.5e21), 2)
+                .addEfficiencyUpgrade("Natural Beauty", rocks(2.5e21), 2)
                 .addGeneratorRequirement("Sedimentary Rock")
                 .addUpgradeRequirement("Jade");
 
@@ -175,21 +175,21 @@ public class SetInStone {
                 .addGeneratorRequirement("Sedimentary Rock")
                 .addUpgradeRequirement("Calcite")
 
-                .addUpgrade("Marble", rocks(9e8), 1.75f)
+                .addEfficiencyUpgrade("Marble", rocks(9e8), 1.75f)
                 .addGeneratorRequirement("Metamorphic Rock")
 
-                .addUpgrade("Slate", rocks(4e9), 2)
+                .addEfficiencyUpgrade("Slate", rocks(4e9), 2)
                 .addGeneratorRequirement("Metamorphic Rock")
 
-                .addUpgrade("Schist", rocks(5e12), 201)
+                .addEfficiencyUpgrade("Schist", rocks(5e12), 201)
                 .addGeneratorRequirement("Metamorphic Rock")
                 .addUpgradeRequirement("Shale")
 
-                .addUpgrade("Anthracite", rocks(1e17), 15_001)
+                .addEfficiencyUpgrade("Anthracite", rocks(1e17), 15_001)
                 .addGeneratorRequirement("Metamorphic Rock")
                 .addUpgradeRequirement("Coal")
 
-                .addUpgrade("Jade", crystals(1.2e17), 889)
+                .addEfficiencyUpgrade("Jade", crystals(1.2e17), 889)
                 .addGeneratorRequirement("Gem")
                 .addUpgradeRequirement("Lab-Grown Diamonds");
 
@@ -197,34 +197,34 @@ public class SetInStone {
                 .addGeneratorRequirement("Mineral")
                 .addUpgradeRequirement("Fluorite")
 
-                .addUpgrade("Amethyst", crystals(8_000), 2)
+                .addEfficiencyUpgrade("Amethyst", crystals(8_000), 2)
                 .addGeneratorRequirement("Crystal")
 
-                .addUpgrade("Jasper", crystals(500_000), 6)
+                .addEfficiencyUpgrade("Jasper", crystals(500_000), 6)
                 .addGeneratorRequirement("Crystal")
                 .addUpgradeRequirement("Amethyst")
 
-                .addUpgrade("Fulgurite", rocks(1.2e16), 11)
+                .addEfficiencyUpgrade("Fulgurite", rocks(1.2e16), 11)
                 .addGeneratorRequirement("Metamorphic Rock")
                 .addUpgradeRequirement("Jasper")
 
-                .addUpgrade("Topaz", crystals(4.5e7), 21)
+                .addEfficiencyUpgrade("Topaz", crystals(4.5e7), 21)
                 .addGeneratorRequirement("Crystal")
                 .addUpgradeRequirement("Jasper")
 
-                .addUpgrade("Lapis Lazuli", rocks(9e17), 31)
+                .addEfficiencyUpgrade("Lapis Lazuli", rocks(9e17), 31)
                 .addGeneratorRequirement("Metamorphic Rock")
                 .addUpgradeRequirement("Coal")
 
-                .addUpgrade("Diamond", crystals(1e11), 41)
+                .addEfficiencyUpgrade("Diamond", crystals(1e11), 41)
                 .addGeneratorRequirement("Crystal")
                 .addUpgradeRequirement("Coal")
 
-                .addUpgrade("Pyrite", crystals(2.7e13), 21)
+                .addEfficiencyUpgrade("Pyrite", crystals(2.7e13), 21)
                 .addGeneratorRequirement("Crystal")
                 .addGeneratorRequirement("Gem")
 
-                .addUpgrade("Lab-Grown Diamonds", crystals(1.2e15), 31)
+                .addEfficiencyUpgrade("Lab-Grown Diamonds", crystals(1.2e15), 31)
                 .addGeneratorRequirement("Crystal")
                 .addUpgradeRequirement("Pyrite");
 
@@ -232,25 +232,25 @@ public class SetInStone {
                 .addGeneratorRequirement("Crystal")
                 .addUpgradeRequirement("Diamond")
 
-                .addUpgrade("Emerald", crystals(3.3e12), 2.5f)
+                .addEfficiencyUpgrade("Emerald", crystals(3.3e12), 2.5f)
                 .addGeneratorRequirement("Gem")
 
-                .addUpgrade("Aquamarine", crystals(6e12), 2.5f)
+                .addEfficiencyUpgrade("Aquamarine", crystals(6e12), 2.5f)
                 .addGeneratorRequirement("Gem")
 
-                .addUpgrade("Opal", crystals(9e13), 3)
-                .addGeneratorRequirement("Gem")
-                .addUpgradeRequirement("Pyrite")
-
-                .addUpgrade("Garnet", crystals(3e14), 3)
+                .addEfficiencyUpgrade("Opal", crystals(9e13), 3)
                 .addGeneratorRequirement("Gem")
                 .addUpgradeRequirement("Pyrite")
 
-                .addUpgrade("Sapphire", crystals(3e15), 6)
+                .addEfficiencyUpgrade("Garnet", crystals(3e14), 3)
+                .addGeneratorRequirement("Gem")
+                .addUpgradeRequirement("Pyrite")
+
+                .addEfficiencyUpgrade("Sapphire", crystals(3e15), 6)
                 .addGeneratorRequirement("Gem")
                 .addUpgradeRequirement("Lab-Grown Diamonds")
 
-                .addUpgrade("Ruby", crystals(1.5e16), 6)
+                .addEfficiencyUpgrade("Ruby", crystals(1.5e16), 6)
                 .addGeneratorRequirement("Gem")
                 .addUpgradeRequirement("Lab-Grown Diamonds");
 
@@ -261,7 +261,7 @@ public class SetInStone {
 
     void main() {
 
-        Garden garden = createGarden(1, 1);
+        Garden garden = createGarden(1, 1, 0);
         GardenState state = new GardenState();
         state.updateGeneratorStates(garden);
 //        state.setBoost(4);

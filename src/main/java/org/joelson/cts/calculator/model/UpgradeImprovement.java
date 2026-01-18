@@ -41,10 +41,15 @@ public record UpgradeImprovement(Upgrade upgrade, GardenState state)
     }
 
     private Amount getIncreaseTimed(UpgradeEffect effect, GeneratorState generatorState) {
-        float effectChange = effect.efficiency() * effect.speed() - 1;
-        return effect.generator().getBaseProduction().multiplyBy(generatorState.efficiency())
-                .multiplyBy(generatorState.count()).divideBy(effect.generator().getBaseChargeTime())
-                .multiplyBy(generatorState.speed()).multiplyBy(effectChange);
+        if (generatorState.automated() || effect.automated()) {
+            float effectChange = (generatorState.automated()) ? effect.efficiency() * effect.speed() - 1 :
+                    effect.efficiency() * effect.speed();
+            return effect.generator().getBaseProduction().multiplyBy(generatorState.efficiency())
+                    .multiplyBy(generatorState.count()).divideBy(effect.generator().getBaseChargeTime())
+                    .multiplyBy(generatorState.speed()).multiplyBy(effectChange);
+        } else {
+            return effect.generator().getBaseProduction().multiplyBy(0);
+        }
     }
 
     public Amount getIncreaseUntimed(UpgradeEffect effect, GeneratorState generatorState) {

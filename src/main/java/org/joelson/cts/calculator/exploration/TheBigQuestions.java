@@ -32,26 +32,26 @@ void main() {
 
     Generator philosophy = builder.createGenerator("Philosophy", questions(25), 1.15f, questions(1))
 
-            .addUpgrade("What is Right?", questions(150), 2)
+            .addEfficiencyUpgrade("What is Right?", questions(150), 2)
             .addGeneratorRequirement("Philosophy")
 
-            .addUpgrade("What is Society?", questions(300_000), 31)
+            .addEfficiencyUpgrade("What is Society?", questions(300_000), 31)
             .addGeneratorRequirement("Philosophy")
             .addGeneratorRequirement("Ethics", 10)
 
-            .addUpgrade("What is True?", questions(2e8), 26)
+            .addEfficiencyUpgrade("What is True?", questions(2e8), 26)
             .addGeneratorRequirement("Philosophy")
             .addGeneratorRequirement("Political Philosophy", 10)
 
-            .addUpgrade("What is Real?", questions(1.5e12), 2501)
+            .addEfficiencyUpgrade("What is Real?", questions(1.5e12), 2501)
             .addGeneratorRequirement("Philosophy")
             .addGeneratorRequirement("Epistemology", 10)
 
-            .addUpgrade("What am I?", questions(1e18), 500_001)
+            .addEfficiencyUpgrade("What am I?", questions(1e18), 500_001)
             .addGeneratorRequirement("Philosophy")
             .addGeneratorRequirement("Metaphysics", 10)
 
-            .addUpgrade("Why?", questions(1.2e25), 5_000_001)
+            .addEfficiencyUpgrade("Why?", questions(1.2e25), 5_000_001)
             .addUpgradeRequirement("Code of Law")
             .addUpgradeRequirement("Anarchism")
             .addUpgradeRequirement("Empiricism")
@@ -59,39 +59,39 @@ void main() {
             .addUpgradeRequirement("Ontology")
             .addUpgradeRequirement("Solipsism")
 
-            .addUpgrade("The Answer Is...", questions(1.5e30), 25_001)
+            .addEfficiencyUpgrade("The Answer Is...", questions(1.5e30), 25_001)
             .addUpgradeRequirement("Thinking...")
             .generator();
 
     Generator ethics = builder.createGenerator("Ethics", questions(2_000), 1.15f, questions(12))
             .addUpgradeRequirement("What is Right?")
 
-            .addUpgrade("What is Ethical?", questions(8_000), 2)
+            .addEfficiencyUpgrade("What is Ethical?", questions(8_000), 2)
             .addGeneratorRequirement("Ethics")
 
-            .addUpgrade("Dharma", questions(15_000), 2)
+            .addEfficiencyUpgrade("Dharma", questions(15_000), 2)
             .addUpgradeRequirement("What is Ethical?")
 
-            .addUpgrade("What is Moral?", questions(40_000), 2)
+            .addEfficiencyUpgrade("What is Moral?", questions(40_000), 2)
             .addGeneratorRequirement("Ethics")
             .addUpgradeRequirement("Dharma")
 
-            .addUpgrade("Moral Skepticism", questions(2e7), 5)
+            .addEfficiencyUpgrade("Moral Skepticism", questions(2e7), 5)
             .addUpgradeRequirement("What is Moral?")
 
-            .addUpgrade("Utilitarianism", questions(3e10), 501)
+            .addEfficiencyUpgrade("Utilitarianism", questions(3e10), 501)
             .addUpgradeRequirement("Moral Skepticism")
 
-            .addUpgrade("Humanism", questions(1.5e13), 101)
+            .addEfficiencyUpgrade("Humanism", questions(1.5e13), 101)
             .addUpgradeRequirement("Moral Skepticism")
 
-            .addUpgrade("Intuitive Ethics", questions(1e16), 501)
+            .addEfficiencyUpgrade("Intuitive Ethics", questions(1e16), 501)
             .addUpgradeRequirement("Dharma")
 
-            .addUpgrade("Code of Law", questions(5e17), 51)
+            .addEfficiencyUpgrade("Code of Law", questions(5e17), 51)
             .addUpgradeRequirement("Humanism")
 
-            .addUpgrade("Stoicism", questions(2e28), 1e10f)
+            .addEfficiencyUpgrade("Stoicism", questions(2e28), 1e10f)
             .addUpgradeRequirement("Hedonism")
             .generator();
 
@@ -99,149 +99,149 @@ void main() {
                     questions(300))
             .addUpgradeRequirement("What is Society?")
 
-            .addUpgrade("Who Should Rule?", questions(1.5e6), 2)
+            .addEfficiencyUpgrade("Who Should Rule?", questions(1.5e6), 2)
             .addGeneratorRequirement("Political Philosophy")
 
-            .addUpgrade("Autocracy", questions(5e6), 1.5f)
+            .addEfficiencyUpgrade("Autocracy", questions(5e6), 1.5f)
             .addUpgradeRequirement("Who Should Rule?")
 
-            .addUpgrade("What is Power?", questions(5e7), 2)
+            .addEfficiencyUpgrade("What is Power?", questions(5e7), 2)
             .addGeneratorRequirement("Political Philosophy")
             .addUpgradeRequirement("Autocracy")
 
-            .addUpgrade("Divine Right", questions(5e8), 3)
+            .addEfficiencyUpgrade("Divine Right", questions(5e8), 3)
             .addUpgradeRequirement("Autocracy")
             .addUpgradeRequirement("What is Power?")
 
-            .addUpgrade("Machiavellianism", questions(7e10), 251)
+            .addEfficiencyUpgrade("Machiavellianism", questions(7e10), 251)
             .addUpgradeRequirement("Divine Right")
 
-            .addUpgrade("Human Rights", questions(7e13), 101)
+            .addEfficiencyUpgrade("Human Rights", questions(7e13), 101)
             .addUpgradeRequirement("Machiavellianism")
 
-            .addUpgrade("Individualism", questions(1e15), 9)
+            .addEfficiencyUpgrade("Individualism", questions(1e15), 9)
             .addUpgradeRequirement("Autocracy")
 
-            .addUpgrade("Right to Revolt", questions(1e17), 151)
+            .addEfficiencyUpgrade("Right to Revolt", questions(1e17), 151)
             .addUpgradeRequirement("Human Rights")
 
-            .addUpgrade("Collectivism", questions(2.5e18), 51)
+            .addEfficiencyUpgrade("Collectivism", questions(2.5e18), 51)
             .addUpgradeRequirement("Individualism")
             .addUpgradeRequirement("Right to Revolt")
             .addUpgradeRequirement("Code of Law")
             // more
 
-            .addUpgrade("Anarchism", questions(1e20), 26)
+            .addEfficiencyUpgrade("Anarchism", questions(1e20), 26)
             .addUpgradeRequirement("Collectivism")
 
-            .addUpgrade("Thinking...", questions(5e29), 1e9f)
+            .addEfficiencyUpgrade("Thinking...", questions(5e29), 1e9f)
             .addUpgradeRequirement("What's the Answer?")
             .generator();
 
     Generator epistemology = builder.createGenerator("Epistemology", questions(3e8), 1.15f, questions(100_000))
             .addUpgradeRequirement("What is True?")
 
-            .addUpgrade("What Do We Know?", questions(8e8), 2)
+            .addEfficiencyUpgrade("What Do We Know?", questions(8e8), 2)
             .addGeneratorRequirement("Epistemology")
 
-            .addUpgrade("Pramana", questions(2e9), 2)
+            .addEfficiencyUpgrade("Pramana", questions(2e9), 2)
             .addUpgradeRequirement("What Do We Know?")
 
-            .addUpgrade("How Do We Know?", questions(5e9), 2)
+            .addEfficiencyUpgrade("How Do We Know?", questions(5e9), 2)
             .addGeneratorRequirement("Epistemology")
             .addUpgradeRequirement("Pramana")
 
-            .addUpgrade("Socratic Method", questions(3e11), 11)
+            .addEfficiencyUpgrade("Socratic Method", questions(3e11), 11)
             .addUpgradeRequirement("How Do We Know?")
 
-            .addUpgrade("Rationalism", questions(6e12), 3)
+            .addEfficiencyUpgrade("Rationalism", questions(6e12), 3)
             .addUpgradeRequirement("Pramana")
 
-            .addUpgrade("Empiricism", questions(4e13), 4)
+            .addEfficiencyUpgrade("Empiricism", questions(4e13), 4)
             .addUpgradeRequirement("Rationalism")
 
-            .addUpgrade("Skepticism", questions(2e22), (2.5e8f + 1))
+            .addEfficiencyUpgrade("Skepticism", questions(2e22), (2.5e8f + 1))
             .addUpgradeRequirement("Socratic Method")
 
-            .addUpgrade("What's the Answer?", questions(2e29), (1.5e6f + 1))
+            .addEfficiencyUpgrade("What's the Answer?", questions(2e29), (1.5e6f + 1))
             .addUpgradeRequirement("Transcendence")
             .generator();
 
     Generator metaphysics = builder.createGenerator("Metaphysics", questions(1e13), 1.15f, questions(8e8))
             .addUpgradeRequirement("What is Real?")
 
-            .addUpgrade("How Did It Start?", questions(1e14), 3)
+            .addEfficiencyUpgrade("How Did It Start?", questions(1e14), 3)
             .addGeneratorRequirement("Metaphysics")
 
-            .addUpgrade("Cosmology", questions(3e14), 2.5f)
+            .addEfficiencyUpgrade("Cosmology", questions(3e14), 2.5f)
             .addUpgradeRequirement("How Did It Start?")
 
-            .addUpgrade("Why Am I Aware?", questions(2e15), 2.5f)
+            .addEfficiencyUpgrade("Why Am I Aware?", questions(2e15), 2.5f)
             .addGeneratorRequirement("Metaphysics")
             .addUpgradeRequirement("Cosmology")
 
-            .addUpgrade("Identity", questions(4e15), 2)
+            .addEfficiencyUpgrade("Identity", questions(4e15), 2)
             .addUpgradeRequirement("Why Am I Aware?")
 
-            .addUpgrade("Ship of Theseus", questions(4e16), 7)
+            .addEfficiencyUpgrade("Ship of Theseus", questions(4e16), 7)
             .addUpgradeRequirement("Identity")
 
-            .addUpgrade("Space & Time", questions(2e21), 15_001)
+            .addEfficiencyUpgrade("Space & Time", questions(2e21), 15_001)
             .addUpgradeRequirement("Cosmology")
 
-            .addUpgrade("Theology", questions(1e23), 51)
+            .addEfficiencyUpgrade("Theology", questions(1e23), 51)
             .addUpgradeRequirement("Cosmology")
 
-            .addUpgrade("Mind & Matter", questions(3e23), 2)
+            .addEfficiencyUpgrade("Mind & Matter", questions(3e23), 2)
             .addUpgradeRequirement("Ship of Theseus")
 
-            .addUpgrade("Ontology", questions(3e24), 11)
+            .addEfficiencyUpgrade("Ontology", questions(3e24), 11)
             .addUpgradeRequirement("Space & Time")
             .addUpgradeRequirement("Theology")
             .addUpgradeRequirement("Mind & Matter")
 
-            .addUpgrade("Ascetism", questions(3e26), 101)
+            .addEfficiencyUpgrade("Ascetism", questions(3e26), 101)
             .addUpgradeRequirement("What's the Good Life?")
 
-            .addUpgrade("Theism", questions(7e27), 16)
+            .addEfficiencyUpgrade("Theism", questions(7e27), 16)
             .addUpgradeRequirement("What's the Point?")
             .generator();
 
     Generator spirit = builder.createGenerator("Spirit", questions(1.2e18), 1.15f, questions(1e14))
             .addUpgradeRequirement("What am I?")
 
-            .addUpgrade("What Is Spirit?", questions(1.5e19), 2)
+            .addEfficiencyUpgrade("What Is Spirit?", questions(1.5e19), 2)
             .addGeneratorRequirement("Spirit")
 
-            .addUpgrade("Theory of Forms", questions(3e19), 3)
+            .addEfficiencyUpgrade("Theory of Forms", questions(3e19), 3)
             .addUpgradeRequirement("What Is Spirit?")
 
-            .addUpgrade("What Is Humanity?", questions(8e19), 2)
+            .addEfficiencyUpgrade("What Is Humanity?", questions(8e19), 2)
             .addGeneratorRequirement("Spirit")
             .addUpgradeRequirement("Theory of Forms")
 
-            .addUpgrade("Sapience", questions(3.5e20), 2)
+            .addEfficiencyUpgrade("Sapience", questions(3.5e20), 2)
             .addUpgradeRequirement("What Is Humanity?")
 
-            .addUpgrade("Soul", questions(1e21), 2)
+            .addEfficiencyUpgrade("Soul", questions(1e21), 2)
             .addUpgradeRequirement("Theory of Forms")
             .addUpgradeRequirement("Sapience")
 
-            .addUpgrade("State of Nature", questions(5e21), 3.5f)
+            .addEfficiencyUpgrade("State of Nature", questions(5e21), 3.5f)
             .addUpgradeRequirement("Sapience")
 
-            .addUpgrade("Nondualism", questions(1e22), 3)
+            .addEfficiencyUpgrade("Nondualism", questions(1e22), 3)
             .addUpgradeRequirement("Soul")
 
-            .addUpgrade("Fate & Free Will", questions(7e23), 101)
+            .addEfficiencyUpgrade("Fate & Free Will", questions(7e23), 101)
             .addUpgradeRequirement("Soul")
             .addUpgradeRequirement("State of Nature")
             .addUpgradeRequirement("Mind & Matter")
 
-            .addUpgrade("Solipsism", questions(7e24), 2.11f)
+            .addEfficiencyUpgrade("Solipsism", questions(7e24), 2.11f)
             .addUpgradeRequirement("Nondualism")
 
-            .addUpgrade("Transcendence", questions(8e28), 5_001)
+            .addEfficiencyUpgrade("Transcendence", questions(8e28), 5_001)
             .addUpgradeRequirement("Stoicism")
             .addUpgradeRequirement("Existentialism")
             .generator();
@@ -249,29 +249,29 @@ void main() {
     Generator meaningOfLife = builder.createGenerator("Meaning of Life", questions(2e24), 1.15f, questions(1e20))
             .addUpgradeRequirement("Why?")
 
-            .addUpgrade("What's the Good Life?", questions(3e25), 11)
+            .addEfficiencyUpgrade("What's the Good Life?", questions(3e25), 11)
             .addGeneratorRequirement("Meaning of Life")
 
-            .addUpgrade("What's the Point?", questions(1e26), 2)
+            .addEfficiencyUpgrade("What's the Point?", questions(1e26), 2)
             .addGeneratorRequirement("Meaning of Life")
 
-            .addUpgrade("Nihilism", questions(7e26), 1)
+            .addEfficiencyUpgrade("Nihilism", questions(7e26), 1)
             .addUpgradeRequirement("What's the Point?")
 
-            .addUpgrade("Hedonism", questions(1e27), 4)
+            .addEfficiencyUpgrade("Hedonism", questions(1e27), 4)
             .addUpgradeRequirement("Ascetism")
 
-            .addUpgrade("Absurdism", questions(3e27), 2)
+            .addEfficiencyUpgrade("Absurdism", questions(3e27), 2)
             .addUpgradeRequirement("Nihilism")
 
-            .addUpgrade("Existentialism", questions(5e28), 5)
+            .addEfficiencyUpgrade("Existentialism", questions(5e28), 5)
             .addUpgradeRequirement("Absurdism")
             .addUpgradeRequirement("Theism")
 
-            .addUpgrade("42", questions(2.5e30), 1.42f)
+            .addEfficiencyUpgrade("42", questions(2.5e30), 1.42f)
             .addUpgradeRequirement("The Answer Is...")
 
-            .addUpgrade("What's the Question?", questions(4e30), 2)
+            .addEfficiencyUpgrade("What's the Question?", questions(4e30), 2)
             .addUpgradeRequirement("42")
             .generator();
 

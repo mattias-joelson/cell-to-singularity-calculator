@@ -52,7 +52,7 @@ public class CalculatorService {
         lifeAfterApocalypse.addGardenWithState(new GardenWithState(extinction, extinctionState));
         Generator luca = new Generator("L.U.C.A.", new Amount(laaCurrency, 40), 1.05f, new Amount(laaCurrency, 1));
         extinction.addGenerator(luca);
-        extinctionState.setGeneratorState(luca, new GeneratorState(753, 1));
+        extinctionState.setGeneratorState(luca, GeneratorState.withEfficiency(753, 1));
 
         createUpgrade(extinction, extinctionState, luca, "Trilobites", 500, 1.5f);
         createUpgrade(extinction, extinctionState, luca, "Cambrian Explosion", 50, 1.5f);
@@ -65,14 +65,14 @@ public class CalculatorService {
 //        createUpgrade(extinction, extinctionState, luca, "Anoxic Oceans", 30000000, 9);
 
         Upgrade placoderms = new Upgrade("Placoderms", new Amount(laaCurrency, 3000000));
-        placoderms.addEffect(new UpgradeEffect(luca, 16));
+        placoderms.addEffect(UpgradeEffect.withEfficiency(luca, 16));
         extinction.addUpgrade(placoderms);
         extinctionState.setUpgradeBought(placoderms);
 
         createUpgrade(extinction, extinctionState, luca, "Devonian Extinction", 4.5e10, 6);
 
         Upgrade tetrapods = new Upgrade("Tetrapods", new Amount(laaCurrency, 6e8));
-        tetrapods.addEffect(new UpgradeEffect(luca, 11));
+        tetrapods.addEffect(UpgradeEffect.withEfficiency(luca, 11));
         extinction.addUpgrade(tetrapods);
         extinctionState.setUpgradeBought(tetrapods);
 
@@ -81,45 +81,45 @@ public class CalculatorService {
         createUpgrade(extinction, extinctionState, luca, "Triassic Extinction", 3e15, 16);
 
         Upgrade tyrannosaurusRex = new Upgrade("Tyrannosaurus Rex", new Amount(laaCurrency, 3.5e13));
-        tyrannosaurusRex.addEffect(new UpgradeEffect(luca, 11));
+        tyrannosaurusRex.addEffect(UpgradeEffect.withEfficiency(luca, 11));
         extinction.addUpgrade(tyrannosaurusRex);
         extinctionState.setUpgradeBought(tyrannosaurusRex);
 
         Generator dinosaurs = new Generator("Reign of Dinosaurs", new Amount(laaCurrency, 8e12), 1.12f,
                 new Amount(laaCurrency, 5e9));
         extinction.addGenerator(dinosaurs);
-        extinctionState.setGeneratorState(dinosaurs, new GeneratorState(103, 1));
+        extinctionState.setGeneratorState(dinosaurs, GeneratorState.withEfficiency(103, 1));
         Upgrade deccanDeathTraps = new Upgrade("Deccan Death Traps", new Amount(laaCurrency, 3.75e14));
-        deccanDeathTraps.addEffect(new UpgradeEffect(dinosaurs, 6));
+        deccanDeathTraps.addEffect(UpgradeEffect.withEfficiency(dinosaurs, 6));
         extinction.addUpgrade(deccanDeathTraps);
         extinctionState.setUpgradeBought(deccanDeathTraps);
         Upgrade killerSpaceRock = new Upgrade("Killer Space Rock!", new Amount(laaCurrency, 4.5e15));
-        killerSpaceRock.addEffect(new UpgradeEffect(dinosaurs, 4));
+        killerSpaceRock.addEffect(UpgradeEffect.withEfficiency(dinosaurs, 4));
         extinction.addUpgrade(killerSpaceRock);
         extinctionState.setUpgradeBought(killerSpaceRock);
         Upgrade shookAndBoom = new Upgrade("Shook and Boom", new Amount(laaCurrency, 3.75e16));
-        shookAndBoom.addEffect(new UpgradeEffect(dinosaurs, 6));
+        shookAndBoom.addEffect(UpgradeEffect.withEfficiency(dinosaurs, 6));
         extinction.addUpgrade(shookAndBoom);
         extinctionState.setUpgradeBought(shookAndBoom);
         Upgrade quakeAndSlide = new Upgrade("Quake and Slide", new Amount(laaCurrency, 3.25e17));
-        quakeAndSlide.addEffect(new UpgradeEffect(dinosaurs, 4.5f));
+        quakeAndSlide.addEffect(UpgradeEffect.withEfficiency(dinosaurs, 4.5f));
         extinction.addUpgrade(quakeAndSlide);
         extinctionState.setUpgradeBought(quakeAndSlide);
         Upgrade metoriteBombs = new Upgrade("Meteorite Bombs", new Amount(laaCurrency, 1.75e18));
-        metoriteBombs.addEffect(new UpgradeEffect(dinosaurs, 2.25f));
+        metoriteBombs.addEffect(UpgradeEffect.withEfficiency(dinosaurs, 2.25f));
         extinction.addUpgrade(metoriteBombs);
         extinctionState.setUpgradeBought(metoriteBombs);
         Upgrade broiledEarth = new Upgrade("Broiled Earth", new Amount(laaCurrency, 4.25e18));
-        broiledEarth.addEffect(new UpgradeEffect(dinosaurs, 3));
+        broiledEarth.addEffect(UpgradeEffect.withEfficiency(dinosaurs, 3));
         extinction.addUpgrade(broiledEarth);
         extinctionState.setUpgradeBought(broiledEarth);
         Upgrade dayIntoNight = new Upgrade("Day into Night", new Amount(laaCurrency, 6.71e19));
-        dayIntoNight.addEffect(new UpgradeEffect(dinosaurs, 6));
+        dayIntoNight.addEffect(UpgradeEffect.withEfficiency(dinosaurs, 6));
         extinction.addUpgrade(dayIntoNight);
         extinctionState.setUpgradeBought(dayIntoNight);
         Upgrade cretaceousExtinction = new Upgrade("Cretaceous Extinction", new Amount(laaCurrency, 1.05e20));
-        cretaceousExtinction.addEffect(new UpgradeEffect(luca, 41));
-        cretaceousExtinction.addEffect(new UpgradeEffect(dinosaurs, 0));
+        cretaceousExtinction.addEffect(UpgradeEffect.withEfficiency(luca, 41));
+        cretaceousExtinction.addEffect(UpgradeEffect.withEfficiency(dinosaurs, 0));
         extinction.addUpgrade(cretaceousExtinction);
         extinctionState.setUpgradeBought(cretaceousExtinction, false);
 
@@ -131,7 +131,7 @@ public class CalculatorService {
     private static void createUpgrade(
             Garden garden, GardenState state, Generator generator, String name, double cost, float efficiency) {
         Upgrade upgrade = new Upgrade(name, new Amount("L.A.A.", cost));
-        upgrade.addEffect(new UpgradeEffect(generator, efficiency));
+        upgrade.addEffect(UpgradeEffect.withEfficiency(generator, efficiency));
         garden.addUpgrade(upgrade);
         state.setUpgradeBought(upgrade);
     }

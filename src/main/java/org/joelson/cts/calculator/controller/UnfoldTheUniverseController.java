@@ -26,7 +26,7 @@ import java.util.Set;
 @Controller
 public class UnfoldTheUniverseController {
 
-    private final Garden garden = UnfoldTheUniverse.createGarden(1, 1);
+    private final Garden garden = UnfoldTheUniverse.createGarden(1, 1, 0);
     private final GardenState state = new GardenState();
 
     public Garden getGarden() {
@@ -163,7 +163,7 @@ public class UnfoldTheUniverseController {
     }
 
     @PostMapping("/unfoldtheuniverse-upgrade")
-    public String updateUnfoldTheUniverse(Model model, String target, String value) {
+    public String unfoldTheUniverseUpgrade(Model model, String target, String value) {
         if (target == null) {
             model.addAttribute("msg", "Invalid target null.");
         } else {
