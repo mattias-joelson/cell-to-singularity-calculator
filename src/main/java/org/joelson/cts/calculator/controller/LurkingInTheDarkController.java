@@ -50,46 +50,52 @@ public class LurkingInTheDarkController {
         setGeneratorCount("Sunlight Zone", 1);
 
         String[] boughtUpdates = {
-//                "Microscopic Plants", // check
-//                "Global Drifters", // check
-//                "Speedy Swimmers", // check
-//                "Whale Power", // check
-//                "Sinking Detritus", // check
-//                "Marine Show", // check
-//                "Snot Palace", // check + twilight
-//                "Nightly Migrations", // check + twilight
-//                "Slow Living", // check + twilight
-//                "Whale Fall", // check + abyss
-//                "Upwelling", // check + trenches
-//                "Nutrient Express", // check + midnight
-//                "Climate Control", // check + twilight
-//                "Earth's Lifeline", // check
+//                "Microscopic Plants",
+//                "Global Drifters",
+//                "Speedy Swimmers",
+//                "Whale Power",
+//                "Sinking Detritus",
+//                "Marine Snow",
+//                "Snot Palace",
+//                "Nightly Migrations",
+//                "Slow Living",
+//                "Whale Fall",
+//                "Upwelling",
+//                "Nutrient Express",
+//                "Climate Control",
+//                "Earth's Lifeline",
 
-//                "Fish World", // check
-//                "Making Light", // check
-//                "Seeing Blue", // check
-//                "Red is the New Black", // check
-//                "See-Through Bodies", // check
-//                "Oxygen Exploit", // check
-//                "Light as a Lure", // check
-//                "Lurking Champion", // check
-//                "Hiding in Light", // check
-//                "Alarms and Flash Bangs", // check
+//                "Fish World",
+//                "Making Light",
+//                "Seeing Blue",
+//                "Red is the New Black",
+//                "See-Through Bodies",
+//                "Oxygen Exploit",
+//                "Light as a Lure",
+//                "Lurking Champion",
+//                "Hiding in Light",
+//                "Alarms and Flash Bangs",
 
-//                "Mammal Limit", // check
-//                "Under Pressure", // check
-//                "Giant Eyes", // check
-//                "The Biggest Gulp", // check
-//                "Giant Teeth", // check
-//                "Extreme Mating", // check
-//                "Collective Living", // check
+//                "Mammal Limit",
+//                "Under Pressure",
+//                "Giant Eyes",
+//                "The Biggest Gulp",
+//                "Giant Teeth",
+//                "Extreme Mating",
+//                "Collective Living",
 
-//                "Smell and Touch", // check
-//                "Electrical Sensors", // check
-//                "Benthic Desert", // check
-//                "A Gathering Herd", // check
-//                "Extreme Species", // check
-//                "Lonesome Predator", // check
+//                "Smell and Touch",
+//                "Electrical Sensors",
+//                "Benthic Desert",
+//                "A Gathering Herd",
+//                "Extreme Species",
+//                "Lonesome Predator",
+
+//                "Hadal Extremes",
+//                "Hydrothermal Vents",
+//                "Chemical Ecosystem",
+//                "Cold Seeps",
+//                "Briny Death Traps",
         };
 
         for (String upgradeName : boughtUpdates) {

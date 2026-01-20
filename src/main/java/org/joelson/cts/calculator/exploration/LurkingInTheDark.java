@@ -53,11 +53,11 @@ public class LurkingInTheDark {
                 .addEfficiencyUpgrade("Sinking Detritus", amount(30_000), 3)
                 .addUpgradeRequirement("Whale Power")
 
-                .addEfficiencyUpgrade("Marine Show", amount(4e9), 1e4f)
+                .addEfficiencyUpgrade("Marine Snow", amount(4e9), 10_001)
                 .addGeneratorRequirement("Twilight Zone")
 
                 .addEfficiencyUpgrade("Snot Palace", amount(3e11), 51)
-                .addUpgradeRequirement("Marine Show")
+                .addUpgradeRequirement("Marine Snow")
 
                 .addEfficiencyUpgrade("Nightly Migrations", amount(2e13), 1_001)
                 .addGeneratorRequirement("Midnight Zone")
@@ -65,7 +65,7 @@ public class LurkingInTheDark {
                 .addEfficiencyUpgrade("Slow Living", amount(8e15), 41)
                 .addGeneratorRequirement("Midnight Zone")
 
-                .addEfficiencyUpgrade("Whale Fall", amount(1.25e21), 1e5f)
+                .addEfficiencyUpgrade("Whale Fall", amount(1.25e21), 100_001)
                 .addUpgradeRequirement("Benthic Desert")
 
                 .addEfficiencyUpgrade("Upwelling", amount(1.75e26), 3)
@@ -117,8 +117,6 @@ public class LurkingInTheDark {
 
                 .withUpgradeEffectBuilder()
                 .addEfficiencyEffect("Snot Palace", 2)
-                .addEfficiencyEffect("Nightly Migrations", 1_001)
-                .addEfficiencyEffect("Slow Living", 41)
                 .addEfficiencyEffect("Climate Control", 1e16f);
 
         builder.createGenerator("Midnight Zone", amount(1e12), amount(3e7))
@@ -170,7 +168,8 @@ public class LurkingInTheDark {
                 .addUpgradeRequirement("Extreme Species")
 
                 .withUpgradeEffectBuilder()
-                .addEfficiencyEffect("Whale Fall", 4);
+                .addEfficiencyEffect("Whale Fall", 4)
+                .addEfficiencyEffect("Upwelling", 10_001);
 
         builder.createGenerator("The Trenches", amount(1e22), amount(5e17))
                 .addUpgradeRequirement("Whale Fall")
@@ -187,11 +186,8 @@ public class LurkingInTheDark {
                 .addEfficiencyUpgrade("Cold Seeps", amount(3e24), 4)
                 .addGeneratorRequirement("The Trenches")
 
-                .addEfficiencyUpgrade("Briny Death Traps", amount(2.5e25), 4)
-                .addGeneratorRequirement("The Trenches")
-
-                .withUpgradeEffectBuilder()
-                .addEfficiencyEffect("Upwelling", 1e4f);
+                .addEfficiencyUpgrade("Briny Death Traps", amount(2.5e25), 3)
+                .addGeneratorRequirement("The Trenches");
 
         builder.resolveRequirements();
 
@@ -251,46 +247,52 @@ public class LurkingInTheDark {
         setGeneratorCount(garden, state, "Sunlight Zone", 1);
 
         String[] boughtUpdates = {
-//                "Microscopic Plants", // check
-//                "Global Drifters", // check
-//                "Speedy Swimmers", // check
-//                "Whale Power", // check
-//                "Sinking Detritus", // check
-//                "Marine Show", // check
-//                "Snot Palace", // check + twilight
-//                "Nightly Migrations", // check + twilight
-//                "Slow Living", // check + twilight
-//                "Whale Fall", // check + abyss
-//                "Upwelling", // check + trenches
-//                "Nutrient Express", // check + midnight
-//                "Climate Control", // check + twilight
-//                "Earth's Lifeline", // check
+//                "Microscopic Plants",
+//                "Global Drifters",
+//                "Speedy Swimmers",
+//                "Whale Power",
+//                "Sinking Detritus",
+//                "Marine Snow",
+//                "Snot Palace",
+//                "Nightly Migrations",
+//                "Slow Living",
+//                "Whale Fall",
+//                "Upwelling",
+//                "Nutrient Express",
+//                "Climate Control",
+//                "Earth's Lifeline",
 
-//                "Fish World", // check
-//                "Making Light", // check
-//                "Seeing Blue", // check
-//                "Red is the New Black", // check
-//                "See-Through Bodies", // check
-//                "Oxygen Exploit", // check
-//                "Light as a Lure", // check
-//                "Lurking Champion", // check
-//                "Hiding in Light", // check
-//                "Alarms and Flash Bangs", // check
+//                "Fish World",
+//                "Making Light",
+//                "Seeing Blue",
+//                "Red is the New Black",
+//                "See-Through Bodies",
+//                "Oxygen Exploit",
+//                "Light as a Lure",
+//                "Lurking Champion",
+//                "Hiding in Light",
+//                "Alarms and Flash Bangs",
 
-//                "Mammal Limit", // check
-//                "Under Pressure", // check
-//                "Giant Eyes", // check
-//                "The Biggest Gulp", // check
-//                "Giant Teeth", // check
-//                "Extreme Mating", // check
-//                "Collective Living", // check
+//                "Mammal Limit",
+//                "Under Pressure",
+//                "Giant Eyes",
+//                "The Biggest Gulp",
+//                "Giant Teeth",
+//                "Extreme Mating",
+//                "Collective Living",
 
-//                "Smell and Touch", // check
-//                "Electrical Sensors", // check
-//                "Benthic Desert", // check
-//                "A Gathering Herd", // check
-//                "Extreme Species", // check
-//                "Lonesome Predator", // check
+//                "Smell and Touch",
+//                "Electrical Sensors",
+//                "Benthic Desert",
+//                "A Gathering Herd",
+//                "Extreme Species",
+//                "Lonesome Predator",
+
+//                "Hadal Extremes",
+//                "Hydrothermal Vents",
+//                "Chemical Ecosystem",
+//                "Cold Seeps",
+//                "Briny Death Traps",
         };
 
         for (String upgradeName : boughtUpdates) {
