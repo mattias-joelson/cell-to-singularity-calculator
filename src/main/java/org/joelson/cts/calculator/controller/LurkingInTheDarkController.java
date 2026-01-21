@@ -299,7 +299,9 @@ public class LurkingInTheDarkController {
     }
 
     private static String efficiencyEffectString(float efficiency) {
-        if (efficiency == Math.round(efficiency)) {
+        if (efficiency >= 1_000_000) {
+            return String.format("%.2e more efficient", efficiency);
+        } else if (efficiency == Math.round(efficiency)) {
             return String.format("%.0f more efficient", efficiency);
         } else {
             return String.format("%.2f more efficient", efficiency);
