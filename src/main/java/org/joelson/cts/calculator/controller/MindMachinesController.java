@@ -14,7 +14,6 @@ import org.joelson.cts.calculator.model.Upgrade;
 import org.joelson.cts.calculator.model.UpgradeEffect;
 import org.joelson.cts.calculator.model.UpgradeImprovement;
 import org.joelson.cts.calculator.util.DurationToolkit;
-import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -214,7 +213,7 @@ public class MindMachinesController {
         return updateModel(model);
     }
 
-    private @NonNull String updateModel(Model model) {
+    private String updateModel(Model model) {
         state.updateGeneratorStates(garden);
 
         model.addAttribute("garden", garden);
@@ -342,7 +341,7 @@ public class MindMachinesController {
         return generatorModels;
     }
 
-    private static @NonNull String createEffectString(Generator generator, UpgradeEffect effect) {
+    private static String createEffectString(Generator generator, UpgradeEffect effect) {
         if (generator.isTimed()) {
             return createTimedEffectString(effect);
         } else {

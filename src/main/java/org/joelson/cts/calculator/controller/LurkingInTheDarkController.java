@@ -1,10 +1,11 @@
 package org.joelson.cts.calculator.controller;
 
-import org.joelson.cts.calculator.exploration.AFelineJourney;
+import org.joelson.cts.calculator.exploration.LurkingInTheDark;
 import org.joelson.cts.calculator.model.Amount;
 import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
+import org.joelson.cts.calculator.model.GeneratorImprovement;
 import org.joelson.cts.calculator.model.GeneratorState;
 import org.joelson.cts.calculator.model.Improvement;
 import org.joelson.cts.calculator.model.ImprovementCalculator;
@@ -12,7 +13,6 @@ import org.joelson.cts.calculator.model.Unlockable;
 import org.joelson.cts.calculator.model.Upgrade;
 import org.joelson.cts.calculator.model.UpgradeEffect;
 import org.joelson.cts.calculator.model.UpgradeImprovement;
-import org.joelson.cts.calculator.util.DurationToolkit;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +25,9 @@ import java.util.Map;
 import java.util.Set;
 
 @Controller
-public class AFelineJourneyController {
+public class LurkingInTheDarkController {
 
-    private final Garden garden = AFelineJourney.createGarden(1, 1, 0);
+    private final Garden garden = LurkingInTheDark.createGarden(1, 1, 0);
     private final GardenState state = new GardenState();
 
     public Garden getGarden() {
@@ -43,75 +43,59 @@ public class AFelineJourneyController {
 //        state.setBoost(4);
         state.updateGeneratorStates(garden);
 
-        setGeneratorCount("House Cats", 0);
-        setGeneratorCount("Felis", 0);
-        setGeneratorCount("Leopard Cat", 0);
-        setGeneratorCount("Puma", 0);
-        setGeneratorCount("Lynx", 0);
-        setGeneratorCount("Ocelot", 0);
-        setGeneratorCount("Caracal", 0);
-        setGeneratorCount("Bay Cat", 0);
-        setGeneratorCount("Panthera", 0);
-        setGeneratorCount("Felidae", 1);
+        setGeneratorCount("The Trenches", 0);
+        setGeneratorCount("The Abyss", 0);
+        setGeneratorCount("Midnight Zone", 0);
+        setGeneratorCount("Twilight Zone", 0);
+        setGeneratorCount("Sunlight Zone", 1);
 
         String[] boughtUpdates = {
-//                "Pantherinae",
-//                "Felinae",
-//                "Digitigrade",
-//                "Claws",
-//                "Acute Senses",
-//                "Flexibility",
-//                "Patterned Coats",
-//                "Rough Tongue",
-//                "Short Skull",
-//                "Obligate Carnivores",
-//                "Whiskers",
+//                "Microscopic Plants",
+//                "Global Drifters",
+//                "Speedy Swimmers",
+//                "Whale Power",
+//                "Sinking Detritus",
+//                "Marine Snow",
+//                "Snot Palace",
+//                "Nightly Migrations",
+//                "Slow Living",
+//                "Whale Fall",
+//                "Upwelling",
+//                "Nutrient Express",
+//                "Climate Control",
+//                "Earth's Lifeline",
 
-//                "Clouded Leopard",
-//                "Tiger",
-//                "Leopard",
-//                "Snow Leopard",
-//                "Sunda Clouded Leopard",
-//                "Lion",
-//                "Jaguar",
+//                "Fish World",
+//                "Making Light",
+//                "Seeing Blue",
+//                "Red is the New Black",
+//                "See-Through Bodies",
+//                "Oxygen Exploit",
+//                "Light as a Lure",
+//                "Lurking Champion",
+//                "Hiding in Light",
+//                "Alarms and Flash Bangs",
 
-//                "Bornean Bay Cat",
-//                "Asian Golden Cat",
-//                "Marbled Cat",
+//                "Mammal Limit",
+//                "Under Pressure",
+//                "Giant Eyes",
+//                "The Biggest Gulp",
+//                "Giant Teeth",
+//                "Extreme Mating",
+//                "Collective Living",
 
-//                "African Caracal",
-//                "Serval",
+//                "Smell and Touch",
+//                "Electrical Sensors",
+//                "Benthic Desert",
+//                "A Gathering Herd",
+//                "Extreme Species",
+//                "Lonesome Predator",
 
-//                "Ocelots",
-//                "Kodkod",
-//                "Andean Mountain Cat",
-//                "Geoffroy's Cat",
-//                "Margay",
-
-//                "Eurasian Lynx",
-//                "Iberian Lynx",
-//                "Bobcat",
-
-//                "Cougar",
-//                "Cheetah",
-
-//                "Leopard Cats",
-//                "Sunda Leopard Cat",
-//                "Fishing Cat",
-//                "Flat-Headed Cat",
-//                "Rusty-Spotted Cat",
-//                "Pallas' Cat",
-
-//                "Jungle Cat",
-//                "Black-Footed Cat",
-//                "Sand Cat",
-//                "African Wildcat",
-
-//                "Fluffy",
-//                "Australian Cats",
-//                "Hairless",
-//                "Orange",
-//                "Hunter at Heart",
+//                "Hadal Extremes",
+//                "Hydrothermal Vents",
+//                "Chemical Ecosystem",
+//                "Cold Seeps",
+//                "Briny Death Traps",
         };
 
         for (String upgradeName : boughtUpdates) {
@@ -125,14 +109,14 @@ public class AFelineJourneyController {
         state.setGeneratorCount(generator, count);
     }
 
-    @GetMapping("/felinejourney")
-    public String felineJourney(Model model) {
+    @GetMapping("/lurkinginthedark")
+    public String lurkingInTheDark(Model model) {
         initState();
         return updateModel(model);
     }
 
-    @PostMapping("/felinejourney-generator-update")
-    public String felineJourneyGeneratorUpdate(Model model, String target, String value) {
+    @PostMapping("/lurkinginthedark-generator-update")
+    public String lurkingInTheDarkGeneratorUpdate(Model model, String target, String value) {
         Generator generator = validateGenerator(model, target);
         if (generator != null) {
             int count = Integer.parseInt(value);
@@ -142,8 +126,8 @@ public class AFelineJourneyController {
         return updateModel(model);
     }
 
-    @PostMapping("/felinejourney-generator-increment")
-    public String felineJourneyGeneratorIncrement(Model model, String target) {
+    @PostMapping("/lurkinginthedark-generator-increment")
+    public String lurkingInTheDarkGeneratorIncrement(Model model, String target) {
         Generator generator = validateGenerator(model, target);
         if (generator != null) {
             GeneratorState generatorState = state.getGeneratorState(generator);
@@ -154,8 +138,8 @@ public class AFelineJourneyController {
         return updateModel(model);
     }
 
-    @PostMapping("/felinejourney-generator-decrement")
-    public String felineJourneyGeneratorDecrement(Model model, String target) {
+    @PostMapping("/lurkinginthedark-generator-decrement")
+    public String lurkingInTheDarkGeneratorDecrement(Model model, String target) {
         Generator generator = validateGenerator(model, target);
         if (generator != null) {
             GeneratorState generatorState = state.getGeneratorState(generator);
@@ -185,8 +169,8 @@ public class AFelineJourneyController {
         return null;
     }
 
-    @PostMapping("/felinejourney-upgrade")
-    public String felineJourneyUpgrade(Model model, String target, String value) {
+    @PostMapping("/lurkinginthedark-upgrade")
+    public String lurkingInTheDarkUpgrade(Model model, String target, String value) {
         if (target == null) {
             model.addAttribute("msg", "Invalid target null.");
         } else {
@@ -221,10 +205,10 @@ public class AFelineJourneyController {
         model.addAttribute("generatorModels", generatorModels);
 
         List<String> actions = new ArrayList<>();
-        AFelineJourney.singleCurrencyApproach(garden, state.copy(), actions);
+        LurkingInTheDark.singleCurrencyApproach(garden, state.copy(), actions);
         model.addAttribute("actions", actions.toArray(new String[0]));
 
-        return "felinejourney";
+        return "lurkinginthedark";
     }
 
     public record GeneratorProduction(String name, int count, String next, String each, String total, String increase) {
@@ -239,28 +223,15 @@ public class AFelineJourneyController {
             String currencyName = generator.getBaseProduction().currency();
             double baseProduction = generator.getBaseProduction().amount();
             float efficiency = generatorState.efficiency();
-            if (generator.isTimed()) {
-                double productionPerCycle = baseProduction * efficiency * count;
-                float speed = generatorState.speed();
-                float cycleTime = generator.getBaseChargeTime() / speed;
-                double production = productionPerCycle / cycleTime;
-                String productionString = String.format("%s in %s s, %s per second",
-                        new Amount(currencyName, productionPerCycle).asString(),
-                        DurationToolkit.durationString(cycleTime),
-                        new Amount(currencyName, production).asString());
-                generatorProductions.add(new GeneratorProduction(generator.getName(), count,
-                        generator.getCost(count).asString(),
-                        generator.getBaseProduction().multiplyBy(efficiency).asString(), productionString,
-                        String.format("%.7f", (baseProduction * efficiency)
-                                / (cycleTime * generator.getCost(count).amount()))));
-            } else {
-                double production = baseProduction * efficiency * count;
-                String productionString = String.format("%s", new Amount(currencyName, production).asString());
-                generatorProductions.add(new GeneratorProduction(generator.getName(), count,
-                        generator.getCost(count).asString(),
-                        generator.getBaseProduction().multiplyBy(efficiency).asString(), productionString,
-                        String.format("%.7f", (baseProduction * efficiency) / generator.getCost(count).amount())));
-            }
+            String productionString;
+            GeneratorImprovement improvement = new GeneratorImprovement(generator, generatorState);
+            String increaseString = String.format("%.7f", improvement.getRatio());
+            double production = baseProduction * efficiency * count;
+            productionString = String.format("%s", new Amount(currencyName, production).asString());
+            generatorProductions.add(
+                    new GeneratorProduction(generator.getName(), count, generator.getCost(count).asString(),
+                            generator.getBaseProduction().multiplyBy(efficiency).asString(), productionString,
+                            increaseString));
         }
         return generatorProductions;
     }
@@ -295,17 +266,22 @@ public class AFelineJourneyController {
         for (Generator generator : generators) {
             List<UpgradeModel> upgradeModels = new ArrayList<>();
             for (Upgrade upgrade : upgrades) {
-                boolean buyable = unlockedUpgrades.contains(upgrade.getName()) && !state.isUpgradeBought(upgrade);
+                boolean bought = state.isUpgradeBought(upgrade);
+                boolean buyable = unlockedUpgrades.contains(upgrade.getName()) && !bought;
                 for (UpgradeEffect effect : upgrade.getEffects()) {
+                    String effectString = efficiencyEffectString(effect.efficiency());
                     if (effect.generator() == generator) {
                         String label;
-                        if (buyable) {
+                        if (bought) {
+                            label = String.format("%s: %s", upgrade.getName(), effectString);
+                        } else if (buyable) {
                             Improvement improvement = UpgradeImprovement.create(upgrade, state);
-                            label = String.format("%s: %.2f more efficient, cost %s, yields +%s, increase %.7f",
-                                    upgrade.getName(), effect.efficiency(), improvement.getCost().asString(),
+                            label = String.format("%s: %s, cost %s, yields %s, increase %.7f",
+                                    upgrade.getName(), effectString, improvement.getCost().asString(),
                                     improvement.getIncrease().asString(), improvement.getRatio());
                         } else {
-                            label = upgrade.getName();
+                            label = String.format("%s: %s, cost %s", upgrade.getName(), effectString,
+                                    upgrade.getCost().asString());
                         }
                         UpgradeModel upgradeModel = new UpgradeModel(upgrade.getName(), label, effect.efficiency(),
                                 state.isUpgradeBought(upgrade), unlockedUpgrades.contains(upgrade.getName()));
@@ -320,6 +296,16 @@ public class AFelineJourneyController {
             generatorModels.add(generatorModel);
         }
         return generatorModels;
+    }
+
+    private static String efficiencyEffectString(float efficiency) {
+        if (efficiency >= 1_000_000) {
+            return String.format("%.2e more efficient", efficiency);
+        } else if (efficiency == Math.round(efficiency)) {
+            return String.format("%.0f more efficient", efficiency);
+        } else {
+            return String.format("%.2f more efficient", efficiency);
+        }
     }
 
     private Set<String> unlockedGenerators(Garden garden, GardenState state) {

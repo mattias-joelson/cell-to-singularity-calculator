@@ -8,7 +8,6 @@ import org.joelson.cts.calculator.model.Unlockable;
 import org.joelson.cts.calculator.model.Upgrade;
 import org.joelson.cts.calculator.model.UpgradeEffect;
 import org.joelson.cts.calculator.model.UpgradeRequirement;
-import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,6 +65,10 @@ public class GardenBuilder {
         if (generator == null) {
             throw new IllegalStateException("No generator with name " + generatorName + " found.");
         }
+        return with(generator);
+    }
+
+    UpgradeEffectBuilder with(Generator generator) {
         return new UpgradeEffectBuilder(garden, generator);
     }
 
@@ -147,7 +150,7 @@ public class GardenBuilder {
         }
     }
 
-    private @NonNull Map<String, Unlockable> mapUnlockables() {
+    private Map<String, Unlockable> mapUnlockables() {
         Map<String, Unlockable> unlockableMap = new HashMap<>();
         addUnlockable(unlockableMap, garden.getGenerators());
         addUnlockable(unlockableMap, garden.getUpgrades());

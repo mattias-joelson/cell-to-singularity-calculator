@@ -39,4 +39,8 @@ public record UpgradeBuilder(GardenBuilder gardenBuilder, Generator generator, U
     public UpgradeBuilder addAutomatedUpgrade(String name, Amount cost) {
         return gardenBuilder.addAutomatedUpgrade(generator, name, cost);
     }
+
+    public UpgradeEffectBuilder withUpgradeEffectBuilder() {
+        return gardenBuilder.with(generator);
+    }
 }
