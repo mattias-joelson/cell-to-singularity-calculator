@@ -21,6 +21,19 @@ public class Garden {
         this.requirements = new HashMap<>();
     }
 
+    public static void generateGeneratorUpgradesNames(Garden garden) {
+        for (Generator generator : garden.getGenerators()) {
+            for (Upgrade upgrade : garden.getUpgrades()) {
+                for (UpgradeEffect effect : upgrade.getEffects()) {
+                    if (effect.generator() == generator) {
+                        System.out.printf("\"%s\", // check%n", upgrade.getName());
+                    }
+                }
+            }
+            System.out.println();
+        }
+    }
+
     public String getName() {
         return name;
     }
