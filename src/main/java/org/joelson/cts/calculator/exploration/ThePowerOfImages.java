@@ -117,7 +117,7 @@ public class ThePowerOfImages {
                 .addUpgradeRequirement("Post Impressionism")
                 .addGeneratorRequirement("Photography")
 
-                .addEfficiencyUpgrade("Expressionisme", amount(5e13), 2)
+                .addEfficiencyUpgrade("Expressionism", amount(5e13), 2)
                 .addGeneratorRequirement("Modernism")
 
                 .addEfficiencyUpgrade("Artist Entrepreneur", amount(2e14), 2.25f)
@@ -132,8 +132,9 @@ public class ThePowerOfImages {
                 .addUpgradeRequirement("Patrons")
                 .addGeneratorRequirement("Modernism")
 
-                .addEfficiencyUpgrade("Abstrct Expressionism", amount(6e17), 10)
-                .addGeneratorRequirement("Modernism");
+                .addEfficiencyUpgrade("Abstract Expressionism", amount(6e17), 21)
+                .addGeneratorRequirement("Modernism")
+                .addUpgradeRequirement("Expressionism");
 
         builder.createGenerator("Art Celebrity", amount(1e16), amount(3e12))
                 .addUpgradeRequirement("Museum")
@@ -148,7 +149,7 @@ public class ThePowerOfImages {
         builder.createGenerator("Post Modernism", amount(5e17), amount(9e13))
                 .addUpgradeRequirement("Cubism")
                 .addGeneratorRequirement("Art Celebrity")
-                .addUpgradeRequirement("Abstrct Expressionism")
+                .addUpgradeRequirement("Abstract Expressionism")
 
                 .addEfficiencyUpgrade("Dadaism", amount(2e18), 3.5f)
                 .addGeneratorRequirement("Post Modernism")
@@ -315,69 +316,69 @@ public class ThePowerOfImages {
 //        Garden.generateGeneratorUpgradesNames(garden);
 
         String[] boughtUpdates = {
-                "Imagination", // check
-//                "Drawing", // check
-//                "Body Paint", // check
+                "Imagination",
+//                "Drawing",
+//                "Body Paint",
 
-//                "Tattoo", // check
-//                "Glyphs", // check
-//                "Brush Strokes", // check
+//                "Tattoo",
+//                "Glyphs",
+//                "Brush Strokes",
 
-//                "Ancient Art", // check
-//                "Folk Art", // check
-//                "Greece and Rome", // check
-//                "Church as King", // check
-//                "The First Projection", // check
+//                "Ancient Art",
+//                "Folk Art",
+//                "Greece and Rome",
+//                "Church as King",
+//                "The First Projection",
 
-//                "Artisans", // check
-//                "Patrons", // check
-//                "Romanticism", // check
-//                "Realism", // check
-//                "Impressionism", // check
-//                "Post Impressionism", // check
+//                "Artisans",
+//                "Patrons",
+//                "Romanticism",
+//                "Realism",
+//                "Impressionism",
+//                "Post Impressionism",
 
-//                "Memory as an Object", // check
-//                "Tricking the Eye", // check
+//                "Memory as an Object",
+//                "Tricking the Eye",
 
-//                "Expressionisme", // check
-//                "Artist Entrepreneur", // check
-//                "Cubism", // check
-//                "Museum", // check
-//                "Abstrct Expressionism", // check
+//                "Expressionism",
+//                "Artist Entrepreneur",
+//                "Cubism",
+//                "Museum",
+//                "Abstract Expressionism",
 
-//                "Critic", // check
-//                "Dealer", // check
+//                "Critic",
+//                "Dealer",
 
-//                "Dadaism", // check
-//                "Surrealism", // check
-//                "Pop Art", // check
-//                "Feminist Art", // check
+//                "Dadaism",
+//                "Surrealism",
+//                "Pop Art",
+//                "Feminist Art",
 
-//                "Hand-Drawn Animation", // check
-//                "Silent to Talkie", // check
-//                "Grayscale to Color", // check
-//                "Video Art", // check
-//                "Computer Animation", // check
+//                "Hand-Drawn Animation",
+//                "Silent to Talkie",
+//                "Grayscale to Color",
+//                "Video Art",
+//                "Computer Animation",
 
-//                "Advertising", // check
-//                "Comics", // check
-//                "Post Pop Art", // check
+//                "Advertising",
+//                "Comics",
+//                "Post Pop Art",
 
-//                "New Media Art", // check
-//                "Digital Art", // check
-//                "Internet", // check
-//                "Algorithmic Art", // check
-//                "AI Imagery", // check
-//                "Meaning", // check
+//                "New Media Art",
+//                "Digital Art",
+//                "Internet",
+//                "Algorithmic Art",
+//                "AI Imagery",
+//                "Meaning",
 
-//                "Street Art", // check
-//                "Socially Engaged Art", // check
-//                "Communities", // check
-//                "Meme", // check
-//                "GIF", // check
-//                "Endless Inspiration", // check
-//                "Anti AI Imagery", // check
-//                "Legacy", // check
+//                "Street Art",
+//                "Socially Engaged Art",
+//                "Communities",
+//                "Meme",
+//                "GIF",
+//                "Endless Inspiration",
+//                "Anti AI Imagery",
+//                "Legacy",
         };
 
         for (String upgradeName : boughtUpdates) {

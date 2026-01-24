@@ -74,52 +74,52 @@ public class ThePowerOfImagesController {
                 "Artisans",
                 "Patrons",
                 "Romanticism",
-//                "Realism",
-//                "Impressionism",
-//                "Post Impressionism", // check
+                "Realism",
+                "Impressionism",
+                "Post Impressionism",
 
-//                "Memory as an Object", // check
-//                "Tricking the Eye", // check
+                "Memory as an Object",
+                "Tricking the Eye",
 
-//                "Expressionisme", // check
-//                "Artist Entrepreneur", // check
-//                "Cubism", // check
-//                "Museum", // check
-//                "Abstrct Expressionism", // check
+                "Expressionism",
+                "Artist Entrepreneur",
+                "Cubism",
+                "Museum",
+                "Abstract Expressionism",
 
-//                "Critic", // check
-//                "Dealer", // check
+                "Critic",
+                "Dealer",
 
-//                "Dadaism", // check
-//                "Surrealism", // check
-//                "Pop Art", // check
-//                "Feminist Art", // check
+                "Dadaism",
+                "Surrealism",
+                "Pop Art",
+                "Feminist Art",
 
-//                "Hand-Drawn Animation", // check
-//                "Silent to Talkie", // check
-//                "Grayscale to Color", // check
-//                "Video Art", // check
-//                "Computer Animation", // check
+                "Hand-Drawn Animation",
+                "Silent to Talkie",
+                "Grayscale to Color",
+                "Video Art",
+                "Computer Animation",
 
-//                "Advertising", // check
-//                "Comics", // check
-//                "Post Pop Art", // check
+                "Advertising",
+                "Comics",
+                "Post Pop Art",
 
-//                "New Media Art", // check
-//                "Digital Art", // check
-//                "Internet", // check
-//                "Algorithmic Art", // check
-//                "AI Imagery", // check
-//                "Meaning", // check
+                "New Media Art",
+                "Digital Art",
+                "Internet",
+                "Algorithmic Art",
+                "AI Imagery",
+                "Meaning",
 
-//                "Street Art", // check
-//                "Socially Engaged Art", // check
-//                "Communities", // check
-//                "Meme", // check
-//                "GIF", // check
-//                "Endless Inspiration", // check
-//                "Anti AI Imagery", // check
-//                "Legacy", // check
+                "Street Art",
+                "Socially Engaged Art",
+                "Communities",
+                "Meme",
+                "GIF",
+                "Endless Inspiration",
+                "Anti AI Imagery",
+                "Legacy",
         };
 
         for (String upgradeName : boughtUpdates) {
