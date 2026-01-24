@@ -197,7 +197,7 @@ public class UnfoldTheUniverseController {
         model.addAttribute("generatorModels", generatorModels);
 
         List<String> actions = new ArrayList<>();
-        UnfoldTheUniverse.singleCurrencyApproach(garden, state.copy(), actions);
+        ImprovementCalculator.singleCurrencyApproach(garden, state.copy(), actions);
         model.addAttribute("actions", actions.toArray(new String[0]));
 
         return "unfoldtheuniverse";

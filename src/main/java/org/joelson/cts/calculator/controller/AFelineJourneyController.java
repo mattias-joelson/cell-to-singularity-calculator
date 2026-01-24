@@ -221,7 +221,7 @@ public class AFelineJourneyController {
         model.addAttribute("generatorModels", generatorModels);
 
         List<String> actions = new ArrayList<>();
-        AFelineJourney.singleCurrencyApproach(garden, state.copy(), actions);
+        ImprovementCalculator.singleCurrencyApproach(garden, state.copy(), actions);
         model.addAttribute("actions", actions.toArray(new String[0]));
 
         return "felinejourney";
