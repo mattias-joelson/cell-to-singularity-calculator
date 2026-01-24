@@ -212,7 +212,7 @@ public class SetInStoneController {
         model.addAttribute("generatorModels", generatorModels);
 
         List<String> actions = new ArrayList<>();
-        SetInStone.candidateApproach(garden, state.copy(), actions);
+        ImprovementCalculator.candidateApproach(garden, state.copy(), actions);
         model.addAttribute("actions", actions.toArray(new String[0]));
 
         return "setinstone";

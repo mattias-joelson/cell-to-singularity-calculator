@@ -228,7 +228,7 @@ public class BeautifulComplexityController {
         model.addAttribute("generatorModels", generatorModels);
 
         List<String> actions = new ArrayList<>();
-        BeautifulComplexity.candidateApproach(garden, state.copy(), actions);
+        ImprovementCalculator.candidateApproach(garden, state.copy(), actions);
         model.addAttribute("actions", actions.toArray(new String[0]));
 
         return "beautifulcomplexity";
