@@ -23,6 +23,14 @@ public class GardenState {
         boost = that.boost;
     }
 
+    public static void isAllUpgradesBought(Garden garden, GardenState state) {
+        for (Upgrade upgrade : garden.getUpgrades()) {
+            if (!state.isUpgradeBought(upgrade)) {
+                throw new IllegalStateException("Missing upgrade " + upgrade.getName());
+            }
+        }
+    }
+
     public void setGeneratorState(Generator generator, GeneratorState state) {
         generatorStates.put(generator.getName(), state);
     }
