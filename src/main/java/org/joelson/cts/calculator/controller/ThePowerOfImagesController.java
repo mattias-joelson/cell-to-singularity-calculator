@@ -229,7 +229,7 @@ public class ThePowerOfImagesController {
         model.addAttribute("generatorModels", generatorModels);
 
         List<String> actions = new ArrayList<>();
-        ThePowerOfImages.singleCurrencyApproach(garden, state.copy(), actions);
+        ImprovementCalculator.singleCurrencyApproach(garden, state.copy(), actions);
         model.addAttribute("actions", actions.toArray(new String[0]));
 
         return "powerofimages";
