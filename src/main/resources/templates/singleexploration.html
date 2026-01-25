@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
-    <title th:text="|Cell to Singularity - ${garden.name}|"/>
+    <title th:text="|Cell to Singularity - ${gardenName}|"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="/css/celltosingularity.css">
 </head>
@@ -10,8 +10,8 @@
 <body>
 <div class="container">
     <div class="itemStats">
-        <h1 th:text="${garden.name}"/>
-        <a href="/lurkinginthedark">Reset</a>
+        <h1 th:text="${gardenName}"/>
+        <a th:href="${gardenGet}">Reset and get garden.</a>
         <h2>Generator Productions</h2>
         <table>
             <tr>
@@ -19,6 +19,7 @@
                 <th>Count</th>
                 <th>Cost of Next</th>
                 <th>Production of Each</th>
+                <th th:if="${timedGenerators}">Total Production per Cycle</th>
                 <th>Total Production</th>
                 <th>Increase</th>
             </tr>
@@ -27,6 +28,7 @@
                 <td th:text="${generatorProduction.count}"/>
                 <td th:text="${generatorProduction.next}"/>
                 <td th:text="${generatorProduction.each}"/>
+                <td th:if="${timedGenerators}" th:text="${generatorProduction.totalPerCycle}"/>
                 <td th:text="${generatorProduction.total}"/>
                 <td th:text="${generatorProduction.increase}"/>
             </tr>
@@ -43,19 +45,19 @@
         <table>
             <tr th:each="generatorModel : ${generatorModels}">
                 <td>
-                    <form action="#" th:action="@{/lurkinginthedark-generator-update}" method="post">
+                    <form action="#" th:action="@{${gardenGeneratorUpdate}}" method="post">
                         <input type="hidden" name="target" th:value="${generatorModel.name}">
                         <label for="count" th:text="${generatorModel.name}"/>
                         <input name="value" id="count" type="number" th:value="${generatorModel.count}"
                                th:disabled="${!generatorModel.unlocked}"/>
                         <input type="submit" value="Set count" th:disabled="${!generatorModel.unlocked}">
-                        <input type="submit" th:formaction="@{/lurkinginthedark-generator-increment}" value="+1"
+                        <input type="submit" th:formaction="@{${gardenGeneratorIncrement}}" value="+1"
                                th:disabled="${!generatorModel.unlocked}">
-                        <input type="submit" th:formaction="@{/lurkinginthedark-generator-decrement}" value="-1"
+                        <input type="submit" th:formaction="@{${gardenGeneratorDecrement}}" value="-1"
                                th:disabled="${!generatorModel.unlocked}">
                     </form>
                     <th:block th:each="upgradeModel : ${generatorModel.upgradeModels}">
-                        <form action="#" th:action="@{/lurkinginthedark-upgrade}" method="post">
+                        <form action="#" th:action="@{${gardenUpgrade}}" method="post">
                             <input type="hidden" name="target" th:value="${upgradeModel.name}">
                             <input type="checkbox" id="upgrade" name="value" th:value="${upgradeModel.name}"
                                    th:checked="${upgradeModel.isBought}" th:disabled="${!upgradeModel.unlocked}"
