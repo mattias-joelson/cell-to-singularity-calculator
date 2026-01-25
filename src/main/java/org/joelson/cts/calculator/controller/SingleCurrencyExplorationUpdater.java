@@ -133,6 +133,8 @@ class SingleCurrencyExplorationUpdater {
     private String updateModel(Model model) {
         state.updateGeneratorStates(garden);
 
+        boolean multiCurrency = garden.getCurrencies().size() > 1;
+
         model.addAttribute("gardenName", garden.getName());
         model.addAttribute("gardenHasTimedGenerators", timedGenerators);
         model.addAttribute("gardenGet", gardenGet);
@@ -141,17 +143,29 @@ class SingleCurrencyExplorationUpdater {
         model.addAttribute("gardenGeneratorDecrement", gardenGeneratorDecrement);
         model.addAttribute("gardenUpgrade", gardenUpgrade);
         model.addAttribute("timedGenerators", timedGenerators);
+        model.addAttribute("multiCurrency", multiCurrency);
 
         List<GeneratorProduction> generatorProductions = calculateGeneratorProduction(garden, state);
         model.addAttribute("generatorProductions", generatorProductions);
         List<String> totalProductions = calculateTotalProductions(garden, state);
         model.addAttribute("totalProductions", totalProductions);
+        List<GeneratorCost> generatorCosts;
+        if (multiCurrency) {
+            generatorCosts = new ArrayList<>();//calculateGeneratorCosts(garden, state);
+        } else {
+            generatorCosts = new ArrayList<>();
+        }
+        model.addAttribute("generatorCosts", generatorCosts);
 
         List<GeneratorModel> generatorModels = calculateModels(garden, state);
         model.addAttribute("generatorModels", generatorModels);
 
         List<String> actions = new ArrayList<>();
-        ImprovementCalculator.singleCurrencyApproach(garden, state.copy(), actions);
+        if (multiCurrency) {
+            ImprovementCalculator.candidateApproach(garden, state.copy(), actions);
+        } else {
+            ImprovementCalculator.singleCurrencyApproach(garden, state.copy(), actions);
+        }
         model.addAttribute("actions", actions.toArray(new String[0]));
 
         return "singleexploration";
@@ -212,6 +226,10 @@ class SingleCurrencyExplorationUpdater {
             }
         }
         return productionAmounts;
+    }
+
+    public record GeneratorCost(String label, String cost, String ratio, String next) {
+
     }
 
     public record GeneratorModel(String name, int count, String cost, boolean isUnlocked,

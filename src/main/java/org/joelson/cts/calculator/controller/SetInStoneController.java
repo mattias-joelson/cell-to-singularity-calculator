@@ -6,35 +6,33 @@ import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
 import org.joelson.cts.calculator.model.GeneratorState;
-import org.joelson.cts.calculator.model.ImprovementCalculator;
-import org.joelson.cts.calculator.model.Unlockable;
-import org.joelson.cts.calculator.model.Upgrade;
-import org.joelson.cts.calculator.model.UpgradeEffect;
-import org.joelson.cts.calculator.util.DurationToolkit;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 @Controller
 public class SetInStoneController {
 
-    private final Garden garden = SetInStone.createGarden(1, 1, 0);
-    private final GardenState state = new GardenState();
+    private static final String GARDEN_GET = "/setinstone";
+    private static final String GARDEN_GENERATOR_UPDATE = "/setinstone-generator-update";
+    private static final String GARDEN_GENERATOR_INCREMENT = "/setinstone-generator-increment";
+    private static final String GARDEN_GENERATOR_DECREMENT = "/setinstone-generator-decrement";
+    private static final String GARDEN_UPGRADE = "/setinstone-upgrade";
 
-    public Garden getGarden() {
+    private final Garden garden;
+    private final GardenState state;
+    private final SingleCurrencyExplorationUpdater helper;
+
+    public SetInStoneController() {
+        garden = SetInStone.createGarden(1, 1, 0);
+        state = new GardenState();
+        helper = new SingleCurrencyExplorationUpdater(garden, state, GARDEN_GET, GARDEN_GENERATOR_UPDATE,
+                GARDEN_GENERATOR_INCREMENT, GARDEN_GENERATOR_DECREMENT, GARDEN_UPGRADE);
         initState();
-        return garden;
-    }
-
-    public GardenState getState() {
-        return state;
     }
 
     private void initState() {
@@ -114,156 +112,30 @@ public class SetInStoneController {
         state.setGeneratorCount(generator, count);
     }
 
-    @GetMapping("/setinstone")
+    @GetMapping(GARDEN_GET)
     public String setInStone(Model model) {
         initState();
-        return updateModel(model);
+        return helper.garden(model);
     }
 
-    @PostMapping("/setinstone-generator-update")
+    @PostMapping(GARDEN_GENERATOR_UPDATE)
     public String setInStoneGeneratorUpdate(Model model, String target, String value) {
-        Generator generator = validateGenerator(model, target);
-        if (generator != null) {
-            int count = Integer.parseInt(value);
-            state.setGeneratorCount(generator, count);
-        }
-
-        return updateModel(model);
+        return helper.gardenGeneratorUpdate(model, target, value);
     }
 
-    @PostMapping("/setinstone-generator-increment")
+    @PostMapping(GARDEN_GENERATOR_INCREMENT)
     public String setInStoneGeneratorIncrement(Model model, String target) {
-        Generator generator = validateGenerator(model, target);
-        if (generator != null) {
-            GeneratorState generatorState = state.getGeneratorState(generator);
-            int count = generatorState.count() + 1;
-            state.setGeneratorCount(generator, count);
-        }
-
-        return updateModel(model);
+        return helper.gardenGeneratorIncrement(model, target);
     }
 
-    @PostMapping("/setinstone-generator-decrement")
+    @PostMapping(GARDEN_GENERATOR_DECREMENT)
     public String setInStoneGeneratorDecrement(Model model, String target) {
-        Generator generator = validateGenerator(model, target);
-        if (generator != null) {
-            GeneratorState generatorState = state.getGeneratorState(generator);
-            int count = Math.max(generatorState.count() - 1, 0);
-            state.setGeneratorCount(generator, count);
-        }
-
-        return updateModel(model);
+        return helper.gardenGeneratorDecrement(model, target);
     }
 
-    private Generator validateGenerator(Model model, String target) {
-        if (target == null) {
-            model.addAttribute("msg", "Generator name is null.");
-        } else {
-            String name = target.trim();
-            if (name.isEmpty()) {
-                model.addAttribute("msg", "Generator name is empty.");
-            } else {
-                Generator generator = garden.getGenerator(name);
-                if (generator == null) {
-                    model.addAttribute("msg", "There exists no generator \"" + name + "\".");
-                } else {
-                    return generator;
-                }
-            }
-        }
-        return null;
-    }
-
-    @PostMapping("/setinstone-upgrade")
-    public String updateSetInStone(Model model, String target, String value) {
-        if (target == null) {
-            model.addAttribute("msg", "Invalid target null.");
-        } else {
-            String name = target.trim();
-            if (name.isEmpty()) {
-                model.addAttribute("msg", "Invalid target \"\".");
-            } else {
-                Upgrade upgrade = garden.getUpgrade(name);
-                if (upgrade != null) {
-                    boolean bought = value != null && value.equals(upgrade.getName());
-                    state.setUpgradeBought(upgrade, bought);
-                } else {
-                    model.addAttribute("msg", "There exists no upgrade \"" + name + "\".");
-                }
-            }
-        }
-
-        return updateModel(model);
-    }
-
-    private String updateModel(Model model) {
-        state.updateGeneratorStates(garden);
-
-        model.addAttribute("garden", garden);
-        model.addAttribute("state", state);
-        List<GeneratorProduction> generatorProductions = calculateGeneratorProduction(garden, state);
-        model.addAttribute("generatorProductions", generatorProductions);
-        List<String> totalProductions = calculateTotalProductions(garden, state);
-        model.addAttribute("totalProductions", totalProductions);
-        List<GeneratorCost> generatorCosts = calculateGeneratorCosts(garden, state);
-        model.addAttribute("generatorCosts", generatorCosts);
-
-        List<GeneratorModel> generatorModels = calculateModels(garden, state);
-        model.addAttribute("generatorModels", generatorModels);
-
-        List<String> actions = new ArrayList<>();
-        ImprovementCalculator.candidateApproach(garden, state.copy(), actions);
-        model.addAttribute("actions", actions.toArray(new String[0]));
-
-        return "setinstone";
-    }
-
-    public record GeneratorProduction(String name, int count, String next, String each, String total, String increase) {
-
-    }
-
-    public static List<GeneratorProduction> calculateGeneratorProduction(Garden garden, GardenState state) {
-        List<GeneratorProduction> generatorProductions = new ArrayList<>();
-        for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
-            GeneratorState generatorState = state.getGeneratorState(generator);
-            int count = generatorState.count();
-            String currencyName = generator.getBaseProduction().currency();
-            double baseProduction = generator.getBaseProduction().amount();
-            float efficiency = generatorState.efficiency();
-            if (generator.isTimed()) {
-                double productionPerCycle = baseProduction * efficiency * count;
-                float speed = generatorState.speed();
-                float cycleTime = generator.getBaseChargeTime() / speed;
-                double production = productionPerCycle / cycleTime;
-                String productionString = String.format("%s in %s s, %s per second",
-                        new Amount(currencyName, productionPerCycle).asString(),
-                        DurationToolkit.durationString(cycleTime),
-                        new Amount(currencyName, production).asString());
-                generatorProductions.add(new GeneratorProduction(generator.getName(), count,
-                        generator.getCost(count).asString(),
-                        generator.getBaseProduction().multiplyBy(efficiency).asString(), productionString,
-                        String.format("%.7f", production / (count * generator.getCost(count).amount()))));
-            } else {
-                double production = baseProduction * efficiency * count;
-                String productionString = String.format("%s", new Amount(currencyName, production).asString());
-                generatorProductions.add(new GeneratorProduction(generator.getName(), count,
-                        generator.getCost(count).asString(),
-                        generator.getBaseProduction().multiplyBy(efficiency).asString(), productionString,
-                        String.format("%.7f", production / (count * generator.getCost(count).amount()))));
-            }
-        }
-        return generatorProductions;
-    }
-
-    private List<String> calculateTotalProductions(Garden garden, GardenState state) {
-        List<String> productionAmounts = new ArrayList<>();
-        Map<String, Double> production = ImprovementCalculator.calculateProduction(garden, state);
-        for (String currency : garden.getCurrencies()) {
-            if (production.containsKey(currency)) {
-                productionAmounts.add(new Amount(currency, production.get(currency)).asString());
-            }
-        }
-        return productionAmounts;
+    @PostMapping(GARDEN_UPGRADE)
+    public String setInStoneUpgrade(Model model, String target, String value) {
+        return helper.gardenUpgrade(model, target, value);
     }
 
     public record GeneratorCost(String label, String cost, String ratio, String next) {
@@ -324,58 +196,5 @@ public class SetInStoneController {
         return new GeneratorCost(String.format("Crystal (%d)", generatorState.count()), cost.asString(),
                 String.format("%.3f %%", cost.amount() / totalCost),
                 generator.getCost(generatorState.count()).asString());
-    }
-
-    public record GeneratorModel(String name, int count, String cost, boolean isUnlocked,
-            UpgradeModel[] upgradeModels) {
-
-    }
-
-    public record UpgradeModel(String name, float efficiency, String cost, boolean isBought, boolean isUnlocked) {
-
-    }
-
-    private List<GeneratorModel> calculateModels(Garden garden, GardenState state) {
-        Set<String> unlockedGenerators = unlockedGenerators(garden, state);
-        Set<String> unlockedUpgrades = unlockedUpgrades(garden, state);
-
-        List<GeneratorModel> generatorModels = new ArrayList<>();
-        List<Generator> generators = garden.getGenerators().reversed();
-        List<Upgrade> upgrades = garden.getUpgrades();
-        for (Generator generator : generators) {
-            List<UpgradeModel> upgradeModels = new ArrayList<>();
-            for (Upgrade upgrade : upgrades) {
-                for (UpgradeEffect effect : upgrade.getEffects()) {
-                    if (effect.generator() == generator) {
-                        UpgradeModel upgradeModel = new UpgradeModel(upgrade.getName(), effect.efficiency(),
-                                upgrade.getCost().asString(), state.isUpgradeBought(upgrade),
-                                unlockedUpgrades.contains(upgrade.getName()));
-                        upgradeModels.add(upgradeModel);
-                    }
-                }
-            }
-            int count = state.getGeneratorState(generator).count();
-            GeneratorModel generatorModel = new GeneratorModel(generator.getName(), count,
-                    generator.getCost(count).asString(), unlockedGenerators.contains(generator.getName()),
-                    upgradeModels.toArray(new UpgradeModel[0]));
-            generatorModels.add(generatorModel);
-        }
-        return generatorModels;
-    }
-
-    private Set<String> unlockedGenerators(Garden garden, GardenState state) {
-        return unlockedNames(garden.getUnlockedGenerators(state));
-    }
-
-    private Set<String> unlockedUpgrades(Garden garden, GardenState state) {
-        return unlockedNames(garden.getUnlockedUpgrades(state));
-    }
-
-    private <T extends Unlockable> Set<String> unlockedNames(List<T> unlockables) {
-        Set<String> names = new HashSet<>(unlockables.size());
-        for (T unlockable : unlockables) {
-            names.add(unlockable.getName());
-        }
-        return names;
     }
 }
