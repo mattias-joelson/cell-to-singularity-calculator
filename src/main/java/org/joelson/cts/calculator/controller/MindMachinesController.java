@@ -28,7 +28,6 @@ public class MindMachinesController {
         helper = new SingleCurrencyExplorationUpdater(garden, state, GARDEN_GET,
                 GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
                 GARDEN_GENERATOR_DECREMENT, GARDEN_UPGRADE);
-
         initState();
     }
 
