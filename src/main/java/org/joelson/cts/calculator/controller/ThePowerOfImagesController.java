@@ -20,13 +20,13 @@ public class ThePowerOfImagesController {
 
     private final Garden garden;
     private final GardenState state;
-    private final SingleCurrencyExplorationUpdater helper;
+    private final ExplorationUpdater updater;
 
     public ThePowerOfImagesController() {
         garden = ThePowerOfImages.createGarden(1, 1, 0);
         state = new GardenState();
-        helper = new SingleCurrencyExplorationUpdater(garden, state, GARDEN_GET, GARDEN_GENERATOR_UPDATE,
-                GARDEN_GENERATOR_INCREMENT, GARDEN_GENERATOR_DECREMENT, GARDEN_UPGRADE);
+        updater = new ExplorationUpdater(garden, state, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
+                GARDEN_GENERATOR_DECREMENT, GARDEN_UPGRADE);
         initState();
     }
 
@@ -127,26 +127,26 @@ public class ThePowerOfImagesController {
     @GetMapping(GARDEN_GET)
     public String powerOfImages(Model model) {
         initState();
-        return helper.garden(model);
+        return updater.garden(model);
     }
 
     @PostMapping(GARDEN_GENERATOR_UPDATE)
     public String powerOfImagesGeneratorUpdate(Model model, String target, String value) {
-        return helper.gardenGeneratorUpdate(model, target, value);
+        return updater.gardenGeneratorUpdate(model, target, value);
     }
 
     @PostMapping(GARDEN_GENERATOR_INCREMENT)
     public String powerOfImagesGeneratorIncrement(Model model, String target) {
-        return helper.gardenGeneratorIncrement(model, target);
+        return updater.gardenGeneratorIncrement(model, target);
     }
 
     @PostMapping(GARDEN_GENERATOR_DECREMENT)
     public String powerOfImagesGeneratorDecrement(Model model, String target) {
-        return helper.gardenGeneratorDecrement(model, target);
+        return updater.gardenGeneratorDecrement(model, target);
     }
 
     @PostMapping(GARDEN_UPGRADE)
     public String powerOfImagesUpgrade(Model model, String target, String value) {
-        return helper.gardenUpgrade(model, target, value);
+        return updater.gardenUpgrade(model, target, value);
     }
 }

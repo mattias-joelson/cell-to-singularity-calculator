@@ -20,13 +20,13 @@ public class LurkingInTheDarkController {
 
     private final Garden garden;
     private final GardenState state;
-    private final SingleCurrencyExplorationUpdater helper;
+    private final ExplorationUpdater updater;
 
     public LurkingInTheDarkController() {
         garden = LurkingInTheDark.createGarden(1, 1, 0);
         state = new GardenState();
-        helper = new SingleCurrencyExplorationUpdater(garden, state, GARDEN_GET, GARDEN_GENERATOR_UPDATE,
-                GARDEN_GENERATOR_INCREMENT, GARDEN_GENERATOR_DECREMENT, GARDEN_UPGRADE);
+        updater = new ExplorationUpdater(garden, state, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
+                GARDEN_GENERATOR_DECREMENT, GARDEN_UPGRADE);
         initState();
     }
 
@@ -103,26 +103,26 @@ public class LurkingInTheDarkController {
     @GetMapping(GARDEN_GET)
     public String lurkingInTheDark(Model model) {
         initState();
-        return helper.garden(model);
+        return updater.garden(model);
     }
 
     @PostMapping(GARDEN_GENERATOR_UPDATE)
     public String lurkingInTheDarkGeneratorUpdate(Model model, String target, String value) {
-        return helper.gardenGeneratorUpdate(model, target, value);
+        return updater.gardenGeneratorUpdate(model, target, value);
     }
 
     @PostMapping(GARDEN_GENERATOR_INCREMENT)
     public String lurkingInTheDarkGeneratorIncrement(Model model, String target) {
-        return helper.gardenGeneratorIncrement(model, target);
+        return updater.gardenGeneratorIncrement(model, target);
     }
 
     @PostMapping(GARDEN_GENERATOR_DECREMENT)
     public String lurkingInTheDarkGeneratorDecrement(Model model, String target) {
-        return helper.gardenGeneratorDecrement(model, target);
+        return updater.gardenGeneratorDecrement(model, target);
     }
 
     @PostMapping(GARDEN_UPGRADE)
     public String lurkingInTheDarkUpgrade(Model model, String target, String value) {
-        return helper.gardenUpgrade(model, target, value);
+        return updater.gardenUpgrade(model, target, value);
     }
 }

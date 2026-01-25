@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-class SingleCurrencyExplorationUpdater {
+class ExplorationUpdater {
 
     private final Garden garden;
     private final GardenState state;
@@ -32,7 +32,7 @@ class SingleCurrencyExplorationUpdater {
     private final String gardenUpgrade;
     private final boolean timedGenerators;
 
-    SingleCurrencyExplorationUpdater(
+    ExplorationUpdater(
             Garden garden, GardenState state, String gardenGet, String gardenGeneratorUpdate,
             String gardenGeneratorIncrement, String gardenGeneratorDecrement, String gardenUpgrade) {
         this.garden = garden;
@@ -168,7 +168,7 @@ class SingleCurrencyExplorationUpdater {
         }
         model.addAttribute("actions", actions.toArray(new String[0]));
 
-        return "singleexploration";
+        return "exploration";
     }
 
     public record GeneratorProduction(String name, int count, String next, String each, String totalPerCycle,

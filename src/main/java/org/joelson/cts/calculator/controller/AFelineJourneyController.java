@@ -20,13 +20,13 @@ public class AFelineJourneyController {
 
     private final Garden garden;
     private final GardenState state;
-    private final SingleCurrencyExplorationUpdater helper;
+    private final ExplorationUpdater updater;
 
     public AFelineJourneyController() {
         garden = AFelineJourney.createGarden(1, 1, 0);
         state = new GardenState();
-        helper = new SingleCurrencyExplorationUpdater(garden, state, GARDEN_GET, GARDEN_GENERATOR_UPDATE,
-                GARDEN_GENERATOR_INCREMENT, GARDEN_GENERATOR_DECREMENT, GARDEN_UPGRADE);
+        updater = new ExplorationUpdater(garden, state, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
+                GARDEN_GENERATOR_DECREMENT, GARDEN_UPGRADE);
         initState();
     }
 
@@ -119,26 +119,26 @@ public class AFelineJourneyController {
     @GetMapping(GARDEN_GET)
     public String felineJourney(Model model) {
         initState();
-        return helper.garden(model);
+        return updater.garden(model);
     }
 
     @PostMapping(GARDEN_GENERATOR_UPDATE)
     public String felineJourneyGeneratorUpdate(Model model, String target, String value) {
-        return helper.gardenGeneratorUpdate(model, target, value);
+        return updater.gardenGeneratorUpdate(model, target, value);
     }
 
     @PostMapping(GARDEN_GENERATOR_INCREMENT)
     public String felineJourneyGeneratorIncrement(Model model, String target) {
-        return helper.gardenGeneratorIncrement(model, target);
+        return updater.gardenGeneratorIncrement(model, target);
     }
 
     @PostMapping(GARDEN_GENERATOR_DECREMENT)
     public String felineJourneyGeneratorDecrement(Model model, String target) {
-        return helper.gardenGeneratorDecrement(model, target);
+        return updater.gardenGeneratorDecrement(model, target);
     }
 
     @PostMapping(GARDEN_UPGRADE)
     public String felineJourneyUpgrade(Model model, String target, String value) {
-        return helper.gardenUpgrade(model, target, value);
+        return updater.gardenUpgrade(model, target, value);
     }
 }
