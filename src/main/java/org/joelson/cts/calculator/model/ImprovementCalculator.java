@@ -26,8 +26,7 @@ public class ImprovementCalculator {
         addUnlocked(garden, state, actions);
         for (int i = 0; i < 100; i += 1) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            ImprovementDescription improvementDescription =
-                    ImprovementCalculator.calculateImprovement(garden, state).get(mapping);
+            ImprovementDescription improvementDescription = calculateImprovement(garden, state).get(mapping);
             System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
             System.out.println();
             Improvement improvement = improvementDescription.improvement();
@@ -63,8 +62,7 @@ public class ImprovementCalculator {
         addUnlocked(garden, state, actions);
         for (int i = 0; i < 100; i += 1) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            Map<CurrencyMapping, ImprovementDescription> improvementDescriptions =
-                    ImprovementCalculator.calculateImprovement(garden, state);
+            Map<CurrencyMapping, ImprovementDescription> improvementDescriptions = calculateImprovement(garden, state);
             System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
             System.out.println();
 
