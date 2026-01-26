@@ -61,15 +61,13 @@ public class ImprovementCalculator {
 
     public static void candidateApproach(Garden garden, GardenState state, List<String> actions) {
         addUnlocked(garden, state, actions);
-        boolean possibleUnlock = false;
-        for (int i = 0; i < 20 || !possibleUnlock; i += 1) {
+        for (int i = 0; i < 100; i += 1) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             Map<CurrencyMapping, ImprovementDescription> improvementDescriptions =
                     ImprovementCalculator.calculateImprovement(garden, state);
             System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
             System.out.println();
 
-            possibleUnlock = false;
             Map<Improvement, Set<Map.Entry<CurrencyMapping, ImprovementDescription>>> improvementMap = new HashMap<>();
             for (Map.Entry<CurrencyMapping, ImprovementDescription> entry : improvementDescriptions.entrySet()) {
                 Improvement improvement = entry.getValue().improvement();
@@ -111,7 +109,9 @@ public class ImprovementCalculator {
                     state.setGeneratorCount(generator, count + 1);
                     if (count == 0) {
                         addUnlocked(garden, state, actions);
-                        possibleUnlock = true;
+                        if (i > 20) {
+                            break;
+                        }
                     }
                 } else if (improvement instanceof UpgradeImprovement upgradeImprovement) {
                     Upgrade upgrade = upgradeImprovement.upgrade();
@@ -125,7 +125,9 @@ public class ImprovementCalculator {
                     state.setUpgradeBought(upgrade);
                     state.updateGeneratorStates(garden);
                     addUnlocked(garden, state, actions);
-                    possibleUnlock = true;
+                    if (i > 20) {
+                        break;
+                    }
                 } else {
                     throw new NullPointerException();
                 }
