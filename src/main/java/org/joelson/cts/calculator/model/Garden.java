@@ -26,7 +26,11 @@ public class Garden {
             for (Upgrade upgrade : garden.getUpgrades()) {
                 for (UpgradeEffect effect : upgrade.getEffects()) {
                     if (effect.generator() == generator) {
-                        System.out.printf("\"%s\", // check%n", upgrade.getName());
+                        String currency =
+                                (generator.getBaseProduction().currency().equals(upgrade.getCost().currency()))
+                                        ? ""
+                                        : String.format("// %s ", upgrade.getCost().currency().toLowerCase());
+                        System.out.printf("\"%s\", %s// check%n", upgrade.getName(), currency);
                     }
                 }
             }
