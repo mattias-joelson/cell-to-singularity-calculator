@@ -148,17 +148,19 @@ public class ImprovementCalculator {
         for (Upgrade upgrade : garden.getUnlockedUpgrades(state)) {
             if (!state.isUpgradeBought(upgrade)) {
                 for (UpgradeEffect effect : upgrade.getEffects()) {
+                    String efficiency = (effect.efficiency() >= 1_000_000) ? String.format("%.2e",
+                            effect.efficiency()) : String.format("%.2f", effect.efficiency());
                     if (effect.speed() == 1) {
-                        actions.add(String.format(" *** unlocked upgrade %s: %s efficiency %.2f, cost %s",
-                                upgrade.getName(), effect.generator().getName(), effect.efficiency(),
+                        actions.add(String.format(" *** unlocked upgrade %s: %s efficiency %s, cost %s",
+                                upgrade.getName(), effect.generator().getName(), efficiency,
                                 upgrade.getCost().asString()));
                     } else if (effect.efficiency() == 1) {
                         actions.add(String.format(" *** unlocked upgrade %s: %s speed %.2f, cost %s",
                                 upgrade.getName(), effect.generator().getName(), effect.speed(),
                                 upgrade.getCost().asString()));
                     } else {
-                        actions.add(String.format(" *** unlocked upgrade %s: %s efficiency %.2f, speed %.2f, cost %s",
-                                upgrade.getName(), effect.generator().getName(), effect.efficiency(), effect.speed(),
+                        actions.add(String.format(" *** unlocked upgrade %s: %s efficiency %s, speed %.2f, cost %s",
+                                upgrade.getName(), effect.generator().getName(), efficiency, effect.speed(),
                                 upgrade.getCost().asString()));
                     }
                 }
