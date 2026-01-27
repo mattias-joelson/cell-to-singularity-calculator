@@ -163,6 +163,7 @@ class ExplorationUpdater {
         List<String> actions = new ArrayList<>();
         if (multiCurrency) {
             ImprovementCalculator.candidateApproach(garden, state.copy(), actions);
+            ImprovementCalculator.multiCurrencyApproach(garden, state.copy(), actions);
         } else {
             ImprovementCalculator.singleCurrencyApproach(garden, state.copy(), actions);
         }
