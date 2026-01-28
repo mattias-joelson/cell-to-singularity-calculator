@@ -400,7 +400,7 @@ public class ThreatOfInfection {
 //        state.verifyAllUpgradesBought(garden);
 
         List<String> actions = new ArrayList<>();
-        ImprovementCalculator.candidateApproach(garden, state, actions);
+        ImprovementCalculator.multiCurrencyApproach(garden, state, actions);
         actions.forEach(System.out::println);
     }
 }
