@@ -12,6 +12,4 @@
 
 - Fast-forward actions
 
-- Reset should be renamed, it simply calls the GET endpoint.
-
 - Mind Machines: Big Data and Large Language Models is faster than LLM followed by BD?

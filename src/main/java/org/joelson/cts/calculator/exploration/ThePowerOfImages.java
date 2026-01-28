@@ -338,7 +338,7 @@ public class ThePowerOfImages {
         }
         state.updateGeneratorStates(garden);
 
-        //GardenState.isAllUpgradesBought(garden, state);
+//        state.verifyAllUpgradesBought(garden);
 
         List<String> actions = new ArrayList<>();
         ImprovementCalculator.singleCurrencyApproach(garden, state, actions);

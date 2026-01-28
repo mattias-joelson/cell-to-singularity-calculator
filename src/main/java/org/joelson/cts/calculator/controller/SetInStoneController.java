@@ -36,7 +36,8 @@ public class SetInStoneController {
     }
 
     private void initState() {
-        state.setBoost(4);
+        state.clearUpgradesBought();
+//        state.setBoost(4);
         state.updateGeneratorStates(garden);
 
         setGeneratorCount("Gem", 0);

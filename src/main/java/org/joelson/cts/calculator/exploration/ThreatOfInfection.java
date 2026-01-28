@@ -397,7 +397,7 @@ public class ThreatOfInfection {
         }
         state.updateGeneratorStates(garden);
 
-//        GardenState.isAllUpgradesBought(garden, state);
+//        state.verifyAllUpgradesBought(garden);
 
         List<String> actions = new ArrayList<>();
         ImprovementCalculator.candidateApproach(garden, state, actions);

@@ -31,6 +31,7 @@ public class LurkingInTheDarkController {
     }
 
     private void initState() {
+        state.clearUpgradesBought();
 //        state.setBoost(4);
         state.updateGeneratorStates(garden);
 

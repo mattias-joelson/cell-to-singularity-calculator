@@ -31,6 +31,7 @@ public class ThePowerOfImagesController {
     }
 
     private void initState() {
+        state.clearUpgradesBought();
 //        state.setBoost(4);
         state.updateGeneratorStates(garden);
 
