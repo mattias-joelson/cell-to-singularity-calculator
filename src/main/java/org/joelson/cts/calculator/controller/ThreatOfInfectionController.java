@@ -50,79 +50,79 @@ public class ThreatOfInfectionController {
         setGeneratorCount("Human Life", 1);
 
         String[] boughtUpdates = {
-//                "Viruses", // contagions // check
-//                "White Blood Cells", // check
-//                "Lymphatic System", // check
-//                "Gut Bacteria", // check
-//                "Fever", // check
-//                "Antibodies", // check
-//                "Documentation", // contagions // check
-//                "Four Humors", // contagions // check
-//                "Fighting the Onryō", // contagions // check
-//                "Quarantines", // contagions // check
-//                "Quinine", // contagions // check
-//                "Herbs and Rituals", // contagions // check
-//                "Plague Doctors", // contagions // check
-//                "Preservation", // contagions // check
-//                "Scientific Survey", // contagions // check
-//                "Germ Theory", // contagions // check
-//                "Sanitation", // contagions // check
-//                "Burning it Down", // contagions // check
-//                "Vaccines", // contagions // check
-//                "Masking", // contagions // check
-//                "Extreme Hygiene", // contagions // check
-//                "Antibiotics", // contagions // check
-//                "Prevention", // contagions // check
-//                "Medical Technology", // contagions // check
-//                "2020-Present", // check
+//                "Viruses", // contagions
+//                "White Blood Cells",
+//                "Lymphatic System",
+//                "Gut Bacteria",
+//                "Fever",
+//                "Antibodies",
+//                "Documentation", // contagions
+//                "Four Humors", // contagions
+//                "Fighting the Onryō", // contagions
+//                "Quarantines", // contagions
+//                "Quinine", // contagions
+//                "Herbs and Rituals", // contagions
+//                "Plague Doctors", // contagions
+//                "Preservation", // contagions
+//                "Scientific Survey", // contagions
+//                "Germ Theory", // contagions
+//                "Sanitation", // contagions
+//                "Burning it Down", // contagions
+//                "Vaccines", // contagions
+//                "Masking", // contagions
+//                "Extreme Hygiene", // contagions
+//                "Antibiotics", // contagions
+//                "Prevention", // contagions
+//                "Medical Technology", // contagions
+//                "2020-Present",
 
-//                "Antoine Plague", // check
-//                "Japanese Smallpox", // check
-//                "Aztec Epidemic", // check
-//                "AD 165-180", // immunity // check
-//                "Bacteria", // check
-//                "735-737", // immunity // check
-//                "1520", // immunity // check
+//                "Antoine Plague",
+//                "Japanese Smallpox",
+//                "Aztec Epidemic",
+//                "AD 165-180", // immunity
+//                "Bacteria",
+//                "735-737", // immunity
+//                "1520", // immunity
 
-//                "Plague of Justinian", // check
-//                "The Black Death", // check
-//                "Third Plague Epidemic", // check
-//                "AD 541-549", // immunity // check
-//                "1346-1353", // immunity // check
-//                "1900", // immunity // check
+//                "Plague of Justinian",
+//                "The Black Death",
+//                "Third Plague Epidemic",
+//                "AD 541-549", // immunity
+//                "1346-1353", // immunity
+//                "1900", // immunity
 
-//                "Questions of Morality", // check
-//                "Parasites and Protists", // check
-//                "1494-1928", // immunity // check
+//                "Questions of Morality",
+//                "Parasites and Protists",
+//                "1494-1928", // immunity
 
-//                "1486 - Present", // immunity // check
+//                "1486 - Present", // immunity
 
-//                "Cocoliztli", // check
-//                "1546-1576", // immunity // check
+//                "Cocoliztli",
+//                "1546-1576", // immunity
 
-//                "Summer in Philadelphia", // check
-//                "1793-1794", // immunity // check
+//                "Summer in Philadelphia",
+//                "1793-1794", // immunity
 
-//                "Urban Epidemic", // check
-//                "1800-1922", // immunity // check
+//                "Urban Epidemic",
+//                "1800-1922", // immunity
 
-//                "The Blue Death", // check
-//                "1817-1860", // immunity // check
+//                "The Blue Death",
+//                "1817-1860", // immunity
 
-//                "The New York Epidemic", // check
-//                "1916", // immunity // check
+//                "The New York Epidemic",
+//                "1916", // immunity
 
-//                "Spanish Flu", // check
-//                "1918-1920", // immunity // check
+//                "Spanish Flu",
+//                "1918-1920", // immunity
 
-//                "Russian Outbreak", // check
-//                "1918-1922", // immunity // check
+//                "Russian Outbreak",
+//                "1918-1922", // immunity
 
-//                "Silent Government", // check
-//                "1981-1988", // immunity // check
+//                "Silent Government",
+//                "1981-1988", // immunity
 
-//                "Covid-19", // check
-//                "New-Age Contagions", // check
+//                "Covid-19",
+//                "New-Age Contagions",
         };
 
         for (String upgradeName : boughtUpdates) {
