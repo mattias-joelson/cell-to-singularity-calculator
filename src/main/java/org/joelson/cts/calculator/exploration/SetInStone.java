@@ -322,7 +322,7 @@ public class SetInStone {
         state.updateGeneratorStates(garden);
 
         List<String> actions = new ArrayList<>();
-        ImprovementCalculator.candidateApproach(garden, state, actions);
+        ImprovementCalculator.multiCurrencyApproach(garden, state, actions);
         actions.forEach(System.out::println);
     }
 }

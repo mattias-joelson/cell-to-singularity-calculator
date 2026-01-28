@@ -5,10 +5,8 @@ import org.joelson.cts.calculator.util.DurationToolkit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import static org.joelson.cts.calculator.util.DurationToolkit.durationString;
 
@@ -54,85 +52,6 @@ public class ImprovementCalculator {
                 }
             } else {
                 throw new NullPointerException();
-            }
-        }
-    }
-
-    public static void candidateApproach(Garden garden, GardenState state, List<String> actions) {
-        addUnlocked(garden, state, actions);
-        for (int i = 0; i < 100; i += 1) {
-            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            Map<CurrencyMapping, ImprovementDescription> improvementDescriptions = calculateImprovement(garden, state);
-            System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-            System.out.println();
-
-            Map<Improvement, Set<Map.Entry<CurrencyMapping, ImprovementDescription>>> improvementMap = new HashMap<>();
-            for (Map.Entry<CurrencyMapping, ImprovementDescription> entry : improvementDescriptions.entrySet()) {
-                Improvement improvement = entry.getValue().improvement();
-                Set<Map.Entry<CurrencyMapping, ImprovementDescription>> set = improvementMap.get(improvement);
-                if (set == null) {
-                    set = new HashSet<>();
-                    set.add(entry);
-                    improvementMap.put(improvement, set);
-                } else {
-                    set.add(entry);
-                }
-            }
-
-            List<String> currencies = garden.getCurrencies();
-            for (String fromCurrency : currencies) {
-                for (String toCurrency : currencies) {
-                    CurrencyMapping mapping = new CurrencyMapping(fromCurrency, toCurrency);
-                    for (Improvement improvement : improvementMap.keySet()) {
-                        if (improvement.getMapping().equals(mapping)) {
-                            actions.add(String.format("%s : %s", mapping.asString(), improvement.getName()));
-                        }
-                    }
-                }
-            }
-
-            for (Map.Entry<Improvement, Set<Map.Entry<CurrencyMapping, ImprovementDescription>>> entry :
-                    improvementMap.entrySet()) {
-                Improvement improvement = entry.getKey();
-                if (improvement instanceof GeneratorImprovement(Generator generator, GeneratorState generatorState)) {
-                    int count = generatorState.count();
-                    for (Map.Entry<CurrencyMapping, ImprovementDescription> currencyEntry : entry.getValue()) {
-                        CurrencyMapping currencyMapping = currencyEntry.getKey();
-                        ImprovementDescription improvementDescription = currencyEntry.getValue();
-                        actions.add(String.format("(%d - %s) Generator %s: %d -> %d : %s", i + 1,
-                                currencyMapping.asString(), generator.getName(), count, count + 1,
-                                improvementDescription.description()));
-
-                    }
-                    state.setGeneratorCount(generator, count + 1);
-                    if (count == 0) {
-                        addUnlocked(garden, state, actions);
-                        if (i > 20) {
-                            break;
-                        }
-                    }
-                } else if (improvement instanceof UpgradeImprovement upgradeImprovement) {
-                    Upgrade upgrade = upgradeImprovement.upgrade();
-                    for (Map.Entry<CurrencyMapping, ImprovementDescription> currencyEntry : entry.getValue()) {
-                        UpgradeEffect effect = upgrade.getEffects().getFirst();
-                        CurrencyMapping currencyMapping = currencyEntry.getKey();
-                        ImprovementDescription improvementDescription = currencyEntry.getValue();
-                        actions.add(String.format("(%d - %s) Upgrade %s (%s) : %s", i + 1, currencyMapping.asString(),
-                                upgrade.getName(), effect.generator().getName(), improvementDescription.description()));
-                    }
-                    state.setUpgradeBought(upgrade);
-                    state.updateGeneratorStates(garden);
-                    addUnlocked(garden, state, actions);
-                    if (i > 20) {
-                        break;
-                    }
-                } else {
-                    throw new NullPointerException();
-                }
-                actions.add("");
-            }
-            if (improvementMap.size() > 1) {
-                break;
             }
         }
     }
