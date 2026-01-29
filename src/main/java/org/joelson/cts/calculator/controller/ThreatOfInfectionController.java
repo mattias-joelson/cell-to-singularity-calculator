@@ -138,28 +138,28 @@ public class ThreatOfInfectionController {
     }
 
     @GetMapping(GARDEN_GET)
-    public String setInStone(Model model) {
+    public String threatOfInfection(Model model) {
         initState();
         return updater.garden(model);
     }
 
     @PostMapping(GARDEN_GENERATOR_UPDATE)
-    public String setInStoneGeneratorUpdate(Model model, String target, String value) {
+    public String threatOfInfectionGeneratorUpdate(Model model, String target, String value) {
         return updater.gardenGeneratorUpdate(model, target, value);
     }
 
     @PostMapping(GARDEN_GENERATOR_INCREMENT)
-    public String setInStoneGeneratorIncrement(Model model, String target) {
+    public String threatOfInfectionGeneratorIncrement(Model model, String target) {
         return updater.gardenGeneratorIncrement(model, target);
     }
 
     @PostMapping(GARDEN_GENERATOR_DECREMENT)
-    public String setInStoneGeneratorDecrement(Model model, String target) {
+    public String threatOfInfectionGeneratorDecrement(Model model, String target) {
         return updater.gardenGeneratorDecrement(model, target);
     }
 
     @PostMapping(GARDEN_UPGRADE)
-    public String setInStoneUpgrade(Model model, String target, String value) {
+    public String threatOfInfectionUpgrade(Model model, String target, String value) {
         return updater.gardenUpgrade(model, target, value);
     }
 }
