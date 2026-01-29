@@ -51,7 +51,7 @@ public class DairyDelights {
                 .addUpgradeRequirement("Lactose")
                 .addUpgradeRequirement("Mozzarella")
 
-                .addEfficiencyUpgrade("Camenbert", cheese(300_000), 1.5f)
+                .addEfficiencyUpgrade("Camembert", cheese(300_000), 1.5f)
                 .addUpgradeRequirement("Brie")
 
                 .addEfficiencyUpgrade("Rennet", cheese(8e6), 3)
@@ -113,7 +113,7 @@ public class DairyDelights {
                 .addGeneratorRequirement("Milk")
                 .addUpgradeRequirement("Cultures")
 
-                .addEfficiencyUpgrade("Brie", cheese(150_000), 0.5f)
+                .addEfficiencyUpgrade("Brie", cheese(150_000), 1.5f)
                 .addGeneratorRequirement("Soft-Ripened Cheese")
 
                 .addEfficiencyUpgrade("Chèvre", cheese(6e10), 601)
@@ -229,20 +229,20 @@ public class DairyDelights {
 
 //        Garden.generateGeneratorUpgradesNames(garden);
 
-        setGeneratorCount(garden, state, "Hard Cheese", 1);
-        setGeneratorCount(garden, state, "Not-Quite-Cheese", 1);
-        setGeneratorCount(garden, state, "Semi-Firm Cheese", 1);
-        setGeneratorCount(garden, state, "Blue Cheese", 1);
-        setGeneratorCount(garden, state, "Semi-Soft Cheese", 1);
-        setGeneratorCount(garden, state, "Soft-Ripened Cheese", 1);
-        setGeneratorCount(garden, state, "Fresh Cheese", 1);
+        setGeneratorCount(garden, state, "Hard Cheese", 0);
+        setGeneratorCount(garden, state, "Not-Quite-Cheese", 0);
+        setGeneratorCount(garden, state, "Semi-Firm Cheese", 0);
+        setGeneratorCount(garden, state, "Blue Cheese", 0);
+        setGeneratorCount(garden, state, "Semi-Soft Cheese", 0);
+        setGeneratorCount(garden, state, "Soft-Ripened Cheese", 0);
+        setGeneratorCount(garden, state, "Fresh Cheese", 0);
         setGeneratorCount(garden, state, "Milk", 1);
 
         String[] boughtUpdates = {
 //                "Lactose", // check
 //                "Mozzarella", // cheese // check
 //                "Cultures", // cheese // check
-//                "Camenbert", // cheese // check
+//                "Camembert", // cheese // check
 //                "Rennet", // cheese // check
 //                "Muenster", // cheese // check
 //                "Danish", // cheese // check
