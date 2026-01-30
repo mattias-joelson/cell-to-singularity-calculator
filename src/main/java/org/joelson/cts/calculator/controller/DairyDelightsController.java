@@ -23,7 +23,7 @@ public class DairyDelightsController {
     private final ExplorationUpdater updater;
 
     public DairyDelightsController() {
-        garden = DairyDelights.createGarden(4, 2, 0);
+        garden = DairyDelights.createGarden(1, 1, 0);
         state = new GardenState();
         updater = new ExplorationUpdater(garden, state, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
                 GARDEN_GENERATOR_DECREMENT, GARDEN_UPGRADE);
