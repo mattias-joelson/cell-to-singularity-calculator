@@ -5,8 +5,7 @@ table, th, td {
 .container {
   display: grid;
   grid-template-areas:
-    'stats actions'
-    'generators actions';
+    'stats actions';
   background-color: #808080;
   padding: 5px;
   gap: 5px;
@@ -19,5 +18,4 @@ table, th, td {
 }
 
 .itemStats {grid-area: stats;}
-.itemGenerators {grid-area: generators;}
 .itemActions {grid-area: actions;}
