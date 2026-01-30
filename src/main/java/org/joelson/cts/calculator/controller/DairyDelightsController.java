@@ -32,7 +32,7 @@ public class DairyDelightsController {
 
     private void initState() {
         state.clearUpgradesBought();
-        state.setBoost(2);
+//        state.setBoost(4);
         state.updateGeneratorStates(garden);
 
         setGeneratorCount("Hard Cheese", 0);
