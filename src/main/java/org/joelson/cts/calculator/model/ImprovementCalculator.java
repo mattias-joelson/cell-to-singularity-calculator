@@ -16,6 +16,133 @@ public class ImprovementCalculator {
         throw new InstantiationException("Should not be instantiated!");
     }
 
+    public static void singleCurrencyApproach(Garden garden, GardenState gardenState, List<String> actions) {
+        GardenState state = gardenState.copy();
+        String currency = garden.getCurrencies().getFirst();
+        CurrencyMapping mapping = new CurrencyMapping(currency, currency);
+
+        addUnlocked(garden, state, actions);
+        for (int i = 0; i < 100; i += 1) {
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            ImprovementDescription improvementDescription = calculateImprovement(garden, state).get(mapping);
+            System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+            System.out.println();
+            Improvement improvement = improvementDescription.improvement();
+            if (improvement instanceof GeneratorImprovement(Generator generator, GeneratorState generatorState)) {
+                int count = generatorState.count();
+                actions.add(String.format("(%d) Generator %s: %d -> %d : %s",
+                        i + 1, generator.getName(), count, count + 1, improvementDescription.description()));
+                state.setGeneratorCount(generator, count + 1);
+                if (count == 0) {
+                    addUnlocked(garden, state, actions);
+                    if (i >= 20) {
+                        break;
+                    }
+                }
+            } else if (improvement instanceof UpgradeImprovement upgradeImprovement) {
+                Upgrade upgrade = upgradeImprovement.upgrade();
+                UpgradeEffect effect = upgrade.getEffects().getFirst();
+                actions.add(String.format("(%d) Upgrade %s (%s) : %s",
+                        i + 1, upgrade.getName(), effect.generator().getName(), improvementDescription.description()));
+                state.setUpgradeBought(upgrade);
+                state.updateGeneratorStates(garden);
+                addUnlocked(garden, state, actions);
+                if (i >= 20) {
+                    break;
+                }
+            } else {
+                throw new NullPointerException();
+            }
+        }
+    }
+
+    public static void multiCurrencyApproach(Garden garden, GardenState state, List<String> actions) {
+        addUnlocked(garden, state, actions);
+
+        List<String> currencies = garden.getCurrencies();
+        for (String fromCurrency : currencies) {
+            for (String toCurrency : currencies) {
+                CurrencyMapping mapping = new CurrencyMapping(fromCurrency, toCurrency);
+                actions.add(String.format(">>> from %s to %s <<<", fromCurrency, toCurrency));
+                multiSingleCurrencyApproach(garden, state.copy(), mapping, actions);
+                actions.add(String.format(">>> from %s to %s <<<", fromCurrency, toCurrency));
+                actions.add("");
+            }
+        }
+
+    }
+
+    private static void multiSingleCurrencyApproach(
+            Garden garden, GardenState state, CurrencyMapping mapping, List<String> actions) {
+
+        for (int i = 0; i < 30; i += 1) {
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            ImprovementDescription improvementDescription = calculateImprovement(garden, state, mapping);
+            System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+            System.out.println();
+            if (improvementDescription == null) {
+                return;
+            }
+            Improvement improvement = improvementDescription.improvement();
+            if (improvement instanceof GeneratorImprovement(Generator generator, GeneratorState generatorState)) {
+                int count = generatorState.count();
+                actions.add(String.format("(%d) Generator %s: %d -> %d : %s",
+                        i + 1, generator.getName(), count, count + 1, improvementDescription.description()));
+                state.setGeneratorCount(generator, count + 1);
+                if (count == 0) {
+                    addUnlocked(garden, state, actions);
+                    if (i >= 15) {
+                        break;
+                    }
+                }
+            } else if (improvement instanceof UpgradeImprovement upgradeImprovement) {
+                Upgrade upgrade = upgradeImprovement.upgrade();
+                UpgradeEffect effect = upgrade.getEffects().getFirst();
+                actions.add(String.format("(%d) Upgrade %s (%s) : %s",
+                        i + 1, upgrade.getName(), effect.generator().getName(), improvementDescription.description()));
+                state.setUpgradeBought(upgrade);
+                state.updateGeneratorStates(garden);
+                addUnlocked(garden, state, actions);
+                if (i >= 15) {
+                    break;
+                }
+            } else {
+                throw new NullPointerException();
+            }
+        }
+    }
+
+    private static void addUnlocked(Garden garden, GardenState state, List<String> actions) {
+        for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
+            if (state.getGeneratorState(generator).count() == 0) {
+                actions.add(String.format(" *** unlocked generator %s: base cost %s, inc %.2f, base production %s",
+                        generator.getName(), generator.getBaseCost().asString(), generator.getCompoundingCost(),
+                        generator.getBaseProduction().multiplyBy(state.getBoost()).asString()));
+            }
+        }
+        for (Upgrade upgrade : garden.getUnlockedUpgrades(state)) {
+            if (!state.isUpgradeBought(upgrade)) {
+                for (UpgradeEffect effect : upgrade.getEffects()) {
+                    String efficiency = (effect.efficiency() >= 1_000_000) ? String.format("%.2e",
+                            effect.efficiency()) : String.format("%.2f", effect.efficiency());
+                    if (effect.speed() == 1) {
+                        actions.add(String.format(" *** unlocked upgrade %s: %s efficiency %s, cost %s",
+                                upgrade.getName(), effect.generator().getName(), efficiency,
+                                upgrade.getCost().asString()));
+                    } else if (effect.efficiency() == 1) {
+                        actions.add(String.format(" *** unlocked upgrade %s: %s speed %.2f, cost %s",
+                                upgrade.getName(), effect.generator().getName(), effect.speed(),
+                                upgrade.getCost().asString()));
+                    } else {
+                        actions.add(String.format(" *** unlocked upgrade %s: %s efficiency %s, speed %.2f, cost %s",
+                                upgrade.getName(), effect.generator().getName(), efficiency, effect.speed(),
+                                upgrade.getCost().asString()));
+                    }
+                }
+            }
+        }
+    }
+
     public static Map<String, Double> calculateProduction(Garden garden, GardenState state) {
         Map<String, Double> totalProduction = new HashMap<>();
         for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
@@ -77,10 +204,35 @@ public class ImprovementCalculator {
         for (Map.Entry<CurrencyMapping, List<Improvement>> improvementsEntry : improvements.entrySet()) {
             ImprovementDescription improvementDescription =
                     calculateMappingImprovement(improvementsEntry, totalProduction, improvements);
-            improvementDescriptionMap.put(improvementsEntry.getKey(), improvementDescription);
+            if (improvementDescription != null) {
+                improvementDescriptionMap.put(improvementsEntry.getKey(), improvementDescription);
+            }
             System.out.println();
         }
         return improvementDescriptionMap;
+    }
+
+    private static ImprovementDescription calculateImprovement(
+            Garden garden, GardenState state, CurrencyMapping mapping) {
+        Map<String, Double> totalProduction = calculateProduction(garden, state);
+
+        Map<CurrencyMapping, List<Improvement>> improvements = new HashMap<>();
+        for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
+            improvements.computeIfAbsent(generator.getMapping(), _ -> new ArrayList<>()).add(
+                    GeneratorImprovement.create(generator, state));
+        }
+        for (Upgrade upgrade : garden.getUnlockedUpgrades(state)) {
+            if (!state.isUpgradeBought(upgrade)) {
+                Improvement improvement = UpgradeImprovement.create(upgrade, state);
+                improvements.computeIfAbsent(improvement.getMapping(), _ -> new ArrayList<>()).add(improvement);
+            }
+        }
+
+        List<Improvement> improvementList = improvements.get(mapping);
+        if (improvementList == null) {
+            return null;
+        }
+        return calculateMappingImprovement(Map.entry(mapping, improvementList), totalProduction, improvements);
     }
 
     private static ImprovementDescription calculateMappingImprovement(
@@ -94,7 +246,11 @@ public class ImprovementCalculator {
             Amount cost = improvement.getCost();
             double ratio = improvement.getRatio();
             Amount increase = improvement.getIncrease();
-            double time = cost.amount() / totalProduction.get(cost.currency());
+            Double totProd = totalProduction.get(cost.currency());
+            if (totProd == null) {
+                continue;
+            }
+            double time = cost.amount() / totProd;
             System.out.printf("%s: cost %s, increase %s, ratio %.7f, time %s%n",
                     improvement.getName(), cost.asString(), increase.asString(), ratio, durationString(time));
         }
@@ -126,7 +282,11 @@ public class ImprovementCalculator {
             }
         }
         Amount bestCost = best.getCost();
-        double bestTime = bestCost.amount() / totalProduction.get(bestCost.currency());
+        Double bestTotProd = totalProduction.get(bestCost.currency());
+        if (bestTotProd == null) {
+            return null;
+        }
+        double bestTime = bestCost.amount() / bestTotProd;
         Improvement bestBefore = null;
         System.out.printf("%s: time %s%n", best.getName(), durationString(bestTime));
         for (Improvement candidate : sameCandidates.reversed()) {
@@ -145,7 +305,11 @@ public class ImprovementCalculator {
         }
         for (Improvement improvement : otherCandidates) {
             Amount improvementCost = improvement.getCost();
-            double improvementTime = improvementCost.amount() / totalProduction.get(improvementCost.currency());
+            Double totProd = totalProduction.get(improvementCost.currency());
+            if (totProd == null) {
+                continue;
+            }
+            double improvementTime = improvementCost.amount() / totProd;
             if (improvementTime < bestTime) {
                 double timedProduction = improvementTime * totalProduction.get(bestCostCurrency);
                 double improvedBestTime = improvementTime + (bestCost.amount() - timedProduction)

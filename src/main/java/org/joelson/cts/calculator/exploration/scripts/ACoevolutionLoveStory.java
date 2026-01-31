@@ -252,15 +252,13 @@ void main() {
     CurrencyMapping mapping = new CurrencyMapping(CURRENCY, CURRENCY);
     List<String> actions = new ArrayList<>();
     printUnlocked(GARDEN, state, actions);
-    boolean possibleUnlock = false;
-    for (int i = 0; i < 20 || !possibleUnlock; i += 1) {
+    for (int i = 0; i < 100; i += 1) {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         ImprovementDescription improvementDescription = ImprovementCalculator.calculateImprovement(GARDEN, state)
                 .get(mapping);
         Improvement improvement = improvementDescription.improvement();
         System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         System.out.println();
-        possibleUnlock = false;
         if (improvement instanceof GeneratorImprovement(Generator generator, GeneratorState generatorState)) {
             int count = generatorState.count();
             actions.add(String.format("(%d) Generator %s: %d -> %d : %s", i + 1, generator.getName(), count, count + 1,
@@ -268,7 +266,9 @@ void main() {
             state.setGeneratorCount(generator, count + 1);
             if (count == 0) {
                 printUnlocked(GARDEN, state, actions);
-                possibleUnlock = true;
+                if (i >= 20) {
+                    break;
+                }
             }
         } else if (improvement instanceof UpgradeImprovement upgradeImprovement) {
             Upgrade upgrade = upgradeImprovement.upgrade();
@@ -284,7 +284,9 @@ void main() {
             state.setUpgradeBought(upgrade);
             state.updateGeneratorStates(GARDEN);
             printUnlocked(GARDEN, state, actions);
-            possibleUnlock = true;
+            if (i >= 20) {
+                break;
+            }
         } else {
             throw new NullPointerException();
         }

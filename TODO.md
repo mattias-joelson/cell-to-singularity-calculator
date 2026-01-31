@@ -10,10 +10,6 @@
 - Different webpages for single currency and multi currency explorations.
 - Make web models generic so they can be used no matter of number of currencies.
 
-- Remove "test" controllers.
-
 - Fast-forward actions
-
-- Reset does not work...
 
 - Mind Machines: Big Data and Large Language Models is faster than LLM followed by BD?
