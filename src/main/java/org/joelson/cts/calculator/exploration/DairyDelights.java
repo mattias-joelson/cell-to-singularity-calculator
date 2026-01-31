@@ -239,53 +239,53 @@ public class DairyDelights {
         setGeneratorCount(garden, state, "Milk", 1);
 
         String[] boughtUpdates = {
-//                "Lactose", // check
-//                "Mozzarella", // cheese // check
-//                "Cultures", // cheese // check
-//                "Camembert", // cheese // check
-//                "Rennet", // cheese // check
-//                "Muenster", // cheese // check
-//                "Danish", // cheese // check
-//                "Curds and Whey", // cheese // check
-//                "Edam", // cheese // check
-//                "Salt", // cheese // check
-//                "Ricotta", // cheese // check
-//                "Parmigiano-Reggiano", // cheese // check
-//                "The Big Cheese", // cheese // check
+//                "Lactose",
+//                "Mozzarella", // cheese
+//                "Cultures", // cheese
+//                "Camembert", // cheese
+//                "Rennet", // cheese
+//                "Muenster", // cheese
+//                "Danish", // cheese
+//                "Curds and Whey", // cheese
+//                "Edam", // cheese
+//                "Salt", // cheese
+//                "Ricotta", // cheese
+//                "Parmigiano-Reggiano", // cheese
+//                "The Big Cheese", // cheese
 
-//                "Cottage Cheese", // check
-//                "Cream Cheese", // check
-//                "Kefir", // check
-//                "Feta", // check
+//                "Cottage Cheese",
+//                "Cream Cheese",
+//                "Kefir",
+//                "Feta",
 
-//                "Brie", // check
-//                "Chèvre", // check
-//                "Paneer", // check
+//                "Brie",
+//                "Chèvre",
+//                "Paneer",
 
-//                "Morbier", // check
-//                "Havarti", // check
+//                "Morbier",
+//                "Havarti",
 
-//                "Roquefort", // check
-//                "Stilton", // check
-//                "Gorgonzola", // check
+//                "Roquefort",
+//                "Stilton",
+//                "Gorgonzola",
 
-//                "Halloumi", // check
-//                "Emmental", // check
-//                "Cheddar", // check
-//                "Gloucester", // check
-//                "Provolone", // check
-//                "Limburger", // check
-//                "Gouda", // check
+//                "Halloumi",
+//                "Emmental",
+//                "Cheddar",
+//                "Gloucester",
+//                "Provolone",
+//                "Limburger",
+//                "Gouda",
 
-//                "Non-Dairy", // check
-//                "Processed", // check
-//                "American", // check
-//                "Canned Cheese", // check
+//                "Non-Dairy",
+//                "Processed",
+//                "American",
+//                "Canned Cheese",
 
-//                "Pecorino", // check
-//                "Manchego", // check
-//                "Cotija", // check
-//                "Casu Martzu", // check
+//                "Pecorino",
+//                "Manchego",
+//                "Cotija",
+//                "Casu Martzu",
         };
 
         for (String upgradeName : boughtUpdates) {
