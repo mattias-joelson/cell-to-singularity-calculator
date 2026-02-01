@@ -281,6 +281,8 @@ public class ImprovementCalculator {
                 System.out.printf("  candidate %s%n", candidate.getName());
             }
         }
+        sameCandidates.sort(Comparator.comparing(Improvement::getRatio));
+        otherCandidates.sort(Comparator.comparing(Improvement::getRatio));
         Amount bestCost = best.getCost();
         Double bestTotProd = totalProduction.get(bestCost.currency());
         if (bestTotProd == null) {
