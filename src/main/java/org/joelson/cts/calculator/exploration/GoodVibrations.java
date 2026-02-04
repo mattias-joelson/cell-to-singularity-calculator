@@ -38,101 +38,92 @@ public class GoodVibrations {
 
         GardenBuilder builder = new GardenBuilder(garden, costMultiplier, productionMultiplier, badgeBonus);
 
-//        builder.createGenerator("Notes", notes(25), notes(1))
-//                .addUpgradeRequirement("Invisible Force");
-//
-//        builder.createGenerator("Sound Waves", notes(15_000), notes(50))
-//                .addUpgradeRequirement("Processing Sound");
-//
-//        builder.createGenerator("Theory", notes(50e6), notes(10_000))
-//                .addUpgradeRequirement("Color of A Note");
-
-        builder.createGenerator("Notes", notes(25), 1.15f, notes(1)) // invisibleForce
+        builder.createGenerator("Notes", notes(25), 1.15f, notes(1))
 //                .addUpgradeRequirement("Invisible Force")
 
-                .addEfficiencyUpgrade("Vibrations", notes(100), 2) // notes
+                .addEfficiencyUpgrade("Vibrations", notes(100), 2)
                 .addGeneratorRequirement("Notes")
 
-                .addEfficiencyUpgrade("Receiving Sound", notes(500), 1.75f) // vibrations
+                .addEfficiencyUpgrade("Receiving Sound", notes(500), 1.75f)
                 .addUpgradeRequirement("Vibrations")
 
-                .addEfficiencyUpgrade("Processing Sound", notes(4000), 2.25f) // receiving sound
+                .addEfficiencyUpgrade("Processing Sound", notes(4000), 2.25f)
                 .addUpgradeRequirement("Receiving Sound");
 
-        builder.createGenerator("Sound Waves", notes(15_000), 1.15f, notes(50)) // processing sound
+        builder.createGenerator("Sound Waves", notes(15_000), 1.15f, notes(50))
                 .addUpgradeRequirement("Processing Sound")
 
-                .addEfficiencyUpgrade("Amplitude", notes(44_000), 2.5f) // sound waves
+                .addEfficiencyUpgrade("Amplitude", notes(44_000), 2.5f)
                 .addGeneratorRequirement("Sound Waves")
 
-                .addEfficiencyUpgrade("Wavelength", notes(600_000), 2.5f) // amplitude
+                .addEfficiencyUpgrade("Wavelength", notes(600_000), 2.5f)
                 .addUpgradeRequirement("Amplitude")
 
-                .addEfficiencyUpgrade("Frequency", notes(2e6), 2.25f) // wavelength
+                .addEfficiencyUpgrade("Frequency", notes(2e6), 2.25f)
                 .addUpgradeRequirement("Wavelength")
 
-                .addEfficiencyUpgrade("Harmonics", notes(1e7), 2.5f) // frequency
+                .addEfficiencyUpgrade("Harmonics", notes(1e7), 2.5f)
                 .addUpgradeRequirement("Frequency")
 
-                .addEfficiencyUpgrade("Color of a Note", notes(3e7), 2.25f) // harmonics
+                .addEfficiencyUpgrade("Color of a Note", notes(3e7), 2.25f)
                 .addUpgradeRequirement("Harmonics")
 
-                .addEfficiencyUpgrade("Vibrato", notes(5e7), 1.75f) // harmonics
+                .addEfficiencyUpgrade("Vibrato", notes(5e7), 1.75f)
                 .addUpgradeRequirement("Harmonics");
 
-        builder.createGenerator("Theory", notes(5e7), 1.15f, notes(10_000)) // inc // Color of a note
+        builder.createGenerator("Theory", notes(5e7), 1.15f, notes(10_000))
                 .addUpgradeRequirement("Color of a Note")
 
-                .addEfficiencyUpgrade("Pitch", notes(1.5e8), 2) // theory
+                .addEfficiencyUpgrade("Pitch", notes(1.5e8), 2)
                 .addGeneratorRequirement("Theory")
 
-                .addEfficiencyUpgrade("Rhythm", notes(4e8), 2) // theory
+                .addEfficiencyUpgrade("Rhythm", notes(4e8), 2)
                 .addGeneratorRequirement("Theory")
 
-                .addEfficiencyUpgrade("African Polyrhythm", notes(7.5e8), 2) // rhythm
+                .addEfficiencyUpgrade("African Polyrhythm", notes(7.5e8), 2)
                 .addUpgradeRequirement("Rhythm")
 
-                .addEfficiencyUpgrade("Notation", notes(3e9), 2.5f) // pitch
+                .addEfficiencyUpgrade("Notation", notes(3e9), 2.5f)
                 .addUpgradeRequirement("Pitch")
 
-                .addEfficiencyUpgrade("Semitones", notes(6e10), 2.5f) // notation, early innovation
+                .addEfficiencyUpgrade("Semitones", notes(6e10), 2.5f)
                 .addGeneratorRequirement("Early Innovations")
                 .addUpgradeRequirement("Notation")
 
-                .addEfficiencyUpgrade("Arabic Maqam", notes(2e11), 2f) // pitch, african polyrhythm
+                .addEfficiencyUpgrade("Arabic Maqam", notes(2e11), 2f)
                 .addUpgradeRequirement("Pitch")
                 .addUpgradeRequirement("African Polyrhythm")
 
-                .addEfficiencyUpgrade("Chinese Shi'er lü", notes(4.5e11), 2.5f) // Arabic Maqam
+                .addEfficiencyUpgrade("Chinese Shi'er lü", notes(4.5e11), 2.5f)
                 .addUpgradeRequirement("Arabic Maqam")
 
-                .addEfficiencyUpgrade("Chords", notes(9e11), 2.5f) // semitones
+                .addEfficiencyUpgrade("Chords", notes(9e11), 2.5f)
                 .addUpgradeRequirement("Semitones")
 
-                .addEfficiencyUpgrade("Octave", notes(8.8e12), 5.4f) // chords
+                .addEfficiencyUpgrade("Octave", notes(8.8e12), 5.4f)
                 .addGeneratorRequirement("Instruments")
                 .addUpgradeRequirement("Chords")
 
-                .addEfficiencyUpgrade("Pentatonic Scale", notes(5e13), 6) // // chinese
+                .addEfficiencyUpgrade("Pentatonic Scale", notes(5e13), 6)
                 .addUpgradeRequirement("Chinese Shi'er lü")
 
-                .addEfficiencyUpgrade("Melody", notes(1e14), 4) // // octave, pentatonic
+                .addEfficiencyUpgrade("Melody", notes(1e14), 4)
                 .addUpgradeRequirement("Octave")
                 .addUpgradeRequirement("Pentatonic Scale");
 
-        builder.createGenerator("Early Innovations", notes(2e10), 1.15f, notes(1e6))// vibrato
+        builder.createGenerator("Early Innovations", notes(2e10), 1.15f, notes(1e6))
                 .addUpgradeRequirement("Vibrato")
 
-                .addEfficiencyUpgrade("Sticks and Rocks", notes(3e10), 2.25f) // early innovations
+                .addEfficiencyUpgrade("Sticks and Rocks", notes(3e10), 2.25f)
                 .addGeneratorRequirement("Early Innovations")
 
-                .addEfficiencyUpgrade("Bone Flute", notes(8e11), 7) // sticks and rocks
+                .addEfficiencyUpgrade("Bone Flute", notes(8e11), 7)
                 .addUpgradeRequirement("Sticks and Rocks")
 
-                .addEfficiencyUpgrade("Write That Down", notes(2.5e12), 4) // Bone Flute
+                .addEfficiencyUpgrade("Write That Down", notes(2.5e12), 4)
                 .addUpgradeRequirement("Bone Flute")
 
-                .addEfficiencyUpgrade("Clay Tablets", notes(3e13), 6) // write that down
+                .addEfficiencyUpgrade("Clay Tablets", notes(3e13), 6)
                 .addUpgradeRequirement("Write That Down");
 
         builder.createGenerator("Instruments", notes(1e12), 1.15f, songs(1))
@@ -142,95 +133,95 @@ public class GoodVibrations {
                 .addEfficiencyUpgrade("What's Next?", notes(8e14), 2.5f)
                 .addUpgradeRequirement("Hurricane Hymn No. 6")
 
-                .addEfficiencyUpgrade("Wind", songs(100), 2) // instruments
+                .addEfficiencyUpgrade("Wind", songs(100), 2)
                 .addGeneratorRequirement("Instruments")
 
-                .addEfficiencyUpgrade("Voice", songs(1_500), 2.25f) // instruments
+                .addEfficiencyUpgrade("Voice", songs(1_500), 2.25f)
                 .addGeneratorRequirement("Instruments")
 
-                .addEfficiencyUpgrade("Ocarina", songs(8_000), 2) // instruments
+                .addEfficiencyUpgrade("Ocarina", songs(8_000), 2)
                 .addUpgradeRequirement("Wind")
 
-                .addEfficiencyUpgrade("Keyboard", songs(150_000), 2.5f) // instruments
+                .addEfficiencyUpgrade("Keyboard", songs(150_000), 2.5f)
                 .addGeneratorRequirement("Instruments")
 
-                .addEfficiencyUpgrade("Percussion", songs(900_000), 1.75f) // instruments
+                .addEfficiencyUpgrade("Percussion", songs(900_000), 1.75f)
                 .addGeneratorRequirement("Instruments")
 
-                .addEfficiencyUpgrade("Autotune", songs(8e6), 2f) // autotune
+                .addEfficiencyUpgrade("Autotune", songs(8e6), 2f)
                 .addUpgradeRequirement("Voice")
 
-                .addEfficiencyUpgrade("Electrophones", songs(1.5e7), 2) // instruments
+                .addEfficiencyUpgrade("Electrophones", songs(1.5e7), 2)
                 .addGeneratorRequirement("Instruments")
 
-                .addEfficiencyUpgrade("The King of Instruments", songs(4e7), 2) // keyboard
+                .addEfficiencyUpgrade("The King of Instruments", songs(4e7), 2)
                 .addUpgradeRequirement("Keyboard")
 
-                .addEfficiencyUpgrade("Xylophone", songs(9e7), 2) // percussion
+                .addEfficiencyUpgrade("Xylophone", songs(9e7), 2)
                 .addUpgradeRequirement("Percussion")
 
-                .addEfficiencyUpgrade("String", songs(2.5e8), 3) // instruments
+                .addEfficiencyUpgrade("String", songs(2.5e8), 3)
                 .addGeneratorRequirement("Instruments")
 
-                .addEfficiencyUpgrade("Synthesizer", songs(8e8), 3.5f) // electrophones
+                .addEfficiencyUpgrade("Synthesizer", songs(8e8), 3.5f)
                 .addUpgradeRequirement("Electrophones")
 
-                .addEfficiencyUpgrade("Lyre, Lyre", songs(3e9), 3.5f) // String
+                .addEfficiencyUpgrade("Lyre, Lyre", songs(3e9), 3.5f)
                 .addUpgradeRequirement("String")
 
-                .addEfficiencyUpgrade("Hurricane Hymn No. 6", songs(7e9), 6) // melody, lyre, clay tablets
+                .addEfficiencyUpgrade("Hurricane Hymn No. 6", songs(7e9), 6)
                 .addUpgradeRequirement("Melody")
                 .addUpgradeRequirement("Lyre, Lyre")
                 .addUpgradeRequirement("Clay Tablets");
 
 
-        builder.createGenerator("Modern Innovations", songs(1e10), 1.15f, songs(1e6)) // what's next
-                .addUpgradeRequirement("What's Next?") // ???
+        builder.createGenerator("Modern Innovations", songs(1e10), 1.15f, songs(1e6))
+                .addUpgradeRequirement("What's Next?")
 
-                .addEfficiencyUpgrade("Phonograph", songs(2e11), 6) // modern
+                .addEfficiencyUpgrade("Phonograph", songs(2e11), 6)
                 .addGeneratorRequirement("Modern Innovations")
 
-                .addEfficiencyUpgrade("Mic Check", songs(7e11), 2) // phonograph
+                .addEfficiencyUpgrade("Mic Check", songs(7e11), 2)
                 .addUpgradeRequirement("Phonograph")
 
-                .addEfficiencyUpgrade("Listen Up", songs(2.5e12), 3) // mic
+                .addEfficiencyUpgrade("Listen Up", songs(2.5e12), 3)
                 .addUpgradeRequirement("Mic Check")
 
-                .addEfficiencyUpgrade("Radio", songs(1.5e14), 76) // listen
+                .addEfficiencyUpgrade("Radio", songs(1.5e14), 76)
                 .addUpgradeRequirement("Listen Up")
 
-                .addEfficiencyUpgrade("Portable Player", songs(2e15), 4) // listen
+                .addEfficiencyUpgrade("Portable Player", songs(2e15), 4)
                 .addUpgradeRequirement("Radio")
 
-                .addEfficiencyUpgrade("Digital Age", songs(8e16), 16) // player
+                .addEfficiencyUpgrade("Digital Age", songs(8e16), 16)
                 .addUpgradeRequirement("Portable Player")
 
-                .addEfficiencyUpgrade("Streaming", songs(4e17), 6) // digital age
+                .addEfficiencyUpgrade("Streaming", songs(4e17), 6)
                 .addUpgradeRequirement("Digital Age")
 
-                .addEfficiencyUpgrade("Here, There, and Everywhere", songs(1e18), 2) // streaming
+                .addEfficiencyUpgrade("Here, There, and Everywhere", songs(1e18), 2)
                 .addUpgradeRequirement("Global Sensations")
                 .addUpgradeRequirement("Streaming");
 
-        builder.createGenerator("A Brief History", songs(5e12), 1.15f, songs(3e8)) // what's next
-                .addUpgradeRequirement("What's Next?") // ???
+        builder.createGenerator("A Brief History", songs(5e12), 1.15f, songs(3e8))
+                .addUpgradeRequirement("What's Next?")
 
-                .addEfficiencyUpgrade("Ancient Times", songs(1.2e13), 4) // brief
+                .addEfficiencyUpgrade("Ancient Times", songs(1.2e13), 4)
                 .addGeneratorRequirement("A Brief History")
 
-                .addEfficiencyUpgrade("Middle Ages", songs(7e13), 2) // ancient
+                .addEfficiencyUpgrade("Middle Ages", songs(7e13), 2)
                 .addUpgradeRequirement("Ancient Times")
 
-                .addEfficiencyUpgrade("Classical Clientele", songs(8e14), 3) // middle
+                .addEfficiencyUpgrade("Classical Clientele", songs(8e14), 3)
                 .addUpgradeRequirement("Middle Ages")
 
-                .addEfficiencyUpgrade("A New World", songs(7e15), 6) // classic
+                .addEfficiencyUpgrade("A New World", songs(7e15), 6)
                 .addUpgradeRequirement("Classical Clientele")
 
-                .addEfficiencyUpgrade("Beyond Borders", songs(3e16), 4) // new world
+                .addEfficiencyUpgrade("Beyond Borders", songs(3e16), 4)
                 .addUpgradeRequirement("A New World")
 
-                .addEfficiencyUpgrade("Global Sensations", songs(1.5e17), 3) // beyond borders
+                .addEfficiencyUpgrade("Global Sensations", songs(1.5e17), 3)
                 .addUpgradeRequirement("Beyond Borders");
 
         builder.resolveRequirements();
@@ -256,64 +247,64 @@ public class GoodVibrations {
         setGeneratorCount(garden, state, "Notes", 1);
 
         String[] boughtUpdates = {
-//                "Vibrations", // check
-//                "Receiving Sound", // check
-//                "Processing Sound", // check
+//                "Vibrations",
+//                "Receiving Sound",
+//                "Processing Sound",
 
-//                "Amplitude", // check
-//                "Wavelength", // check
-//                "Frequency", // check
-//                "Harmonics", // check
-//                "Color of a Note", // check
-//                "Vibrato", // check
+//                "Amplitude",
+//                "Wavelength",
+//                "Frequency",
+//                "Harmonics",
+//                "Color of a Note",
+//                "Vibrato",
 
-//                "Pitch", // check
-//                "Rhythm", // check
-//                "African Polyrhythm", // check
-//                "Notation", // check
-//                "Semitones", // check
-//                "Arabic Maqam", // check
-//                "Chinese Shi'er lü", // check
-//                "Chords", // check
-//                "Octave", // check
-//                "Pentatonic Scale", // check
-//                "Melody", // check
+//                "Pitch",
+//                "Rhythm",
+//                "African Polyrhythm",
+//                "Notation",
+//                "Semitones",
+//                "Arabic Maqam",
+//                "Chinese Shi'er lü",
+//                "Chords",
+//                "Octave",
+//                "Pentatonic Scale",
+//                "Melody",
 
-//                "Sticks and Rocks", // check
-//                "Bone Flute", // check
-//                "Write That Down", // check
-//                "Clay Tablets", // check
+//                "Sticks and Rocks",
+//                "Bone Flute",
+//                "Write That Down",
+//                "Clay Tablets",
 
-//                "What's Next?", // notes // check
-//                "Wind", // check
-//                "Voice", // check
-//                "Ocarina", // check
-//                "Keyboard", // check
-//                "Percussion", // check
-//                "Autotune", // check
-//                "Electrophones", // check
-//                "The King of Instruments", // check
-//                "Xylophone", // check
-//                "String", // check
-//                "Synthesizer", // check
-//                "Lyre, Lyre", // check
-//                "Hurricane Hymn No. 6", // check
+//                "What's Next?", // notes
+//                "Wind",
+//                "Voice",
+//                "Ocarina",
+//                "Keyboard",
+//                "Percussion",
+//                "Autotune",
+//                "Electrophones",
+//                "The King of Instruments",
+//                "Xylophone",
+//                "String",
+//                "Synthesizer",
+//                "Lyre, Lyre",
+//                "Hurricane Hymn No. 6",
 
-//                "Phonograph", // check
-//                "Mic Check", // check
-//                "Listen Up", // check
-//                "Radio", // check
-//                "Portable Player", // check
-//                "Digital Age", // check
-//                "Streaming", // check
-//                "Here, There, and Everywhere", // check
+//                "Phonograph",
+//                "Mic Check",
+//                "Listen Up",
+//                "Radio",
+//                "Portable Player",
+//                "Digital Age",
+//                "Streaming",
+//                "Here, There, and Everywhere",
 
-//                "Ancient Times", // check
-//                "Middle Ages", // check
-//                "Classical Clientele", // check
-//                "A New World", // check
-//                "Beyond Borders", // check
-//                "Global Sensations", // check
+//                "Ancient Times",
+//                "Middle Ages",
+//                "Classical Clientele",
+//                "A New World",
+//                "Beyond Borders",
+//                "Global Sensations",
         };
 
         for (String upgradeName : boughtUpdates) {

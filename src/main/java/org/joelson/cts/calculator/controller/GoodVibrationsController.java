@@ -44,64 +44,64 @@ public class GoodVibrationsController {
         setGeneratorCount("Notes", 1);
 
         String[] boughtUpdates = {
-//                "Vibrations", // check
-//                "Receiving Sound", // check
-//                "Processing Sound", // check
+//                "Vibrations",
+//                "Receiving Sound",
+//                "Processing Sound",
 
-//                "Amplitude", // check
-//                "Wavelength", // check
-//                "Frequency", // check
-//                "Harmonics", // check
-//                "Color of a Note", // check
-//                "Vibrato", // check
+//                "Amplitude",
+//                "Wavelength",
+//                "Frequency",
+//                "Harmonics",
+//                "Color of a Note",
+//                "Vibrato",
 
-//                "Pitch", // check
-//                "Rhythm", // check
-//                "African Polyrhythm", // check
-//                "Notation", // check
-//                "Semitones", // check
-//                "Arabic Maqam", // check
-//                "Chinese Shi'er lü", // check
-//                "Chords", // check
-//                "Octave", // check
-//                "Pentatonic Scale", // check
-//                "Melody", // check
+//                "Pitch",
+//                "Rhythm",
+//                "African Polyrhythm",
+//                "Notation",
+//                "Semitones",
+//                "Arabic Maqam",
+//                "Chinese Shi'er lü",
+//                "Chords",
+//                "Octave",
+//                "Pentatonic Scale",
+//                "Melody",
 
-//                "Sticks and Rocks", // check
-//                "Bone Flute", // check
-//                "Write That Down", // check
-//                "Clay Tablets", // check
+//                "Sticks and Rocks",
+//                "Bone Flute",
+//                "Write That Down",
+//                "Clay Tablets",
 
-//                "What's Next?", // notes // check
-//                "Wind", // check
-//                "Voice", // check
-//                "Ocarina", // check
-//                "Keyboard", // check
-//                "Percussion", // check
-//                "Autotune", // check
-//                "Electrophones", // check
-//                "The King of Instruments", // check
-//                "Xylophone", // check
-//                "String", // check
-//                "Synthesizer", // check
-//                "Lyre, Lyre", // check
-//                "Hurricane Hymn No. 6", // check
+//                "What's Next?", // notes
+//                "Wind",
+//                "Voice",
+//                "Ocarina",
+//                "Keyboard",
+//                "Percussion",
+//                "Autotune",
+//                "Electrophones",
+//                "The King of Instruments",
+//                "Xylophone",
+//                "String",
+//                "Synthesizer",
+//                "Lyre, Lyre",
+//                "Hurricane Hymn No. 6",
 
-//                "Phonograph", // check
-//                "Mic Check", // check
-//                "Listen Up", // check
-//                "Radio", // check
-//                "Portable Player", // check
-//                "Digital Age", // check
-//                "Streaming", // check
-//                "Here, There, and Everywhere", // check
+//                "Phonograph",
+//                "Mic Check",
+//                "Listen Up",
+//                "Radio",
+//                "Portable Player",
+//                "Digital Age",
+//                "Streaming",
+//                "Here, There, and Everywhere",
 
-//                "Ancient Times", // check
-//                "Middle Ages", // check
-//                "Classical Clientele", // check
-//                "A New World", // check
-//                "Beyond Borders", // check
-//                "Global Sensations", // check
+//                "Ancient Times",
+//                "Middle Ages",
+//                "Classical Clientele",
+//                "A New World",
+//                "Beyond Borders",
+//                "Global Sensations",
         };
 
         for (String upgradeName : boughtUpdates) {
