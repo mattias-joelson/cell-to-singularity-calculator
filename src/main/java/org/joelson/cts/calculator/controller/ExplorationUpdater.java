@@ -16,6 +16,7 @@ import org.joelson.cts.calculator.util.DurationToolkit;
 import org.springframework.ui.Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -151,7 +152,7 @@ class ExplorationUpdater {
         model.addAttribute("totalProductions", totalProductions);
         List<GeneratorCost> generatorCosts;
         if (multiCurrency) {
-            generatorCosts = new ArrayList<>();//calculateGeneratorCosts(garden, state);
+            generatorCosts = calculateGeneratorCosts(garden, state);
         } else {
             generatorCosts = new ArrayList<>();
         }
@@ -230,6 +231,49 @@ class ExplorationUpdater {
 
     public record GeneratorCost(String label, String cost, String ratio, String next) {
 
+    }
+
+    private List<GeneratorCost> calculateGeneratorCosts(Garden garden, GardenState state) {
+
+        Map<String, Amount> generatorCostMap = new HashMap<>();
+        Map<String, Amount> totalCostMap = new HashMap<>();
+
+        for (Generator generator : garden.getGenerators()) {
+            GeneratorState generatorState = state.getGeneratorState(generator);
+            Amount cost = calculateGeneratorCost(generator, generatorState);
+            generatorCostMap.put(generator.getName(), cost);
+            String currency = generator.getBaseCost().currency();
+            Amount total = totalCostMap.get(currency);
+            if (total != null) {
+                totalCostMap.put(currency, total.plus(cost));
+            } else {
+                totalCostMap.put(currency, cost);
+            }
+        }
+
+        List<GeneratorCost> generatorCosts = new ArrayList<>();
+        for (Generator generator : garden.getGenerators().reversed()) {
+            Amount cost = generatorCostMap.get(generator.getName());
+            Amount total = totalCostMap.get(generator.getBaseCost().currency());
+            generatorCosts.add(new GeneratorCost(generator.getName(), cost.asString(),
+                    String.format("%.2f %%", 100 * cost.amount() / total.amount()),
+                    generator.getCost(state.getGeneratorState(generator).count()).asString()));
+        }
+
+        return generatorCosts;
+    }
+
+    private Amount calculateGeneratorCost(Generator generator, GeneratorState generatorState) {
+        double compoundingCost = generator.getCompoundingCost();
+        int count = generatorState.count();
+        Amount cost = generator.getBaseCost();
+        Amount sumCost = new Amount(cost.currency(), 0);
+        for (int i = 0; i < count; i += 1) {
+            sumCost = sumCost.plus(cost);
+            cost = cost.multiplyBy(compoundingCost);
+        }
+
+        return sumCost;
     }
 
     public record GeneratorModel(String name, int count, String cost, boolean isUnlocked,
