@@ -124,6 +124,7 @@ public class FungusAmongUs {
 
                 .addEfficiencyUpgrade("Bread", fungus(4e16), 5)
                 .addUpgradeRequirement("Truffles")
+                .addUpgradeRequirement("Yeast")
 
                 .addEfficiencyUpgrade("Fermentation", fungus(9e16), 2)
                 .addGeneratorRequirement("Tasty Fungi")
