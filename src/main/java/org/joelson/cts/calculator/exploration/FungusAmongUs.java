@@ -31,27 +31,27 @@ public class FungusAmongUs {
         builder.createGenerator("Fungi", fungus(20), 1.15f, fungus(1))
 
                 .addEfficiencyUpgrade("Mycology", fungus(600), 1.5f)
-                .addGeneratorRequirement("Fungi", 1)
+                .addGeneratorRequirement("Fungi")
 
                 .addEfficiencyUpgrade("Mushrooms", fungus(5_000), 11)
-                .addGeneratorRequirement("Fungi", 1)
+                .addGeneratorRequirement("Fungi")
 
                 .addEfficiencyUpgrade("Yeast", fungus(2e15), 2e9f)
-                .addGeneratorRequirement("Fungi", 1)
-                .addGeneratorRequirement("Tasty Fungi", 1)
+                .addGeneratorRequirement("Fungi")
+                .addGeneratorRequirement("Tasty Fungi")
 
                 .addEfficiencyUpgrade("Mold", fungus(2e18), 251)
-                .addGeneratorRequirement("Fungi", 1)
+                .addGeneratorRequirement("Fungi")
                 .addUpgradeRequirement("Blue Cheese");
 
         builder.createGenerator("Fungal Living", fungus(700), 1.15f, fungus(5))
                 .addUpgradeRequirement("Mycology")
 
                 .addEfficiencyUpgrade("Diet", fungus(1_250), 2)
-                .addGeneratorRequirement("Fungal Living", 1)
+                .addGeneratorRequirement("Fungal Living")
 
                 .addEfficiencyUpgrade("Reproduction", fungus(2_000), 2)
-                .addGeneratorRequirement("Fungal Living", 1)
+                .addGeneratorRequirement("Fungal Living")
 
                 .addEfficiencyUpgrade("Hydrolytic Enzymes", fungus(50_000), 2)
                 .addUpgradeRequirement("Diet")
@@ -60,7 +60,7 @@ public class FungusAmongUs {
                 .addUpgradeRequirement("Reproduction")
 
                 .addEfficiencyUpgrade("Symbiosis", fungus(5e7), 51)
-                .addGeneratorRequirement("Fungal Living", 1)
+                .addGeneratorRequirement("Fungal Living")
 
                 .addEfficiencyUpgrade("Growth", fungus(1e9), 11)
                 .addUpgradeRequirement("Reproduction");
@@ -69,13 +69,13 @@ public class FungusAmongUs {
                 .addUpgradeRequirement("Hydrolytic Enzymes")
 
                 .addEfficiencyUpgrade("Bioremediation", fungus(2e6), 3)
-                .addGeneratorRequirement("Fungal Cleaners", 1)
+                .addGeneratorRequirement("Fungal Cleaners")
 
                 .addEfficiencyUpgrade("Radiotrophic Fungi", fungus(1.5e7), 4)
                 .addUpgradeRequirement("Bioremediation")
 
                 .addEfficiencyUpgrade("Decomposition", fungus(1.5e10), 16)
-                .addGeneratorRequirement("Fungal Cleaners", 1)
+                .addGeneratorRequirement("Fungal Cleaners")
 
                 .addEfficiencyUpgrade("Fungal Burial", fungus(1.5e11), 26)
                 .addUpgradeRequirement("Decomposition");
@@ -84,14 +84,14 @@ public class FungusAmongUs {
                 .addUpgradeRequirement("Symbiosis")
 
                 .addEfficiencyUpgrade("Mycorrhiza", fungus(7e8), 2)
-                .addGeneratorRequirement("Fungi of the Forest", 1)
+                .addGeneratorRequirement("Fungi of the Forest")
 
                 .addEfficiencyUpgrade("Mycelial Network", fungus(9e9), 2)
-                .addGeneratorRequirement("Fungi of the Forest", 1)
+                .addGeneratorRequirement("Fungi of the Forest")
                 .addUpgradeRequirement("Growth")
 
                 .addEfficiencyUpgrade("Ghost Orchid", fungus(4e10), 2)
-                .addGeneratorRequirement("Fungi of the Forest", 1)
+                .addGeneratorRequirement("Fungi of the Forest")
                 .addUpgradeRequirement("Decomposition")
 
                 .addEfficiencyUpgrade("Defense Alert", fungus(8e10), 2)
@@ -101,15 +101,15 @@ public class FungusAmongUs {
                 .addUpgradeRequirement("Fungal Burial")
 
                 .addEfficiencyUpgrade("Building Material", fungus(6e11), 4)
-                .addGeneratorRequirement("Domesticated Fungi", 1)
+                .addGeneratorRequirement("Domesticated Fungi")
 
                 .addEfficiencyUpgrade("Pesticides", fungus(1.5e12), 11)
-                .addGeneratorRequirement("Domesticated Fungi", 1)
+                .addGeneratorRequirement("Domesticated Fungi")
 
                 .addEfficiencyUpgrade("Medicine", fungus(2e13), 3)
-                .addGeneratorRequirement("Domesticated Fungi", 1)
+                .addGeneratorRequirement("Domesticated Fungi")
 
-                .addEfficiencyUpgrade("Antibiotics", fungus(4e20), 3e6f)
+                .addEfficiencyUpgrade("Antibiotics", fungus(4e20), 3_000_001)
                 .addUpgradeRequirement("Medicine")
                 .addUpgradeRequirement("Mold");
 
@@ -117,7 +117,7 @@ public class FungusAmongUs {
                 .addUpgradeRequirement("Medicine")
 
                 .addEfficiencyUpgrade("Edible Mushrooms", fungus(1.2e14), 3)
-                .addGeneratorRequirement("Tasty Fungi", 1)
+                .addGeneratorRequirement("Tasty Fungi")
 
                 .addEfficiencyUpgrade("Truffles", fungus(8e14), 2.5f)
                 .addUpgradeRequirement("Edible Mushrooms")
@@ -126,7 +126,7 @@ public class FungusAmongUs {
                 .addUpgradeRequirement("Truffles")
 
                 .addEfficiencyUpgrade("Fermentation", fungus(9e16), 2)
-                .addUpgradeRequirement("Truffles")
+                .addGeneratorRequirement("Tasty Fungi")
 
                 .addEfficiencyUpgrade("Cheese Ripening", fungus(2.5e17), 5)
                 .addUpgradeRequirement("Fermentation")
@@ -141,10 +141,10 @@ public class FungusAmongUs {
                 .addUpgradeRequirement("Mold")
 
                 .addEfficiencyUpgrade("Moldy Food", fungus(1.5e19), 9)
-                .addGeneratorRequirement("Unwelcome Fungi", 1)
+                .addGeneratorRequirement("Unwelcome Fungi")
 
                 .addEfficiencyUpgrade("Fungal Infections", fungus(6e19), 2.5f)
-                .addGeneratorRequirement("Unwelcome Fungi", 1)
+                .addGeneratorRequirement("Unwelcome Fungi")
 
                 .addEfficiencyUpgrade("Plant Blight", fungus(5e21), 6)
                 .addUpgradeRequirement("Fungal Infections")
@@ -157,22 +157,22 @@ public class FungusAmongUs {
                 .addUpgradeRequirement("Fungal Infections")
 
                 .addEfficiencyUpgrade("Poisonous Mushrooms", fungus(3e24), 41)
-                .addGeneratorRequirement("Unwelcome Fungi", 1)
+                .addGeneratorRequirement("Unwelcome Fungi")
 
                 .addEfficiencyUpgrade("Amanita", fungus(1e25), 5)
                 .addUpgradeRequirement("Poisonous Mushrooms")
 
                 .addEfficiencyUpgrade("Parasitic Fungi", fungus(1e26), 16)
-                .addGeneratorRequirement("Unwelcome Fungi", 1);
+                .addGeneratorRequirement("Unwelcome Fungi");
 
         builder.createGenerator("Mind-Altering Fungi", fungus(1e23), 1.15f, fungus(5e18))
                 .addUpgradeRequirement("Alcohol")
 
                 .addEfficiencyUpgrade("Scent & Taste", fungus(4e23), 7)
-                .addGeneratorRequirement("Mind-Altering Fungi", 1)
+                .addGeneratorRequirement("Mind-Altering Fungi")
 
                 .addEfficiencyUpgrade("Psychedelic Mushrooms", fungus(4e25), 16)
-                .addGeneratorRequirement("Mind-Altering Fungi", 1)
+                .addGeneratorRequirement("Mind-Altering Fungi")
                 .addUpgradeRequirement("Poisonous Mushrooms")
 
                 .addEfficiencyUpgrade("Cordyceps", fungus(1e27), 2)
@@ -201,53 +201,53 @@ public class FungusAmongUs {
         setGeneratorCount(garden, state, "Fungi", 1);
 
         String[] boughtUpgrades = {
-//                "Mycology", // check
-//                "Mushrooms", // check
-//                "Yeast", // check
-//                "Mold", // check
+//                "Mycology",
+//                "Mushrooms",
+//                "Yeast",
+//                "Mold",
 
-//                "Diet", // check
-//                "Reproduction", // check
-//                "Hydrolytic Enzymes", // check
-//                "Spores", // check
-//                "Symbiosis", // check
-//                "Growth", // check
+//                "Diet",
+//                "Reproduction",
+//                "Hydrolytic Enzymes",
+//                "Spores",
+//                "Symbiosis",
+//                "Growth",
 
-//                "Bioremediation", // check
-//                "Radiotrophic Fungi", // check
-//                "Decomposition", // check
-//                "Fungal Burial", // check
+//                "Bioremediation",
+//                "Radiotrophic Fungi",
+//                "Decomposition",
+//                "Fungal Burial",
 
-//                "Mycorrhiza", // check
-//                "Mycelial Network", // check
-//                "Ghost Orchid", // check
-//                "Defense Alert", // check
+//                "Mycorrhiza",
+//                "Mycelial Network",
+//                "Ghost Orchid",
+//                "Defense Alert",
 
-//                "Building Material", // check
-//                "Pesticides", // check
-//                "Medicine", // check
-//                "Antibiotics", // check
+//                "Building Material",
+//                "Pesticides",
+//                "Medicine",
+//                "Antibiotics",
 
-//                "Edible Mushrooms", // check
-//                "Truffles", // check
-//                "Bread", // check
-//                "Fermentation", // check
-//                "Cheese Ripening", // check
-//                "Blue Cheese", // check
-//                "Alcohol", // check
+//                "Edible Mushrooms",
+//                "Truffles",
+//                "Bread",
+//                "Fermentation",
+//                "Cheese Ripening",
+//                "Blue Cheese",
+//                "Alcohol",
 
-//                "Moldy Food", // check
-//                "Fungal Infections", // check
-//                "Plant Blight", // check
-//                "Black Mold", // check
-//                "Human Illness", // check
-//                "Poisonous Mushrooms", // check
-//                "Amanita", // check
-//                "Parasitic Fungi", // check
+//                "Moldy Food",
+//                "Fungal Infections",
+//                "Plant Blight",
+//                "Black Mold",
+//                "Human Illness",
+//                "Poisonous Mushrooms",
+//                "Amanita",
+//                "Parasitic Fungi",
 
-//                "Scent & Taste", // check
-//                "Psychedelic Mushrooms", // check
-//                "Cordyceps", // check
+//                "Scent & Taste",
+//                "Psychedelic Mushrooms",
+//                "Cordyceps",
         };
 
         for (String upgradeName : boughtUpgrades) {

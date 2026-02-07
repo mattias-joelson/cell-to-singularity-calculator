@@ -45,53 +45,53 @@ public class FungusAmongUsController {
         setGeneratorCount("Fungi", 1);
 
         String[] boughtUpgrades = {
-//                "Mycology", // check
-//                "Mushrooms", // check
-//                "Yeast", // check
-//                "Mold", // check
+//                "Mycology",
+//                "Mushrooms",
+//                "Yeast",
+//                "Mold",
 
-//                "Diet", // check
-//                "Reproduction", // check
-//                "Hydrolytic Enzymes", // check
-//                "Spores", // check
-//                "Symbiosis", // check
-//                "Growth", // check
+//                "Diet",
+//                "Reproduction",
+//                "Hydrolytic Enzymes",
+//                "Spores",
+//                "Symbiosis",
+//                "Growth",
 
-//                "Bioremediation", // check
-//                "Radiotrophic Fungi", // check
-//                "Decomposition", // check
-//                "Fungal Burial", // check
+//                "Bioremediation",
+//                "Radiotrophic Fungi",
+//                "Decomposition",
+//                "Fungal Burial",
 
-//                "Mycorrhiza", // check
-//                "Mycelial Network", // check
-//                "Ghost Orchid", // check
-//                "Defense Alert", // check
+//                "Mycorrhiza",
+//                "Mycelial Network",
+//                "Ghost Orchid",
+//                "Defense Alert",
 
-//                "Building Material", // check
-//                "Pesticides", // check
-//                "Medicine", // check
-//                "Antibiotics", // check
+//                "Building Material",
+//                "Pesticides",
+//                "Medicine",
+//                "Antibiotics",
 
-//                "Edible Mushrooms", // check
-//                "Truffles", // check
-//                "Bread", // check
-//                "Fermentation", // check
-//                "Cheese Ripening", // check
-//                "Blue Cheese", // check
-//                "Alcohol", // check
+//                "Edible Mushrooms",
+//                "Truffles",
+//                "Bread",
+//                "Fermentation",
+//                "Cheese Ripening",
+//                "Blue Cheese",
+//                "Alcohol",
 
-//                "Moldy Food", // check
-//                "Fungal Infections", // check
-//                "Plant Blight", // check
-//                "Black Mold", // check
-//                "Human Illness", // check
-//                "Poisonous Mushrooms", // check
-//                "Amanita", // check
-//                "Parasitic Fungi", // check
+//                "Moldy Food",
+//                "Fungal Infections",
+//                "Plant Blight",
+//                "Black Mold",
+//                "Human Illness",
+//                "Poisonous Mushrooms",
+//                "Amanita",
+//                "Parasitic Fungi",
 
-//                "Scent & Taste", // check
-//                "Psychedelic Mushrooms", // check
-//                "Cordyceps", // check
+//                "Scent & Taste",
+//                "Psychedelic Mushrooms",
+//                "Cordyceps",
         };
 
         for (String upgradeName : boughtUpgrades) {
