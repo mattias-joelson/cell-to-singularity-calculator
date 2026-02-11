@@ -85,7 +85,7 @@ public class AnatomyOfLife {
                 .addEfficiencyUpgrade("Parietal Lobe", deoxy(750_000), 2.25f)
                 .addGeneratorRequirement("Brain")
 
-                .addEfficiencyUpgrade("Nose", deoxy(1e13), 1.5e6f)
+                .addEfficiencyUpgrade("Nose", deoxy(1e13), 1_500_001)
                 .addUpgradeRequirement("Temporal Lobe")
                 .addUpgradeRequirement("Bronchi")
 
@@ -93,7 +93,7 @@ public class AnatomyOfLife {
                 .addUpgradeRequirement("Temporal Lobe")
                 .addUpgradeRequirement("Bronchi")
 
-                .addEfficiencyUpgrade("Mouth", deoxy(3e20), 5e6f)
+                .addEfficiencyUpgrade("Mouth", deoxy(3e20), 5_000_001)
                 .addUpgradeRequirement("Parietal Lobe")
                 .addUpgradeRequirement("Epidermis");
 
@@ -103,7 +103,7 @@ public class AnatomyOfLife {
                 .addEfficiencyUpgrade("Hypothalamus", deoxy(1.2e7), 2)
                 .addGeneratorRequirement("Endocrine System")
 
-                .addEfficiencyUpgrade("Pituitary", deoxy(2.6e7), 2.5f)
+                .addEfficiencyUpgrade("Pituitary", deoxy(3.6e7), 2.5f)
                 .addUpgradeRequirement("Hypothalamus")
 
                 .addEfficiencyUpgrade("Adrenal", deoxy(6e7), 2.5f)
@@ -144,7 +144,7 @@ public class AnatomyOfLife {
                 .addEfficiencyUpgrade("Tendons", deoxy(8e14), 31)
                 .addUpgradeRequirement("Skeletal Muscles")
 
-                .addEfficiencyUpgrade("Smooth Muscles", deoxy(4e21), 2.5e6f)
+                .addEfficiencyUpgrade("Smooth Muscles", deoxy(4e21), 2_500_001)
                 .addGeneratorRequirement("Muscles")
                 .addGeneratorRequirement("Stomach");
 
