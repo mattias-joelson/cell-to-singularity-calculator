@@ -46,74 +46,74 @@ public class AJourneyOfSerenityController {
         setGeneratorCount("Wild Tea Plant", 1);
 
         String[] boughtUpgrades = {
-//                "Cultivation", // check
-//                "Health Benefits", // check
-//                "Defense Response", // check
-//                "Tea Meals", // check
-//                "Chagayu", // check
-//                "Herbal Medicine", // check
-//                "Ochazuke", // check
+//                "Cultivation",
+//                "Health Benefits",
+//                "Defense Response",
+//                "Tea Meals",
+//                "Chagayu",
+//                "Herbal Medicine",
+//                "Ochazuke",
 
-//                "Origin Myth", // check
-//                "Calm Body and Mind", // check
-//                "Digestion", // check
-//                "Anti-inflammatory", // check
-//                "Weight Management", // check
+//                "Origin Myth",
+//                "Calm Body and Mind",
+//                "Digestion",
+//                "Anti-inflammatory",
+//                "Weight Management",
 
-//                "Pruning", // check
-//                "Harvesting", // check
-//                "Scissors", // check
-//                "Harvesting Machinery", // check
-//                "Soil Acidity", // check
-//                "Fertilizer", // check
-//                "Pest and Disease Control", // check
-//                "Vertical Farming", // check
-//                "Irrigation System", // check
-//                "Mechanical Plucking", // check
-//                "Drone Technology", // check
-//                "Monitoring System", // check
-//                "Storing", // check
-//                "Drying", // check
-//                "Roasting", // check
-//                "Fermentation", // check
+//                "Pruning",
+//                "Harvesting",
+//                "Scissors",
+//                "Harvesting Machinery",
+//                "Soil Acidity",
+//                "Fertilizer",
+//                "Pest and Disease Control",
+//                "Vertical Farming",
+//                "Irrigation System",
+//                "Mechanical Plucking",
+//                "Drone Technology",
+//                "Monitoring System",
+//                "Storing",
+//                "Drying",
+//                "Roasting",
+//                "Fermentation",
 
-//                "Tea Contest", // check
-//                "Silk Road Trade", // check
-//                "Arabic Shai", // check
-//                "Moroccan Atai", // check
-//                "AI Automation", // tea leaves // check
+//                "Tea Contest",
+//                "Silk Road Trade",
+//                "Arabic Shai",
+//                "Moroccan Atai",
+//                "AI Automation", // tea leaves
 
-//                "Whisking", // check
-//                "Foam Art", // check
-//                "Chanoyu", // check
-//                "Grinding", // tea leaves // check
+//                "Whisking",
+//                "Foam Art",
+//                "Chanoyu",
+//                "Grinding", // tea leaves
 
-//                "Steeping", // check
-//                "Darye", // check
-//                "Trade to Europe", // check
-//                "Yunnan Pu-erh Tea", // tea leaves // check
-//                "Tea Brick", // tea leaves // check
+//                "Steeping",
+//                "Darye",
+//                "Trade to Europe",
+//                "Yunnan Pu-erh Tea", // tea leaves
+//                "Tea Brick", // tea leaves
 
-//                "British Tea", // check
-//                "Masala Chai", // check
-//                "Boiling", // check
-//                "High Tea", // check
-//                "Tea House", // check
-//                "Assam Tea", // tea leaves // check
-//                "Storage Jar", // tea leaves // check
+//                "British Tea",
+//                "Masala Chai",
+//                "Boiling",
+//                "High Tea",
+//                "Tea House",
+//                "Assam Tea", // tea leaves
+//                "Storage Jar", // tea leaves
 
-//                "Iced Tea", // check
-//                "Cold Brew", // check
-//                "Herbal Tea", // check
-//                "Tea Latte", // check
-//                "Tea Cocktail", // check
-//                "Bubble Tea", // check
-//                "Tea Bag", // tea leaves // check
-//                "Vacuum Sealer", // tea leaves // check
+//                "Iced Tea",
+//                "Cold Brew",
+//                "Herbal Tea",
+//                "Tea Latte",
+//                "Tea Cocktail",
+//                "Bubble Tea",
+//                "Tea Bag", // tea leaves
+//                "Vacuum Sealer", // tea leaves
 
-//                "Tea Simulator", // check
-//                "Online Tea Ceremony", // check
-//                "Shared Serenity", // check
+//                "Tea Simulator",
+//                "Online Tea Ceremony",
+//                "Shared Serenity",
         };
 
         for (String upgradeName : boughtUpgrades) {

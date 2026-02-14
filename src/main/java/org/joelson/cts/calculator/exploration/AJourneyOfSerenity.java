@@ -60,7 +60,7 @@ public class AJourneyOfSerenity {
                 .addUpgradeRequirement("Tea Meals")
                 .addUpgradeRequirement("Anti-inflammatory");
 
-        builder.createGenerator("Domesticated Tea Plant", leaves(75_000), 1.15f, leaves(500))
+        builder.createGenerator("Domesticated Tea Plant", leaves(75_000), leaves(500))
                 .addUpgradeRequirement("Cultivation")
 
                 .addEfficiencyUpgrade("Origin Myth", leaves(2e6), 2)
@@ -79,7 +79,7 @@ public class AJourneyOfSerenity {
                 .addUpgradeRequirement("Cultivation")
                 .addUpgradeRequirement("Anti-inflammatory");
 
-        builder.createGenerator("Tea Plantation", leaves(5e7), 1.15f, leaves(100_000))
+        builder.createGenerator("Tea Plantation", leaves(5e7), leaves(100_000))
                 .addUpgradeRequirement("Origin Myth")
 
                 .addEfficiencyUpgrade("Pruning", leaves(9e9), 2.25f)
@@ -117,7 +117,8 @@ public class AJourneyOfSerenity {
                 .addUpgradeRequirement("Mechanical Plucking")
 
                 .addEfficiencyUpgrade("Monitoring System", leaves(2e19), 6)
-                .addUpgradeRequirement("Drone Technology") // ? Drone Tech
+                .addUpgradeRequirement("Drone Technology")
+                .addGeneratorRequirement("Unconventional Tea")
 
                 .addEfficiencyUpgrade("Storing", leaves(3e8), 2.5f)
                 .addGeneratorRequirement("Tea Plantation", 1)
@@ -149,7 +150,7 @@ public class AJourneyOfSerenity {
                 .addEfficiencyUpgrade("AI Automation", leaves(9e19), 20_000_000_000_001f)
                 .addUpgradeRequirement("Monitoring System");
 
-        builder.createGenerator("Matcha", cups(1e6), 1.15f, cups(200))
+        builder.createGenerator("Matcha", cups(1e6), cups(200))
                 .addGeneratorRequirement("Tea Evolution", 1)
 
                 .addEfficiencyUpgrade("Whisking", cups(1.5e7), 2f)
@@ -166,7 +167,7 @@ public class AJourneyOfSerenity {
                 .addGeneratorRequirement("Matcha", 1)
                 .addUpgradeRequirement("Roasting");
 
-        builder.createGenerator("Loose-Leaf Tea", cups(3e8), 1.15f, cups(25_000))
+        builder.createGenerator("Loose-Leaf Tea", cups(3e8), cups(25_000))
                 .addUpgradeRequirement("Arabic Shai")
                 .addUpgradeRequirement("Moroccan Atai")
 
@@ -186,7 +187,7 @@ public class AJourneyOfSerenity {
                 .addUpgradeRequirement("Yunnan Pu-erh Tea")
                 .addUpgradeRequirement("Fermentation");
 
-        builder.createGenerator("Infused Tea", cups(4e13), 1.15f, cups(2e9))
+        builder.createGenerator("Infused Tea", cups(4e13), cups(2e9))
                 .addUpgradeRequirement("Trade to Europe")
 
                 .addEfficiencyUpgrade("British Tea", cups(1e14), 9)
@@ -212,7 +213,7 @@ public class AJourneyOfSerenity {
                 .addUpgradeRequirement("Assam Tea")
                 .addUpgradeRequirement("Tea Brick");
 
-        builder.createGenerator("Unconventional Tea", cups(5e18), 1.15f, cups(1e15))
+        builder.createGenerator("Unconventional Tea", cups(5e18), cups(1e15))
                 .addUpgradeRequirement("Masala Chai")
 
                 .addEfficiencyUpgrade("Iced Tea", cups(4e20), 2)
@@ -227,7 +228,7 @@ public class AJourneyOfSerenity {
                 .addEfficiencyUpgrade("Tea Latte", cups(2e23), 5)
                 .addUpgradeRequirement("Herbal Tea")
 
-                .addEfficiencyUpgrade("Tea Cocktail", cups(1.5e24), 201f)
+                .addEfficiencyUpgrade("Tea Cocktail", cups(1.5e24), 21)
                 .addUpgradeRequirement("Herbal Tea")
 
                 .addEfficiencyUpgrade("Bubble Tea", cups(3e25), 6)
@@ -240,7 +241,7 @@ public class AJourneyOfSerenity {
                 .addEfficiencyUpgrade("Vacuum Sealer", leaves(3e19), 2.5f)
                 .addUpgradeRequirement("Tea Bag");
 
-        builder.createGenerator("Virtual Tea", cups(5e22), 1.15f, cups(4e18))
+        builder.createGenerator("Virtual Tea", cups(5e22), cups(4e18))
                 .addUpgradeRequirement("AI Automation")
 
                 .addEfficiencyUpgrade("Tea Simulator", cups(5e23), 4f)
@@ -276,74 +277,74 @@ public class AJourneyOfSerenity {
         setGeneratorCount(garden, state, "Wild Tea Plant", 1);
 
         String[] boughtUpgrades = {
-//                "Cultivation", // check
-//                "Health Benefits", // check
-//                "Defense Response", // check
-//                "Tea Meals", // check
-//                "Chagayu", // check
-//                "Herbal Medicine", // check
-//                "Ochazuke", // check
+//                "Cultivation",
+//                "Health Benefits",
+//                "Defense Response",
+//                "Tea Meals",
+//                "Chagayu",
+//                "Herbal Medicine",
+//                "Ochazuke",
 
-//                "Origin Myth", // check
-//                "Calm Body and Mind", // check
-//                "Digestion", // check
-//                "Anti-inflammatory", // check
-//                "Weight Management", // check
+//                "Origin Myth",
+//                "Calm Body and Mind",
+//                "Digestion",
+//                "Anti-inflammatory",
+//                "Weight Management",
 
-//                "Pruning", // check
-//                "Harvesting", // check
-//                "Scissors", // check
-//                "Harvesting Machinery", // check
-//                "Soil Acidity", // check
-//                "Fertilizer", // check
-//                "Pest and Disease Control", // check
-//                "Vertical Farming", // check
-//                "Irrigation System", // check
-//                "Mechanical Plucking", // check
-//                "Drone Technology", // check
-//                "Monitoring System", // check
-//                "Storing", // check
-//                "Drying", // check
-//                "Roasting", // check
-//                "Fermentation", // check
+//                "Pruning",
+//                "Harvesting",
+//                "Scissors",
+//                "Harvesting Machinery",
+//                "Soil Acidity",
+//                "Fertilizer",
+//                "Pest and Disease Control",
+//                "Vertical Farming",
+//                "Irrigation System",
+//                "Mechanical Plucking",
+//                "Drone Technology",
+//                "Monitoring System",
+//                "Storing",
+//                "Drying",
+//                "Roasting",
+//                "Fermentation",
 
-//                "Tea Contest", // check
-//                "Silk Road Trade", // check
-//                "Arabic Shai", // check
-//                "Moroccan Atai", // check
-//                "AI Automation", // tea leaves // check
+//                "Tea Contest",
+//                "Silk Road Trade",
+//                "Arabic Shai",
+//                "Moroccan Atai",
+//                "AI Automation", // tea leaves
 
-//                "Whisking", // check
-//                "Foam Art", // check
-//                "Chanoyu", // check
-//                "Grinding", // tea leaves // check
+//                "Whisking",
+//                "Foam Art",
+//                "Chanoyu",
+//                "Grinding", // tea leaves
 
-//                "Steeping", // check
-//                "Darye", // check
-//                "Trade to Europe", // check
-//                "Yunnan Pu-erh Tea", // tea leaves // check
-//                "Tea Brick", // tea leaves // check
+//                "Steeping",
+//                "Darye",
+//                "Trade to Europe",
+//                "Yunnan Pu-erh Tea", // tea leaves
+//                "Tea Brick", // tea leaves
 
-//                "British Tea", // check
-//                "Masala Chai", // check
-//                "Boiling", // check
-//                "High Tea", // check
-//                "Tea House", // check
-//                "Assam Tea", // tea leaves // check
-//                "Storage Jar", // tea leaves // check
+//                "British Tea",
+//                "Masala Chai",
+//                "Boiling",
+//                "High Tea",
+//                "Tea House",
+//                "Assam Tea", // tea leaves
+//                "Storage Jar", // tea leaves
 
-//                "Iced Tea", // check
-//                "Cold Brew", // check
-//                "Herbal Tea", // check
-//                "Tea Latte", // check
-//                "Tea Cocktail", // check
-//                "Bubble Tea", // check
-//                "Tea Bag", // tea leaves // check
-//                "Vacuum Sealer", // tea leaves // check
+//                "Iced Tea",
+//                "Cold Brew",
+//                "Herbal Tea",
+//                "Tea Latte",
+//                "Tea Cocktail",
+//                "Bubble Tea",
+//                "Tea Bag", // tea leaves
+//                "Vacuum Sealer", // tea leaves
 
-//                "Tea Simulator", // check
-//                "Online Tea Ceremony", // check
-//                "Shared Serenity", // check
+//                "Tea Simulator",
+//                "Online Tea Ceremony",
+//                "Shared Serenity",
         };
 
         for (String upgradeName : boughtUpgrades) {
