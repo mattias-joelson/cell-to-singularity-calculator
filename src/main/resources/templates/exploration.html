@@ -51,9 +51,9 @@
             </tr>
             <tr th:each="generatorCost : ${generatorCosts}">
                 <td th:text="${generatorCost.label}"/>
-                <td th:text="${generatorCost.cost}"/>
-                <td th:text="${generatorCost.ratio}"/>
-                <td th:text="${generatorCost.next}"/>
+                <td class="alnright" th:text="${generatorCost.cost}"/>
+                <td class="alnright" th:text="${generatorCost.ratio}"/>
+                <td class="alnright" th:text="${generatorCost.next}"/>
             </tr>
         </table>
         <h2>Generators</h2>

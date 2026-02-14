@@ -241,7 +241,7 @@ class ExplorationUpdater {
         Map<String, Amount> generatorCostMap = new HashMap<>();
         Map<String, Amount> totalCostMap = new HashMap<>();
 
-        for (Generator generator : garden.getGenerators()) {
+        for (Generator generator : garden.getUnlockedGenerators(state)) {
             GeneratorState generatorState = state.getGeneratorState(generator);
             Amount cost = calculateGeneratorCost(generator, generatorState);
             generatorCostMap.put(generator.getName(), cost);
@@ -255,7 +255,7 @@ class ExplorationUpdater {
         }
 
         List<GeneratorCost> generatorCosts = new ArrayList<>();
-        for (Generator generator : garden.getGenerators().reversed()) {
+        for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
             Amount cost = generatorCostMap.get(generator.getName());
             Amount total = totalCostMap.get(generator.getBaseCost().currency());
             generatorCosts.add(new GeneratorCost(generator.getName(), cost.asString(),
