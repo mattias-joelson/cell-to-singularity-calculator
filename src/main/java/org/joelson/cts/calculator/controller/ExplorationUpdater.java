@@ -173,11 +173,12 @@ class ExplorationUpdater {
     }
 
     public record GeneratorProduction(String name, int count, String next, String each, String totalPerCycle,
-            String total, String increase) {
+            String total, String portion, String increase) {
 
     }
 
     public static List<GeneratorProduction> calculateGeneratorProduction(Garden garden, GardenState state) {
+        Map<String, Double> totalProduction = ImprovementCalculator.calculateProduction(garden, state);
         List<GeneratorProduction> generatorProductions = new ArrayList<>();
         for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
             GeneratorState generatorState = state.getGeneratorState(generator);
@@ -186,6 +187,7 @@ class ExplorationUpdater {
             double baseProduction = generator.getBaseProduction().amount();
             float efficiency = generatorState.efficiency();
             String totalPerCycleString;
+            double production;
             String productionString;
             GeneratorImprovement improvement = new GeneratorImprovement(generator, generatorState);
             String increaseString = String.format("%.7f", improvement.getRatio());
@@ -201,19 +203,20 @@ class ExplorationUpdater {
                     totalPerCycleString = String.format("%s in %.3f s",
                             new Amount(currencyName, productionPerCycle).asString(), cycleTime);
                 }
-                double production = productionPerCycle / cycleTime;
+                production = productionPerCycle / cycleTime;
                 String productionFormatString = (generatorState.automated()) ? "%s" : "(%s)";
                 productionString = String.format(productionFormatString,
                         new Amount(currencyName, production).asString());
             } else {
                 totalPerCycleString = "";
-                double production = baseProduction * efficiency * count;
+                production = baseProduction * efficiency * count;
                 productionString = String.format("%s", new Amount(currencyName, production).asString());
             }
+            String portionString = String.format("%.2f %%", 100 * production / totalProduction.get(currencyName));
             generatorProductions.add(
                     new GeneratorProduction(generator.getName(), count, generator.getCost(count).asString(),
                             generator.getBaseProduction().multiplyBy(efficiency).asString(),
-                            totalPerCycleString, productionString, increaseString));
+                            totalPerCycleString, productionString, portionString, increaseString));
         }
         return generatorProductions;
     }

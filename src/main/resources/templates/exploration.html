@@ -21,16 +21,18 @@
                 <th>Production of Each</th>
                 <th th:if="${timedGenerators}">Total Production per Cycle</th>
                 <th>Total Production</th>
+                <th>Portion</th>
                 <th>Increase</th>
             </tr>
             <tr th:each="generatorProduction : ${generatorProductions}">
                 <td th:text="${generatorProduction.name}"/>
-                <td th:text="${generatorProduction.count}"/>
-                <td th:text="${generatorProduction.next}"/>
-                <td th:text="${generatorProduction.each}"/>
-                <td th:if="${timedGenerators}" th:text="${generatorProduction.totalPerCycle}"/>
-                <td th:text="${generatorProduction.total}"/>
-                <td th:text="${generatorProduction.increase}"/>
+                <td class="alnright" th:text="${generatorProduction.count}"/>
+                <td class="alnright" th:text="${generatorProduction.next}"/>
+                <td class="alnright" th:text="${generatorProduction.each}"/>
+                <td class="alnright" th:if="${timedGenerators}" th:text="${generatorProduction.totalPerCycle}"/>
+                <td class="alnright" th:text="${generatorProduction.total}"/>
+                <td class="alnright" th:text="${generatorProduction.portion}"/>
+                <td class="alnright" th:text="${generatorProduction.increase}"/>
             </tr>
         </table>
         <h2>Total Production</h2>

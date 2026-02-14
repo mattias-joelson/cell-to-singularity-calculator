@@ -75,7 +75,7 @@ public class ImprovementCalculator {
     private static void multiSingleCurrencyApproach(
             Garden garden, GardenState state, CurrencyMapping mapping, List<String> actions) {
 
-        for (int i = 0; i < 30; i += 1) {
+        for (int i = 0; i < 20; i += 1) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             ImprovementDescription improvementDescription = calculateImprovement(garden, state, mapping);
             System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
