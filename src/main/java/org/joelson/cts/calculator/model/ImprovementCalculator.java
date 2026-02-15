@@ -5,8 +5,10 @@ import org.joelson.cts.calculator.util.DurationToolkit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static org.joelson.cts.calculator.util.DurationToolkit.durationString;
 
@@ -17,23 +19,29 @@ public class ImprovementCalculator {
     }
 
     public static void singleCurrencyApproach(Garden garden, GardenState state, List<String> actions) {
-        addUnlocked(garden, state, actions);
+        Set<String> unlocked = new HashSet<>();
+        addUnlocked(garden, state, actions, unlocked);
+        actions.add("");
 
         String currency = garden.getCurrencies().getFirst();
         CurrencyMapping mapping = new CurrencyMapping(currency, currency);
 
-        multiSingleCurrencyApproach(garden, state.copy(), mapping, 100, 20, actions);
+        multiSingleCurrencyApproach(garden, state.copy(), mapping, 100, 20, actions, unlocked);
     }
 
     public static void multiCurrencyApproach(Garden garden, GardenState state, List<String> actions) {
-        addUnlocked(garden, state, actions);
+        Set<String> unlocked = new HashSet<>();
+        addUnlocked(garden, state, actions, unlocked);
+        actions.add("");
 
         List<String> currencies = garden.getCurrencies();
         for (String fromCurrency : currencies) {
             for (String toCurrency : currencies) {
                 CurrencyMapping mapping = new CurrencyMapping(fromCurrency, toCurrency);
                 List<String> mappingActions = new ArrayList<>();
-                multiSingleCurrencyApproach(garden, state.copy(), mapping, 20, 15, mappingActions);
+                Set<String> mappingUnlocked = new HashSet<>();
+                mappingUnlocked.addAll(unlocked);
+                multiSingleCurrencyApproach(garden, state.copy(), mapping, 20, 15, mappingActions, mappingUnlocked);
                 if (!mappingActions.isEmpty()) {
                     actions.add(String.format(">>> from %s to %s <<<", fromCurrency, toCurrency));
                     actions.addAll(mappingActions);
@@ -46,7 +54,8 @@ public class ImprovementCalculator {
     }
 
     private static void multiSingleCurrencyApproach(
-            Garden garden, GardenState state, CurrencyMapping mapping, int rows, int rowsBreak, List<String> actions) {
+            Garden garden, GardenState state, CurrencyMapping mapping, int rows, int unlockedRows, List<String> actions,
+            Set<String> unlocked) {
 
         for (int i = 0; i < rows; i += 1) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
@@ -62,11 +71,9 @@ public class ImprovementCalculator {
                 actions.add(String.format("(%d) Generator %s: %d -> %d : %s",
                         i + 1, generator.getName(), count, count + 1, improvementDescription.description()));
                 state.setGeneratorCount(generator, count + 1);
-                if (count == 0) {
-                    addUnlocked(garden, state, actions);
-                    if (i >= rowsBreak) {
-                        break;
-                    }
+                addUnlocked(garden, state, actions, unlocked);
+                if (count == 0 && i >= unlockedRows) {
+                    break;
                 }
             } else if (improvement instanceof UpgradeImprovement upgradeImprovement) {
                 Upgrade upgrade = upgradeImprovement.upgrade();
@@ -75,8 +82,8 @@ public class ImprovementCalculator {
                         i + 1, upgrade.getName(), effect.generator().getName(), improvementDescription.description()));
                 state.setUpgradeBought(upgrade);
                 state.updateGeneratorStates(garden);
-                addUnlocked(garden, state, actions);
-                if (i >= rowsBreak) {
+                addUnlocked(garden, state, actions, unlocked);
+                if (i >= unlockedRows) {
                     break;
                 }
             } else {
@@ -85,16 +92,17 @@ public class ImprovementCalculator {
         }
     }
 
-    private static void addUnlocked(Garden garden, GardenState state, List<String> actions) {
+    private static void addUnlocked(Garden garden, GardenState state, List<String> actions, Set<String> unlocked) {
         for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
-            if (state.getGeneratorState(generator).count() == 0) {
+            if (state.getGeneratorState(generator).count() == 0 && !unlocked.contains(generator.getName())) {
                 actions.add(String.format(" *** unlocked generator %s: base cost %s, inc %.2f, base production %s",
                         generator.getName(), generator.getBaseCost().asString(), generator.getCompoundingCost(),
                         generator.getBaseProduction().multiplyBy(state.getBoost()).asString()));
+                unlocked.add(generator.getName());
             }
         }
         for (Upgrade upgrade : garden.getUnlockedUpgrades(state)) {
-            if (!state.isUpgradeBought(upgrade)) {
+            if (!state.isUpgradeBought(upgrade) && !unlocked.contains(upgrade.getName())) {
                 for (UpgradeEffect effect : upgrade.getEffects()) {
                     String efficiency = (effect.efficiency() >= 1_000_000) ? String.format("%.2e",
                             effect.efficiency()) : String.format("%.2f", effect.efficiency());
@@ -112,6 +120,7 @@ public class ImprovementCalculator {
                                 upgrade.getCost().asString()));
                     }
                 }
+                unlocked.add(upgrade.getName());
             }
         }
     }
