@@ -16,44 +16,13 @@ public class ImprovementCalculator {
         throw new InstantiationException("Should not be instantiated!");
     }
 
-    public static void singleCurrencyApproach(Garden garden, GardenState gardenState, List<String> actions) {
-        GardenState state = gardenState.copy();
+    public static void singleCurrencyApproach(Garden garden, GardenState state, List<String> actions) {
+        addUnlocked(garden, state, actions);
+
         String currency = garden.getCurrencies().getFirst();
         CurrencyMapping mapping = new CurrencyMapping(currency, currency);
 
-        addUnlocked(garden, state, actions);
-        for (int i = 0; i < 100; i += 1) {
-            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            ImprovementDescription improvementDescription = calculateImprovement(garden, state).get(mapping);
-            System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-            System.out.println();
-            Improvement improvement = improvementDescription.improvement();
-            if (improvement instanceof GeneratorImprovement(Generator generator, GeneratorState generatorState)) {
-                int count = generatorState.count();
-                actions.add(String.format("(%d) Generator %s: %d -> %d : %s",
-                        i + 1, generator.getName(), count, count + 1, improvementDescription.description()));
-                state.setGeneratorCount(generator, count + 1);
-                if (count == 0) {
-                    addUnlocked(garden, state, actions);
-                    if (i >= 20) {
-                        break;
-                    }
-                }
-            } else if (improvement instanceof UpgradeImprovement upgradeImprovement) {
-                Upgrade upgrade = upgradeImprovement.upgrade();
-                UpgradeEffect effect = upgrade.getEffects().getFirst();
-                actions.add(String.format("(%d) Upgrade %s (%s) : %s",
-                        i + 1, upgrade.getName(), effect.generator().getName(), improvementDescription.description()));
-                state.setUpgradeBought(upgrade);
-                state.updateGeneratorStates(garden);
-                addUnlocked(garden, state, actions);
-                if (i >= 20) {
-                    break;
-                }
-            } else {
-                throw new NullPointerException();
-            }
-        }
+        multiSingleCurrencyApproach(garden, state.copy(), mapping, 100, 20, actions);
     }
 
     public static void multiCurrencyApproach(Garden garden, GardenState state, List<String> actions) {
@@ -64,7 +33,7 @@ public class ImprovementCalculator {
             for (String toCurrency : currencies) {
                 CurrencyMapping mapping = new CurrencyMapping(fromCurrency, toCurrency);
                 actions.add(String.format(">>> from %s to %s <<<", fromCurrency, toCurrency));
-                multiSingleCurrencyApproach(garden, state.copy(), mapping, actions);
+                multiSingleCurrencyApproach(garden, state.copy(), mapping, 20, 15, actions);
                 actions.add(String.format(">>> from %s to %s <<<", fromCurrency, toCurrency));
                 actions.add("");
             }
@@ -73,9 +42,9 @@ public class ImprovementCalculator {
     }
 
     private static void multiSingleCurrencyApproach(
-            Garden garden, GardenState state, CurrencyMapping mapping, List<String> actions) {
+            Garden garden, GardenState state, CurrencyMapping mapping, int rows, int rowsBreak, List<String> actions) {
 
-        for (int i = 0; i < 20; i += 1) {
+        for (int i = 0; i < rows; i += 1) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             ImprovementDescription improvementDescription = calculateImprovement(garden, state, mapping);
             System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
@@ -91,7 +60,7 @@ public class ImprovementCalculator {
                 state.setGeneratorCount(generator, count + 1);
                 if (count == 0) {
                     addUnlocked(garden, state, actions);
-                    if (i >= 15) {
+                    if (i >= rowsBreak) {
                         break;
                     }
                 }
@@ -103,7 +72,7 @@ public class ImprovementCalculator {
                 state.setUpgradeBought(upgrade);
                 state.updateGeneratorStates(garden);
                 addUnlocked(garden, state, actions);
-                if (i >= 15) {
+                if (i >= rowsBreak) {
                     break;
                 }
             } else {
@@ -183,33 +152,6 @@ public class ImprovementCalculator {
         }
         System.out.println();
         return totalProduction;
-    }
-
-    public static Map<CurrencyMapping, ImprovementDescription> calculateImprovement(Garden garden, GardenState state) {
-        Map<String, Double> totalProduction = calculateProduction(garden, state);
-
-        Map<CurrencyMapping, List<Improvement>> improvements = new HashMap<>();
-        for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
-            improvements.computeIfAbsent(generator.getMapping(), _ -> new ArrayList<>()).add(
-                    GeneratorImprovement.create(generator, state));
-        }
-        for (Upgrade upgrade : garden.getUnlockedUpgrades(state)) {
-            if (!state.isUpgradeBought(upgrade)) {
-                Improvement improvement = UpgradeImprovement.create(upgrade, state);
-                improvements.computeIfAbsent(improvement.getMapping(), _ -> new ArrayList<>()).add(improvement);
-            }
-        }
-
-        Map<CurrencyMapping, ImprovementDescription> improvementDescriptionMap = new HashMap<>();
-        for (Map.Entry<CurrencyMapping, List<Improvement>> improvementsEntry : improvements.entrySet()) {
-            ImprovementDescription improvementDescription =
-                    calculateMappingImprovement(improvementsEntry, totalProduction, improvements);
-            if (improvementDescription != null) {
-                improvementDescriptionMap.put(improvementsEntry.getKey(), improvementDescription);
-            }
-            System.out.println();
-        }
-        return improvementDescriptionMap;
     }
 
     private static ImprovementDescription calculateImprovement(

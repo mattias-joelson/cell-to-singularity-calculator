@@ -1,16 +1,9 @@
 import org.joelson.cts.calculator.model.Amount;
-import org.joelson.cts.calculator.model.CurrencyMapping;
 import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
-import org.joelson.cts.calculator.model.GeneratorImprovement;
-import org.joelson.cts.calculator.model.GeneratorState;
-import org.joelson.cts.calculator.model.Improvement;
 import org.joelson.cts.calculator.model.ImprovementCalculator;
-import org.joelson.cts.calculator.model.ImprovementDescription;
-import org.joelson.cts.calculator.model.Upgrade;
 import org.joelson.cts.calculator.model.UpgradeEffect;
-import org.joelson.cts.calculator.model.UpgradeImprovement;
 import org.joelson.cts.calculator.model.builder.GardenBuilder;
 
 private static final Garden GARDEN = new Garden("A Coevolution Love Story");
@@ -248,75 +241,7 @@ void main() {
     setGeneratorCount(primitiveFlowers, 0);
     setGeneratorCount(flowers, 1);
 
-    GardenState state = STATE.copy();
-    CurrencyMapping mapping = new CurrencyMapping(CURRENCY, CURRENCY);
     List<String> actions = new ArrayList<>();
-    printUnlocked(GARDEN, state, actions);
-    for (int i = 0; i < 100; i += 1) {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        ImprovementDescription improvementDescription = ImprovementCalculator.calculateImprovement(GARDEN, state)
-                .get(mapping);
-        Improvement improvement = improvementDescription.improvement();
-        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-        System.out.println();
-        if (improvement instanceof GeneratorImprovement(Generator generator, GeneratorState generatorState)) {
-            int count = generatorState.count();
-            actions.add(String.format("(%d) Generator %s: %d -> %d : %s", i + 1, generator.getName(), count, count + 1,
-                    improvementDescription.description()));
-            state.setGeneratorCount(generator, count + 1);
-            if (count == 0) {
-                printUnlocked(GARDEN, state, actions);
-                if (i >= 20) {
-                    break;
-                }
-            }
-        } else if (improvement instanceof UpgradeImprovement upgradeImprovement) {
-            Upgrade upgrade = upgradeImprovement.upgrade();
-            StringBuilder improvedGenerators = new StringBuilder();
-            for (UpgradeEffect effect : upgrade.getEffects()) {
-                if (!improvedGenerators.isEmpty()) {
-                    improvedGenerators.append(", ");
-                }
-                improvedGenerators.append(effect.generator().getName());
-            }
-            actions.add(String.format("(%d) Upgrade %s (%s) : %s", i + 1, upgrade.getName(), improvedGenerators,
-                    improvementDescription.description()));
-            state.setUpgradeBought(upgrade);
-            state.updateGeneratorStates(GARDEN);
-            printUnlocked(GARDEN, state, actions);
-            if (i >= 20) {
-                break;
-            }
-        } else {
-            throw new NullPointerException();
-        }
-    }
-
+    ImprovementCalculator.singleCurrencyApproach(GARDEN, STATE, actions);
     actions.forEach(System.out::println);
-}
-
-private static void printUnlocked(Garden garden, GardenState state, List<String> actions) {
-    for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
-        if (state.getGeneratorState(generator).count() == 0) {
-            if (generator.isTimed()) {
-                actions.add(String.format(" *** unlocked generator %s: base cost %s, inc %.2f, base production %s, "
-                                + "base charge time %,.2f",
-                        generator.getName(), generator.getBaseCost().asString(), generator.getCompoundingCost(),
-                        generator.getBaseProduction().asString(), generator.getBaseChargeTime() / STATE.getBoost()));
-            } else {
-                actions.add(String.format(" *** unlocked generator %s: base cost %s, inc %.2f, base production %s",
-                        generator.getName(), generator.getBaseCost().asString(), generator.getCompoundingCost(),
-                        generator.getBaseProduction().multiplyBy(STATE.getBoost()).asString()));
-            }
-        }
-    }
-    for (Upgrade upgrade : garden.getUnlockedUpgrades(state)) {
-        if (!state.isUpgradeBought(upgrade)) {
-            for (UpgradeEffect effect : upgrade.getEffects()) {
-                actions.add(String.format(" *** unlocked upgrade %s: %s efficiency %.2f, speed %.2f, cost %s",
-                        upgrade.getName(), effect.generator().getName(), effect.efficiency(), effect.speed(),
-                        upgrade.getCost().asString()));
-            }
-        }
-    }
 }
