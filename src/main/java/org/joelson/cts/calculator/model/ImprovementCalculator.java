@@ -32,10 +32,14 @@ public class ImprovementCalculator {
         for (String fromCurrency : currencies) {
             for (String toCurrency : currencies) {
                 CurrencyMapping mapping = new CurrencyMapping(fromCurrency, toCurrency);
-                actions.add(String.format(">>> from %s to %s <<<", fromCurrency, toCurrency));
-                multiSingleCurrencyApproach(garden, state.copy(), mapping, 20, 15, actions);
-                actions.add(String.format(">>> from %s to %s <<<", fromCurrency, toCurrency));
-                actions.add("");
+                List<String> mappingActions = new ArrayList<>();
+                multiSingleCurrencyApproach(garden, state.copy(), mapping, 20, 15, mappingActions);
+                if (!mappingActions.isEmpty()) {
+                    actions.add(String.format(">>> from %s to %s <<<", fromCurrency, toCurrency));
+                    actions.addAll(mappingActions);
+                    actions.add(String.format(">>> from %s to %s <<<", fromCurrency, toCurrency));
+                    actions.add("");
+                }
             }
         }
 
