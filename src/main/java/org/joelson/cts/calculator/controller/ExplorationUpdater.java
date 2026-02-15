@@ -1,6 +1,7 @@
 package org.joelson.cts.calculator.controller;
 
 import org.joelson.cts.calculator.model.Amount;
+import org.joelson.cts.calculator.model.CurrencyMapping;
 import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
@@ -16,6 +17,7 @@ import org.joelson.cts.calculator.util.DurationToolkit;
 import org.springframework.ui.Model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -160,6 +162,9 @@ class ExplorationUpdater {
 
         List<GeneratorModel> generatorModels = calculateModels(garden, state);
         model.addAttribute("generatorModels", generatorModels);
+
+        List<MappingIncrementsModel> mappingIncrementsModels = calculateMappingIncrements(garden, state);
+        model.addAttribute("mappingIncrementsModels", mappingIncrementsModels);
 
         List<String> actions = new ArrayList<>();
         if (multiCurrency) {
@@ -405,5 +410,53 @@ class ExplorationUpdater {
             names.add(unlockable.getName());
         }
         return names;
+    }
+
+    private record MappingIncrementsModel(String mapping, List<IncrementModel> incrementModels) {
+
+    }
+
+    private record IncrementModel(String name, String cost, String yield, String increase, String time) {
+
+    }
+
+    private List<MappingIncrementsModel> calculateMappingIncrements(Garden garden, GardenState state) {
+
+        List<MappingIncrementsModel> mappingIncrementsModels = new ArrayList<>();
+        Map<CurrencyMapping, List<Improvement>> mappingImprovements = ImprovementCalculator.availableImprovements(
+                garden, state);
+        Map<String, Double> totalProduction = ImprovementCalculator.calculateProduction(garden, state);
+        for (String fromCurrency : garden.getCurrencies()) {
+            for (String toCurrency : garden.getCurrencies()) {
+                CurrencyMapping mapping = new CurrencyMapping(fromCurrency, toCurrency);
+                if (!mappingImprovements.containsKey(mapping)) {
+                    continue;
+                }
+                List<Improvement> improvements = mappingImprovements.get(mapping);
+                List<IncrementModel> incrementModels = new ArrayList<>();
+                improvements.sort(Comparator.comparing(Improvement::getRatio));
+                for (Improvement improvement : improvements.reversed()) {
+                    Amount cost = improvement.getCost();
+                    Double totProd = totalProduction.get(cost.currency());
+                    String timeString;
+                    if (totProd == null) {
+                        timeString = "Inf";
+                    } else {
+                        double time = cost.amount() / totProd;
+                        timeString = DurationToolkit.durationString(time);
+                    }
+                    String type = (improvement instanceof GeneratorImprovement) ? "(G) " : "(U) ";
+                    IncrementModel incrementModel = new IncrementModel(type + improvement.getName(),
+                            cost.asString(), improvement.getIncrease().asString(),
+                            String.format("%.7f", improvement.getRatio()), timeString);
+                    incrementModels.add(incrementModel);
+                }
+                mappingIncrementsModels.add(
+                        new MappingIncrementsModel(String.format("From %s to %s", mapping.from(), mapping.to()),
+                                incrementModels));
+            }
+        }
+
+        return mappingIncrementsModels;
     }
 }

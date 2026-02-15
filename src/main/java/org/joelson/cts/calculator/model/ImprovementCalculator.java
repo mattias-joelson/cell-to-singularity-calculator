@@ -170,8 +170,18 @@ public class ImprovementCalculator {
             Garden garden, GardenState state, CurrencyMapping mapping) {
         Map<String, Double> totalProduction = calculateProduction(garden, state);
 
+        Map<CurrencyMapping, List<Improvement>> improvements = availableImprovements(garden, state);
+
+        List<Improvement> improvementList = improvements.get(mapping);
+        if (improvementList == null) {
+            return null;
+        }
+        return calculateMappingImprovement(Map.entry(mapping, improvementList), totalProduction, improvements);
+    }
+
+    public static Map<CurrencyMapping, List<Improvement>> availableImprovements(Garden garden, GardenState state) {
         Map<CurrencyMapping, List<Improvement>> improvements = new HashMap<>();
-        for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
+        for (Generator generator : garden.getUnlockedGenerators(state)) {
             improvements.computeIfAbsent(generator.getMapping(), _ -> new ArrayList<>()).add(
                     GeneratorImprovement.create(generator, state));
         }
@@ -181,12 +191,7 @@ public class ImprovementCalculator {
                 improvements.computeIfAbsent(improvement.getMapping(), _ -> new ArrayList<>()).add(improvement);
             }
         }
-
-        List<Improvement> improvementList = improvements.get(mapping);
-        if (improvementList == null) {
-            return null;
-        }
-        return calculateMappingImprovement(Map.entry(mapping, improvementList), totalProduction, improvements);
+        return improvements;
     }
 
     private static ImprovementDescription calculateMappingImprovement(

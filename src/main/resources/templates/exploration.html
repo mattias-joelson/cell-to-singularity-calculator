@@ -85,6 +85,25 @@
         </table>
     </div>
     <div class="itemActions">
+        <th:block th:each="mappingIncrementsModel : ${mappingIncrementsModels}">
+            <h2 th:text="${mappingIncrementsModel.mapping}"/>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Cost</th>
+                    <th>Yield</th>
+                    <th>Increase</th>
+                    <th>Time</th>
+                </tr>
+                <tr th:each="incrementModel : ${mappingIncrementsModel.incrementModels}">
+                    <td th:text="${incrementModel.name}"/>
+                    <td class="alnright" th:text="${incrementModel.cost}"/>
+                    <td class="alnright" th:text="${incrementModel.yield}"/>
+                    <td class="alnright" th:text="${incrementModel.increase}"/>
+                    <td class="alnright" th:text="${incrementModel.time}"/>
+                </tr>
+            </table>
+        </th:block>
         <h2>Actions</h2>
         <table>
             <tr th:each="action : ${actions}">
