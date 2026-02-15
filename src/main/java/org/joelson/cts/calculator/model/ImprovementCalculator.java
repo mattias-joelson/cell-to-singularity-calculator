@@ -39,9 +39,8 @@ public class ImprovementCalculator {
             for (String toCurrency : currencies) {
                 CurrencyMapping mapping = new CurrencyMapping(fromCurrency, toCurrency);
                 List<String> mappingActions = new ArrayList<>();
-                Set<String> mappingUnlocked = new HashSet<>();
-                mappingUnlocked.addAll(unlocked);
-                multiSingleCurrencyApproach(garden, state.copy(), mapping, 20, 15, mappingActions, mappingUnlocked);
+                multiSingleCurrencyApproach(garden, state.copy(), mapping, 20, 15, mappingActions,
+                        new HashSet<>(unlocked));
                 if (!mappingActions.isEmpty()) {
                     actions.add(String.format(">>> from %s to %s <<<", fromCurrency, toCurrency));
                     actions.addAll(mappingActions);
