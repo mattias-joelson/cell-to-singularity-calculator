@@ -1,16 +1,8 @@
 import org.joelson.cts.calculator.model.Amount;
-import org.joelson.cts.calculator.model.CurrencyMapping;
 import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
-import org.joelson.cts.calculator.model.GeneratorImprovement;
-import org.joelson.cts.calculator.model.GeneratorState;
-import org.joelson.cts.calculator.model.Improvement;
 import org.joelson.cts.calculator.model.ImprovementCalculator;
-import org.joelson.cts.calculator.model.ImprovementDescription;
-import org.joelson.cts.calculator.model.Upgrade;
-import org.joelson.cts.calculator.model.UpgradeEffect;
-import org.joelson.cts.calculator.model.UpgradeImprovement;
 import org.joelson.cts.calculator.model.builder.GardenBuilder;
 
 private static final Garden GARDEN = new Garden("The Price of Thrust");
@@ -362,105 +354,7 @@ void main() {
     }
     STATE.updateGeneratorStates(GARDEN);
 
-    GardenState state = STATE.copy();
     List<String> actions = new ArrayList<>();
-    printUnlocked(GARDEN, state, actions);
-    candidateApproach(state, actions);
-
+    ImprovementCalculator.multiCurrencyApproach(GARDEN, STATE, actions);
     actions.forEach(System.out::println);
-}
-
-private static void candidateApproach(GardenState state, List<String> actions) {
-    boolean possibleUnlock = false;
-    for (int i = 0; i < 20 || !possibleUnlock; i += 1) {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        Map<CurrencyMapping, ImprovementDescription> improvementDescriptions =
-                ImprovementCalculator.calculateImprovement(GARDEN, state);
-        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-        System.out.println();
-
-        possibleUnlock = false;
-        Map<Improvement, Set<Map.Entry<CurrencyMapping, ImprovementDescription>>> improvementMap = new HashMap<>();
-        for (Map.Entry<CurrencyMapping, ImprovementDescription> entry : improvementDescriptions.entrySet()) {
-            Improvement improvement = entry.getValue().improvement();
-            Set<Map.Entry<CurrencyMapping, ImprovementDescription>> set = improvementMap.get(improvement);
-            if (set == null) {
-                set = new HashSet<>();
-                set.add(entry);
-                improvementMap.put(improvement, set);
-            } else {
-                set.add(entry);
-            }
-        }
-
-        for (String fromCurrency : CURRENCIES) {
-            for (String toCurrency : CURRENCIES) {
-                CurrencyMapping mapping = new CurrencyMapping(fromCurrency, toCurrency);
-                for (Improvement improvement : improvementMap.keySet()) {
-                    if (improvement.getMapping().equals(mapping)) {
-                        actions.add(String.format("%s : %s", mapping.asString(), improvement.getName()));
-                    }
-                }
-            }
-        }
-
-        for (Map.Entry<Improvement, Set<Map.Entry<CurrencyMapping, ImprovementDescription>>> entry :
-                improvementMap.entrySet()) {
-            Improvement improvement = entry.getKey();
-            if (improvement instanceof GeneratorImprovement(Generator generator, GeneratorState generatorState)) {
-                int count = generatorState.count();
-                for (Map.Entry<CurrencyMapping, ImprovementDescription> currencyEntry : entry.getValue()) {
-                    CurrencyMapping currencyMapping = currencyEntry.getKey();
-                    ImprovementDescription improvementDescription = currencyEntry.getValue();
-                    actions.add(String.format("(%d - %s) Generator %s: %d -> %d : %s", i + 1,
-                            currencyMapping.asString(), generator.getName(), count, count + 1,
-                            improvementDescription.description()));
-
-                }
-                state.setGeneratorCount(generator, count + 1);
-                if (count == 0) {
-                    printUnlocked(GARDEN, state, actions);
-                    possibleUnlock = true;
-                }
-            } else if (improvement instanceof UpgradeImprovement upgradeImprovement) {
-                Upgrade upgrade = upgradeImprovement.upgrade();
-                for (Map.Entry<CurrencyMapping, ImprovementDescription> currencyEntry : entry.getValue()) {
-                    UpgradeEffect effect = upgrade.getEffects().getFirst();
-                    CurrencyMapping currencyMapping = currencyEntry.getKey();
-                    ImprovementDescription improvementDescription = currencyEntry.getValue();
-                    actions.add(String.format("(%d - %s) Upgrade %s (%s) : %s", i + 1, currencyMapping.asString(),
-                            upgrade.getName(), effect.generator().getName(), improvementDescription.description()));
-                }
-                state.setUpgradeBought(upgrade);
-                state.updateGeneratorStates(GARDEN);
-                printUnlocked(GARDEN, state, actions);
-                possibleUnlock = true;
-            } else {
-                throw new NullPointerException();
-            }
-            actions.add("");
-        }
-        if (improvementMap.size() > 1) {
-            break;
-        }
-    }
-}
-
-private static void printUnlocked(Garden garden, GardenState state, List<String> actions) {
-    for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
-        if (state.getGeneratorState(generator).count() == 0) {
-            actions.add(String.format(" *** unlocked generator %s: base cost %s, inc %.2f, base production %s",
-                    generator.getName(), generator.getBaseCost().asString(), generator.getCompoundingCost(),
-                    generator.getBaseProduction().multiplyBy(STATE.getBoost()).asString()));
-        }
-    }
-    for (Upgrade upgrade : garden.getUnlockedUpgrades(state)) {
-        if (!state.isUpgradeBought(upgrade)) {
-            for (UpgradeEffect effect : upgrade.getEffects()) {
-                actions.add(String.format(" *** unlocked upgrade %s: %s efficiency %.2f, cost %s",
-                        upgrade.getName(), effect.generator().getName(), effect.efficiency(),
-                        upgrade.getCost().asString()));
-            }
-        }
-    }
 }

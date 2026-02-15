@@ -21,16 +21,18 @@
                 <th>Production of Each</th>
                 <th th:if="${timedGenerators}">Total Production per Cycle</th>
                 <th>Total Production</th>
+                <th>Portion</th>
                 <th>Increase</th>
             </tr>
             <tr th:each="generatorProduction : ${generatorProductions}">
                 <td th:text="${generatorProduction.name}"/>
-                <td th:text="${generatorProduction.count}"/>
-                <td th:text="${generatorProduction.next}"/>
-                <td th:text="${generatorProduction.each}"/>
-                <td th:if="${timedGenerators}" th:text="${generatorProduction.totalPerCycle}"/>
-                <td th:text="${generatorProduction.total}"/>
-                <td th:text="${generatorProduction.increase}"/>
+                <td class="alnright" th:text="${generatorProduction.count}"/>
+                <td class="alnright" th:text="${generatorProduction.next}"/>
+                <td class="alnright" th:text="${generatorProduction.each}"/>
+                <td class="alnright" th:if="${timedGenerators}" th:text="${generatorProduction.totalPerCycle}"/>
+                <td class="alnright" th:text="${generatorProduction.total}"/>
+                <td class="alnright" th:text="${generatorProduction.portion}"/>
+                <td class="alnright" th:text="${generatorProduction.increase}"/>
             </tr>
         </table>
         <h2>Total Production</h2>
@@ -49,9 +51,9 @@
             </tr>
             <tr th:each="generatorCost : ${generatorCosts}">
                 <td th:text="${generatorCost.label}"/>
-                <td th:text="${generatorCost.cost}"/>
-                <td th:text="${generatorCost.ratio}"/>
-                <td th:text="${generatorCost.next}"/>
+                <td class="alnright" th:text="${generatorCost.cost}"/>
+                <td class="alnright" th:text="${generatorCost.ratio}"/>
+                <td class="alnright" th:text="${generatorCost.next}"/>
             </tr>
         </table>
         <h2>Generators</h2>
@@ -83,6 +85,25 @@
         </table>
     </div>
     <div class="itemActions">
+        <th:block th:each="mappingIncrementsModel : ${mappingIncrementsModels}">
+            <h2 th:text="${mappingIncrementsModel.mapping}"/>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Cost</th>
+                    <th>Yield</th>
+                    <th>Increase</th>
+                    <th>Time</th>
+                </tr>
+                <tr th:each="incrementModel : ${mappingIncrementsModel.incrementModels}">
+                    <td th:text="${incrementModel.name}"/>
+                    <td class="alnright" th:text="${incrementModel.cost}"/>
+                    <td class="alnright" th:text="${incrementModel.yield}"/>
+                    <td class="alnright" th:text="${incrementModel.increase}"/>
+                    <td class="alnright" th:text="${incrementModel.time}"/>
+                </tr>
+            </table>
+        </th:block>
         <h2>Actions</h2>
         <table>
             <tr th:each="action : ${actions}">

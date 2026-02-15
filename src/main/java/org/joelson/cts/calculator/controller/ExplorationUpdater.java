@@ -1,6 +1,7 @@
 package org.joelson.cts.calculator.controller;
 
 import org.joelson.cts.calculator.model.Amount;
+import org.joelson.cts.calculator.model.CurrencyMapping;
 import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
@@ -16,6 +17,7 @@ import org.joelson.cts.calculator.util.DurationToolkit;
 import org.springframework.ui.Model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -161,6 +163,9 @@ class ExplorationUpdater {
         List<GeneratorModel> generatorModels = calculateModels(garden, state);
         model.addAttribute("generatorModels", generatorModels);
 
+        List<MappingIncrementsModel> mappingIncrementsModels = calculateMappingIncrements(garden, state);
+        model.addAttribute("mappingIncrementsModels", mappingIncrementsModels);
+
         List<String> actions = new ArrayList<>();
         if (multiCurrency) {
             ImprovementCalculator.multiCurrencyApproach(garden, state.copy(), actions);
@@ -173,11 +178,12 @@ class ExplorationUpdater {
     }
 
     public record GeneratorProduction(String name, int count, String next, String each, String totalPerCycle,
-            String total, String increase) {
+            String total, String portion, String increase) {
 
     }
 
     public static List<GeneratorProduction> calculateGeneratorProduction(Garden garden, GardenState state) {
+        Map<String, Double> totalProduction = ImprovementCalculator.calculateProduction(garden, state);
         List<GeneratorProduction> generatorProductions = new ArrayList<>();
         for (Generator generator : garden.getUnlockedGenerators(state).reversed()) {
             GeneratorState generatorState = state.getGeneratorState(generator);
@@ -186,6 +192,7 @@ class ExplorationUpdater {
             double baseProduction = generator.getBaseProduction().amount();
             float efficiency = generatorState.efficiency();
             String totalPerCycleString;
+            double production;
             String productionString;
             GeneratorImprovement improvement = new GeneratorImprovement(generator, generatorState);
             String increaseString = String.format("%.7f", improvement.getRatio());
@@ -201,19 +208,20 @@ class ExplorationUpdater {
                     totalPerCycleString = String.format("%s in %.3f s",
                             new Amount(currencyName, productionPerCycle).asString(), cycleTime);
                 }
-                double production = productionPerCycle / cycleTime;
+                production = productionPerCycle / cycleTime;
                 String productionFormatString = (generatorState.automated()) ? "%s" : "(%s)";
                 productionString = String.format(productionFormatString,
                         new Amount(currencyName, production).asString());
             } else {
                 totalPerCycleString = "";
-                double production = baseProduction * efficiency * count;
+                production = baseProduction * efficiency * count;
                 productionString = String.format("%s", new Amount(currencyName, production).asString());
             }
+            String portionString = String.format("%.2f %%", 100 * production / totalProduction.get(currencyName));
             generatorProductions.add(
                     new GeneratorProduction(generator.getName(), count, generator.getCost(count).asString(),
                             generator.getBaseProduction().multiplyBy(efficiency).asString(),
-                            totalPerCycleString, productionString, increaseString));
+                            totalPerCycleString, productionString, portionString, increaseString));
         }
         return generatorProductions;
     }
@@ -240,6 +248,9 @@ class ExplorationUpdater {
 
         for (Generator generator : garden.getGenerators()) {
             GeneratorState generatorState = state.getGeneratorState(generator);
+            if (generatorState.count() == 0) {
+                continue;
+            }
             Amount cost = calculateGeneratorCost(generator, generatorState);
             generatorCostMap.put(generator.getName(), cost);
             String currency = generator.getBaseCost().currency();
@@ -253,6 +264,9 @@ class ExplorationUpdater {
 
         List<GeneratorCost> generatorCosts = new ArrayList<>();
         for (Generator generator : garden.getGenerators().reversed()) {
+            if (!generatorCostMap.containsKey(generator.getName())) {
+                continue;
+            }
             Amount cost = generatorCostMap.get(generator.getName());
             Amount total = totalCostMap.get(generator.getBaseCost().currency());
             generatorCosts.add(new GeneratorCost(generator.getName(), cost.asString(),
@@ -396,5 +410,53 @@ class ExplorationUpdater {
             names.add(unlockable.getName());
         }
         return names;
+    }
+
+    private record MappingIncrementsModel(String mapping, List<IncrementModel> incrementModels) {
+
+    }
+
+    private record IncrementModel(String name, String cost, String yield, String increase, String time) {
+
+    }
+
+    private List<MappingIncrementsModel> calculateMappingIncrements(Garden garden, GardenState state) {
+
+        List<MappingIncrementsModel> mappingIncrementsModels = new ArrayList<>();
+        Map<CurrencyMapping, List<Improvement>> mappingImprovements = ImprovementCalculator.availableImprovements(
+                garden, state);
+        Map<String, Double> totalProduction = ImprovementCalculator.calculateProduction(garden, state);
+        for (String fromCurrency : garden.getCurrencies()) {
+            for (String toCurrency : garden.getCurrencies()) {
+                CurrencyMapping mapping = new CurrencyMapping(fromCurrency, toCurrency);
+                if (!mappingImprovements.containsKey(mapping)) {
+                    continue;
+                }
+                List<Improvement> improvements = mappingImprovements.get(mapping);
+                List<IncrementModel> incrementModels = new ArrayList<>();
+                improvements.sort(Comparator.comparing(Improvement::getRatio));
+                for (Improvement improvement : improvements.reversed()) {
+                    Amount cost = improvement.getCost();
+                    Double totProd = totalProduction.get(cost.currency());
+                    String timeString;
+                    if (totProd == null) {
+                        timeString = "Inf";
+                    } else {
+                        double time = cost.amount() / totProd;
+                        timeString = DurationToolkit.durationString(time);
+                    }
+                    String type = (improvement instanceof GeneratorImprovement) ? "(G) " : "(U) ";
+                    IncrementModel incrementModel = new IncrementModel(type + improvement.getName(),
+                            cost.asString(), improvement.getIncrease().asString(),
+                            String.format("%.7f", improvement.getRatio()), timeString);
+                    incrementModels.add(incrementModel);
+                }
+                mappingIncrementsModels.add(
+                        new MappingIncrementsModel(String.format("From %s to %s", mapping.from(), mapping.to()),
+                                incrementModels));
+            }
+        }
+
+        return mappingIncrementsModels;
     }
 }
