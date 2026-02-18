@@ -46,67 +46,67 @@ public class ACoevolutionLoveStoryController {
         setGeneratorCount("Flowers", 1);
 
         String[] boughtUpgrades = {
-//                "Naked Seeds", // check
-//                "Bloom Boom", // check
-//                "Size and Structure", // check
-//                "Pollen Tag", // check
-//                "Pollination Pinnacle", // check
-//                "A New Suitor", // check
+//                "Naked Seeds",
+//                "Bloom Boom",
+//                "Size and Structure",
+//                "Pollen Tag",
+//                "Pollination Pinnacle",
+//                "A New Suitor",
 
-//                "Self-Marriage", // check
-//                "Self-Control", // check
-//                "Stranger Marriage", // check
-//                "The Showy Magnolia", // check
+//                "Self-Marriage",
+//                "Self-Control",
+//                "Stranger Marriage",
+//                "The Showy Magnolia",
 
-//                "Come One or All?", // check
-//                "Dandelion Welcome Mat", // check
-//                "Snappy Snapdragons", // check
-//                "Early Willows", // check
-//                "Color and Pattern", // check
+//                "Come One or All?",
+//                "Dandelion Welcome Mat",
+//                "Snappy Snapdragons",
+//                "Early Willows",
+//                "Color and Pattern",
 
-//                "Nectar Bribes", // check
-//                "Nectar Safeguards", // check
-//                "Kidnappers!", // check
-//                "Murderers!", // check
-//                "Floral Oils", // check
-//                "Orchid Flowers", // check
+//                "Nectar Bribes",
+//                "Nectar Safeguards",
+//                "Kidnappers!",
+//                "Murderers!",
+//                "Floral Oils",
+//                "Orchid Flowers",
 
-//                "A New Suitor", // check
-//                "Wasteful Wind", // check
-//                "Flight", // check
-//                "The Hungry Beetle", // check
-//                "The Vegetarian Wasp", // check
-//                "Solitary Nests", // check
-//                "UV Vision", // check
-//                "Happy Ending", // check
-//                "Apex of Evolution", // check
+//                "A New Suitor",
+//                "Wasteful Wind",
+//                "Flight",
+//                "The Hungry Beetle",
+//                "The Vegetarian Wasp",
+//                "Solitary Nests",
+//                "UV Vision",
+//                "Happy Ending",
+//                "Apex of Evolution",
 
-//                "Johnston's Organ", // check
-//                "The Competition", // check
-//                "Birds Not Bees", // check
-//                "Bumblebee Exclusive", // check
+//                "Johnston's Organ",
+//                "The Competition",
+//                "Birds Not Bees",
+//                "Bumblebee Exclusive",
 
-//                "Very Hairy Body", // check
-//                "Pollen Brushes", // check
-//                "Bristled Baskets", // check
-//                "Buzz Pollination", // check
-//                "Mechanical Mouthparts", // check
-//                "Bandit Bees", // check
-//                "All-Purpose Oils", // check
-//                "Orchid Bees", // check
+//                "Very Hairy Body",
+//                "Pollen Brushes",
+//                "Bristled Baskets",
+//                "Buzz Pollination",
+//                "Mechanical Mouthparts",
+//                "Bandit Bees",
+//                "All-Purpose Oils",
+//                "Orchid Bees",
 
-//                "Baby Bees", // check
-//                "Old Foragers", // check
-//                "Waggle Dance", // check
+//                "Baby Bees",
+//                "Old Foragers",
+//                "Waggle Dance",
 
-//                "The Crops We Crave", // check
-//                "Our Favorite Bee", // check
-//                "Africanized Bees", // check
-//                "Wild Decline", // check
-//                "Habitat Destruction", // check
-//                "Varroa Destructor", // check
-//                "Colony Collapse Disorder", // check
-//                "Till Death Do Us Part?", // check
+//                "The Crops We Crave",
+//                "Our Favorite Bee",
+//                "Africanized Bees",
+//                "Wild Decline",
+//                "Habitat Destruction",
+//                "Varroa Destructor",
+//                "Colony Collapse Disorder",
+//                "Till Death Do Us Part?",
         };
 
         for (String upgradeName : boughtUpgrades) {
