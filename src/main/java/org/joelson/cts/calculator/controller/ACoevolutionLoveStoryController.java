@@ -37,12 +37,12 @@ public class ACoevolutionLoveStoryController {
 
         setGeneratorCount("Human", 0);
         setGeneratorCount("The Hive Life", 0);
-        setGeneratorCount("Food Banking", 0);
-        setGeneratorCount("Primitive Bees", 0);
-        setGeneratorCount("Bees", 0);
         setGeneratorCount("Bribery and Deception", 0);
+        setGeneratorCount("Food Banking", 0);
         setGeneratorCount("The Art of Attraction", 0);
+        setGeneratorCount("Primitive Bees", 0);
         setGeneratorCount("Primitive Flowers", 0);
+        setGeneratorCount("Bees", 0);
         setGeneratorCount("Flowers", 1);
 
         String[] boughtUpgrades = {
@@ -52,24 +52,6 @@ public class ACoevolutionLoveStoryController {
 //                "Pollen Tag",
 //                "Pollination Pinnacle",
 //                "A New Suitor",
-
-//                "Self-Marriage",
-//                "Self-Control",
-//                "Stranger Marriage",
-//                "The Showy Magnolia",
-
-//                "Come One or All?",
-//                "Dandelion Welcome Mat",
-//                "Snappy Snapdragons",
-//                "Early Willows",
-//                "Color and Pattern",
-
-//                "Nectar Bribes",
-//                "Nectar Safeguards",
-//                "Kidnappers!",
-//                "Murderers!",
-//                "Floral Oils",
-//                "Orchid Flowers",
 
 //                "A New Suitor",
 //                "Wasteful Wind",
@@ -81,10 +63,21 @@ public class ACoevolutionLoveStoryController {
 //                "Happy Ending",
 //                "Apex of Evolution",
 
+//                "Self-Marriage",
+//                "Self-Control",
+//                "Stranger Marriage",
+//                "The Showy Magnolia",
+
 //                "Johnston's Organ",
 //                "The Competition",
 //                "Birds Not Bees",
 //                "Bumblebee Exclusive",
+
+//                "Come One or All?",
+//                "Dandelion Welcome Mat",
+//                "Snappy Snapdragons",
+//                "Early Willows",
+//                "Color and Pattern",
 
 //                "Very Hairy Body",
 //                "Pollen Brushes",
@@ -94,6 +87,13 @@ public class ACoevolutionLoveStoryController {
 //                "Bandit Bees",
 //                "All-Purpose Oils",
 //                "Orchid Bees",
+
+//                "Nectar Bribes",
+//                "Nectar Safeguards",
+//                "Kidnappers!",
+//                "Murderers!",
+//                "Floral Oils",
+//                "Orchid Flowers",
 
 //                "Baby Bees",
 //                "Old Foragers",
