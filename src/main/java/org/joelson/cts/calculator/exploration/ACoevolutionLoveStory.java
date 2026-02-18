@@ -108,7 +108,7 @@ public class ACoevolutionLoveStory {
                 .addUpgradeRequirement("Floral Oils")
                 .addUpgradeRequirement("Orchid Bees");
 
-        builder.createGenerator("Bees", pollen(500), 1.15f, pollen(450), 45)
+        builder.createGenerator("Bees", pollen(500), pollen(450), 45)
                 .addGeneratorRequirement("Flowers", 1)
 
                 .addEfficiencyUpgrade("Wasteful Wind", pollen(4_000), 3)
@@ -139,7 +139,7 @@ public class ACoevolutionLoveStory {
                 .withUpgradeEffectBuilder()
                 .addEfficiencyEffect("A New Suitor", 16);
 
-        builder.createGenerator("Primitive Bees", pollen(4e8), 1.15f, pollen(1.5e8), 500)
+        builder.createGenerator("Primitive Bees", pollen(4e8), pollen(1.5e8), 500)
                 .addUpgradeRequirement("The Vegetarian Wasp")
 
                 .addEfficiencyUpgrade("Johnston's Organ", pollen(5e9), 4)
@@ -155,7 +155,7 @@ public class ACoevolutionLoveStory {
                 .addUpgradeRequirement("Birds Not Bees") // ???
                 .addUpgradeRequirement("Snappy Snapdragons"); // ???
 
-        builder.createGenerator("Food Banking", pollen(1.5e16), 1.15f, pollen(1.8e15), 1_800)
+        builder.createGenerator("Food Banking", pollen(1.5e16), pollen(1.8e15), 1_800)
                 .addGeneratorRequirement("Primitive Bees", 1)
                 .addUpgradeRequirement("UV Vision")
 
@@ -184,7 +184,7 @@ public class ACoevolutionLoveStory {
                 .addEfficiencyUpgrade("Orchid Bees", pollen(5e23), 9)
                 .addUpgradeRequirement("Solitary Nests");
 
-        builder.createGenerator("The Hive Life", pollen(8e25), 1.15f, pollen(3.6e26), 3_600)
+        builder.createGenerator("The Hive Life", pollen(8e25), pollen(3.6e26), 3_600)
                 .addGeneratorRequirement("Food Banking", 1)
                 .addUpgradeRequirement("Orchid Bees")
 
@@ -197,7 +197,7 @@ public class ACoevolutionLoveStory {
                 .addEfficiencySpeedUpgrade("Waggle Dance", pollen(2e27), 11, 2)
                 .addUpgradeRequirement("Old Foragers");
 
-        builder.createGenerator("Human", pollen(2.8e31), 1.15f, pollen(2.88e32), 7_200)
+        builder.createGenerator("Human", pollen(2.8e31), pollen(2.88e32), 7_200)
                 .addUpgradeRequirement("A New Suitor")
 
                 .addSpeedAutomatedUpgrade("The Crops We Crave", pollen(8e31), 2)
