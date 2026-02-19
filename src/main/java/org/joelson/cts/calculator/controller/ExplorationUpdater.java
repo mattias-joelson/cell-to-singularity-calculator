@@ -201,7 +201,7 @@ class ExplorationUpdater {
                 float speed = generatorState.speed();
                 float cycleTime = generator.getBaseChargeTime() / speed;
                 if (cycleTime > 60) {
-                    totalPerCycleString = String.format("%s in %s s",
+                    totalPerCycleString = String.format("%s in %s",
                             new Amount(currencyName, productionPerCycle).asString(),
                             DurationToolkit.durationString(cycleTime));
                 } else {
