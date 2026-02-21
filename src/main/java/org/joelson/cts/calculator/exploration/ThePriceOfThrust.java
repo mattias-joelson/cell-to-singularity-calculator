@@ -48,7 +48,7 @@ public class ThePriceOfThrust {
     }
 
     public static Garden createGarden(int costMultiplier, int productionMultiplier, float badgeBonus) {
-        Garden garden = new Garden("The Price of Thrust");
+        Garden garden = new Garden("The Price of Thrust", ThePriceOfThrust::alterGarden);
         for (String currency : CURRENCIES) {
             garden.addCurrency(currency);
         }
@@ -283,10 +283,7 @@ public class ThePriceOfThrust {
         return garden;
     }
 
-    public static void alterGarden(Garden garden, GardenState state) {
-        if (!garden.getName().equals("The Price of Thrust")) {
-            throw new IllegalArgumentException("Invalid garden type: " + garden.getName());
-        }
+    private static void alterGarden(Garden garden, GardenState state) {
         Generator futureMoney = garden.getGenerator("Future Money");
         GeneratorState generatorState = state.getGeneratorState(futureMoney);
         if (generatorState.count() > 0 && futureMoney.getBaseCost().currency().equals(ELECTRONIC_CURRENCY)) {

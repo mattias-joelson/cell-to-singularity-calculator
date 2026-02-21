@@ -4,17 +4,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 public class Garden {
 
     private final String name;
+    private final BiConsumer<Garden, GardenState> alterGarden;
     private final List<String> currencies;
     private final List<Generator> generators;
     private final List<Upgrade> upgrades;
     private final Map<Unlockable, List<Requirement>> requirements;
 
     public Garden(String name) {
+        this(name, null);
+    }
+
+    public Garden(String name, BiConsumer<Garden, GardenState> alterGarden) {
         this.name = name;
+        this.alterGarden = alterGarden;
         this.currencies = new ArrayList<>();
         this.generators = new ArrayList<>();
         this.upgrades = new ArrayList<>();
@@ -129,6 +136,12 @@ public class Garden {
             if (upgrade.getName().equals(name)) {
                 throw new IllegalStateException("There already exists an upgrade named " + name + ".");
             }
+        }
+    }
+
+    public void possibleAlterGarden(GardenState state) {
+        if (alterGarden != null) {
+            alterGarden.accept(this, state);
         }
     }
 
