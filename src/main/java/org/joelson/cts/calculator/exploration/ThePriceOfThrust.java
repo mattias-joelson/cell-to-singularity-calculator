@@ -6,8 +6,6 @@ import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
 import org.joelson.cts.calculator.model.GeneratorState;
 import org.joelson.cts.calculator.model.ImprovementCalculator;
-import org.joelson.cts.calculator.model.Upgrade;
-import org.joelson.cts.calculator.model.UpgradeEffect;
 import org.joelson.cts.calculator.model.builder.GardenBuilder;
 
 import java.util.ArrayList;
@@ -295,34 +293,11 @@ public class ThePriceOfThrust {
             Generator electronicMoney = garden.getGenerator("Electronic Money");
             Generator newElectronicMoney = new Generator(electronicMoney.getName(), electronicMoney.getBaseCost(),
                     electronicMoney.getCompoundingCost(), future(electronicMoney.getBaseProduction().amount()));
-
-            swapGenerators(garden, electronicMoney, newElectronicMoney);
+            garden.swapGenerators(electronicMoney, newElectronicMoney);
             Generator newFutureMoney = new Generator(futureMoney.getName(), future(futureMoney.getBaseCost().amount()),
                     futureMoney.getCompoundingCost(), futureMoney.getBaseProduction());
-            swapGenerators(garden, futureMoney, newFutureMoney);
+            garden.swapGenerators(futureMoney, newFutureMoney);
         }
-    }
-
-    private static void swapGenerators(Garden garden, Generator oldGenerator, Generator newGenerator) {
-        List<Generator> generators = garden.getGenerators();
-        for (int i = 0; i < generators.size(); i += 1) {
-            if (generators.get(i).equals(oldGenerator)) {
-                generators.set(i, newGenerator);
-                for (Upgrade upgrade : garden.getUpgrades()) {
-                    List<UpgradeEffect> effects = upgrade.getEffects();
-                    for (UpgradeEffect effect : effects) {
-                        if (effect.generator().equals(oldGenerator)) {
-                            effects.remove(effect);
-                            effects.add(new UpgradeEffect(newGenerator, effect.efficiency(), effect.speed(),
-                                    effect.automated()));
-                            break;
-                        }
-                    }
-                }
-                return;
-            }
-        }
-        throw new IllegalStateException("No old generator found: " + oldGenerator.getName());
     }
 
     void main() {

@@ -131,4 +131,26 @@ public class Garden {
             }
         }
     }
+
+    public void swapGenerators(Generator oldGenerator, Generator newGenerator) {
+        List<Generator> generators = getGenerators();
+        for (int i = 0; i < generators.size(); i += 1) {
+            if (generators.get(i).equals(oldGenerator)) {
+                generators.set(i, newGenerator);
+                for (Upgrade upgrade : getUpgrades()) {
+                    List<UpgradeEffect> effects = upgrade.getEffects();
+                    for (UpgradeEffect effect : effects) {
+                        if (effect.generator().equals(oldGenerator)) {
+                            effects.remove(effect);
+                            effects.add(new UpgradeEffect(newGenerator, effect.efficiency(), effect.speed(),
+                                    effect.automated()));
+                            break;
+                        }
+                    }
+                }
+                return;
+            }
+        }
+        throw new IllegalStateException("No old generator found: " + oldGenerator.getName());
+    }
 }
