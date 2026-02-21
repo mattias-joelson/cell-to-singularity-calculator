@@ -297,65 +297,65 @@ public class ThePriceOfThrust {
         setGeneratorCount(garden, state, "Commodity Currency", 1);
 
         String[] boughtUpgrades = {
-//                "Debt", // check
-//                "Tally Sticks", // check
-//                "Bartering", // check
-//                "Wampum", // check
-//                "Recordkeeping", // check
-//                "Intrinsic Value", // check
-//                "Precious Metals", // check
-//                "Metallurgy", // check
-//                "Cowrie Shells", // check
-//                "Bronze Shells", // check
-//                "Government Mints", // check
-//                "Shekels", // coinage // check
-//                "Rai Stones", // coinage // check
-//                "Quipu", // banknotes // check
+//                "Debt",
+//                "Tally Sticks",
+//                "Bartering",
+//                "Wampum",
+//                "Recordkeeping",
+//                "Intrinsic Value",
+//                "Precious Metals",
+//                "Metallurgy",
+//                "Cowrie Shells",
+//                "Bronze Shells",
+//                "Government Mints",
+//                "Shekels", // coinage
+//                "Rai Stones", // coinage
+//                "Quipu", // banknotes
 
-//                "Lydian Coinage", // check
-//                "Chinese Coins", // check
-//                "Interest", // check
-//                "Usury", // check
-//                "Roman Coinage", // check
-//                "Carolingian Coinage", // check
-//                "Negotiable Instruments", // check
-//                "Banking", // check
-//                "Iconography", // check
-//                "Deposit Lending", // check
-//                "Counterfeiting", // check
-//                "Credit", // banknotes // check
-//                "Piece of Eight", // banknotes // check
-//                "Taxation", // credit // check
+//                "Lydian Coinage",
+//                "Chinese Coins",
+//                "Interest",
+//                "Usury",
+//                "Roman Coinage",
+//                "Carolingian Coinage",
+//                "Negotiable Instruments",
+//                "Banking",
+//                "Iconography",
+//                "Deposit Lending",
+//                "Counterfeiting",
+//                "Credit", // banknotes
+//                "Piece of Eight", // banknotes
+//                "Taxation", // credit
 
-//                "Flying Money", // check
-//                "Central Bank", // check
-//                "Gold Standard", // check
-//                "Fiat Money", // check
-//                "Stock Market", // check
-//                "Speculative Bubbles", // check
-//                "Inflation", // check
-//                "ATM", // credit // check
-//                "Euro", // cryptocurrency // check
+//                "Flying Money",
+//                "Central Bank",
+//                "Gold Standard",
+//                "Fiat Money",
+//                "Stock Market",
+//                "Speculative Bubbles",
+//                "Inflation",
+//                "ATM", // credit
+//                "Euro", // cryptocurrency
 
-//                "Information Security", // check
-//                "Payment Cards", // check
-//                "Online Banking", // check
-//                "e-commerce", // check
-//                "Wire Transfer", // check
-//                "Mobile Payment", // check
-//                "ETF", // check
-//                "Bank Run", // cryptocurrency // check
-//                "Algorithmic Trading", // cryptocurrency // check
+//                "Information Security",
+//                "Payment Cards",
+//                "Online Banking",
+//                "e-commerce",
+//                "Wire Transfer",
+//                "Mobile Payment",
+//                "ETF",
+//                "Bank Run", // cryptocurrency
+//                "Algorithmic Trading", // cryptocurrency
 
-//                "Darwinium Cube", // check
-//                "Blockchain", // check
-//                "Cryptocurrency", // check
-//                "Virtual Currencies", // check
-//                "What's next?", // check
-//                "Unregulated", // check
-//                "One world, One Currency?", // check
-//                "Decentralized Utopia?", // check
-//                "Post-scarcity Society?", // check
+//                "Darwinium Cube",
+//                "Blockchain",
+//                "Cryptocurrency",
+//                "Virtual Currencies",
+//                "What's next?",
+//                "Unregulated",
+//                "One world, One Currency?",
+//                "Decentralized Utopia?",
+//                "Post-scarcity Society?",
         };
         for (String upgradeName : boughtUpgrades) {
             state.setUpgradeBought(garden.getUpgrade(upgradeName));
