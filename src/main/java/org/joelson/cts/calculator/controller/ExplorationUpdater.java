@@ -1,5 +1,6 @@
 package org.joelson.cts.calculator.controller;
 
+import org.joelson.cts.calculator.exploration.ThePriceOfThrust;
 import org.joelson.cts.calculator.model.Amount;
 import org.joelson.cts.calculator.model.CurrencyMapping;
 import org.joelson.cts.calculator.model.Garden;
@@ -134,6 +135,9 @@ class ExplorationUpdater {
     }
 
     private String updateModel(Model model) {
+        if (garden.getName().equals("The Price of Thrust")) {
+            ThePriceOfThrust.alterGarden(garden, state);
+        }
         state.updateGeneratorStates(garden);
 
         boolean multiCurrency = garden.getCurrencies().size() > 1;

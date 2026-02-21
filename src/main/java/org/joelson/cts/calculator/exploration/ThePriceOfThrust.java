@@ -4,7 +4,10 @@ import org.joelson.cts.calculator.model.Amount;
 import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
+import org.joelson.cts.calculator.model.GeneratorState;
 import org.joelson.cts.calculator.model.ImprovementCalculator;
+import org.joelson.cts.calculator.model.Upgrade;
+import org.joelson.cts.calculator.model.UpgradeEffect;
 import org.joelson.cts.calculator.model.builder.GardenBuilder;
 
 import java.util.ArrayList;
@@ -280,6 +283,42 @@ public class ThePriceOfThrust {
         builder.resolveRequirements();
 
         return garden;
+    }
+
+    public static void alterGarden(Garden garden, GardenState state) {
+        if (!garden.getName().equals("The Price of Thrust")) {
+            throw new IllegalArgumentException("Invalid garden type: " + garden.getName());
+        }
+        Generator futureMoney = garden.getGenerator("Future Money");
+        GeneratorState generatorState = state.getGeneratorState(futureMoney);
+        if (generatorState.count() > 0) {
+            Generator electronicMoney = garden.getGenerator("Electronic Money");
+            List<Generator> generators = garden.getGenerators();
+            generators.remove(electronicMoney);
+            generators.remove(futureMoney);
+            Generator newElectronicMoney = new Generator(electronicMoney.getName(), electronicMoney.getBaseCost(),
+                    electronicMoney.getCompoundingCost(), future(electronicMoney.getBaseProduction().amount()));
+            generators.add(newElectronicMoney);
+            Generator newFutureMoney = new Generator(futureMoney.getName(), future(futureMoney.getBaseCost().amount()),
+                    futureMoney.getCompoundingCost(), futureMoney.getBaseProduction());
+            generators.add(newFutureMoney);
+            alterUpgrades(garden, electronicMoney, newElectronicMoney);
+            alterUpgrades(garden, futureMoney, newFutureMoney);
+        }
+    }
+
+    private static void alterUpgrades(Garden garden, Generator oldGenerator, Generator newGenerator) {
+        for (Upgrade upgrade : garden.getUpgrades()) {
+            List<UpgradeEffect> effects = upgrade.getEffects();
+            for (UpgradeEffect effect : effects) {
+                if (effect.generator().equals(oldGenerator)) {
+                    effects.remove(effect);
+                    effects.add(
+                            new UpgradeEffect(newGenerator, effect.efficiency(), effect.speed(), effect.automated()));
+                    break;
+                }
+            }
+        }
     }
 
     void main() {
