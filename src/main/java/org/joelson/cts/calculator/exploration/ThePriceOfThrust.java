@@ -293,32 +293,36 @@ public class ThePriceOfThrust {
         GeneratorState generatorState = state.getGeneratorState(futureMoney);
         if (generatorState.count() > 0) {
             Generator electronicMoney = garden.getGenerator("Electronic Money");
-            List<Generator> generators = garden.getGenerators();
-            generators.remove(electronicMoney);
-            generators.remove(futureMoney);
             Generator newElectronicMoney = new Generator(electronicMoney.getName(), electronicMoney.getBaseCost(),
                     electronicMoney.getCompoundingCost(), future(electronicMoney.getBaseProduction().amount()));
-            generators.add(newElectronicMoney);
+
+            swapGenerators(garden, electronicMoney, newElectronicMoney);
             Generator newFutureMoney = new Generator(futureMoney.getName(), future(futureMoney.getBaseCost().amount()),
                     futureMoney.getCompoundingCost(), futureMoney.getBaseProduction());
-            generators.add(newFutureMoney);
-            alterUpgrades(garden, electronicMoney, newElectronicMoney);
-            alterUpgrades(garden, futureMoney, newFutureMoney);
+            swapGenerators(garden, futureMoney, newFutureMoney);
         }
     }
 
-    private static void alterUpgrades(Garden garden, Generator oldGenerator, Generator newGenerator) {
-        for (Upgrade upgrade : garden.getUpgrades()) {
-            List<UpgradeEffect> effects = upgrade.getEffects();
-            for (UpgradeEffect effect : effects) {
-                if (effect.generator().equals(oldGenerator)) {
-                    effects.remove(effect);
-                    effects.add(
-                            new UpgradeEffect(newGenerator, effect.efficiency(), effect.speed(), effect.automated()));
-                    break;
+    private static void swapGenerators(Garden garden, Generator oldGenerator, Generator newGenerator) {
+        List<Generator> generators = garden.getGenerators();
+        for (int i = 0; i < generators.size(); i += 1) {
+            if (generators.get(i).equals(oldGenerator)) {
+                generators.set(i, newGenerator);
+                for (Upgrade upgrade : garden.getUpgrades()) {
+                    List<UpgradeEffect> effects = upgrade.getEffects();
+                    for (UpgradeEffect effect : effects) {
+                        if (effect.generator().equals(oldGenerator)) {
+                            effects.remove(effect);
+                            effects.add(new UpgradeEffect(newGenerator, effect.efficiency(), effect.speed(),
+                                    effect.automated()));
+                            break;
+                        }
+                    }
                 }
+                return;
             }
         }
+        throw new IllegalStateException("No old generator found: " + oldGenerator.getName());
     }
 
     void main() {
