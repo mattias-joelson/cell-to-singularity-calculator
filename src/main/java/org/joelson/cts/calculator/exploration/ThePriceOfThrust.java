@@ -291,7 +291,7 @@ public class ThePriceOfThrust {
         }
         Generator futureMoney = garden.getGenerator("Future Money");
         GeneratorState generatorState = state.getGeneratorState(futureMoney);
-        if (generatorState.count() > 0) {
+        if (generatorState.count() > 0 && futureMoney.getBaseCost().currency().equals(ELECTRONIC_CURRENCY)) {
             Generator electronicMoney = garden.getGenerator("Electronic Money");
             Generator newElectronicMoney = new Generator(electronicMoney.getName(), electronicMoney.getBaseCost(),
                     electronicMoney.getCompoundingCost(), future(electronicMoney.getBaseProduction().amount()));
