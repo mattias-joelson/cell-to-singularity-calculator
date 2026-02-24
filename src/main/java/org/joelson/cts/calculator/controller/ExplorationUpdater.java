@@ -134,6 +134,7 @@ class ExplorationUpdater {
     }
 
     private String updateModel(Model model) {
+        garden.possibleAlterGarden(state);
         state.updateGeneratorStates(garden);
 
         boolean multiCurrency = garden.getCurrencies().size() > 1;
