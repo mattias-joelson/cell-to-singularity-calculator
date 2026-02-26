@@ -287,7 +287,6 @@ public class TheBigQuestions {
         setGeneratorCount(garden, state, "Philosophy", 1);
 
         String[] boughtUpgrades = {
-
 //                "What is Right?", // check
 //                "What is Society?", // check
 //                "What is True?", // check
