@@ -43,80 +43,80 @@ public class TheBigQuestionsController {
         setGeneratorCount("Ethics", 0);
         setGeneratorCount("Philosophy", 1);
 
-        String[] boughtUpdates = {
-//                "What is Right?", // check
-//                "What is Society?", // check
-//                "What is True?", // check
-//                "What is Real?", // check
-//                "What am I?", // check
-//                "Why?", // check
-//                "The Answer Is...", // check
+        String[] boughtUpgrades = {
+//                "What is Right?",
+//                "What is Society?",
+//                "What is True?",
+//                "What is Real?",
+//                "What am I?",
+//                "Why?",
+//                "The Answer Is...",
 
-//                "What is Ethical?", // check
-//                "Dharma", // check
-//                "What is Moral?", // check
-//                "Moral Skepticism", // check
-//                "Utilitarianism", // check
-//                "Humanism", // check
-//                "Intuitive Ethics", // check
-//                "Code of Law", // check
-//                "Stoicism", // check
+//                "What is Ethical?",
+//                "Dharma",
+//                "What is Moral?",
+//                "Moral Skepticism",
+//                "Utilitarianism",
+//                "Humanism",
+//                "Intuitive Ethics",
+//                "Code of Law",
+//                "Stoicism",
 
-//                "Who Should Rule?", // check
-//                "Autocracy", // check
-//                "What is Power?", // check
-//                "Divine Right", // check
-//                "Machiavellianism", // check
-//                "Human Rights", // check
-//                "Individualism", // check
-//                "Right to Revolt", // check
-//                "Collectivism", // check
-//                "Anarchism", // check
-//                "Thinking...", // check
+//                "Who Should Rule?",
+//                "Autocracy",
+//                "What is Power?",
+//                "Divine Right",
+//                "Machiavellianism",
+//                "Human Rights",
+//                "Individualism",
+//                "Right to Revolt",
+//                "Collectivism",
+//                "Anarchism",
+//                "Thinking...",
 
-//                "What Do We Know?", // check
-//                "Pramana", // check
-//                "How Do We Know?", // check
-//                "Socratic Method", // check
-//                "Rationalism", // check
-//                "Empiricism", // check
-//                "Skepticism", // check
-//                "What's the Answer?", // check
+//                "What Do We Know?",
+//                "Pramana",
+//                "How Do We Know?",
+//                "Socratic Method",
+//                "Rationalism",
+//                "Empiricism",
+//                "Skepticism",
+//                "What's the Answer?",
 
-//                "How Did It Start?", // check
-//                "Cosmology", // check
-//                "Why Am I Aware?", // check
-//                "Identity", // check
-//                "Ship of Theseus", // check
-//                "Space & Time", // check
-//                "Theology", // check
-//                "Mind & Matter", // check
-//                "Ontology", // check
-//                "Ascetism", // check
-//                "Theism", // check
+//                "How Did It Start?",
+//                "Cosmology",
+//                "Why Am I Aware?",
+//                "Identity",
+//                "Ship of Theseus",
+//                "Space & Time",
+//                "Theology",
+//                "Mind & Matter",
+//                "Ontology",
+//                "Ascetism",
+//                "Theism",
 
-//                "What Is Spirit?", // check
-//                "Theory of Forms", // check
-//                "What Is Humanity?", // check
-//                "Sapience", // check
-//                "Soul", // check
-//                "State of Nature", // check
-//                "Nondualism", // check
-//                "Fate & Free Will", // check
-//                "Solipsism", // check
-//                "Transcendence", // check
+//                "What Is Spirit?",
+//                "Theory of Forms",
+//                "What Is Humanity?",
+//                "Sapience",
+//                "Soul",
+//                "State of Nature",
+//                "Nondualism",
+//                "Fate & Free Will",
+//                "Solipsism",
+//                "Transcendence",
 
-//                "What's the Good Life?", // check
-//                "What's the Point?", // check
-//                "Nihilism", // check
-//                "Hedonism", // check
-//                "Absurdism", // check
-//                "Existentialism", // check
-//                "42", // check
-//                "What's the Question?", // check
+//                "What's the Good Life?",
+//                "What's the Point?",
+//                "Nihilism",
+//                "Hedonism",
+//                "Absurdism",
+//                "Existentialism",
+//                "42",
+//                "What's the Question?",
         };
 
-        for (String upgradeName : boughtUpdates) {
+        for (String upgradeName : boughtUpgrades) {
             state.setUpgradeBought(garden.getUpgrade(upgradeName));
         }
         state.updateGeneratorStates(garden);
