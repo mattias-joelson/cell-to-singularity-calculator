@@ -173,7 +173,7 @@ public class UnfoldTheUniverse {
         setGeneratorCount(garden, state, "Hubble Telescope", 0);
         setGeneratorCount(garden, state, "Ground Telescope", 1);
 
-        String[] boughtUpdates = {
+        String[] boughtUpgrades = {
 //                "Space Telescope",
 //                "Origins",
 
@@ -215,7 +215,7 @@ public class UnfoldTheUniverse {
 //                "First Images",
         };
 
-        for (String upgradeName : boughtUpdates) {
+        for (String upgradeName : boughtUpgrades) {
             state.setUpgradeBought(garden.getUpgrade(upgradeName));
         }
         state.updateGeneratorStates(garden);
