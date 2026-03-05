@@ -42,49 +42,49 @@ public class UnfoldTheUniverseController {
         setGeneratorCount("Hubble Telescope", 0);
         setGeneratorCount("Ground Telescope", 1);
 
-        String[] boughtUpdates = {
-//                "Space Telescope", // check
-//                "Origins", // check
+        String[] boughtUpgrades = {
+//                "Space Telescope",
+//                "Origins",
 
-//                "Repair Mission", // check
-//                "Landmark Discoveries", // check
-//                "Hubble's Successor", // check
-//                "Distance from Earth", // check
-//                "Size Comparison", // check
+//                "Repair Mission",
+//                "Landmark Discoveries",
+//                "Hubble's Successor",
+//                "Distance from Earth",
+//                "Size Comparison",
 
-//                "James E. Webb", // check
-//                "Naming", // check
-//                "Mission Objectives", // check
-//                "Mission Length", // check
-//                "Cleared Name", // check
-//                "International Collaboration", // check
-//                "Budget", // check
-//                "Ground Support", // check
+//                "James E. Webb",
+//                "Naming",
+//                "Mission Objectives",
+//                "Mission Length",
+//                "Cleared Name",
+//                "International Collaboration",
+//                "Budget",
+//                "Ground Support",
 
-//                "Black Holes", // check
-//                "Galactic Birth", // check
-//                "Funding", // check
-//                "Seeking Exoplanets", // check
-//                "Averted Cancellation", // check
-//                "Delayed Launch", // check
+//                "Black Holes",
+//                "Galactic Birth",
+//                "Funding",
+//                "Seeking Exoplanets",
+//                "Averted Cancellation",
+//                "Delayed Launch",
 
-//                "Infrared Visibility", // check
-//                "Micro Shutters", // check
-//                "Dangerous Heat", // check
-//                "Sunshield", // check
-//                "Hexagonal Mirrors", // check
+//                "Infrared Visibility",
+//                "Micro Shutters",
+//                "Dangerous Heat",
+//                "Sunshield",
+//                "Hexagonal Mirrors",
 
-//                "Christmas Launch", // check
-//                "Journey to L2", // check
-//                "Sunshield Unfolding", // check
-//                "Mirrors Unfolding", // check
-//                "Secondary Mirrors", // check
-//                "Primary Mirrors", // check
-//                "Warm-Up Period", // check
-//                "First Images", // check
+//                "Christmas Launch",
+//                "Journey to L2",
+//                "Sunshield Unfolding",
+//                "Mirrors Unfolding",
+//                "Secondary Mirrors",
+//                "Primary Mirrors",
+//                "Warm-Up Period",
+//                "First Images",
         };
 
-        for (String upgradeName : boughtUpdates) {
+        for (String upgradeName : boughtUpgrades) {
             state.setUpgradeBought(garden.getUpgrade(upgradeName));
         }
         state.updateGeneratorStates(garden);
