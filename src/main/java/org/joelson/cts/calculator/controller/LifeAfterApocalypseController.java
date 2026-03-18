@@ -45,75 +45,75 @@ public class LifeAfterApocalypseController {
         setGeneratorCount("L.U.C.A.", 1);
 
         String[] boughtUpgrades = {
-//                "Cambrian Explosion", // check
-//                "Trilobites", // check
-//                "Placoderms", // check
-//                "Tetrapods", // check
-//                "Archosaurs", // check
-//                "Tyrannosaurus Rex", // check
-//                "Homo Sapiens", // check
-//                "Unknown Species", // check
-//                "Space Loophole", // check
-//                "Life Beyond", // check
-//                "Ordovician Extinction", // check
-//                "Devonian Extinction", // check
-//                "Permian Extinction", // check
-//                "Triassic Extinction", // check
-//                "Cretaceous Extinction", // check
-//                "Anthropocene Extinction", // check
-//                "Solar Apocalypse", // check
+//                "Cambrian Explosion",
+//                "Trilobites",
+//                "Placoderms",
+//                "Tetrapods",
+//                "Archosaurs",
+//                "Tyrannosaurus Rex",
+//                "Homo Sapiens",
+//                "Unknown Species",
+//                "Space Loophole",
+//                "Life Beyond",
+//                "Ordovician Extinction",
+//                "Devonian Extinction",
+//                "Permian Extinction",
+//                "Triassic Extinction",
+//                "Cretaceous Extinction",
+//                "Anthropocene Extinction",
+//                "Solar Apocalypse",
 
-//                "Ordovician Extinction", // check
-//                "Trilobite World", // check
-//                "Asteroid Bombardment", // check
-//                "Continental Collision", // check
-//                "Carbon Tipping Point", // check
-//                "Ice Age!", // check
-//                "Anoxic Oceans", // check
+//                "Ordovician Extinction",
+//                "Trilobite World",
+//                "Asteroid Bombardment",
+//                "Continental Collision",
+//                "Carbon Tipping Point",
+//                "Ice Age!",
+//                "Anoxic Oceans",
 
-//                "Devonian Extinction", // check
-//                "Land Grab", // check
-//                "Killer Trees", // check
-//                "Killer Plankton", // check
-//                "Extinction Pulses", // check
+//                "Devonian Extinction",
+//                "Land Grab",
+//                "Killer Trees",
+//                "Killer Plankton",
+//                "Extinction Pulses",
 
-//                "Permian Extinction", // check
-//                "Vertebrate World", // check
-//                "Mega-Volcanoes", // check
-//                "Toxic Ash", // check
-//                "Ozone Destroyed", // check
-//                "Acid Rain", // check
-//                "Carbon Amok", // check
-//                "Scorching Earth", // check
+//                "Permian Extinction",
+//                "Vertebrate World",
+//                "Mega-Volcanoes",
+//                "Toxic Ash",
+//                "Ozone Destroyed",
+//                "Acid Rain",
+//                "Carbon Amok",
+//                "Scorching Earth",
 
-//                "Triassic Extinction", // check
-//                "Crocodile World", // check
-//                "Pangean Rift", // check
-//                "Carbon Amok (Again)", // check
+//                "Triassic Extinction",
+//                "Crocodile World",
+//                "Pangean Rift",
+//                "Carbon Amok (Again)",
 
-//                "Cretaceous Extinction", // check
-//                "Deccan Death Traps", // check
-//                "Killer Space Rock!", // check
-//                "Shook and Boom", // check
-//                "Quake and Slide", // check
-//                "Meteorite Bombs", // check
-//                "Broiled Earth", // check
-//                "Day into Night", // check
+//                "Cretaceous Extinction",
+//                "Deccan Death Traps",
+//                "Killer Space Rock!",
+//                "Shook and Boom",
+//                "Quake and Slide",
+//                "Meteorite Bombs",
+//                "Broiled Earth",
+//                "Day into Night",
 
-//                "Anthropocene Extinction", // check
-//                "Thermal Maximum", // check
-//                "Ice Age (Again)", // check
-//                "Anthropocene", // check
-//                "Human Impact", // check
-//                "Extinction Threats", // check
-//                "Climate Tipping Point", // check
-//                "Dead Oceans?", // check
-//                "Nuclear Winter?", // check
-//                "Killer Space Rock?", // check
-//                "Galactic Hazards?", // check
+//                "Anthropocene Extinction",
+//                "Thermal Maximum",
+//                "Ice Age (Again)",
+//                "Anthropocene",
+//                "Human Impact",
+//                "Extinction Threats",
+//                "Climate Tipping Point",
+//                "Dead Oceans?",
+//                "Nuclear Winter?",
+//                "Killer Space Rock?",
+//                "Galactic Hazards?",
 
-//                "Solar Apocalypse", // check
-//                "An Existential Question", // check
+//                "Solar Apocalypse",
+//                "An Existential Question",
         };
 
         for (String upgradeName : boughtUpgrades) {
