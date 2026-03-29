@@ -30,6 +30,7 @@
                     <form action="#" th:action="@{${gardenGeneratorUpdate}}" method="post">
                         <input type="hidden" name="target" th:value="${generatorProduction.name}">
                         <input name="value" id="count" type="number" th:value="${generatorProduction.count}">
+                        <input type="submit" value="Set">
                         <input type="submit" th:formaction="@{${gardenGeneratorIncrement}}" value="+1">
                         <input type="submit" th:formaction="@{${gardenGeneratorDecrement}}" value="-1">
                     </form>
