@@ -26,7 +26,14 @@
             </tr>
             <tr th:each="generatorProduction : ${generatorProductions}">
                 <td th:text="${generatorProduction.name}"/>
-                <td class="alnright" th:text="${generatorProduction.count}"/>
+                <td>
+                    <form action="#" th:action="@{${gardenGeneratorUpdate}}" method="post">
+                        <input type="hidden" name="target" th:value="${generatorProduction.name}">
+                        <input name="value" id="count" type="number" th:value="${generatorProduction.count}">
+                        <input type="submit" th:formaction="@{${gardenGeneratorIncrement}}" value="+1">
+                        <input type="submit" th:formaction="@{${gardenGeneratorDecrement}}" value="-1">
+                    </form>
+                </td>
                 <td class="alnright" th:text="${generatorProduction.next}"/>
                 <td class="alnright" th:text="${generatorProduction.each}"/>
                 <td class="alnright" th:if="${timedGenerators}" th:text="${generatorProduction.totalPerCycle}"/>
