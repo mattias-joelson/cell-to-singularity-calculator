@@ -103,7 +103,20 @@
                     <th>Time</th>
                 </tr>
                 <tr th:each="incrementModel : ${mappingIncrementsModel.incrementModels}">
-                    <td th:text="${incrementModel.name}"/>
+                    <td>
+                        <form method="post">
+                            <input type="hidden" name="target" th:value="${incrementModel.name}">
+                            <label th:text="${incrementModel.type}"/>
+                            <input type="submit" th:value="${incrementModel.name}"
+                                   th:if="${incrementModel.type == '(G)'}"
+                                   th:formaction="@{${gardenGeneratorIncrement}}">
+                            <input type="hidden" name="value" th:value="${incrementModel.name}"
+                                   th:unless="${incrementModel.type == '(G)'}">
+                            <input type="submit" th:value="${incrementModel.name}"
+                                   th:unless="${incrementModel.type == '(G)'}"
+                                   th:formaction="@{${gardenUpgrade}}">
+                        </form>
+                    </td>
                     <td class="alnright" th:text="${incrementModel.cost}"/>
                     <td class="alnright" th:text="${incrementModel.yield}"/>
                     <td class="alnright" th:text="${incrementModel.increase}"/>
