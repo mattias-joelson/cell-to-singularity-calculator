@@ -64,7 +64,7 @@
                         <input type="hidden" name="target" th:value="${generatorModel.name}">
                         <label for="count" th:text="${generatorModel.name}"/>
                         <input name="value" id="count" type="number" th:value="${generatorModel.count}"
-                               th:disabled="${!generatorModel.unlocked}"/>
+                               th:disabled="${!generatorModel.unlocked}">
                         <input type="submit" value="Set count" th:disabled="${!generatorModel.unlocked}">
                         <input type="submit" th:formaction="@{${gardenGeneratorIncrement}}" value="+1"
                                th:disabled="${!generatorModel.unlocked}">
