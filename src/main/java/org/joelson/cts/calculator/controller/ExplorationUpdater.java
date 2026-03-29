@@ -417,7 +417,7 @@ class ExplorationUpdater {
 
     }
 
-    private record IncrementModel(String name, String cost, String yield, String increase, String time) {
+    private record IncrementModel(String type, String name, String cost, String yield, String increase, String time) {
 
     }
 
@@ -446,8 +446,8 @@ class ExplorationUpdater {
                         double time = cost.amount() / totProd;
                         timeString = DurationToolkit.durationString(time);
                     }
-                    String type = (improvement instanceof GeneratorImprovement) ? "(G) " : "(U) ";
-                    IncrementModel incrementModel = new IncrementModel(type + improvement.getName(),
+                    String type = (improvement instanceof GeneratorImprovement) ? "(G)" : "(U)";
+                    IncrementModel incrementModel = new IncrementModel(type, improvement.getName(),
                             cost.asString(), improvement.getIncrease().asString(),
                             String.format("%.7f", improvement.getRatio()), timeString);
                     incrementModels.add(incrementModel);
