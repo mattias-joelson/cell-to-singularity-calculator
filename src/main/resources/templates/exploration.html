@@ -58,7 +58,13 @@
                 <th>Next Cost</th>
             </tr>
             <tr th:each="generatorCost : ${generatorCosts}">
-                <td th:text="${generatorCost.label}"/>
+                <td>
+                    <form action="#" th:action="@{${gardenGeneratorIncrement}}" method="post">
+                        <input type="hidden" name="target" th:value="${generatorCost.label}">
+                        <input type="submit" th:formaction="@{${gardenGeneratorIncrement}}"
+                               th:value="${generatorCost.label}">
+                    </form>
+                </td>
                 <td class="alnright" th:text="${generatorCost.cost}"/>
                 <td class="alnright" th:text="${generatorCost.ratio}"/>
                 <td class="alnright" th:text="${generatorCost.next}"/>
