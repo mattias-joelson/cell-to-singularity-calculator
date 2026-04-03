@@ -26,7 +26,15 @@
             </tr>
             <tr th:each="generatorProduction : ${generatorProductions}">
                 <td th:text="${generatorProduction.name}"/>
-                <td class="alnright" th:text="${generatorProduction.count}"/>
+                <td>
+                    <form action="#" th:action="@{${gardenGeneratorUpdate}}" method="post">
+                        <input type="hidden" name="target" th:value="${generatorProduction.name}">
+                        <input name="value" id="count" type="number" th:value="${generatorProduction.count}">
+                        <input type="submit" value="Set">
+                        <input type="submit" th:formaction="@{${gardenGeneratorIncrement}}" value="+1">
+                        <input type="submit" th:formaction="@{${gardenGeneratorDecrement}}" value="-1">
+                    </form>
+                </td>
                 <td class="alnright" th:text="${generatorProduction.next}"/>
                 <td class="alnright" th:text="${generatorProduction.each}"/>
                 <td class="alnright" th:if="${timedGenerators}" th:text="${generatorProduction.totalPerCycle}"/>
@@ -50,7 +58,13 @@
                 <th>Next Cost</th>
             </tr>
             <tr th:each="generatorCost : ${generatorCosts}">
-                <td th:text="${generatorCost.label}"/>
+                <td>
+                    <form action="#" th:action="@{${gardenGeneratorIncrement}}" method="post">
+                        <input type="hidden" name="target" th:value="${generatorCost.label}">
+                        <input type="submit" th:formaction="@{${gardenGeneratorIncrement}}"
+                               th:value="${generatorCost.label}">
+                    </form>
+                </td>
                 <td class="alnright" th:text="${generatorCost.cost}"/>
                 <td class="alnright" th:text="${generatorCost.ratio}"/>
                 <td class="alnright" th:text="${generatorCost.next}"/>
@@ -64,7 +78,7 @@
                         <input type="hidden" name="target" th:value="${generatorModel.name}">
                         <label for="count" th:text="${generatorModel.name}"/>
                         <input name="value" id="count" type="number" th:value="${generatorModel.count}"
-                               th:disabled="${!generatorModel.unlocked}"/>
+                               th:disabled="${!generatorModel.unlocked}">
                         <input type="submit" value="Set count" th:disabled="${!generatorModel.unlocked}">
                         <input type="submit" th:formaction="@{${gardenGeneratorIncrement}}" value="+1"
                                th:disabled="${!generatorModel.unlocked}">
@@ -96,7 +110,20 @@
                     <th>Time</th>
                 </tr>
                 <tr th:each="incrementModel : ${mappingIncrementsModel.incrementModels}">
-                    <td th:text="${incrementModel.name}"/>
+                    <td>
+                        <form method="post">
+                            <input type="hidden" name="target" th:value="${incrementModel.name}">
+                            <label th:text="${incrementModel.type}"/>
+                            <input type="submit" th:value="${incrementModel.name}"
+                                   th:if="${incrementModel.type == '(G)'}"
+                                   th:formaction="@{${gardenGeneratorIncrement}}">
+                            <input type="hidden" name="value" th:value="${incrementModel.name}"
+                                   th:unless="${incrementModel.type == '(G)'}">
+                            <input type="submit" th:value="${incrementModel.name}"
+                                   th:unless="${incrementModel.type == '(G)'}"
+                                   th:formaction="@{${gardenUpgrade}}">
+                        </form>
+                    </td>
                     <td class="alnright" th:text="${incrementModel.cost}"/>
                     <td class="alnright" th:text="${incrementModel.yield}"/>
                     <td class="alnright" th:text="${incrementModel.increase}"/>
