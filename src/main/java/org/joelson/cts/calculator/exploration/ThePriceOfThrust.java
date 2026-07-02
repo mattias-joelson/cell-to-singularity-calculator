@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ThePriceOfThrust {
 
-    private static final String COMMODITY_CURRENCY = "Labor";
+    private static final String COMMODITY_CURRENCY = "Cowrie Shells";
     private static final String COINS_CURRENCY = "Coinage";
     private static final String PAPER_CURRENCY = "Banknotes";
     private static final String ELECTRONIC_CURRENCY = "Credit";
