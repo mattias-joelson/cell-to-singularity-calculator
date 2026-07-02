@@ -121,7 +121,7 @@ public class AnatomyOfLife {
                 .addGeneratorRequirement("Skin");
 
         builder.createGenerator("Skeleton", oxy(8e9), deoxy(250_000))
-                .addUpgradeRequirement("Hypothalamus")
+                .addGeneratorRequirement("Endocrine System", 5)
 
                 .addEfficiencyUpgrade("Bones", deoxy(1.5e10), 6)
                 .addGeneratorRequirement("Skeleton")
@@ -226,56 +226,56 @@ public class AnatomyOfLife {
         setGeneratorCount(garden, state, "Heart", 1);
 
         String[] boughtUpgrades = {
-//                "Spinal Cord", // check
-//                "Nerves", // check
-//                "Brain Stem", // check
-//                "Right Atrium", // deoxygenated blood // check
-//                "Right Ventricle", // deoxygenated blood // check
-//                "Digestion", // deoxygenated blood // check
-//                "Left Atrium", // deoxygenated blood // check
-//                "Left Ventricle", // deoxygenated blood // check
+//                "Spinal Cord",
+//                "Nerves",
+//                "Brain Stem",
+//                "Right Atrium", // deoxygenated blood
+//                "Right Ventricle", // deoxygenated blood
+//                "Digestion", // deoxygenated blood
+//                "Left Atrium", // deoxygenated blood
+//                "Left Ventricle", // deoxygenated blood
 
-//                "Frontal Lobe", // check
-//                "Occipital Lobe", // check
-//                "Eyes", // check
-//                "Temporal Lobe", // check
-//                "Parietal Lobe", // check
-//                "Nose", // check
-//                "Ears", // check
-//                "Mouth", // check
+//                "Frontal Lobe",
+//                "Occipital Lobe",
+//                "Eyes",
+//                "Temporal Lobe",
+//                "Parietal Lobe",
+//                "Nose",
+//                "Ears",
+//                "Mouth",
 
-//                "Hypothalamus", // check
-//                "Pituitary", // check
-//                "Adrenal", // check
-//                "Gonads", // check
-//                "Pineal", // check
-//                "Thyroid", // check
+//                "Hypothalamus",
+//                "Pituitary",
+//                "Adrenal",
+//                "Gonads",
+//                "Pineal",
+//                "Thyroid",
 
-//                "Bones", // check
-//                "Bone Marrow", // check
-//                "Cartilage", // check
-//                "Joints", // check
+//                "Bones",
+//                "Bone Marrow",
+//                "Cartilage",
+//                "Joints",
 
-//                "Skeletal Muscles", // check
-//                "Tendons", // check
-//                "Smooth Muscles", // check
+//                "Skeletal Muscles",
+//                "Tendons",
+//                "Smooth Muscles",
 
-//                "Bronchi", // deoxygenated blood // check
-//                "Aveoli", // deoxygenated blood // check
+//                "Bronchi", // deoxygenated blood
+//                "Aveoli", // deoxygenated blood
 
-//                "Epidermis", // check
-//                "Dermis", // check
-//                "Hypodermis", // check
+//                "Epidermis",
+//                "Dermis",
+//                "Hypodermis",
 
-//                "Small Intestine", // check
-//                "Large Intestine", // check
+//                "Small Intestine",
+//                "Large Intestine",
 
-//                "Ureters", // check
-//                "Bladder", // check
+//                "Ureters",
+//                "Bladder",
 
-//                "Gallbladder", // check
-//                "Pancreas", // check
-//                "Aorta", // check
+//                "Gallbladder",
+//                "Pancreas",
+//                "Aorta",
         };
 
         for (String upgradeName : boughtUpgrades) {
