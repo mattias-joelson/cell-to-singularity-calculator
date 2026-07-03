@@ -35,68 +35,74 @@ public class UpperBoundsController {
 //        state.setBoost(4);
         state.updateGeneratorStates(garden);
 
-        setGeneratorCount("Exosphere", 0);
         setGeneratorCount("Thermosphere", 0);
         setGeneratorCount("Mesosphere", 0);
         setGeneratorCount("Stratosphere", 0);
+        setGeneratorCount("Storm", 0);
+        setGeneratorCount("Cloud", 0);
         setGeneratorCount("Troposhpere", 1);
 
         String[] boughtUpgrades = {
-//                "Air", // check
-//                "Nitrogen", // check
-//                "Oxygen", // check
-//                "Water", // check
-//                "Sunlight", // check
-//                "Infrared Radiation", // check
-//                "Vapor", // check
-//                "Clouds", // check
-//                "Cumulus", // check
-//                "Pressure", // check
-//                "Wind", // check
-//                "Cirrus", // check
-//                "Fronts", // check
-//                "Storm", // check
-//                "Cumlonimbus", // check
-//                "Tornado", // check
-//                "Jet Stream", // check
-//                "Stratus", // check
-//                "Rain", // check
-//                "Lightning", // check
-//                "Thunder", // check
-//                "Nimbostratus", // check
-//                "Visible Light", // check
-//                "Rainbow", // check
-//                "Mammatus", // check
-//                "UV Radiation", // check
-//                "Lenticular Clouds", // check
-//                "Asperitas", // check
-//                "Ozone", // check
+//                "Air",
+//                "Nitrogen",
+//                "Oxygen",
+//                "Water",
+//                "Sunlight",
+//                "Infrared Radiation",
+//                "Vapor",
+//                "Pressure",
+//                "Wind",
+//                "Fronts",
+//                "Jet Stream",
+//                "Visible Light",
+//                "Rainbow",
+//                "UV Radiation",
+//                "Ozone",
 
-//                "Ozone Layer", // check
-//                "Blue Jet Lightning", // check
-//                "Polar Vortes", // check
-//                "Nacreous Clouds", // check
-//                "Blue Sky", // check
-//                "Black Sky", // check
+//                "Cumulus",
+//                "Cirrus",
+//                "Stratus",
+//                "Cumulonimbus",
+//                "Nimbostratus",
+//                "Asperitas",
+//                "Mammatus",
+//                "Lenticular",
+//                "Nacreous Clouds",
+//                "Noctilucent Clouds",
 
-//                "Meteoric Smoke Particles", // check
-//                "Shooting Stars", // check
-//                "Sprites", // check
-//                "Noctilucent Clouds", // check
-//                "ELVES", // check
-//                "Turbopause", // check
+//                "Cumulonimbus",
+//                "Precipitation",
+//                "Tornado",
+//                "Lightning",
+//                "Thunder",
+//                "Blue Jet Lightning",
+//                "Sprites",
 
-//                "Karman Line", // check
-//                "Ionized Gas", // check
-//                "Electron", // check
-//                "Positive Ion", // check
-//                "Airglow", // check
-//                "Cosmic Rays", // check
-//                "Plasma Bubbles", // check
-//                "Solar Winds", // check
-//                "Aurora Borealis", // check
-//                "Magnetosphere", // check
-//                "Ionosphere", // check
+//                "Nacreous Clouds",
+//                "Blue Jet Lightning",
+//                "Ozone Layer",
+//                "Polar Vortes",
+//                "Blue Sky",
+//                "Black Sky",
+
+//                "Noctilucent Clouds",
+//                "Sprites",
+//                "Meteoric Smoke Particles",
+//                "Shooting Stars",
+//                "ELVES",
+//                "Turbopause",
+
+//                "Karman Line",
+//                "Electron",
+//                "Positive Ion",
+//                "Plasma",
+//                "Ionosphere",
+//                "Cosmic Rays",
+//                "Plasma Bubbles",
+//                "Airglow",
+//                "Solar Winds",
+//                "Aurora",
+//                "Magnetosphere",
         };
 
         for (String upgradeName : boughtUpgrades) {
