@@ -12,7 +12,7 @@ import java.util.List;
 
 public class UnfoldTheUniverse {
 
-    private static final String MIRRORS_CURRENCY = " Honeycomb Mirrors";
+    private static final String MIRRORS_CURRENCY = "Honeycomb Mirrors";
 
     private static Amount mirrors(double amount) {
         return new Amount(MIRRORS_CURRENCY, amount);
