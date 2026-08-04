@@ -40,31 +40,31 @@ public class FaceYourFearsController {
         setGeneratorCount("The Insidious", 1);
 
         String[] boughtUpgrades = {
-//                "Kobold", // check
-//                "Bannik", // check
-//                "Kappa", // check
-//                "Bunyip", // check
-//                "Adze", // check
-//                "Crocotta", // check
+//                "Kobold",
+//                "Bannik",
+//                "Kappa",
+//                "Bunyip",
+//                "Adze",
+//                "Crocotta",
 
-//                "Baba Yaga", // check
-//                "Mermaid", // check
-//                "Hal", // check
-//                "Changeling", // check
-//                "Chupacabra", // check
-//                "Capelobo", // check
-//                "Yeti", // check
-//                "Mothman", // check
-//                "Jersey Devil", // check
-//                "Bigfoot", // check
+//                "Baba Yaga",
+//                "Mermaid",
+//                "Hal",
+//                "Changeling",
+//                "Chupacabra",
+//                "Capelobo",
+//                "Yeti",
+//                "Mothman",
+//                "Jersey Devil",
+//                "Bigfoot",
 
-//                "Yacumama", // check
-//                "Raiju", // check
-//                "Dingonek", // check
-//                "Tatzelwurm", // check
-//                "Mongolian Death Worm", // check
-//                "Jinn", // check
-//                "Loch Ness Monster", // check
+//                "Yacumama",
+//                "Raiju",
+//                "Dingonek",
+//                "Tatzelwurm",
+//                "Mongolian Death Worm",
+//                "Jinn",
+//                "Loch Ness Monster",
         };
 
         for (String upgradeName : boughtUpgrades) {
