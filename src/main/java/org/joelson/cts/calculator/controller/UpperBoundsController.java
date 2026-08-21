@@ -35,6 +35,7 @@ public class UpperBoundsController {
 //        state.setBoost(4);
         state.updateGeneratorStates(garden);
 
+        setGeneratorCount("Exosphere", 0);
         setGeneratorCount("Thermosphere", 0);
         setGeneratorCount("Mesosphere", 0);
         setGeneratorCount("Stratosphere", 0);
