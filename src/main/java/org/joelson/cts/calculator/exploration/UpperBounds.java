@@ -205,6 +205,9 @@ public class UpperBounds {
                 .addEfficiencyUpgrade("Magnetosphere", elevation(3.6e42), 48)
                 .addUpgradeRequirement("Solar Winds");
 
+        builder.createGenerator("Exosphere", elevation(1e43), elevation(1))
+                        .addUpgradeRequirement("Magnetosphere");
+
         builder.resolveRequirements();
 
         builder.with("Storm")
@@ -229,6 +232,7 @@ public class UpperBounds {
 
 //        Garden.generateGeneratorUpgradesNames(garden);
 
+        setGeneratorCount(garden, state, "Exosphere", 0);
         setGeneratorCount(garden, state, "Thermosphere", 0);
         setGeneratorCount(garden, state, "Mesosphere", 0);
         setGeneratorCount(garden, state, "Stratosphere", 0);
