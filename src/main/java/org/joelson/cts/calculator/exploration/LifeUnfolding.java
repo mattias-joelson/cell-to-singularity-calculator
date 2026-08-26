@@ -183,7 +183,7 @@ public class LifeUnfolding {
 
                 .addEfficiencyUpgrade("Diet Limits", nutrition(570_000), 5)
                 .addGeneratorRequirement("Mother")
-                .addUpgradeRequirement("Zygote")
+                .addUpgradeRequirement("Multiples")
 
                 .addEfficiencyUpgrade("Confirmation", nutrition(8.8e8), 500)
                 .addGeneratorRequirement("Mother")
