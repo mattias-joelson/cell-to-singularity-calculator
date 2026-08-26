@@ -35,6 +35,7 @@ public class LifeUnfoldingController {
 //        state.setBoost(4);
         state.updateGeneratorStates(garden);
 
+        setGeneratorCount("Mother", 1);
         setGeneratorCount("Month Nine", 0);
         setGeneratorCount("Month Eight", 0);
         setGeneratorCount("Month Seven", 0);
@@ -44,64 +45,63 @@ public class LifeUnfoldingController {
         setGeneratorCount("Month Three", 0);
         setGeneratorCount("Month Two", 0);
         setGeneratorCount("Month One", 0);
-        setGeneratorCount("Mother", 1);
 
         String[] boughtUpgrades = {
-//                "Reproductive System", // check
-//                "Egg", // check
-//                "Sperm", // check
-//                "Fertilization", // check
-//                "Diet Limits", // check
-//                "Confirmation", // check
-//                "Morning Sickness", // check
-//                "Cravings", // check
-//                "Milk Glands", // check
-//                "False Labor", // check
-//                "Labor", // check
-//                "Water Breaking", // check
-//                "Dilation", // check
-//                "Afterbirth", // push! // check
+//                "Zygote",
+//                "Multiples",
+//                "Blastocyst",
+//                "Embryo",
+//                "Placenta",
+//                "Amniotic Sac",
 
-//                "Zygote", // check
-//                "Multiples", // check
-//                "Blastocyst", // check
-//                "Embryo", // check
-//                "Placenta", // check
-//                "Amniotic Sac", // check
+//                "Neural Tube",
+//                "Heart Tube",
+//                "The Body Forms",
+//                "Umbilical Cord",
 
-//                "Neural Tube", // check
-//                "Heart Tube", // check
-//                "The Body Forms", // check
-//                "Umbilical Cord", // check
+//                "Fetus",
+//                "Amniotic Fluid",
 
-//                "Fetus", // check
-//                "Amniotic Fluid", // check
+//                "Reproductive Organs",
+//                "Organ Function",
+//                "Rudimentary Senses",
 
-//                "Reproductive Organs", // check
-//                "Organ Function", // check
-//                "Rudimentary Senses", // check
+//                "Fetal Skin",
+//                "Kicks and Punches",
 
-//                "Fetal Skin", // check
-//                "Kicks and Punches", // check
+//                "Bone Marrow",
+//                "Hearing",
+//                "Lungs",
+//                "Pre-Term Birth",
 
-//                "Bone Marrow", // check
-//                "Hearing", // check
-//                "Lungs", // check
-//                "Pre-Term Birth", // check
+//                "Opaque Skin",
+//                "Blinking",
 
-//                "Opaque Skin", // check
-//                "Blinking", // check
+//                "Brain",
+//                "Independence",
 
-//                "Brain", // check
-//                "Independence", // check
+//                "Fluid Balance",
+//                "Cranial Plate",
+//                "Hair",
+//                "Immune System",
+//                "Lightening",
 
-//                "Fluid Balance", // check
-//                "Cranial Plate", // check
-//                "Hair", // check
-//                "Immune System", // check
-//                "Lightening", // check
-//                "Expulsion", // check
-//                "Birth", // push! // check
+//                "Reproductive System",
+//                "Egg",
+//                "Sperm",
+//                "Fertilization",
+//                "Diet Limits",
+//                "Confirmation",
+//                "Morning Sickness",
+//                "Cravings",
+//                "Milk Glands",
+//                "False Labor",
+//                "Labor",
+//                "Water Breaking",
+//                "Dilation",
+//                "Expulsion",
+//                "Birth", // push!
+//                "Afterbirth", // push!
         };
 
         for (String upgradeName : boughtUpgrades) {
