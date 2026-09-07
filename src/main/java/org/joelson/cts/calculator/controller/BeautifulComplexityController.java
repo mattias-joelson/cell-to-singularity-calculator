@@ -1,18 +1,13 @@
 package org.joelson.cts.calculator.controller;
 
 import org.joelson.cts.calculator.exploration.BeautifulComplexity;
-import org.joelson.cts.calculator.model.Amount;
 import org.joelson.cts.calculator.model.Garden;
 import org.joelson.cts.calculator.model.GardenState;
 import org.joelson.cts.calculator.model.Generator;
-import org.joelson.cts.calculator.model.GeneratorState;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class BeautifulComplexityController {
@@ -155,68 +150,4 @@ public class BeautifulComplexityController {
         return updater.gardenUpgrade(model, target, value);
     }
 
-    public record GeneratorCost(String label, String cost, String ratio, String next) {
-
-    }
-
-    private static List<GeneratorCost> calculateGeneratorCosts(Garden garden, GardenState state) {
-        Amount buildingCost = calculateGeneratorCost(garden, state, "Building Blocks");
-        Amount arithmeticCost = calculateGeneratorCost(garden, state, "Arithmetic");
-        Amount algebraCost = calculateGeneratorCost(garden, state, "Algebra");
-        Amount appliedCost = calculateGeneratorCost(garden, state, "Applied Math");
-        Amount geometryCost = calculateGeneratorCost(garden, state, "Geometry");
-
-        Amount realCost = buildingCost.plus(arithmeticCost).plus(algebraCost).plus(appliedCost).plus(geometryCost);
-
-        Amount marvelsCost = calculateGeneratorCost(garden, state, "Marvels and Mysteries");
-
-        Amount totalRealCost = realCost.plus(marvelsCost);
-
-        Amount calculusCost = calculateGeneratorCost(garden, state, "Calculus");
-        Amount discreteCost = calculateGeneratorCost(garden, state, "Discrete Math");
-        Amount totalImaginaryCost = calculusCost.plus(discreteCost);
-
-        List<GeneratorCost> generatorCosts = new ArrayList<>();
-        generatorCosts.add(createGeneratorCost(garden, state, "Discrete Math", discreteCost, totalImaginaryCost));
-        generatorCosts.add(createGeneratorCost(garden, state, "Calculus", calculusCost, totalImaginaryCost));
-        generatorCosts.add(new GeneratorCost("", "", "", ""));
-        generatorCosts.add(createGeneratorCost(garden, state, "Marvels and Mysteries", marvelsCost, totalRealCost));
-        generatorCosts.add(new GeneratorCost("sum real", realCost.asString(),
-                String.format("%.3f %%", 100 * realCost.amount() / totalRealCost.amount()), "<needed?>"));
-        generatorCosts.add(createGeneratorCost(garden, state, "Geometry", geometryCost, totalRealCost));
-        generatorCosts.add(createGeneratorCost(garden, state, "Applied Math", appliedCost, totalRealCost));
-        generatorCosts.add(createGeneratorCost(garden, state, "Algebra", algebraCost, totalRealCost));
-        generatorCosts.add(createGeneratorCost(garden, state, "Arithmetic", arithmeticCost, totalRealCost));
-        generatorCosts.add(createGeneratorCost(garden, state, "Building Blocks", buildingCost, totalRealCost));
-
-        return generatorCosts;
-    }
-
-    private static Amount calculateGeneratorCost(Garden garden, GardenState state, String generatorName) {
-        Generator generator = garden.getGenerator(generatorName);
-        GeneratorState generatorState = state.getGeneratorState(generator);
-        return calculateGeneratorCost(generator, generatorState);
-    }
-
-    private static Amount calculateGeneratorCost(Generator generator, GeneratorState generatorState) {
-        double sum = 0;
-        for (int lvl = 0; lvl < generatorState.count(); lvl += 1) {
-            sum += generator.getCost(lvl).amount();
-        }
-        return new Amount(generator.getBaseCost().currency(), sum);
-    }
-
-    private static GeneratorCost createGeneratorCost(
-            Garden garden, GardenState state, String generatorName, Amount cost, Amount totalCost) {
-        Generator generator = garden.getGenerator(generatorName);
-        return createGeneratorCost(generator, state.getGeneratorState(generator), cost, totalCost);
-    }
-
-    private static GeneratorCost createGeneratorCost(
-            Generator generator, GeneratorState generatorState, Amount cost, Amount totalCost) {
-        return new GeneratorCost(String.format("%s by %s (%d)", generator.getBaseCost().currency(), generator.getName(),
-                generatorState.count()),
-                cost.asString(), String.format("%.3f %%", 100 * cost.amount() / totalCost.amount()),
-                generator.getCost(generatorState.count()).asString());
-    }
 }
