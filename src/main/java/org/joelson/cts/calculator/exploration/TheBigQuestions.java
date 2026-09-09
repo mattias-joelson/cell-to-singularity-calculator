@@ -230,7 +230,7 @@ public class TheBigQuestions {
                 .addUpgradeRequirement("State of Nature")
                 .addUpgradeRequirement("Mind & Matter")
 
-                .addEfficiencyUpgrade("Solipsism", questions(7e24), 2.11f)
+                .addEfficiencyUpgrade("Solipsism", questions(7e24), 1.11f)
                 .addUpgradeRequirement("Nondualism")
 
                 .addEfficiencyUpgrade("Transcendence", questions(8e28), 5_001)
