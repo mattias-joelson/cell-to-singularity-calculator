@@ -61,23 +61,6 @@ class ExplorationUpdater {
         this.timedGenerators = hasTimedGenerators(garden);
     }
 
-    ExplorationUpdater(
-            Garden garden, GardenState state, String gardenGet, String gardenGeneratorUpdate,
-            String gardenGeneratorIncrement, String gardenGeneratorDecrement, String gardenUpgrade) {
-        this.gardenCreator = null;
-        this.garden = garden;
-        this.state = state;
-        this.gardenChallengeLevel = null;
-        this.gardenBoost = null;
-        this.gardenProductionIncrese = null;
-        this.gardenGet = gardenGet;
-        this.gardenGeneratorUpdate = gardenGeneratorUpdate;
-        this.gardenGeneratorIncrement = gardenGeneratorIncrement;
-        this.gardenGeneratorDecrement = gardenGeneratorDecrement;
-        this.gardenUpgrade = gardenUpgrade;
-        this.timedGenerators = hasTimedGenerators(garden);
-    }
-
     private Garden createGarden() {
         return this.gardenCreator.create(getCostIncrease(), getProductionBoost(), getProductionIncrease());
     }

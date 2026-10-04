@@ -12,25 +12,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ThreatOfInfectionController {
 
+    private static final String GARDEN_CHALLENGE_LEVEL = "/threatofinfection-challenge-level";
+    private static final String GARDEN_BOOST = "/threatofinfection-boost";
+    private static final String GARDEN_PRODUCTION_INCREASE = "/threatofinfection-production-increase";
     private static final String GARDEN_GET = "/threatofinfection";
     private static final String GARDEN_GENERATOR_UPDATE = "/threatofinfection-generator-update";
     private static final String GARDEN_GENERATOR_INCREMENT = "/threatofinfection-generator-increment";
     private static final String GARDEN_GENERATOR_DECREMENT = "/threatofinfection-generator-decrement";
     private static final String GARDEN_UPGRADE = "/threatofinfection-upgrade";
 
-    private final Garden garden;
-    private final GardenState state;
     private final ExplorationUpdater updater;
 
     public ThreatOfInfectionController() {
-        garden = ThreatOfInfection.createGarden(1, 1, 0);
-        state = new GardenState();
-        updater = new ExplorationUpdater(garden, state, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
+        updater = new ExplorationUpdater(ThreatOfInfection::createGarden, GARDEN_CHALLENGE_LEVEL, GARDEN_BOOST,
+                GARDEN_PRODUCTION_INCREASE, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
                 GARDEN_GENERATOR_DECREMENT, GARDEN_UPGRADE);
         initState();
     }
 
     private void initState() {
+        Garden garden = updater.getGarden();
+        GardenState state = updater.getState();
         state.clearUpgradesBought();
 //        state.setBoost(4);
         state.updateGeneratorStates(garden);
@@ -133,8 +135,23 @@ public class ThreatOfInfectionController {
     }
 
     private void setGeneratorCount(String generatorName, int count) {
-        Generator generator = garden.getGenerator(generatorName);
-        state.setGeneratorCount(generator, count);
+        Generator generator = updater.getGarden().getGenerator(generatorName);
+        updater.getState().setGeneratorCount(generator, count);
+    }
+
+    @PostMapping(GARDEN_CHALLENGE_LEVEL)
+    public String threatOfInfectionChallengeLevel(Model model, String value) {
+        return updater.updateChallengeLevel(model, value);
+    }
+
+    @PostMapping(GARDEN_BOOST)
+    public String threatOfInfectionBoost(Model model, String value) {
+        return updater.updateBoost(model, value);
+    }
+
+    @PostMapping(GARDEN_PRODUCTION_INCREASE)
+    public String threatOfInfectionProductionIncrease(Model model, String value) {
+        return updater.updateProductionIncrease(model, value);
     }
 
     @GetMapping(GARDEN_GET)

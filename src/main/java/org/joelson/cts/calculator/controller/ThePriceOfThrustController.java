@@ -12,25 +12,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ThePriceOfThrustController {
 
+    private static final String GARDEN_CHALLENGE_LEVEL = "/priceofthrust-challenge-level";
+    private static final String GARDEN_BOOST = "/priceofthrust-boost";
+    private static final String GARDEN_PRODUCTION_INCREASE = "/priceofthrust-production-increase";
     private static final String GARDEN_GET = "/priceofthrust";
     private static final String GARDEN_GENERATOR_UPDATE = "/priceofthrust-generator-update";
     private static final String GARDEN_GENERATOR_INCREMENT = "/priceofthrust-generator-increment";
     private static final String GARDEN_GENERATOR_DECREMENT = "/priceofthrust-generator-decrement";
     private static final String GARDEN_UPGRADE = "/priceofthrust-upgrade";
 
-    private final Garden garden;
-    private final GardenState state;
     private final ExplorationUpdater updater;
 
     public ThePriceOfThrustController() {
-        garden = ThePriceOfThrust.createGarden(1, 1, 0);
-        state = new GardenState();
-        updater = new ExplorationUpdater(garden, state, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
+        updater = new ExplorationUpdater(ThePriceOfThrust::createGarden, GARDEN_CHALLENGE_LEVEL, GARDEN_BOOST,
+                GARDEN_PRODUCTION_INCREASE, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
                 GARDEN_GENERATOR_DECREMENT, GARDEN_UPGRADE);
         initState();
     }
 
     private void initState() {
+        Garden garden = updater.getGarden();
+        GardenState state = updater.getState();
         state.clearUpgradesBought();
 //        state.setBoost(4);
         state.updateGeneratorStates(garden);
@@ -110,8 +112,23 @@ public class ThePriceOfThrustController {
     }
 
     private void setGeneratorCount(String generatorName, int count) {
-        Generator generator = garden.getGenerator(generatorName);
-        state.setGeneratorCount(generator, count);
+        Generator generator = updater.getGarden().getGenerator(generatorName);
+        updater.getState().setGeneratorCount(generator, count);
+    }
+
+    @PostMapping(GARDEN_CHALLENGE_LEVEL)
+    public String priceOfThrustChallengeLevel(Model model, String value) {
+        return updater.updateChallengeLevel(model, value);
+    }
+
+    @PostMapping(GARDEN_BOOST)
+    public String priceOfThrustBoost(Model model, String value) {
+        return updater.updateBoost(model, value);
+    }
+
+    @PostMapping(GARDEN_PRODUCTION_INCREASE)
+    public String priceOfThrustProductionIncrease(Model model, String value) {
+        return updater.updateProductionIncrease(model, value);
     }
 
     @GetMapping(GARDEN_GET)
