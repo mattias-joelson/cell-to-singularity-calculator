@@ -11,7 +11,34 @@
 <div class="container">
     <div class="itemStats">
         <h1 th:text="${gardenName}"/>
-        <a th:href="${gardenGet}">Reset and get garden.</a>
+        <p><a th:href="${gardenGet}">Reset and get garden.</a></p>
+        <table>
+            <tr>
+                <th>Challenge Level</th>
+                <th>Boost</th>
+                <th>Production Increase</th>
+            </tr>
+            <tr>
+                <td>
+                    <form action="#" th:action="@{${gardenChallengeLevel}}" method="post">
+                        <input name="value" id="level" type="number" th:value="${challengeLevel}">
+                        <input type="submit" value="Set">
+                    </form>
+                </td>
+                <td>
+                    <form action="#" th:action="@{${gardenBoost}}" method="post">
+                        <input name="value" id="boost" type="number" th:value="${boost}">
+                        <input type="submit" value="Set">
+                    </form>
+                </td>
+                <td>
+                    <form action="#" th:action="@{${gardenProductionIncrease}}" method="post">
+                        <input name="value" id="increase" type="number" th:value="${productionIncrease}">
+                        <input type="submit" value="Set">
+                    </form>
+                </td>
+            </tr>
+        </table>
         <h2>Generator Productions</h2>
         <table>
             <tr>

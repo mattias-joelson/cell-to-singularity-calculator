@@ -9,12 +9,16 @@ public class GardenState {
 
     private final Map<String, GeneratorState> generatorStates;
     private final Set<String> upgradesBought;
+    private int challengeLevel;
     private int boost;
+    private int productionIncrease;
 
     public GardenState() {
         this.generatorStates = new HashMap<>();
         this.upgradesBought = new HashSet<>();
+        this.challengeLevel = 1;
         this.boost = 1;
+        this.productionIncrease = 0;
     }
 
     private GardenState(GardenState that) {
@@ -78,12 +82,28 @@ public class GardenState {
         return upgradesBought.contains(upgrade.getName());
     }
 
+    public void setChallengeLevel(int challengeLevel) {
+        this.challengeLevel = challengeLevel;
+    }
+
+    public int getChallengeLevel() {
+        return challengeLevel;
+    }
+
     public void setBoost(int boost) {
         this.boost = boost;
     }
 
     public int getBoost() {
         return boost;
+    }
+
+    public void setProductionIncrease(int productionIncrease) {
+        this.productionIncrease = productionIncrease;
+    }
+
+    public int getProductionIncrease() {
+        return productionIncrease;
     }
 
     public void updateGeneratorStates(Garden garden) {
