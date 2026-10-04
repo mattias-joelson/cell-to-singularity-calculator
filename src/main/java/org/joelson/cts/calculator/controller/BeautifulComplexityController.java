@@ -127,43 +127,43 @@ public class BeautifulComplexityController {
     }
 
     @PostMapping(GARDEN_CHALLENGE_LEVEL)
-    public String setInStoneChallengeLevel(Model model, String value) {
+    public String beautifulComplexityChallengeLevel(Model model, String value) {
         return updater.updateChallengeLevel(model, value);
     }
 
     @PostMapping(GARDEN_BOOST)
-    public String setInStoneBoost(Model model, String value) {
+    public String beautifulComplexityBoost(Model model, String value) {
         return updater.updateBoost(model, value);
     }
 
     @PostMapping(GARDEN_PRODUCTION_INCREASE)
-    public String setInStoneProductionIncrease(Model model, String value) {
+    public String beautifulComplexityProductionIncrease(Model model, String value) {
         return updater.updateProductionIncrease(model, value);
     }
 
     @GetMapping(GARDEN_GET)
-    public String setInStone(Model model) {
+    public String beautifulComplexity(Model model) {
         initState();
         return updater.garden(model);
     }
 
     @PostMapping(GARDEN_GENERATOR_UPDATE)
-    public String setInStoneGeneratorUpdate(Model model, String target, String value) {
+    public String beautifulComplexityGeneratorUpdate(Model model, String target, String value) {
         return updater.gardenGeneratorUpdate(model, target, value);
     }
 
     @PostMapping(GARDEN_GENERATOR_INCREMENT)
-    public String setInStoneGeneratorIncrement(Model model, String target) {
+    public String beautifulComplexityGeneratorIncrement(Model model, String target) {
         return updater.gardenGeneratorIncrement(model, target);
     }
 
     @PostMapping(GARDEN_GENERATOR_DECREMENT)
-    public String setInStoneGeneratorDecrement(Model model, String target) {
+    public String beautifulComplexityGeneratorDecrement(Model model, String target) {
         return updater.gardenGeneratorDecrement(model, target);
     }
 
     @PostMapping(GARDEN_UPGRADE)
-    public String setInStoneUpgrade(Model model, String target, String value) {
+    public String beautifulComplexityUpgrade(Model model, String target, String value) {
         return updater.gardenUpgrade(model, target, value);
     }
 
