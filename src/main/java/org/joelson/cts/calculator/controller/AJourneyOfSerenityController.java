@@ -12,25 +12,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AJourneyOfSerenityController {
 
+    private static final String GARDEN_CHALLENGE_LEVEL = "/journeyofserenity-challenge-level";
+    private static final String GARDEN_BOOST = "/journeyofserenity-boost";
+    private static final String GARDEN_PRODUCTION_INCREASE = "/journeyofserenity-production-increase";
     private static final String GARDEN_GET = "/journeyofserenity";
     private static final String GARDEN_GENERATOR_UPDATE = "/journeyofserenity-generator-update";
     private static final String GARDEN_GENERATOR_INCREMENT = "/journeyofserenity-generator-increment";
     private static final String GARDEN_GENERATOR_DECREMENT = "/journeyofserenity-generator-decrement";
     private static final String GARDEN_UPGRADE = "/journeyofserenity-upgrade";
 
-    private final Garden garden;
-    private final GardenState state;
     private final ExplorationUpdater updater;
 
     public AJourneyOfSerenityController() {
-        garden = AJourneyOfSerenity.createGarden(1, 1, 0);
-        state = new GardenState();
-        updater = new ExplorationUpdater(garden, state, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
+        updater = new ExplorationUpdater(AJourneyOfSerenity::createGarden, GARDEN_CHALLENGE_LEVEL, GARDEN_BOOST,
+                GARDEN_PRODUCTION_INCREASE, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
                 GARDEN_GENERATOR_DECREMENT, GARDEN_UPGRADE);
         initState();
     }
 
     private void initState() {
+        Garden garden = updater.getGarden();
+        GardenState state = updater.getState();
         state.clearUpgradesBought();
 //        state.setBoost(4);
         state.updateGeneratorStates(garden);
@@ -123,8 +125,23 @@ public class AJourneyOfSerenityController {
     }
 
     private void setGeneratorCount(String generatorName, int count) {
-        Generator generator = garden.getGenerator(generatorName);
-        state.setGeneratorCount(generator, count);
+        Generator generator = updater.getGarden().getGenerator(generatorName);
+        updater.getState().setGeneratorCount(generator, count);
+    }
+
+    @PostMapping(GARDEN_CHALLENGE_LEVEL)
+    public String journeyOfSerenityChallengeLevel(Model model, String value) {
+        return updater.updateChallengeLevel(model, value);
+    }
+
+    @PostMapping(GARDEN_BOOST)
+    public String journeyOfSerenityBoost(Model model, String value) {
+        return updater.updateBoost(model, value);
+    }
+
+    @PostMapping(GARDEN_PRODUCTION_INCREASE)
+    public String journeyOfSerenityProductionIncrease(Model model, String value) {
+        return updater.updateProductionIncrease(model, value);
     }
 
     @GetMapping(GARDEN_GET)

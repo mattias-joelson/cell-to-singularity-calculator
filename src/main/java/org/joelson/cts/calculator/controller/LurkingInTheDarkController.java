@@ -12,25 +12,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class LurkingInTheDarkController {
 
+    private static final String GARDEN_CHALLENGE_LEVEL = "/lurkinginthedark-challenge-level";
+    private static final String GARDEN_BOOST = "/lurkinginthedark-boost";
+    private static final String GARDEN_PRODUCTION_INCREASE = "/lurkinginthedark-production-increase";
     private static final String GARDEN_GET = "/lurkinginthedark";
     private static final String GARDEN_GENERATOR_UPDATE = "/lurkinginthedark-generator-update";
     private static final String GARDEN_GENERATOR_INCREMENT = "/lurkinginthedark-generator-increment";
     private static final String GARDEN_GENERATOR_DECREMENT = "/lurkinginthedark-generator-decrement";
     private static final String GARDEN_UPGRADE = "/lurkinginthedark-upgrade";
 
-    private final Garden garden;
-    private final GardenState state;
     private final ExplorationUpdater updater;
 
     public LurkingInTheDarkController() {
-        garden = LurkingInTheDark.createGarden(1, 1, 0);
-        state = new GardenState();
-        updater = new ExplorationUpdater(garden, state, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
+        updater = new ExplorationUpdater(LurkingInTheDark::createGarden, GARDEN_CHALLENGE_LEVEL, GARDEN_BOOST,
+                GARDEN_PRODUCTION_INCREASE, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
                 GARDEN_GENERATOR_DECREMENT, GARDEN_UPGRADE);
         initState();
     }
 
     private void initState() {
+        Garden garden = updater.getGarden();
+        GardenState state = updater.getState();
         state.clearUpgradesBought();
 //        state.setBoost(4);
         state.updateGeneratorStates(garden);
@@ -97,8 +99,23 @@ public class LurkingInTheDarkController {
     }
 
     private void setGeneratorCount(String generatorName, int count) {
-        Generator generator = garden.getGenerator(generatorName);
-        state.setGeneratorCount(generator, count);
+        Generator generator = updater.getGarden().getGenerator(generatorName);
+        updater.getState().setGeneratorCount(generator, count);
+    }
+
+    @PostMapping(GARDEN_CHALLENGE_LEVEL)
+    public String lurkingInTheDarkChallengeLevel(Model model, String value) {
+        return updater.updateChallengeLevel(model, value);
+    }
+
+    @PostMapping(GARDEN_BOOST)
+    public String lurkingInTheDarkBoost(Model model, String value) {
+        return updater.updateBoost(model, value);
+    }
+
+    @PostMapping(GARDEN_PRODUCTION_INCREASE)
+    public String lurkingInTheDarkProductionIncrease(Model model, String value) {
+        return updater.updateProductionIncrease(model, value);
     }
 
     @GetMapping(GARDEN_GET)

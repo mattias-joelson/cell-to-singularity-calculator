@@ -24,11 +24,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+interface GardenCreator {
+    Garden create(int costMultiplier, int productionMultiplier, float badgeBonus);
+}
+
 class ExplorationUpdater {
 
-    private final Garden garden;
+    private final GardenCreator gardenCreator;
+    private Garden garden;
     private final GardenState state;
     private final String gardenGet;
+    private final String gardenChallengeLevel;
+    private final String gardenBoost;
+    private final String gardenProductionIncrese;
     private final String gardenGeneratorUpdate;
     private final String gardenGeneratorIncrement;
     private final String gardenGeneratorDecrement;
@@ -36,16 +44,45 @@ class ExplorationUpdater {
     private final boolean timedGenerators;
 
     ExplorationUpdater(
-            Garden garden, GardenState state, String gardenGet, String gardenGeneratorUpdate,
+            GardenCreator gardenCreator, String gardenChallengeLevel, String gardenBoost,
+            String gardenProductionIncrese, String gardenGet, String gardenGeneratorUpdate,
             String gardenGeneratorIncrement, String gardenGeneratorDecrement, String gardenUpgrade) {
-        this.garden = garden;
-        this.state = state;
+        this.gardenCreator = gardenCreator;
+        this.state = new GardenState();
+        this.garden = createGarden();
+        this.gardenChallengeLevel = gardenChallengeLevel;
+        this.gardenBoost = gardenBoost;
+        this.gardenProductionIncrese = gardenProductionIncrese;
         this.gardenGet = gardenGet;
         this.gardenGeneratorUpdate = gardenGeneratorUpdate;
         this.gardenGeneratorIncrement = gardenGeneratorIncrement;
         this.gardenGeneratorDecrement = gardenGeneratorDecrement;
         this.gardenUpgrade = gardenUpgrade;
         this.timedGenerators = hasTimedGenerators(garden);
+    }
+
+    private Garden createGarden() {
+        return this.gardenCreator.create(getCostIncrease(), getProductionBoost(), getProductionIncrease());
+    }
+
+    public Garden getGarden() {
+        return garden;
+    }
+
+    public GardenState getState() {
+        return state;
+    }
+
+    private int getCostIncrease() {
+        return (int) Math.round(Math.pow(4, state.getChallengeLevel() - 1));
+    }
+
+    private int getProductionBoost() {
+        return (int) Math.round(Math.pow(2, state.getChallengeLevel() - 1));
+    }
+
+    private float getProductionIncrease() {
+        return state.getProductionIncrease() / 100f;
     }
 
     private static boolean hasTimedGenerators(Garden garden) {
@@ -55,6 +92,77 @@ class ExplorationUpdater {
             }
         }
         return false;
+    }
+
+    public String updateChallengeLevel(Model model, String value) {
+        if (value == null) {
+            model.addAttribute("msg", "Challenge level is null.");
+        } else {
+            String trimmedValue = value.trim();
+            if (trimmedValue.isEmpty()) {
+                model.addAttribute("msg", "Challenge level is empty.");
+            } else {
+                try {
+                    int level = Integer.parseInt(trimmedValue);
+                    if (level <= 0) {
+                        model.addAttribute("msg", "Challenge level <= 0.");
+                    } else {
+                        state.setChallengeLevel(level);
+                        garden = createGarden();
+                    }
+                } catch (NumberFormatException e) {
+                    model.addAttribute("msg", "Challenge level is not an integer.");
+                }
+            }
+        }
+        return updateModel(model);
+    }
+
+    public String updateBoost(Model model, String value) {
+        if (value == null) {
+            model.addAttribute("msg", "Boost is null.");
+        } else {
+            String trimmedValue = value.trim();
+            if (trimmedValue.isEmpty()) {
+                model.addAttribute("msg", "Boost is empty.");
+            } else {
+                try {
+                    int boost = Integer.parseInt(trimmedValue);
+                    if (boost != 1 && boost != 2 && boost != 4) {
+                        model.addAttribute("msg", "Boost is not 1, 2 or 4: " + boost);
+                    } else {
+                        state.setBoost(boost);
+                    }
+                } catch (NumberFormatException e) {
+                    model.addAttribute("msg", "Boost is not an integer.");
+                }
+            }
+        }
+        return updateModel(model);
+    }
+
+    public String updateProductionIncrease(Model model, String value) {
+        if (value == null) {
+            model.addAttribute("msg", "Production increase is null.");
+        } else {
+            String trimmedValue = value.trim();
+            if (trimmedValue.isEmpty()) {
+                model.addAttribute("msg", "Production increase is empty.");
+            } else {
+                try {
+                    int increase = Integer.parseInt(trimmedValue);
+                    if (increase < 0) {
+                        model.addAttribute("msg", "Production increase < 0.");
+                    } else {
+                        state.setProductionIncrease(increase);
+                        garden = createGarden();
+                    }
+                } catch (NumberFormatException e) {
+                    model.addAttribute("msg", "Production increase is not an integer.");
+                }
+            }
+        }
+        return updateModel(model);
     }
 
     public String garden(Model model) {
@@ -136,6 +244,13 @@ class ExplorationUpdater {
     private String updateModel(Model model) {
         garden.possibleAlterGarden(state);
         state.updateGeneratorStates(garden);
+
+        model.addAttribute("gardenChallengeLevel", gardenChallengeLevel);
+        model.addAttribute("challengeLevel", state.getChallengeLevel());
+        model.addAttribute("gardenBoost", gardenBoost);
+        model.addAttribute("boost", state.getBoost());
+        model.addAttribute("gardenProductionIncrease", gardenProductionIncrese);
+        model.addAttribute("productionIncrease", state.getProductionIncrease());
 
         boolean multiCurrency = garden.getCurrencies().size() > 1;
 

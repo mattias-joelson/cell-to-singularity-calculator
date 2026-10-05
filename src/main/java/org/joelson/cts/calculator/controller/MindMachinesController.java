@@ -12,25 +12,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class MindMachinesController {
 
+    private static final String GARDEN_CHALLENGE_LEVEL = "/mindmachines-challenge-level";
+    private static final String GARDEN_BOOST = "/mindmachines-boost";
+    private static final String GARDEN_PRODUCTION_INCREASE = "/mindmachines-production-increase";
     private static final String GARDEN_GET = "/mindmachines";
     private static final String GARDEN_GENERATOR_UPDATE = "/mindmachines-generator-update";
     private static final String GARDEN_GENERATOR_INCREMENT = "/mindmachines-generator-increment";
     private static final String GARDEN_GENERATOR_DECREMENT = "/mindmachines-generator-decrement";
     private static final String GARDEN_UPGRADE = "/mindmachines-upgrade";
 
-    private final Garden garden;
-    private final GardenState state;
     private final ExplorationUpdater updater;
 
     public MindMachinesController() {
-        garden = MindMachines.createGarden(1, 1, 0);
-        state = new GardenState();
-        updater = new ExplorationUpdater(garden, state, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
+        updater = new ExplorationUpdater(MindMachines::createGarden, GARDEN_CHALLENGE_LEVEL, GARDEN_BOOST,
+                GARDEN_PRODUCTION_INCREASE, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
                 GARDEN_GENERATOR_DECREMENT, GARDEN_UPGRADE);
         initState();
     }
 
     private void initState() {
+        Garden garden = updater.getGarden();
+        GardenState state = updater.getState();
         state.clearUpgradesBought();
 //        state.setBoost(4);
         state.updateGeneratorStates(garden);
@@ -118,8 +120,23 @@ public class MindMachinesController {
     }
 
     private void setGeneratorCount(String generatorName, int count) {
-        Generator generator = garden.getGenerator(generatorName);
-        state.setGeneratorCount(generator, count);
+        Generator generator = updater.getGarden().getGenerator(generatorName);
+        updater.getState().setGeneratorCount(generator, count);
+    }
+
+    @PostMapping(GARDEN_CHALLENGE_LEVEL)
+    public String mindMachinesChallengeLevel(Model model, String value) {
+        return updater.updateChallengeLevel(model, value);
+    }
+
+    @PostMapping(GARDEN_BOOST)
+    public String mindMachinesBoost(Model model, String value) {
+        return updater.updateBoost(model, value);
+    }
+
+    @PostMapping(GARDEN_PRODUCTION_INCREASE)
+    public String mindMachinesProductionIncrease(Model model, String value) {
+        return updater.updateProductionIncrease(model, value);
     }
 
     @GetMapping(GARDEN_GET)

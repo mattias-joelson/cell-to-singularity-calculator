@@ -12,25 +12,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class BeautifulComplexityController {
 
+    private static final String GARDEN_CHALLENGE_LEVEL = "/beautifulcomplexity-challenge-level";
+    private static final String GARDEN_BOOST = "/beautifulcomplexity-boost";
+    private static final String GARDEN_PRODUCTION_INCREASE = "/beautifulcomplexity-production-increase";
     private static final String GARDEN_GET = "/beautifulcomplexity";
     private static final String GARDEN_GENERATOR_UPDATE = "/beautifulcomplexity-generator-update";
     private static final String GARDEN_GENERATOR_INCREMENT = "/beautifulcomplexity-generator-increment";
     private static final String GARDEN_GENERATOR_DECREMENT = "/beautifulcomplexity-generator-decrement";
     private static final String GARDEN_UPGRADE = "/beautifulcomplexity-upgrade";
 
-    private final Garden garden;
-    private final GardenState state;
     private final ExplorationUpdater updater;
 
     public BeautifulComplexityController() {
-        garden = BeautifulComplexity.createGarden(1, 1, 0);
-        state = new GardenState();
-        updater = new ExplorationUpdater(garden, state, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
+        updater = new ExplorationUpdater(BeautifulComplexity::createGarden, GARDEN_CHALLENGE_LEVEL, GARDEN_BOOST,
+                GARDEN_PRODUCTION_INCREASE, GARDEN_GET, GARDEN_GENERATOR_UPDATE, GARDEN_GENERATOR_INCREMENT,
                 GARDEN_GENERATOR_DECREMENT, GARDEN_UPGRADE);
         initState();
     }
 
     private void initState() {
+        Garden garden = updater.getGarden();
+        GardenState state = updater.getState();
         state.clearUpgradesBought();
 //        state.setBoost(4);
         state.updateGeneratorStates(garden);
@@ -120,33 +122,48 @@ public class BeautifulComplexityController {
     }
 
     private void setGeneratorCount(String generatorName, int count) {
-        Generator generator = garden.getGenerator(generatorName);
-        state.setGeneratorCount(generator, count);
+        Generator generator = updater.getGarden().getGenerator(generatorName);
+        updater.getState().setGeneratorCount(generator, count);
+    }
+
+    @PostMapping(GARDEN_CHALLENGE_LEVEL)
+    public String beautifulComplexityChallengeLevel(Model model, String value) {
+        return updater.updateChallengeLevel(model, value);
+    }
+
+    @PostMapping(GARDEN_BOOST)
+    public String beautifulComplexityBoost(Model model, String value) {
+        return updater.updateBoost(model, value);
+    }
+
+    @PostMapping(GARDEN_PRODUCTION_INCREASE)
+    public String beautifulComplexityProductionIncrease(Model model, String value) {
+        return updater.updateProductionIncrease(model, value);
     }
 
     @GetMapping(GARDEN_GET)
-    public String setInStone(Model model) {
+    public String beautifulComplexity(Model model) {
         initState();
         return updater.garden(model);
     }
 
     @PostMapping(GARDEN_GENERATOR_UPDATE)
-    public String setInStoneGeneratorUpdate(Model model, String target, String value) {
+    public String beautifulComplexityGeneratorUpdate(Model model, String target, String value) {
         return updater.gardenGeneratorUpdate(model, target, value);
     }
 
     @PostMapping(GARDEN_GENERATOR_INCREMENT)
-    public String setInStoneGeneratorIncrement(Model model, String target) {
+    public String beautifulComplexityGeneratorIncrement(Model model, String target) {
         return updater.gardenGeneratorIncrement(model, target);
     }
 
     @PostMapping(GARDEN_GENERATOR_DECREMENT)
-    public String setInStoneGeneratorDecrement(Model model, String target) {
+    public String beautifulComplexityGeneratorDecrement(Model model, String target) {
         return updater.gardenGeneratorDecrement(model, target);
     }
 
     @PostMapping(GARDEN_UPGRADE)
-    public String setInStoneUpgrade(Model model, String target, String value) {
+    public String beautifulComplexityUpgrade(Model model, String target, String value) {
         return updater.gardenUpgrade(model, target, value);
     }
 
